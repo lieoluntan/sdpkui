@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="content-type" content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
+    <title>原型utf8</title>
+
+    <!-- idTabs链接文件 -->
+    
+    <!-- <script type="text/javascript" src="xppjs/jquery.js"></script> -->
+    <script type="text/javascript" src="easyui_xpp/jquery-easyui-136/jquery.min.js"></script> 
+    <script src="xppjs/jquery.idTabs.js"></script>
+    <!-- easyui链接文件 -->
+    <script type="text/javascript" src="easyui_xpp/jquery-easyui-136/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="easyui_xpp/jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
+    <!-- xpp的链接文件 -->
+    <link   rel="stylesheet" type="text/css" href="easyui_xpp/jquery-easyui-136/themes/gray/easyui.css"/>
+    <link   rel="stylesheet" type="text/css" href="easyui_xpp/jquery-easyui-136/themes/icon.css"/>
+    
+    <!-- 
+    <script src="jquery.js"></script>
+    <link  rel="stylesheet"  href="themes/default/easyui.css"  type="text/css"  />
+    <link  rel="stylesheet"  href="themes/icon.css"  type="text/css"  />
+     -->
+
+    <!-- 
+    <script  type="text/javascript"  src="js/jquery-1.8.2.js" ></script>
+    <script  type="text/javascript"  src="js/jquery.easyui.min.js" ></script>
+    <script  type="text/javascript"  src="js/easyui-lang-zh_CN.js"></script>
+    
+    .idTabs a { display:block; background:#222; color:snow; padding:0 13px; font:bold 25pt Arial; text-decoration:none; }
+     -->
+
+    <style> 
+
+    	*{
+    		font-family:"黑体";
+    	}
+
+    	.div-a{ background: no-repeat;width:1440px;height: 5px;padding:7px;box-sizing:border-box;}  /*用于阴影shadow*/
+        #menu ul { height:944px;width:145px;float:left;list-style:none;
+margin:0px; padding:0;text-align:center;}
+        #menu li { list-style:none; /*Try deleting this float*/ 
+            margin-bottom:0px; margin:0px;
+            font-size:12px;
+            color:#353535;
+
+         }
+        #menu a.selected { background:#9B9B9B; color:#000;}
+        #menu a{display:block; width:145px;height: 100px;text-decoration:none;line-height:100px; text-align:center; 
+            color:#FFFFFF;padding-top:15%;box-sizing:border-box;} 
+        #menu_sub ul { height:944px;width:170px;float:left;list-style:none;
+                    margin:0px; padding:0;}
+        #menu_sub li { list-style:none; /*Try deleting this float*/ 
+            margin-bottom:0px; margin:0px; 
+         }
+        #menu_sub a.selected { background:#9B9B9B; color:#000;}
+        #menu_sub a{display:block; width:170px;height: 33px;text-decoration:none;color:#000000;padding-left: 20%;} 
+        
+        
+    	
+    </style>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        //单击一级菜单
+        $( "#menu_1" ).click(function() { 
+        document.getElementById("menu_a1").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_2" ).click(function() { 
+        document.getElementById("menu_b2").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_3" ).click(function() { 
+        document.getElementById("menu_c2").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_4" ).click(function() { 
+        document.getElementById("menu_d2").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_5" ).click(function() { 
+        document.getElementById("menu_e2").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_6" ).click(function() { 
+        document.getElementById("menu_f2").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_7" ).click(function() { 
+        document.getElementById("menu_g2").click();
+        });//end 7 外圈 单击
+
+        $( "#menu_8" ).click(function() { 
+        document.getElementById("menu_h2").click();
+        });//end 7 外圈 单击
+
+        //单击二级菜单
+        $( "#menu_b2" ).click(function(){
+            document.getElementById('ifr2a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+        $( "#menu_c2" ).click(function(){
+            document.getElementById('ifr3a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+        $( "#menu_d2" ).click(function(){
+            document.getElementById('ifr4a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+        $( "#menu_e2" ).click(function(){
+            document.getElementById('ifr5a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+        $( "#menu_f2" ).click(function(){
+            document.getElementById('ifr6a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+        $( "#menu_g2" ).click(function(){
+            document.getElementById('ifr7a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+        $( "#menu_h2" ).click(function(){
+            document.getElementById('ifr8a2').contentWindow.location.reload();
+            // alert("点击了学生管理");
+        });
+
+
+        //单击二级菜单结束
+
+} );//end 最外层 $(document).ready
+        
+    </script>
+
+</head>
+
+<body>
+
+
+
+    <div id="container" style="width:1740px;height: 1024px;background-color:#F2F2F2;">
+
+        <div id="header" style="background-color:#FFFFFF;width:1740px;height: 80px;box-shadow: 5px 2px 4px  #DDDDDD;">
+            <h1 style="margin-bottom:0;text-align:center;">树袋老师</h1></div>
+        <div id="pwinShowDown" class="div-a" style="width:1440px;height: 5px;"></div>
+
+            <div id="menu" class="idTabs" style="background-color:#4A4A4A;height:944px;width:145px;float:left;">
+                <ul>
+                <li style="width:145px;height: 45px;"></li>
+                <li ><a id="menu_1" href="#one" style="background-image: url(icon_xpp/menu_1_main.png);background-repeat:no-repeat;background-position: 50% 20%;">总览</a></li>
+                <li ><a id="menu_2" class="selected" href="#two" style="background-image: url(icon_xpp/menu_2_stu.png);background-repeat:no-repeat;background-position: 50% 20%;">学员</a></li>
+                <li ><a id="menu_3" href="#three" style="background-image: url(icon_xpp/menu_3_cla.png);background-repeat:no-repeat;background-position: 50% 20%;">班级</a></li>
+                <li ><a id="menu_4" href="#four" style="background-image: url(icon_xpp/menu_4_emp.png);background-repeat:no-repeat;background-position: 50% 20%;">员工</a></li>
+                <li ><a id="menu_5" href="#five" style="background-image: url(icon_xpp/menu_5_cour.png);background-repeat:no-repeat;background-position: 50% 20%;">课程</a></li>
+                <li ><a id="menu_6" href="#six" style="background-image: url(icon_xpp/menu_6_putcour.png);background-repeat:no-repeat;background-position: 50% 20%;">排课</a></li>
+                <li ><a id="menu_7" href="#seven" style="background-image: url(icon_xpp/menu_7_finan.png);background-repeat:no-repeat;background-position: 50% 20%;">财务</a></li>
+                <li ><a id="menu_8" href="#eight" style="background-image: url(icon_xpp/menu_8_set.png);background-repeat:no-repeat;background-position: 50% 20%;">设置</a></li>
+              </ul>
+            </div>
+             
+             <!-- start menu_sub子菜单div -->   
+            <div id="menu_sub" class="idTabs"  style="background-color:#F2F2F2;height:944px;width:170px;float:left;box-sizing:border-box;border-style:solid;border-color: #F2F2F2 
+
+#D2D2D2 #F2F2F2 #F2F2F2;border-width:1px;">
+                
+                    
+                    <div id="one" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">校区总览</p></li>
+                            <li><a id="menu_a1" href="#one_1">我的今日课程</a></li>
+                            <li><a id="menu_a2" href="#one_2">全校今日课程</a></li>
+                            <li><a id="menu_a3" href="#one_3">接近结课学生</a></li>
+                        </ul>
+                        
+                  </div>
+                  <div id="two" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">学员</p></li>
+                            <li><a id="menu_b1" href="#two_1">新增学员</a></li>
+                            <li><a id="menu_b2" href="#two_2"  class="selected">管理学员</a></li>
+                        </ul>
+                  </div>
+                  <div id="three" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">班级</p></li>
+                            <li><a id="menu_c1" href="#three_1">新增班级</a></li>
+                            <li><a id="menu_c2" href="#three_2">管理班级(含排课)</a></li>
+                        </ul>
+
+                  </div>
+                  <div id="four" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">员工</p></li>
+                            <li><a id="menu_d1" href="#four_1">新增员工</a></li>
+                            <li><a id="menu_d2" href="#four_2">管理员工</a></li>
+                        </ul>
+
+                  </div>
+                  <div id="five" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">课程</p></li>
+                            <li><a id="menu_e1" href="#five_1">新增课程</a></li>
+                            <li><a id="menu_e2" href="#five_2">管理课程</a></li>
+                        </ul>
+
+                  </div>
+                  <div id="six" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">排课</p></li>
+                            <li><a id="menu_f1" href="#six_1">基本关系</a></li>
+                            <li><a id="menu_f2" href="#six_2">排课关系一</a></li>
+                            <li><a id="menu_f3" href="#six_3">排课关系二</a></li>
+                            <li><a id="menu_f4" href="#six_4">排课关系三</a></li>
+                        </ul>
+
+                  </div>
+                  <div id="seven" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">财务</p></li>
+                            <li><a id="menu_g1" href="#seven_1">新增合同</a></li>
+                            <li><a id="menu_g2" href="#seven_2">管理合同</a></li> 
+                        </ul>
+
+                  </div>
+                  <div id="eight" >
+                        <ul>
+                        	<li style="width:170px;height: 80px;"><p style="text-align:center;font-size:30px;box-sizing:border-box;">设置</p></li>
+                            <li><a id="menu_h1" href="#eight_1">教室新增</a></li>
+                            <li><a id="menu_h2" href="#eight_2">教室的管理</a></li> 
+                            <li><a id="menu_h3" href="#eight_3">权限设置</a></li> 
+                        </ul>
+
+                  </div>
+                  
+
+            </div><!-- end menu_sub子菜单div -->
+
+            <!-- start 内容容器div -->
+            <div id="content_container" style="background-color:#F2F2F2;width:1420px;height: 944px;float:left;">
+                <div id="content_header" style="background-color:#F2F2F2;width:1120px;height:73px;"></div>
+                <div id="menu_blank" style="background-color:#F2F2F2;width:50px;height:871px;float:left;"></div>
+
+                <div id="menu_content" class="idTabs" style="background-color:#FFFFFF;width:1272px;height:850px;float:left;box-shadow: 5px 2px 4px  #DDDDDD;">
+                <!-- <b>内容区域</b><br> -->
+
+                        <div id="one_1" style="float:left;">
+                           <p style="text-align:left;font-size:25px;box-sizing:border-box;margin:20px 5px 15px 40px;">您的今日课程one_1
+                           </p> 
+                           <!-- <iframe src="easyui_xpp/sub-1a1-mycourse.html" width="972" height="690" style="margin:20px 5px 15px 30px;" frameborder="0"></iframe> -->
+                        </div>
+                        <div id="one_2" style="float:left;display: block;">
+                           <p style="text-align:left;font-size:25px;box-sizing:border-box;margin:20px 5px 15px 40px;">全校今日课程one_2
+                           </p>
+                           
+                           <!-- <iframe src="easyui_xpp/crudDemo.html" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe> -->
+                        </div>
+                        <div id="one_3" style="float:left;display: block;">
+                           <p style="text-align:left;font-size:25px;box-sizing:border-box;margin:20px 5px 15px 40px;">结课情况one_3
+                           </p>
+                           
+                           <!-- <iframe src="easyui_xpp/crudDemo.html" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe> -->
+                        </div>
+
+                        <div id="two_1" >
+                            
+                            <!-- <p style="text-align:center;font-size:20px;box-sizing:border-box;">内容two_1</p> -->
+                            <iframe src="easyui_xpp/2a1.html" scrolling="no" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="two_2" >
+                            <iframe id="ifr2a2" name="ifrname" src="easyui_xpp/2a2.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                        <div id="three_1" >
+                            <iframe src="easyui_xpp/3a1.html" scrolling="no" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="three_2" style="box-sizing:border-box;overflow-x:hidden;overflow-y:hidden;">
+                            <iframe id="ifr3a2" src="easyui_xpp/3a2_ye1.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;overflow-x:hidden;overflow-y:hidden;" frameborder="0"></iframe>
+                        </div>
+
+                        <div id="four_1" >
+                            <iframe src="easyui_xpp/4a1.html" scrolling="no" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="four_2" >
+                            <iframe id="ifr4a2" src="easyui_xpp/4a2.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                        <div id="five_1" >
+                            <iframe src="easyui_xpp/5a1.html" scrolling="no" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="five_2" >
+                            <iframe id="ifr5a2" src="easyui_xpp/5a2.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                        <!--开始 six 排课暂时留空 todo -->
+                        <div id="six_1" >
+                            <iframe src="easyui_xpp/6a1.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="six_2" >
+                            <iframe id="ifr6a2" src="easyui_xpp/6a2.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="six_3" >
+                            <iframe src="easyui_xpp/6a3.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                        <div id="six_4" >
+                            <iframe src="easyui_xpp/6a4.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                        <!-- 结束 six 排课暂时留空 todo  -->
+
+                        <div id="seven_1" >
+                            <iframe src="easyui_xpp/7a1.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="seven_2" >
+                            <iframe id="ifr7a2" src="easyui_xpp/7a2.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                        <div id="eight_1" >
+                            <iframe src="easyui_xpp/8a1.html" scrolling="no" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="eight_2" >
+                            <iframe id="ifr8a2" src="easyui_xpp/8a2.html" scrolling="no" width="1200" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+                        <div id="eight_3" >
+                            <p style="text-align:center;font-size:30px;box-sizing:border-box;">内容eight_3</p>
+                            <iframe src="easyui_xpp/crudDemo.html" width="972" height="690" style="box-sizing:border-box;" frameborder="0"></iframe>
+                        </div>
+
+                </div>
+                
+                <!-- <div id="content_header" style="background-color:#FFA500;width:1125px;height:73px;float:left;"> 
+						.div-b{ background:#000;padding:5px;} 
+					url(div-a-bg.png)
+					box-sizing:border-box;是用于设置padding不增加元素宽度和高度
+                -->
+
+            </div> <!-- end 内容容器div -->
+                    
+
+                <div id="footer" style="background-color:#FFFFFF;clear:both;text-align:center;">
+                            版权：上海浅枫计算机网络</div>
+
+    </div>             
+
+
+    <div id="pwin" scrolling="no" ></div><!-- 空div 用来给子页面弹出窗口 -->
+    </body>
+    </html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ec4333bc-2e8d-437e-8341-7717e8f8f257" name="tom6" url="http://localhost:8080/sdpk">
+        <fileTransfer port="0" mountedRoot="F:\HM_ui_Git\apache-tomcat-6.0.45\webapps\sdpk" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

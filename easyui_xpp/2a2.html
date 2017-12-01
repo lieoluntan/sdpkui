@@ -80,18 +80,15 @@
 				data: JSON.stringify(send_data),
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
-					/*alert("删除完成");*/
-					$(function(){
-					    setTimeout(function(){
-					        $('.alert-main').show(300).delay(3000).hide(300);
-                        })
+                    setTimeout(function(){
+                        $('.alert-main').show(1000).delay(6000).hide(1000);
                     });
-					window.location.reload();
+					/*window.location.reload();*/
 
 				}
 			 
 			});//end $.ajax
-
+            /* 弹窗事件 */
          table.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
     } );//end 外圈 $('#delbut').click
 
@@ -404,9 +401,9 @@
 </p>
 <script>
     $(function () {
-        $('close-item').click(function(){
+        $('.close-item').click(function(){
             $('.alert-main').hide()
-        },6000)
+        })
     })
 </script>
 <!--E--弹窗开始-->

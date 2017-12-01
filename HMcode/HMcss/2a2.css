@@ -190,7 +190,6 @@ tbody tr:hover{
     display: none;
 }
 .alert-main .close-item{
-    color: #4c4c4c;
     position: absolute;
     left: 370px;
     cursor: pointer;

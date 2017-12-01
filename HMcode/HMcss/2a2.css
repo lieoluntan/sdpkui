@@ -166,4 +166,36 @@ tbody tr:hover{
     border:none;
     color:#5bc159 !important;
 }
+/* 弹窗样式 */
+.alert-main{
+    width:400px;
+    position:absolute;
+    top: 0;
+    left:50%;
+    margin-left:-200px;
+    line-height: 34px;
+    color:green;
+    padding:8px;
+    font-size:16px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow: 0 0 5px #ccc;
+    box-shadow: 0 0 5px #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    z-index: 999;
+    display: none;
+}
+.alert-main .close-item{
+    color: #4c4c4c;
+    position: absolute;
+    left: 370px;
+    cursor: pointer;
+    font-size:20px;
+    color:#868686;
+}
+
 

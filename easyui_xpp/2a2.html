@@ -80,7 +80,12 @@
 				data: JSON.stringify(send_data),
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
-					alert("删除完成");
+					/*alert("删除完成");*/
+					$(function(){
+					    setTimeout(function(){
+					        $('.alert-main').show(300).delay(3000).hide(300);
+                        })
+                    });
 					window.location.reload();
 
 				}
@@ -392,7 +397,19 @@
                  <!-- 按钮div结束 -->
     </div><!-- end id=dialog -->
  
-
+<!--S--弹窗开始-->
+<p class="alert-main">
+    此条学生信息已删除
+    <a class="close-item">×</a>
+</p>
+<script>
+    $(function () {
+        $('close-item').click(function(){
+            $('.alert-main').hide()
+        },6000)
+    })
+</script>
+<!--E--弹窗开始-->
 
 </body>
 </html>

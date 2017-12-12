@@ -264,7 +264,7 @@
     a2obj = JSON.parse(result);
     var a2data = a2obj.data;
     table_full = $('#content03_2_tb').DataTable( {
-        "scrollY": "280px",
+
         "scrollCollapse": "true",
         destroy:true,
         data: a2data,
@@ -540,16 +540,16 @@
 
 				<tr class="tit_tr"><td>选择课程</td></tr>
 				<tr><td>
-					<input id="L1ee"  name="courseUuid" data-options="editable:false" class="easyui-combobox yzss">
+					<input id="L1ee"  name="courseUuid" data-options="editable:false" class="easyui-combobox yzss" style="width:270px;height: 36px;">
 				</td></tr>
 
 				<tr class="tit_tr"><td>授课老师</td></tr>
 				<tr><td>
-					<input id="L2ee"  name="empUuid" data-options="editable:false" class="easyui-combobox yzss">
+					<input id="L2ee"  name="empUuid" data-options="editable:false" class="easyui-combobox yzss" style="width:270px;height: 36px;">
 				</td></tr>
 				<tr class="tit_tr"><td>上课教室</td></tr>
 				<tr><td>
-					<input id="L3ee"  name="classroomUuid" data-options="editable:false" class="easyui-combobox yzss">
+					<input id="L3ee"  name="classroomUuid" data-options="editable:false" class="easyui-combobox yzss" style="width:270px;height: 36px;">
 				</td></tr>
 
 			</table><!-- end content02_tb1 第一个表格结束 -->
@@ -562,8 +562,8 @@
 					<td class="de-part">上课时间</td>
 				</tr>
 				<tr class="tit_tr">
-					<td class="de-part"><input id="keDateTime" type="text" class="easyui-datebox" required="required" ></td>
-					<td class="de-part"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true"></td>
+					<td class="de-part"><input id="keDateTime" type="text" class="easyui-datebox" required="required" style="width:130px;height: 36px;"></td>
+					<td class="de-part"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true" style="width:130px;height: 36px;"></td>
 				</tr>
 				<!-- 第三四行 -->
 				<tr class="tit_tr">
@@ -571,8 +571,8 @@
 					<td class="de-part">排课次数</td>
 				</tr>
 				<tr class="tit_tr">
-					<td class="de-part"><input id="keLongTime" class="easyui-numberspinner"  required="required"></td>
-					<td class="de-part"><input id="keCount" class="easyui-numberspinner"  required="required" data-options="min:1,max:50,editable:true"></td>
+					<td class="de-part"><input id="keLongTime" class="easyui-numberspinner"  required="required" style="width:130px;height: 36px;"></td>
+					<td class="de-part"><input id="keCount" class="easyui-numberspinner"  required="required" data-options="min:1,max:50,editable:true" style="width:130px;height: 36px;"></td>
 				</tr>
 
 			</table><!--end content02_tb2 第二个表格结束 -->
@@ -715,30 +715,30 @@
             		<tr>
 	    			<td class="name-c">课&nbsp;&nbsp;&nbsp;&nbsp;程</td>
 	    			<td>
-                        <input style="width:270px" id="L1ee_dlg"  name="courseUuid" data-options="editable:false" class="easyui-combobox">
+                        <input style="width: 270px;height:36px;" id="L1ee_dlg"  name="courseUuid" data-options="editable:false" class="easyui-combobox">
             		</td>
 	    			</tr>
 				
 					<tr>
 	    			<td class="name-c">上课日期</td>
-	    			<td><input id="keDateTime_Dlg" type="text" class="easyui-datebox" required="required" style="width:260px;"></td>
+	    			<td><input id="keDateTime_Dlg" type="text" class="easyui-datebox" required="required" style="width:270px;height:36px;"></td>
 	    			</tr>
 
 					<tr>
 	    			<td  class="name-c">上课时间</td>
-	    			<td class="new_st"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true"></td>
+	    			<td class="new_st"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true" style="height: 36px;width: 194px;font-size:16px;"></td>
 	    			</tr>
 						
 					<tr>
 	    			<td class="name-c">上课时长</td>
-	    			<td><input id="keLongTime" class="easyui-numberspinner" style="height: 39px;width: 194px;font-size:16px;" required="required" data-options="min:1,max:300,editable:true"></td>
+	    			<td><input id="keLongTime" class="easyui-numberspinner" style="height: 36px;width: 194px;font-size:16px;" required="required" data-options="min:1,max:300,editable:true"></td>
 
 	    			</tr>
 
 	    			<tr>
 	    			<td  class="name-c">授课老师</td>
 	    			<td>
-                        <input style="width:260px" id="L2ee_dlg"  name="empUuid" data-options="editable:false" class="easyui-combobox">
+                        <input style="width:260px;height: 34px;" id="L2ee_dlg"  name="empUuid" data-options="editable:false" class="easyui-combobox">
             		</td>
 
 	    			</tr>
@@ -746,7 +746,7 @@
 	    			<tr>
 	    			<td class="name-c">教&nbsp;&nbsp;&nbsp;&nbsp;室</td>
 	    			<td>
-                        <input style="width:260px" id="L3ee_dlg"  name="classroomUuid" data-options="editable:false" class="easyui-combobox">
+                        <input style="width:260px" id="L3ee_dlg"  name="classroomUuid" data-options="editable:false" class="easyui-combobox" style="width:260px;height: 34px;">
             		</td>
 
 	    			</tr>
@@ -762,33 +762,6 @@
     </div><!-- end id=dialog -->
 </body>
 <script>
-    /*控制左边页面下拉框大小*/
-    $(function(){
-	    $('.combo').css({
-			"width":"270px",
-			"height":"34px",
-			"lineHeight":"34px"
-		});
-        $('.de-part .combo').css({
-            "width":"130px",
-            "height":"34px",
-            "lineHeight":"34px"
-        });
-        $('#keLongTime ,#keStartTime ,#keCount').css({
-			"width":"110px",
-			"height":'34px',
-			"lineHeight":'34px'
-		});
-        $('.spinner').css({
-            "width":"130px",
-            "height":"34px",
-            "lineHeight":"34px"
-        });
-
-		$('.de-part .combo-text').css("width","100px");
-		$('.spinner-arrow').css("height","34px");
-		$('.spinner-arrow-up ,.spinner-arrow-down').css("height","17px");
-	});
 	/* 复选框样式 */
 	$(function(){
 	    $('.data-main .check-class').click(function(){

@@ -103,8 +103,11 @@ margin:0px; padding:0;text-align:center;}
         });
 
         $( "#menu_c2" ).click(function(){
-            document.getElementById('ifr3a2').contentWindow.location.reload();
-            // alert("点击了学生管理");
+            // document.getElementById('ifr3a2').contentWindow.location.reload();
+            // alert("开始ifr3a2");
+            document.getElementById('ifr3a2').src="easyui_xpp/3a2_ye1.html";
+            // alert("结束ifr3a2");
+            // alert("点击了管理班级");
         });
 
         $( "#menu_d2" ).click(function(){
@@ -119,7 +122,12 @@ margin:0px; padding:0;text-align:center;}
 
         $( "#menu_f2" ).click(function(){
             document.getElementById('ifr6a2').contentWindow.location.reload();
-            // alert("点击了学生管理");
+            // alert("点击了排课关系一");
+        });
+
+        $( "#menu_f5" ).click(function(){
+            document.getElementById('ifr6a5').contentWindow.location.reload();
+            // alert("点击了排课");
         });
 
         $( "#menu_g2" ).click(function(){
@@ -142,9 +150,9 @@ margin:0px; padding:0;text-align:center;}
 </head>
 
 <body style="margin:0;padding:0;min-width: 1440px;">
-    <div id="container" style="height: 1024px;background-color:#F2F2F2;">
+    <div id="container" style="width:1740px;height: 1024px;background-color:#F2F2F2;">
 
-        <div id="header" style="background-color:#FFFFFF;height: 80px;box-shadow: 0 2px 2px #ccc; position:relative;">
+        <div id="header" style="background-color:#FFFFFF;width:1740px;height: 80px; position:relative;">
             <img style="display: block;width:62px;height:52px;float: left;margin-left:38px;margin-top:14px;" title="logo" src="HMcode/HMimages/logo.jpg">
             <h1 style="font-size:32px; color:#5e5e5e; line-height: 80px; text-align: center;padding:0;margin:0;">树袋老师</h1>
             <div class="xl-box" style="position:absolute; right:43px;top: 26px;color:#5e5e5e;">
@@ -178,6 +186,8 @@ line-height: 28px;">宋瑛瑛</i>
              
              <!-- start menu_sub子菜单div -->   
             <div id="menu_sub" class="idTabs"  style="background-color:#F2F2F2;height:944px;/*width:170px;*/width:10%;min-width:132px;float:left;box-sizing:border-box;border-right: 1px solid #d2d2d2;">
+                
+                    
                     <div id="one" >
                         <ul>
                         	<li><p style="text-align:center;font-size:24px;line-height:56px;box-sizing:border-box;">校区总览</p></li>
@@ -316,7 +326,7 @@ line-height: 28px;">宋瑛瑛</i>
                         </div>
 
                         <div id="six_5" >
-                            <iframe src="easyui_xpp/6a5.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
+                            <iframe id="ifr6a5" src="easyui_xpp/6a5.html" scrolling="no" width="1100" height="890" style="box-sizing:border-box;" frameborder="0"></iframe>
                         </div>
 
                         <!-- 结束 six 排课暂时留空 todo  -->

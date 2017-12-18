@@ -208,7 +208,8 @@ tbody tr:hover{
 /* 弹窗修改 */
 /* 弹窗头部样式修改 */
 .panel-title {
-    font-size: 14px;
+    font-size: 20px;
+    padding-left:10px;
     font-weight: normal;
     color: #575765;
     height: 30px;

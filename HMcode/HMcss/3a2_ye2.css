@@ -244,6 +244,8 @@ tbody tr:hover{
 /* 日历及表格区域 */
 .add_block{
     min-width:1100px;
+    display: flex;
+    flex-wrap: nowrap;
     background-color: #fafafa;
     padding:20px 10px 0 10px;
     -webkit-box-sizing: border-box;
@@ -252,13 +254,12 @@ tbody tr:hover{
     overflow: hidden;
 }
 .calen-b{
-    min-width:370px;
-    width:40%;
+    width:370px;
     height:573px;
     display: block;
     float: left;
     background-color: white;
-    margin-right: 2%;
+    margin-right: 10px;
 }
 .calen-b>p{
     font-size:18px;
@@ -278,8 +279,8 @@ tbody tr:hover{
 }
 .tab-tab{
     min-width:690px;
-    width:58%;
     float: left;
+    width:80%;
     background:white;
 }
 .tab-tab .btn-class{
@@ -331,7 +332,8 @@ tbody tr:hover{
 
 /* 弹窗头部样式修改 */
 .panel-title {
-    font-size: 14px;
+    font-size: 20px;
+    padding-left:10px;
     font-weight: normal;
     color: #575765;
     height: 30px;

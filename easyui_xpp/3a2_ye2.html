@@ -139,6 +139,8 @@
     var a2data = a2obj.data;
     table_ye2 = $('#paike_biao').DataTable( {
         destroy:true,//表示可重复加载
+        "scrollX": true,
+        scrollY:false,
         data: a2data,
         columns: [
             { "data": "courseName" },

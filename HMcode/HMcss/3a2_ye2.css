@@ -8,6 +8,12 @@
 em{
     font-style: normal;
 }
+/*滚动条设置*/
+::-webkit-scrollbar{width:14px;}
+::-webkit-scrollbar-track{background-color:#dcdcdc;}
+::-webkit-scrollbar-thumb{background-color:#666;}
+::-webkit-scrollbar-thumb:hover {background-color:#848484}
+::-webkit-scrollbar-thumb:active {background-color:#999}
 /*最外面的tab样式*/
 /*按钮样式*/
 .btn-class{
@@ -152,6 +158,12 @@ tbody tr:hover{
     color:#5bc159 !important;
 }
 
+/*控制表格水平滚动条的样式*/
+.dataTables_wrapper .dataTables_scroll {
+    clear: both;
+    min-width: 600px;
+    overflow: scroll;
+}
 /* tab标签 */
 .tab-style{
     clear: both;

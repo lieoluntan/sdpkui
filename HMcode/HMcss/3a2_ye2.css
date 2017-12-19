@@ -8,6 +8,12 @@
 em{
     font-style: normal;
 }
+/*滚动条设置*/
+::-webkit-scrollbar{width:14px;}
+::-webkit-scrollbar-track{background-color:#dcdcdc;}
+::-webkit-scrollbar-thumb{background-color:#666;}
+::-webkit-scrollbar-thumb:hover {background-color:#848484}
+::-webkit-scrollbar-thumb:active {background-color:#999}
 /*最外面的tab样式*/
 /*按钮样式*/
 .btn-class{
@@ -152,6 +158,11 @@ tbody tr:hover{
     color:#5bc159 !important;
 }
 
+/*控制表格水平滚动条的样式*/
+.dataTables_wrapper .dataTables_scroll {
+    clear: both;
+    min-width: 600px;
+}
 /* tab标签 */
 .tab-style{
     clear: both;
@@ -201,7 +212,7 @@ tbody tr:hover{
 /* 第一部分 */
 .class-xq{
     height:130px;
-    width:1100px;
+    min-width:1100px;
     padding:20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -243,7 +254,9 @@ tbody tr:hover{
 }
 /* 日历及表格区域 */
 .add_block{
-    width:1100px;
+    min-width:1100px;
+    display: flex;
+    flex-wrap: nowrap;
     background-color: #fafafa;
     padding:20px 10px 0 10px;
     -webkit-box-sizing: border-box;
@@ -257,7 +270,7 @@ tbody tr:hover{
     display: block;
     float: left;
     background-color: white;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 .calen-b>p{
     font-size:18px;
@@ -276,8 +289,9 @@ tbody tr:hover{
     color:#818181;
 }
 .tab-tab{
-    width:690px;
+    min-width:690px;
     float: left;
+    width:80%;
     background:white;
 }
 .tab-tab .btn-class{
@@ -329,7 +343,8 @@ tbody tr:hover{
 
 /* 弹窗头部样式修改 */
 .panel-title {
-    font-size: 14px;
+    font-size: 20px;
+    padding-left:10px;
     font-weight: normal;
     color: #575765;
     height: 30px;

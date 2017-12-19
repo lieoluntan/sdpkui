@@ -139,6 +139,8 @@
     var a2data = a2obj.data;
     table_ye2 = $('#paike_biao').DataTable( {
         destroy:true,//表示可重复加载
+        "scrollX": true,
+        scrollY:false,
         data: a2data,
         columns: [
             { "data": "courseName" },
@@ -491,7 +493,7 @@
 </head>
 <body>
 	
-	<div id="fen_3a2detail_container" style="width:1100px;height: 850px;background-color:#FFFFFF;">
+	<div id="fen_3a2detail_container" style="height: 850px;background-color:#FFFFFF;">
 
 		<div id="ye_1_content01" class="class-xq">
 				<div id="litle_a1" class="xq-logo">
@@ -542,28 +544,28 @@
                     <!--start 表头 -->
                     <thead class="tab-tit">
                     <tr>
-                        <th style="width:90px;">课程名称</th>
-                        <th style="width:65px;">类别</th>
-                        <th style="width:110px;">上课日期</th>
-                        <th style="width:90px;">上课时间</th>
-                        <th style="width:75px;">星期</th>
-                        <th style="width:90px;">授课老师</th>
-                        <th style="width:90px;">授课教室</th>
-                        <th style="width:80px;">上课时长</th>
+                        <th style="min-width:90px;">课程名称</th>
+                        <th style="min-width:65px;">类别</th>
+                        <th style="min-width:110px;">上课日期</th>
+                        <th style="min-width:90px;">上课时间</th>
+                        <th style="min-width:75px;">星期</th>
+                        <th style="min-width:90px;">授课老师</th>
+                        <th style="min-width:90px;">授课教室</th>
+                        <th style="min-width:80px;">上课时长</th>
                     </tr>
                     </thead>
                     <!--end 表头 -->
                     <!-- start 表尾 -->
                     <tfoot class="tab-tit">
                     <tr>
-                        <th style="width:90px;">课程名称</th>
-                        <th style="width:65px;">类别</th>
-                        <th style="width:110px;">上课日期</th>
-                        <th style="width:90px;">上课时间</th>
-                        <th style="width:75px;">星期</th>
-                        <th style="width:90px;">授课老师</th>
-                        <th style="width:90px;">授课教室</th>
-                        <th style="width:80px;">上课时长</th>
+                        <th style="min-width:90px;">课程名称</th>
+                        <th style="min-width:65px;">类别</th>
+                        <th style="min-width:110px;">上课日期</th>
+                        <th style="min-width:90px;">上课时间</th>
+                        <th style="min-width:75px;">星期</th>
+                        <th style="min-width:90px;">授课老师</th>
+                        <th style="min-width:90px;">授课教室</th>
+                        <th style="min-width:80px;">上课时长</th>
                     </tr>
                     </tfoot>
                     <!-- end 表尾 -->

@@ -55,7 +55,13 @@ margin:0px; padding:0;text-align:center;}
          }
         #menu_sub a.selected { background:#dcdcdc; color:#000;}
         #menu_sub a{display:block;line-height: 33px;text-decoration:none;color:#000000;}
-
+        .trans-arr{
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
 
     	
     </style>
@@ -158,9 +164,9 @@ margin:0px; padding:0;text-align:center;}
             <div class="xl-box" style="position:absolute; right:43px;top: 26px;color:#5e5e5e;">
                 <i class="user-name" style="font-style: normal;font-size:16px;
 line-height: 28px;">宋瑛瑛</i>
-                <span class="arrow-box" style="cursor: pointer"><img src="HMcode/HMimages/arrow-ss.png"></span>
-                <ul class="part-xl" style="display:none;width:120px;margin:0;position: absolute;top: 70px; right: -10px;color:#5e5e5e;background-color: white;padding:15px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;">
-                    <span style="color: white;position: absolute;top: -13px;left:50px;">▲</span>
+                <span class="arrow-box" style="cursor: pointer"><img class="" src="HMcode/HMimages/arrow-ss.png"></span>
+                <ul class="part-xl" style="display:none;width:100px;margin:0;position: absolute;top: 40px; right: -10px;color:#5e5e5e;background-color: white;padding:6px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-box-shadow: 0 0 4px #ccc;-moz-box-shadow:0 0 4px #ccc;box-shadow: 0 0 4px #ccc;">
+                    <span style="color: white;position: absolute;top: -13px;left:40px;text-shadow: 0 -2px 2px #ccc;">▲</span>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">个人信息</a> </li>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">密码设置</a> </li>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">账号绑定</a> </li>
@@ -261,7 +267,7 @@ line-height: 28px;">宋瑛瑛</i>
             </div><!-- end menu_sub子菜单div -->
 
             <!-- start 内容容器div -->
-            <div id="content_container" style="background-color:#F2F2F2;min-width:1100px;width:80%;overflow-x:scroll;height: 944px;float:left;">
+            <div id="content_container" style="background-color:#F2F2F2;width:80%;height: 944px;float:left;">
                 <div id="content_header" style="background-color:#F2F2F2;min-width:1100px;width:80%;height:73px;"></div>
                 <div id="menu_blank"></div>
                 <div id="menu_content" class="idTabs" style="background-color:#FFFFFF;width:96%;margin-left: 2%;margin-right:2%;height:850px;float:left;">
@@ -372,6 +378,7 @@ line-height: 28px;">宋瑛瑛</i>
     /* 顶部下拉 */
     $(function(){
         $('.arrow-box img ,.user-name').click(function(){
+            $('.arrow-box img').toggleClass("trans-arr");
             if($('.part-xl').is(":hidden")){
                 $('.part-xl').show();
                 $(this).animate("transform","rotate(180deg)");

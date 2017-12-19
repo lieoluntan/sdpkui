@@ -162,7 +162,6 @@ tbody tr:hover{
 .dataTables_wrapper .dataTables_scroll {
     clear: both;
     min-width: 600px;
-    overflow: scroll;
 }
 /* tab标签 */
 .tab-style{

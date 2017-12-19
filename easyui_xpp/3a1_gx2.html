@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="DataTables/datatables.js"></script>
 	<script type="text/javascript" src="../xppjs/jquery.serialize-object.js"></script>
+    <script type="text/javascript" src="../xppjs/jquery.cookie.js"></script>
 	
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
@@ -18,24 +19,33 @@
 
 	<script type="text/javascript">
         var table_pk3;//全局变量
+        var G_Uidcla;//全局变量
 		 $(document).ready(function(){
+            //------------以下部分是获取cookie中的班级uuid-start-----------
+        // 取出
+            G_Uidcla = $.cookie('UidCla');
+
         //------------步骤0--------------------
-        //4个表格初始化
-        //步骤1,展示列表数据
-        var dataSet = [{"uuid":"空","className":"初始为空","contrName":"初始为空"}];
-        var table_pk3 = $('#G3_tb5').DataTable({
-                data: dataSet,
+
+        //1个表格初始化
+             table_pk3 = $('#G3_tb5').DataTable( {
+                "ajax": "/sdpk/aaClass_Contract?qqiu=getListBycla&classUuid="+G_Uidcla,
+                "searching" : false, //去掉搜索框方法一
+                "bFilter": false,   //去掉搜索框方法二
+                "bSort": false,  //禁止排序
+                "paging": false,   //禁止分页
+                "info": false,   //去掉底部文字
+
                 "columns": [
                     { "data": "className" ,"width":"350px"},
                     { "data": "contrName" ,"width":"350px"}
                 ]
-            } );
+            } );//end 1个表格初始化 结束
 
 
 
         //------------步骤一--------------------
 		 	//步骤1，加载所有下拉框
-    	$( "#btn_combo" ).click(function() { 
         //获取班级列表数据，并取出其中的数组类型
         var send_edit_data = {};
             // send_edit_data.uuid = delRowData.uuid;
@@ -75,9 +85,7 @@
             });
 
 
-
-
-    });//end 1 外圈 save_1 单击
+//end 1 外圈 加载所有下拉框
 
     	//步骤1_x1，在步骤1的回调,展示L1,L2,L3下拉框
     function huiFunc1(result){
@@ -90,6 +98,8 @@
                 valueField: 'uuid',
                 textField: 'name',
                 selectOnNavigation: false,
+                value:G_Uidcla,  //默认选中value指定的选项
+                readonly:true,  //不可选择
 
                 //选择事件，选重的时候同时加载数据表
                 onSelect: function(rec){
@@ -170,7 +180,7 @@
         //要初始化一个对象，不然会报undifine未定义错误
         var delRowData = {};
         //获取选择那一行的数据
-         delRowData = table_rela3.row('.selected').data();
+         delRowData = table_pk3.row('.selected').data();
          //获取选择行中的uuid字段
          var Auuid = delRowData.uuid;
          
@@ -208,6 +218,28 @@
 	</script>
 
 
+    <script type="text/javascript">
+
+    function clearForm(){
+            alert("在修改中可再次编辑关系");
+            // window.location.href="3a1_gx2.html";
+            //调用父级弹窗start
+                var $parent = self.parent.$;
+                $parent('#menu_c2').click();
+            //调用父级弹窗end
+        };//end function clearForm
+
+        function submitForm(){
+            // window.location.href="3a1_gx2.html";
+            //调用父级弹窗start
+                var $parent = self.parent.$;
+                $parent('#menu_c2').click();
+            //调用父级弹窗end
+        };//end function clearForm
+
+    </script>
+
+
 	<style type="text/css">
 		*{
     		font-family:"黑体";
@@ -222,27 +254,27 @@
 		<div id="ye_2_blank" style="background-color:#FFFFFF;width:54px;height:636px;float:left;"></div>
 
 		<div id="ye_3_text_container" style="box-sizing:border-box;background-color:#FFFFFF;width:923px;height:636px;float:left;">
-			<div id="header_1" style="background-color:#FFFFFF;width:923px;height: 28px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:24px;margin-bottom:0;text-align:left;">排课关系</strong></div>
+			<div  style="background-color:#FFFFFF;width:923px;height: 28px;float:left;">
+            <strong style="float:left;box-sizing:border-box;font-size:24px;margin-bottom:0;text-align:left;">添加</strong></div>
 
-            <!-- 划线 --><div id="header_2" style="background-color:#FFFFFF;width:923px;height: 8px;float:left;border-style:solid; border-bottom-width:1px;border-left: none;border-top: none;border-right: none;">
+            <!-- 划线 --><div  style="background-color:#FFFFFF;width:923px;height: 8px;float:left;border-style:solid; border-bottom-width:1px;border-left: none;border-top: none;border-right: none;">
             </div>
-            <!-- 关系图片 -->
-            <div id="header_1" style="background-color:#FFFFFF;background-image: url(../icon_xpp/6a1_a.png);background-repeat:no-repeat;width:923px;height: 200px;float:left;"></div>
 
-            
 
-            <div id="header_1" style="background-color:#FFFFFF;width:923px;height: 28px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:24px;margin-bottom:0;text-align:left;">排课关系三</strong></div>
 
             <!-- 划线 --><div id="header_2" style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
             </div>
 
             <!-- 留空按钮 --> 
             <div style="width: 923px;height: 22px;float:left;">
-            <button id="btn_combo" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;background-color: #3CDA9E">初始化下拉框</button>
 
-            </div><!-- 留空按钮结束 --> 
+            </div><!-- 留空按钮结束 -->
+
+            <!-- 划文字 -->
+            <div style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
+                <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;color: #18be76;">
+                    添加合同</strong>
+            </div><!-- 划文字结束 -->
 
             <div id="header_3_form" style="background-color:#FFFFFF;width:923px;height: 560px;float:left;">
                     <!-- start  3行布局 -->
@@ -310,6 +342,19 @@
             		</table> <!-- end id为 G3_tb5 -->
 
             		</div> <!-- 包裹关系三列表，关系四列表 结束-->
+
+                    <!-- 按钮div开始 -->
+                        <div  style="width: 50%;height: 50%;">
+                            <!-- 留空 -->
+                            <div style="width: 200px;height: 32px;float:left;">
+
+                            </div><!-- 留空结束 -->
+                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="float: left;" onclick="submitForm()">完成</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton btn-xk" style="float: left;" onclick="clearForm()">取消</a>
+
+                        </div>
+                        <!-- 按钮div结束 -->
+
             </div><!-- end div  header_3_form-->
 
 		</div><!-- end div  ye_3_text_container-->

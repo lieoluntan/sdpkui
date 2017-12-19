@@ -100,7 +100,7 @@
     $.each(a2dataT, function (n, value) {
     // alert(n + ' ' + value);
     var trs = "";
-    trs += value.courseName + "___";
+    trs += value.courseName + ",";
     couseStr += trs;
     });
 
@@ -540,7 +540,7 @@
                 <button id="delbut" class="btn-class del-btn">删除</button>
                 <button id="opener" class="btn-class">调课</button>
 
-                <table id="paike_biao" class="display tab-mians" cellspacing="0" width="100%">
+                <table id="paike_biao" class="display tab-mians" cellspacing="0" width="100%" style="padding-top:0;">
                     <!--start 表头 -->
                     <thead class="tab-tit">
                     <tr>

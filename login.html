@@ -25,7 +25,7 @@
         
         <link rel="stylesheet" href="assets/css/reset.css">
         <!--<link rel="stylesheet" href="assets/css/supersized.css">-->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <!--<link rel="stylesheet" href="assets/css/style.css">-->
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -122,7 +122,20 @@
                 -webkit-box-shadow: none;
                 -moz-box-shadow: none;
                 box-shadow: none;
-                color:#9B9B9B;
+                color:#9B9BB9;
+                text-shadow: none;
+            }
+            ::-webkit-input-placeholder { /* WebKit browsers */
+                color:    #9B9BB9;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color:    #999;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color:   #9B9BB9;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10+ */
+                color:    #9B9BB9;
             }
             input:focus{
                 -webkit-box-shadow: none;
@@ -133,7 +146,8 @@
             button{
                 width:250px;
                 height:40px;
-                margin:14px auto 0;
+                margin-left:250px;
+                margin-top:14px;
                 color:white;
                 line-height: 40px;
                 text-align: center;
@@ -170,7 +184,9 @@
                 <input type="text" id="uLogUser" name="uLogUser" class="username" placeholder="请输入账号">
                 <input type="password" id="uPassWord" name="uPassWord" class="password"  placeholder="请输入密码">
                 <button id="btn_denlu" class="login-btn">登陆</button>
+<!--
                 <div class="error"><span>+</span></div>
+-->
                 </div>
 
 

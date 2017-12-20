@@ -15,7 +15,7 @@
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
-
+    <link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/3a1_gx2.css"/>
 
 	<script type="text/javascript">
         var table_pk3;//全局变量
@@ -239,119 +239,77 @@
 
     </script>
 
-
-	<style type="text/css">
-		*{
-    		font-family:"黑体";
-    	}
-	</style>
 </head>
 <body>
 	
-	<div id="fen_container"  style="width:977px;height: 690px;background-color:#FFFFFF;"> 
+	<div id="fen_container" class="tab-con">
 
-		<div id="ye_1_blank" style="background-color:#FFFFFF;width:977px;height:54px;float:left;"></div>
-		<div id="ye_2_blank" style="background-color:#FFFFFF;width:54px;height:636px;float:left;"></div>
+		<div id="ye_1_blank"></div>
+		<div id="ye_2_blank"></div>
 
-		<div id="ye_3_text_container" style="box-sizing:border-box;background-color:#FFFFFF;width:923px;height:636px;float:left;">
-			<div  style="background-color:#FFFFFF;width:923px;height: 28px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:24px;margin-bottom:0;text-align:left;">添加</strong></div>
-
-            <!-- 划线 --><div  style="background-color:#FFFFFF;width:923px;height: 8px;float:left;border-style:solid; border-bottom-width:1px;border-left: none;border-top: none;border-right: none;">
+		<div id="ye_3_text_container">
+			<div id="header_1">
+                <h2>添加</h2>
             </div>
-
-
-
-            <!-- 划线 --><div id="header_2" style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
-            </div>
-
-            <!-- 留空按钮 --> 
-            <div style="width: 923px;height: 22px;float:left;">
-
-            </div><!-- 留空按钮结束 -->
-
+            <!-- 留空按钮 -->
+            <!--<div style="width: 923px;height: 22px;float:left;"></div>-->
+            <!-- 留空按钮结束 -->
             <!-- 划文字 -->
-            <div style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
-                <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;color: #18be76;">
-                    添加合同</strong>
+            <div class="tit_style">
+                <h3>添加合同</h3>
             </div><!-- 划文字结束 -->
 
-            <div id="header_3_form" style="background-color:#FFFFFF;width:923px;height: 560px;float:left;">
+            <div id="header_3_form">
                     <!-- start  3行布局 -->
-                    <table id="header_3_tb1" style="float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-
-                    <tr style="width:923px;height: 28px; "></tr>
+                    <table id="header_3_tb1" class="tab-style">
                     <!-- 第二行 -->
                     <tr>
-                    <td align="center" style="text-align:left;background-color:#FFFFFF;width:70px;height:39px;box-sizing:border-box;font-size:16px;color: red;">班级:</td>
+                    <td class="name-s" style="padding-left:0">班级:</td>
                     <td>
-                    <input id="L3cc"  name="" class="easyui-combobox" style="height: 39px;width: 194px;font-size:16px;">
-                    </td>  
-
-                    <td style="height: 39px;width: 60px;background-color:#FFFFFF;"></td>
-
-                    <td align="center" style="text-align:left;background-color:#FFFFFF;width:70px;height:39px;box-sizing:border-box;font-size:16px;color: red;">合同:</td>
-                    <td>
-                    <input id="R3dd" type="" name="" class="easyui-combobox" style="height: 39px;width: 194px;font-size:16px;">
+                    <input id="L3cc"  name="" class="easyui-combobox" style="height: 36px;width: 200px;font-size:16px;">
                     </td>
-
-                    <td style="height: 39px;width: 60px;background-color:#FFFFFF;"></td>
-
-                    <td align="center" style="text-align:left;background-color:#FFFFFF;width:70px;height:39px;box-sizing:border-box;font-size:16px;"></td>
-                    <td style="height: 39px;width: 194px;font-size:16px;">
-                    <button id="save_3" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">保存</button>
-                    <button id="del_3" style="float:right;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">删除</button>
+                    <td class="name-s">合同:</td>
+                    <td>
+                    <input id="R3dd" type="" name="" class="easyui-combobox" style="height: 36px;width: 200px;font-size:16px;">
+                    </td>
+                    <td style="padding-left:100px;">
+                    <button id="save_3" class="btn-class">保存</button>
+                    <button id="del_3" class="btn-class del-btn">删除</button>
                     </td>
                     </tr>
                     <!-- 第二行结束 -->
-
-                    <!-- 留空开始 -->
-                    <tr style="width:923px;height: 28px; "></tr>
-                    <!-- 留空结束 -->
 
                     </table><!-- end id=header_3_tb1 -->
                     <!-- end  3行布局 -->
 
 
             		<!-- 包裹关系三列表，关系四列表 start-->
-            		<div id="HasG3G4" style="background-color:#FFFFFF;width:800px;height: 360px;float:left;">
-            		<table id="G3_tb5"  style="width: 923px;float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-
-                    <!-- 留空开始 -->
-                    <tr style="width:923px;height: 28px; "></tr>
-                    <!-- 留空结束 -->
+            		<div id="HasG3G4">
+            		<table id="G3_tb5"  class="tab-mians">
             		<!--start 表头 -->
-                        <thead>
+                        <thead class="tab-tit">
                             <tr>
-                                <th>班级</th>
-                                <th>合同</th>
+                                <th style="min-width:150px;">班级</th>
+                                <th style="min-width:150px;">合同</th>
                             </tr>
                         </thead>
                         <!--end 表头 -->
                         <!-- start 表尾 -->
-                        <tfoot>
+                        <tfoot class="tab-tit">
                             <tr>
-                                <th>班级</th>
-                                <th>合同</th>
+                                <th style="min-width:150px;">班级</th>
+                                <th style="min-width:150px;">合同</th>
                             </tr>
                         </tfoot>
                         <!-- end 表尾 -->
-					<!-- 留空开始 -->
-	    			<tr style="width:923px;height: 28px; "></tr>
-					<!-- 留空结束 -->
             		</table> <!-- end id为 G3_tb5 -->
 
             		</div> <!-- 包裹关系三列表，关系四列表 结束-->
 
                     <!-- 按钮div开始 -->
-                        <div  style="width: 50%;height: 50%;">
-                            <!-- 留空 -->
-                            <div style="width: 200px;height: 32px;float:left;">
-
-                            </div><!-- 留空结束 -->
-                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="float: left;" onclick="submitForm()">完成</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton btn-xk" style="float: left;" onclick="clearForm()">取消</a>
-
+                        <div class="btn-box">
+                            <a href="javascript:void(0)" class="easyui-linkbutton btn-xk"  onclick="clearForm()">取消</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="submitForm()">完成</a>
                         </div>
                         <!-- 按钮div结束 -->
 
@@ -362,4 +320,10 @@
 
 	</div><!-- end div  id="fen_container"-->
 </body>
+<script>
+    $(function(){
+        /* 表格自适应设置 */
+        $('table.dataTable').css("width","100%");
+    })
+</script>
 </html>

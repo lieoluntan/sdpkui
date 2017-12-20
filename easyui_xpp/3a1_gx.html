@@ -15,7 +15,7 @@
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
-
+    <link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/3a1_gx.css"/>
 
 	<script type="text/javascript">
 		var table_rela1;//全局变量
@@ -512,242 +512,175 @@
 
     </script>
 
-
-	<style type="text/css">
-		*{
-    		font-family:"黑体";
-    	}
-	</style>
 </head>
 <body>
 	
-	<div id="fen_container"  style="width:977px;height: 690px;background-color:#FFFFFF;"> 
+	<div id="fen_container" class="tab-con">
 
-		<div id="ye_1_blank" style="background-color:#FFFFFF;width:977px;height:54px;float:left;"></div>
-		<div id="ye_2_blank" style="background-color:#FFFFFF;width:54px;height:636px;float:left;"></div>
+		<div id="ye_1_blank"></div>
+		<div id="ye_2_blank"></div>
 
-		<div id="ye_3_text_container" style="box-sizing:border-box;background-color:#FFFFFF;width:923px;height:636px;float:left;">
-			<div id="header_1" style="background-color:#FFFFFF;width:923px;height: 28px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:24px;margin-bottom:0;text-align:left;">添加</strong></div>
-
-            <!-- 划线 --><div id="header_2" style="background-color:#FFFFFF;width:923px;height: 8px;float:left;border-style:solid; border-bottom-width:1px;border-left: none;border-top: none;border-right: none;">
+		<div id="ye_3_text_container">
+			<div id="header_1">
+                <h2>添加</h2>
             </div>
-          
-            <!-- 留空按钮 --> 
-            <div style="width: 923px;height: 32px;float:left;">
+            <div id="header_3_form" style="color: #4c4c4c;">
 
-            </div><!-- 留空按钮结束 --> 
-
-            
-
-            <div id="header_3_form" style="background-color:#FFFFFF;width:923px;height: 560px;float:left;">
-
-            		<div style="background-color: #FFFFFF;width:400px;height: 700px;float:left;"><!-- 主框架左半页 start -->
+            		<div style="background-color: #FFFFFF;min-width:400px;float:left;margin-right:4%;width:48%;"><!-- 主框架左半页 start -->
                     
+                    <div class="left_t" style="min-width: 400px;">
+                        <div class="tit_style">
+                            <h3>添加班主任</h3>
+                        </div>
 
-            		<div style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;color: #18be76;">添加班主任</strong></div>
-           
-            		<table id="header_3_tb1" style="float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-            		<!-- 第一个表格第一行开始 -->
-            		<tr>
-	    			<td style="height: 39px;width: 194px;font-size:16px;">
-		    			<strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">班级:</strong>
-	    			</td>
-	    			<td style="height: 39px;width: 20px;background-color:#FFFFFF;"></td>
-	    			<td style="height: 39px;width: 194px;font-size:16px; ">
-		    	    <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">班主任:</strong>
-	    			</td>
-                    <!-- 留空 --><td style="height: 39px;width: 194px;font-size:16px; "></td>                  
-	    			</tr><!-- 第一个表格第一行结束 -->
-
-	    			<!-- 第一个表格第二行开始 -->
-	    			<tr>
-                    <td style="height: 39px;width: 194px;font-size:16px; ">
-                    <button id="save_1" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">保存</button>
-                    <button id="del_1" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">删除</button>
-                    </td>
-                    </tr>
-
-            		<!-- 第一个表格第三行开始 -->
-            		<tr>
-	    			<td>
-						<input id="L1cc" type="" name="" class="easyui-combobox"  style="height: 39px;width: 194px;font-size:16px; ">
-	    			</td>
-	    			<td style="height: 39px;width: 20px;background-color:#FFFFFF;"></td>
-	    			<td>
-		    			<input id="R1dd" type="" name="" class="easyui-combobox" style="height: 39px;width: 194px;font-size:16px; ">
-	    			</td>
-	    			
-	    			</tr><!-- 第一个表格第二行结束 -->
-
-	    		
-            		</table><!-- end id=header_3_tb1 -->
-
-            		<!-- 包裹关系一列表，关系二列表 start-->
-            		<div id="HasG1G2" style="width:400px;height: 100px;float:left;">
-            		<table id="G1_tb2"  style="width: 400px;float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-            		<!--start 表头 -->
-                        <thead>
+                        <table id="header_3_tb1">
+                            <!-- 第一个表格第一行开始 -->
                             <tr>
-                                <th style="width:200px ;">班级</th>
-                                <th style="width:200px ;">班主任</th>
-                            </tr>
-                        </thead>
-                        <!--end 表头 -->
-                        <!-- start 表尾 -->
-                        <tfoot>
+                                <td style="height: 36px;width: 170px;font-size:16px;">班级:</td>
+                                <td style="height: 36px;width: 170px;font-size:16px;">班主任:</td>
+                            </tr><!-- 第一个表格第一行结束 -->
+
+
+                            <!-- 第一个表格第三行开始 -->
                             <tr>
-                                <th style="width:200px ;">班级</th>
-                                <th style="width:200px ;">班主任</th>
-                            </tr>
-                        </tfoot>
-                        <!-- end 表尾 -->
-            		</table> <!-- end id为 G1_tb2 -->
+                                <td>
+                                    <input id="L1cc" type="" name="" class="easyui-combobox"  style="height: 36px;width: 160px;font-size:16px;">
+                                </td>
+                                <td>
+                                    <input id="R1dd" type="" name="" class="easyui-combobox" style="height: 36px;width: 160px;font-size:16px;">
+                                <td>
+                                    <button id="save_1" class="btn-class">保存</button>
+                                    <button id="del_1" class="btn-class del-btn">删除</button>
+                                </td>
+                                </td>
 
-            		</div> <!-- 包裹关系一列表，关系二列表 结束-->
+                            </tr><!-- 第一个表格第二行结束 -->
+                            <!-- 第一个表格第二行开始 -->
+                        </table><!-- end id=header_3_tb1 -->
+
+                        <!-- 包裹关系一列表，关系二列表 start-->
+                        <div id="HasG1G2">
+                            <table id="G1_tb2" class="tab-mians" style="width:100%;">
+                                <!--start 表头 -->
+                                <thead class="tab-tit">
+                                <tr>
+                                    <th style="min-width:200px ;">班级</th>
+                                    <th style="min-width:200px ;">班主任</th>
+                                </tr>
+                                </thead>
+                                <!--end 表头 -->
+                                <!-- start 表尾 -->
+                                <tfoot class="tab-tit">
+                                <tr>
+                                    <th style="min-width:200px ;">班级</th>
+                                    <th style="min-width:200px ;">班主任</th>
+                                </tr>
+                                </tfoot>
+                                <!-- end 表尾 -->
+                            </table> <!-- end id为 G1_tb2 -->
+
+                        </div> <!-- 包裹关系一列表，关系二列表 结束-->
+                    </div>
+                    <div class="left_b" style="min-width: 400px;">
+                        <!-- 划文字 -->
+                        <div class="tit_style">
+                            <h3>添加学员</h3>
+                        </div>
+
+                        <!-- 包裹班级关联学员列表 start-->
+                        <div id="HasG3G4">
+                            <table id="header_3_tb4">
+
+                                <td style="height: 36px;width: 170px;font-size:16px;">班级:</td>
+                                <td style="height: 36px;width: 170px;font-size:16px;">学员:</td>
+                                <!-- 第4个表格第二行开始 -->
+                                <tr>
+                                    <td>
+                                        <input id="L2cc" type="" name="" class="easyui-combobox"  style="height: 36px;width: 160px;font-size:16px;">
+                                    </td>
+                                    <td>
+                                        <input id="R2dd" type="" name="" class="easyui-combobox" style="height: 36px;width: 160px;font-size:16px;">
+                                    </td>
+                                    <td>
+                                        <button id="save_2" class="btn-class">保存</button>
+                                        <button id="del_2" class="btn-class del-btn">删除</button>
+                                    </td>
+                                </tr><!-- 第4表格第二行结束 -->
+                            </table><!-- 第4表格结束 header_3_tb4 -->
 
 
-                <!-- 划文字 -->
-            	<div style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;color: #18be76;">添加学员</strong></div>
+                            <table id="G2_tb3"  class="tab-mians" style="width:100%;">
+                                <!--start 表头 -->
+                                <thead class="tab-tit">
+                                <tr>
+                                    <th style="min-width:200px;">班级</th>
+                                    <th style="min-width:200px;">学员</th>
+                                </tr>
+                                </thead>
+                                <!--end 表头 -->
+                                <!-- start 表尾 -->
+                                <tfoot class="tab-tit">
+                                <tr>
+                                    <th style="min-width:200px;">班级</th>
+                                    <th style="min-width:200px;">学员</th>
+                                </tr>
+                                </tfoot>
+                                <!-- end 表尾 -->
+                            </table> <!-- end id为 G2_tb3 -->
 
-            <!-- 包裹班级关联学员列表 start-->
-            		<div id="HasG3G4" style="background-color:#FFFFFF;width:400px;height: 300px;float:left;">
-	    		<table id="header_3_tb4" style="float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-
-                    <!-- 留空开始 -->
-                    <tr style="width:923px;height: 8px; "></tr>
-                    <!-- 留空结束 -->
-
-                    <td style="height: 39px;width: 194px;font-size:16px;">
-                    <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">班级:</strong>
-                    </td>
-                    <td style="height: 39px;width: 20px;background-color:#FFFFFF;"></td>
-                    <td style="height: 39px;width: 20px;font-size:16px;">
-                    <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">学员:</strong>
-                    </td>
-
-                    <tr>
-                    <td style="height: 39px;width: 194px;font-size:16px; ">
-                    <button id="save_2" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">保存</button>
-                    <button id="del_2" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">删除</button>
-                    </td>
-                    </tr>
-            		
-            		<!-- 第4个表格第二行开始 -->
-            		<tr>
-	    			<td>
-                        <input id="L2cc" type="" name="" class="easyui-combobox"  style="height: 39px;width: 194px;font-size:16px; ">
-                    </td>
-                    <td style="height: 39px;width: 20px;background-color:#FFFFFF;"></td>
-                    <td>
-                    <input id="R2dd" type="" name="" class="easyui-combobox" style="height: 39px;width: 194px;font-size:16px; ">
-                    </td>
-	    			</tr><!-- 第4表格第二行结束 -->
-
-	    		
-            		</table><!-- 第4表格结束 header_3_tb4 -->
-
-            		
-            		<table id="G2_tb3"  style="width: 400px;float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-                    <!--start 表头 -->
-                        <thead>
-                            <tr>
-                                <th style="width:200px;">班级</th>
-                                <th style="width:200px;">学员</th>
-                            </tr>
-                        </thead>
-                        <!--end 表头 -->
-                        <!-- start 表尾 -->
-                        <tfoot>
-                            <tr>
-                                <th style="width:200px;">班级</th>
-                                <th style="width:200px;">学员</th>
-                            </tr>
-                        </tfoot>
-                        <!-- end 表尾 -->
-                    <!-- 留空开始 -->
-                    <tr style="width:923px;height: 28px; "></tr>
-                    <!-- 留空结束 -->
-                    </table> <!-- end id为 G2_tb3 -->
-
-            		</div> <!-- 包裹班级关联学员列表 结束-->
+                        </div> <!-- 包裹班级关联学员列表 结束-->
+                    </div>
                     </div><!-- 主框架左半页 end -->
-
-                    <div style="background-color: #FFFFFF;width:50px;height: 700px;float:left;"><!-- 主框架中间空 start -->
-
-                    </div><!-- 主框架中间空 end -->
-
-                    <div style="background-color: #FFFFFF;width:400px;height: 700px;float:left;"><!-- 主框架右半页 start -->
-
-                    
+                    <div style="background-color: #FFFFFF;min-width:400px;height: 700px;float:left;width:48%;"><!-- 主框架右半页 start -->
 
             		<!-- 划文字 -->
-            	<div style="background-color:#FFFFFF;width:923px;height: 18px;float:left;">
-            <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;color: #18be76;">添加课程</strong></div>
+            	<div class="tit_style">
+                    <h3>添加课程</h3>
+                </div>
 
             		<!-- 包裹班级课程关联列表 start-->
-            		<div id="HasG3" style="background-color:#FFFFFF;width:400px;height: 300px;float:left;">
+            		<div id="HasG3">
 
             		<!-- start  3行布局 -->
-                    <table id="tb_classCour" style="float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
+                    <table id="tb_classCour">
 
-
-                    <td style="height: 39px;width: 194px;font-size:16px;">
-                    <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">班级:</strong>
-                    </td>
-                    <td style="height: 39px;width: 20px;background-color:#FFFFFF;"></td>
-                    <td style="height: 39px;width: 20px;font-size:16px;">
-                    <strong style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">课程:</strong>
-                    </td>
-
-                    <tr>
-                    <td style="height: 39px;width: 194px;font-size:16px; ">
-                    <button id="save_3" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">保存</button>
-                    <button id="del_3" style="float:left;box-sizing:border-box;font-size:13px;margin-bottom:0;text-align:left;">删除</button>
-                    </td>
-                    </tr>
+                    <td style="height: 36px;width: 170px;font-size:16px;">班级:</td>
+                    <td style="height: 36px;width: 170px;font-size:16px;">课程:</td>
             		
             		<!-- 第4个表格第二行开始 -->
             		<tr>
 	    			<td>
-                        <input id="L3cc" type="" name="" class="easyui-combobox"  style="height: 39px;width: 194px;font-size:16px; ">
+                        <input id="L3cc" type="" name="" class="easyui-combobox"  style="height: 36px;width: 160px;font-size:16px;">
                     </td>
-                    <td style="height: 39px;width: 20px;background-color:#FFFFFF;"></td>
                     <td>
-                    <input id="R3dd" type="" name="" class="easyui-combobox" style="height: 39px;width: 194px;font-size:16px; ">
+                    <input id="R3dd" type="" name="" class="easyui-combobox" style="height: 36px;width: 160px;font-size:16px;">
+                        <td>
+                            <button id="save_3" class="btn-class">保存</button>
+                            <button id="del_3" class="btn-class del-btn">删除</button>
+                        </td>
                     </td>
 	    			</tr><!-- 第4表格第二行结束 -->
 
-	    		
             		</table><!-- 第4表格结束 header_3_tb4 -->
                     <!-- end  3行布局 -->
 
-            		<table id="G3_tb5"  style="width: 400px;float:left;box-sizing:border-box;margin-bottom:0;border-collapse:collapse">
-
-                    <!-- 留空开始 -->
-                    <tr style="width:400px;height: 28px; "></tr>
-                    <!-- 留空结束 -->
+            		<table id="G3_tb5" class="tab-mians" style="width:100%;">
             		<!--start 表头 -->
-                        <thead>
+                        <thead class="tab-tit">
                             <tr>
-                                <th style="width:200px;">班级</th>
-                                <th style="width:200px;">课程</th>
+                                <th style="min-width:200px;">班级</th>
+                                <th style="min-width:200px;">课程</th>
                             </tr>
                         </thead>
                         <!--end 表头 -->
                         <!-- start 表尾 -->
-                        <tfoot>
+                        <tfoot class="tab-tit">
                             <tr>
-                                <th style="width:200px;">班级</th>
-                                <th style="width:200px;">课程</th>
+                                <th style="min-width:200px;">班级</th>
+                                <th style="min-width:200px;">课程</th>
                             </tr>
                         </tfoot>
                         <!-- end 表尾 -->
-					<!-- 留空开始 -->
-	    			<tr style="width:923px;height: 28px; "></tr>
-					<!-- 留空结束 -->
             		</table> <!-- end id为 G3_tb5 -->
 
 
@@ -755,14 +688,9 @@
             		</div> <!-- 包裹班级课程关联列表 start-->
 
                         <!-- 按钮div开始 -->
-                        <div  style="width: 50%;height: 50%;">
-                            <!-- 留空 -->
-                            <div style="width: 200px;height: 32px;float:left;">
-
-                            </div><!-- 留空结束 -->
-                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="float: left;" onclick="submitForm()">完成</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton btn-xk" style="float: left;" onclick="clearForm()">取消</a>
-
+                        <div class="btn-box">
+                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="submitForm()">完成</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton btn-xk" onclick="clearForm()">取消</a>
                         </div>
                         <!-- 按钮div结束 -->
 

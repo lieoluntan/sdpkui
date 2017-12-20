@@ -116,6 +116,12 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
     border:none;
     border-bottom: 1px solid #e7e7e7;
 }
+table.dataTable tbody tr {
+    background-color: #ffffff;
+    height: 49px;
+    text-align: center;
+    border-bottom: 1px solid #e7e7e7;
+}
 table.dataTable.row-border tbody tr:first-child th, table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th, table.dataTable.display tbody tr:first-child td ,table.dataTable.display tbody tr.odd, table.dataTable.display tbody tr.even{
     padding:0;
     line-height:44px;

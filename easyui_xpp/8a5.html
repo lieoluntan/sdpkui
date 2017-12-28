@@ -58,8 +58,17 @@
                 treeCount[i] = treeNodes[i].id;
             }
             send_data.rsList = treeCount;
-            console.log(send_data);
+            $.ajax({
+                url:"",
+                type: "POST",
+                data: JSON.stringify(send_data),
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    alert("新增成功");
+                }
+            })
         });
+
     });
 </script>
 </html>

@@ -1,4 +1,4 @@
---------------------------------------
+﻿--------------------------------------
 --2、学生表t_student
 
 CREATE TABLE t_student (
@@ -167,6 +167,36 @@ CREATE TABLE t_classroom (
   PRIMARY KEY (uuid)
 );
 
+--------------------------------------
+--9、角色表t_role
+
+CREATE TABLE t_role (
+  uuid varchar(50) NOT NULL,
+  name varchar(50) NOT NULL,
+  
+  createDate datetime DEFAULT NULL,
+  modifyDate datetime DEFAULT NULL,
+  createPeople varchar(50) DEFAULT NULL,
+  modifyPeople varchar(50) DEFAULT NULL,
+  remark varchar(50)Not Null,
+  PRIMARY KEY (uuid)
+);
+
+--------------------------------------
+--9、资源表t_resource
+
+CREATE TABLE t_resource (
+  uuid varchar(50) NOT NULL,
+  name varchar(50) NOT NULL,
+  
+  createDate datetime DEFAULT NULL,
+  modifyDate datetime DEFAULT NULL,
+  createPeople varchar(50) DEFAULT NULL,
+  modifyPeople varchar(50) DEFAULT NULL,
+  
+  PRIMARY KEY (uuid)
+);
+
 
 --------------------------------------
 
@@ -250,3 +280,24 @@ CREATE TABLE t_userPK (
 );
 
 --------------------------------------
+
+--16、用户角色表t_userPK
+
+CREATE TABLE t_userPK_role (
+  uuid varchar(50) NOT NULL,
+  userPkid varchar(50) NOT NULL,
+  Roleid varchar(50) NOT NULL,
+  PRIMARY KEY (uuid)
+);
+
+=======
+
+--15、角色资源表t_role_resource
+
+CREATE TABLE t_role_resource (
+  uuid varchar(50) NOT NULL,
+  roleid varchar(50) NOT NULL,
+  resourceid varchar(50) NOT NULL,
+  
+  PRIMARY KEY (uuid)
+);

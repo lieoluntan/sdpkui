@@ -122,7 +122,6 @@
             for(var i=0;i<delTableTr.rsList.length;i++){
                 var node = $("#tree").tree("find",delTableTr.rsList[i]);
                 $('#tree').tree("check",node.target);
-                console.log(delTableTr.rsList[i]);
             }
             $( "#dialog" ).dialog( "open" );//出现编辑弹窗
         });
@@ -132,8 +131,14 @@
             ediTab = tabData.row(".selected").data();
             var sendTab = {};//定义一个空对象，用于存放修改后传送的数值
             sendTab.uuid = ediTab.uuid;
-            sendTab.name = $('input[name = "name"]')[0].value;
-            sendTab.remark = $('input[name = "remark"]')[0].value;
+            sendTab.name = $('input[name = "name"]').val();
+            sendTab.remark = $('input[name = "remark"]').val();
+            var treeNodes = $("#tree").tree('getChecked');//获取已选中的元素
+            var treeCount=[];//存储已选元素的id
+            for(var i=0;i<treeNodes.length;i++){
+                treeCount[i] = treeNodes[i].id;
+            }
+            sendTab.rsList = treeCount;
             /* ajax数据的调用 */
             $.ajax({
                 url:"/sdpk/aaRole?qqiu=edit",

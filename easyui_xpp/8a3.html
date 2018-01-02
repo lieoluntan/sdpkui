@@ -24,26 +24,23 @@
     <table id="adm-user" class="display tab-mians" cellspacing="0" width="100%">
         <thead class="tab-tit">
             <tr>
-                <th>用户姓名</th>
-                <th>用户账号</th>
-                <th>用户密码</th>
-                <th>用户角色</th>
+                <th style="min-width: 150px">用户姓名</th>
+                <th style="min-width: 150px">用户账号</th>
+                <th style="min-width: 150px">用户密码</th>
             </tr>
         </thead>
         <tfoot class="tab-tit">
             <tr>
-                <th>用户姓名</th>
-                <th>用户账号</th>
-                <th>用户密码</th>
-                <th>用户角色</th>
+                <th style="min-width: 150px">用户姓名</th>
+                <th style="min-width: 150px">用户账号</th>
+                <th style="min-width: 150px">用户密码</th>
             </tr>
         </tfoot>
         <tbody>
             <tr>
-                <th>李老师</th>
-                <th>sd1001</th>
-                <th>shudai888</th>
-                <th>管理员</th>
+                <th style="min-width: 150px">李老师</th>
+                <th style="min-width: 150px">sd1001</th>
+                <th style="min-width: 150px">shudai888</th>
             </tr>
         </tbody>
     </table>
@@ -93,11 +90,11 @@
             ajax:{
                 url:"/sdpk/aaUserPK?qqiu=list"
             },
+
             columns:[
                 {"data":"uName"},
                 {"data":"uLogUser"},
-                {"data":"uPassWord"},
-                {"data":"roleList"}
+                {"data":"uPassWord"}
             ]
         });
         /* 第二步：选择列表进行操作(鼠标选中事件) */
@@ -152,17 +149,25 @@
                     textField:"name",
                     multiple:true,
                     selectOnNavigation: false
-                })
-            }
+                });
+                //加载完了下拉框1111111111111111111111111111111111
+                var delTableTr = {};//定义一个空的对象
+                delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
+                //吧获取到的值给到弹窗里面的value
+                $('input[name = "uName"]')[0].value = delTableTr.uName;
+                $('input[name = "uLogUser"]')[0].value = delTableTr.uLogUser;
+                $('input[name="uPassWord"]')[0].value = delTableTr.uPassWord;
+                var selShhuz = delTableTr.role;
+                var arr=[];
+                for(var i = 0;i<selShhuz.length;i++){
+                    arr[i]=selShhuz[i].uuid;
+                }
+                $('#infoSel').combobox('setValues',arr);
+                $( "#dialog" ).dialog( "open" );//出现编辑弹窗
 
-            var delTableTr = {};//定义一个空的对象
-            delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
-            //吧获取到的值给到弹窗里面的value
-            $('input[name = "uName"]')[0].value = delTableTr.uName;
-            $('input[name = "uLogUser"]')[0].value = delTableTr.uLogUser;
-            $('input[name="uPassWord"]')[0].value = delTableTr.uPassWord;
-            $('#infoSel').combobox('setValues',delTableTr.roleList);
-            $( "#dialog" ).dialog( "open" );//出现编辑弹窗
+            }//end selFunction
+
+
         });
         /* 第五步：点击提交按钮事件 */
         $("#confirm-d").click(function(){
@@ -174,6 +179,7 @@
             sendTab.uLogUser = $('input[name = "uLogUser"]')[0].value;
             sendTab.uPassWord = $('input[name="uPassWord"]')[0].value;
             sendTab.roleList = $('#infoSel').combobox("getValues");
+
             if(sendTab.roleList ==""||sendTab.roleList==null){
                 alert("请选择用户角色");
                 return false;
@@ -188,9 +194,8 @@
                     alert("修改成功");
                     window.location.reload();
                 }
-            })
+            });
         });
-
         //        控制页面下拉框
         $('.combo ,.combo .combo-text').css({
             "height":"36px",

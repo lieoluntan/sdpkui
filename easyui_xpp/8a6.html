@@ -133,6 +133,15 @@
             sendTab.uuid = ediTab.uuid;
             sendTab.name = $('input[name = "name"]').val();
             sendTab.remark = $('input[name = "remark"]').val();
+            if(sendTab.name==""||sendTab.name==null){
+                alert("请输入角色信息");
+                return false;
+            }
+            if(sendTab.remark==""||sendTab.remark==null){
+                alert("请输入备注信息");
+                return false;
+            }
+            var root = $('#tree').tree("getRoot");
             var treeNodes = $("#tree").tree('getChecked');//获取已选中的元素
             var treeCount=[];//存储已选元素的id
             for(var i=0;i<treeNodes.length;i++){
@@ -146,7 +155,9 @@
                 data:JSON.stringify(sendTab),
                 contentType:"application/json;charset=UTF-8",
                 success:function(result){
-                    alert("修改成功");
+                    var obj = {};
+                    obj = JSON.parse(result);
+                    alert(obj.message);
                     window.location.reload();
                 }
             })

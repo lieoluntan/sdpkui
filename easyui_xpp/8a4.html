@@ -87,13 +87,27 @@
                 alert("请选择用户角色");
                 return false;
             }
+            if(objSel.uLogUser ==""||objSel.uLogUser==null){
+                 alert("请输入用户账号");
+                 return false;
+             }
+             if(objSel.uPassWord ==""||objSel.uPassWord==null){
+                   alert("请输入用户密码");
+                   return false;
+              }
+              if(objSel.uName ==""||objSel.uName==null){
+                    alert("请输入用户姓名");
+                    return false;
+              }
             $.ajax({
                 url:"/sdpk/aaUserPK?qqiu=add",
                 type:"POST",
                 contentType:"application/json;charset=UTF-8",
                 data:JSON.stringify(objSel),
                 success:function(result){
-                    alert("新增成功");
+                    var obj = {};
+                    obj = JSON.parse(result);
+                    alert(obj.message);
                 }
             });
         });

@@ -52,6 +52,14 @@
             var noteInfo = $('#remark').val();
             send_data.name = name;
             send_data.remark = noteInfo;
+            if(send_data.name =="" ||send_data.name ==null ){
+                alert("请输入角色");
+                return false;
+            }
+            if(send_data.remark =="" ||send_data.remark ==null ){
+                alert("请输入备注");
+                return false;
+            }
             var treeNodes = $("#tree").tree('getChecked');//获取已选中的元素
             var treeCount=[];//存储已选元素的id
             for(var i=0;i<treeNodes.length;i++){
@@ -64,7 +72,9 @@
                 data: JSON.stringify(send_data),
                 contentType: "application/json;charset=UTF-8",
                 success:function(result){
-                    alert("新增成功");
+                    var obj = {};
+                    obj = JSON.parse(result);
+                    alert(obj.message);
                 }
             });
         });

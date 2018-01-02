@@ -27,6 +27,7 @@
                 <th>用户姓名</th>
                 <th>用户账号</th>
                 <th>用户密码</th>
+                <th>用户角色</th>
             </tr>
         </thead>
         <tfoot class="tab-tit">
@@ -34,6 +35,7 @@
                 <th>用户姓名</th>
                 <th>用户账号</th>
                 <th>用户密码</th>
+                <th>用户角色</th>
             </tr>
         </tfoot>
         <tbody>
@@ -41,6 +43,7 @@
                 <th>李老师</th>
                 <th>sd1001</th>
                 <th>shudai888</th>
+                <th>管理员</th>
             </tr>
         </tbody>
     </table>
@@ -60,7 +63,21 @@
                 <tr>
                     <td class="name-s" style="padding-left:0">用户密码</td>
                     <td><input type="text" name="uPassWord" class="yzss" style="width:250px;" value="请输入密码"></td>
-                </tr>
+                </tr><tr>
+                <td class="name-s" style="padding-left:0">用户角色</td>
+                <td>
+                    <input id="infoSel" class="easyui-combobox yzss"
+                           name="roleList"
+                           data-options="
+					url:'selcs.json',
+					method:'get',
+					valueField:'id',
+					textField:'text',
+					multiple:true,
+					panelHeight:'auto'
+			">
+                </td>
+            </tr>
             </table>
         </form>
         <div class="btn-box" style="margin-right: 25px;">
@@ -88,7 +105,8 @@
             columns:[
                 {"data":"uName"},
                 {"data":"uLogUser"},
-                {"data":"uPassWord"}
+                {"data":"uPassWord"},
+                {"data":"roleList"}
             ]
         });
         /* 第二步：选择列表进行操作(鼠标选中事件) */
@@ -130,6 +148,7 @@
             $('input[name = "uName"]')[0].value = delTableTr.uName;
             $('input[name = "uLogUser"]')[0].value = delTableTr.uLogUser;
             $('input[name="uPassWord"]')[0].value = delTableTr.uPassWord;
+            $('#infoSel').combobox('setValues',delTableTr.roleList);
             $( "#dialog" ).dialog( "open" );//出现编辑弹窗
         });
         /* 第五步：点击提交按钮事件 */
@@ -141,6 +160,11 @@
             sendTab.uName = $('input[name = "uName"]')[0].value;
             sendTab.uLogUser = $('input[name = "uLogUser"]')[0].value;
             sendTab.uPassWord = $('input[name="uPassWord"]')[0].value;
+            sendTab.roleList = $('#infoSel').combobox("getValues");
+            if(sendTab.roleList ==""||objSel.roleList==null){
+                alert("请选择用户角色");
+                return false;
+            }
             /* ajax数据的调用 */
             $.ajax({
                 url:"/sdpk/aaUserPK?qqiu=edit",
@@ -153,6 +177,18 @@
                 }
             })
         });
+
+        //        控制页面下拉框
+        $('.combo ,.combo .combo-text').css({
+            "height":"36px",
+            "lineHeight":"34px",
+            "fontSize":"16px",
+            "color":"#646464",
+            "width":"216px"
+        });
+        $('.combo-arrow').css("height","34px");
+        $('.combo').css("width","250px");
+
     });
 </script>
 </html>

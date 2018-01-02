@@ -66,16 +66,7 @@
                 </tr><tr>
                 <td class="name-s" style="padding-left:0">用户角色</td>
                 <td>
-                    <input id="infoSel" class="easyui-combobox yzss"
-                           name="roleList"
-                           data-options="
-					url:'/sdpk/aaRole?qqiu=list',
-					method:'get',
-					valueField:'id',
-					textField:'text',
-					multiple:true,
-					panelHeight:'auto'
-			">
+                    <input id="infoSel" class="easyui-combobox yzss" name="roleList" style="width:250px;height: 34px;">
                 </td>
             </tr>
             </table>
@@ -142,6 +133,28 @@
         /* 第四步：点击编辑按钮出现弹窗 */
         //获取选中行的值，并把值给到弹窗相应的位置
         $("#btn-edi").click(function(){
+//            获取下拉框的所有内容
+            $.ajax({
+                url:"/sdpk/aaRole?qqiu=list",
+                type:"GET",
+                contentType:"application/json;charset=UTF-8",
+                success:function(result){
+                    selFunction(result);
+                }
+            });
+            function selFunction(result) {
+                var objSle = {};
+                objSle = JSON.parse(result);
+                var objData = objSle.data;
+                $("#infoSel").combobox({
+                    data:objData,
+                    valueField:"uuid",
+                    textField:"name",
+                    multiple:true,
+                    selectOnNavigation: false
+                })
+            }
+
             var delTableTr = {};//定义一个空的对象
             delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
             //吧获取到的值给到弹窗里面的value
@@ -161,7 +174,7 @@
             sendTab.uLogUser = $('input[name = "uLogUser"]')[0].value;
             sendTab.uPassWord = $('input[name="uPassWord"]')[0].value;
             sendTab.roleList = $('#infoSel').combobox("getValues");
-            if(sendTab.roleList ==""||objSel.roleList==null){
+            if(sendTab.roleList ==""||sendTab.roleList==null){
                 alert("请选择用户角色");
                 return false;
             }

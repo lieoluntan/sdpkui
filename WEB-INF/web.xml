@@ -26,7 +26,25 @@
     <url-pattern>/CRUDController</url-pattern>
   </servlet-mapping>
   
-   <servlet>
+  <servlet>
+    <servlet-name>MyStuController</servlet-name>
+    <servlet-class>com.sdpk.query.controller.MyStuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyStuController</servlet-name>
+    <url-pattern>/aaMyStu</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MyClaController</servlet-name>
+    <servlet-class>com.sdpk.query.controller.MyClaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyClaController</servlet-name>
+    <url-pattern>/aaMyCla</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>RoleRsController</servlet-name>
     <servlet-class>com.sdpk.controller.RoleResourceController</servlet-class>
   </servlet>
@@ -60,8 +78,7 @@
     <servlet-name>aaStudentN</servlet-name>
     <url-pattern>/aaStudent</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
+	<servlet>
     <servlet-name>aaEmpname</servlet-name>
     <servlet-class>com.sdpk.controller.EmployeeControl</servlet-class>
   </servlet>
@@ -99,7 +116,7 @@
   
   <servlet>
     <servlet-name>aaRoleN</servlet-name>
-    <servlet-class>com.sdpk.controller.RoleControl</servlet-class>
+    <servlet-class>com.sdpk.system.controller.RoleController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>aaRoleN</servlet-name>
@@ -172,7 +189,7 @@
  
  <servlet>
     <servlet-name>aaUserPKN</servlet-name>
-    <servlet-class>com.sdpk.controller.UserPKControl</servlet-class>
+    <servlet-class>com.sdpk.system.controller.UserPKControl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>aaUserPKN</servlet-name>
@@ -199,7 +216,7 @@
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>QueryController</servlet-name>
-    <servlet-class>com.sdpk.controller.QueryController</servlet-class>
+    <servlet-class>com.sdpk.query.controller.QueryController</servlet-class>
   </servlet>
 
 
@@ -212,6 +229,7 @@
     <servlet-name>ResourceController</servlet-name>
     <url-pattern>/servlet/ResourceController</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>RoleResourceController</servlet-name>
     <url-pattern>/servlet/RoleResourceController</url-pattern>

@@ -18,6 +18,7 @@
 
         <!-- 新的 -->
         <script type="text/javascript" src="xppjs/jquery.serialize-object.js"></script>
+        <script type="text/javascript" src="xppjs/jquery.cookie.js"></script>
 
         <!-- CSS 
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
@@ -53,8 +54,22 @@
 //                            alert("登录执行中");
                             var result2obj = {};
                             result2obj = JSON.parse(result);
-                            if(result2obj.qingqiu=="yes"){
-//                                alert("用户密码正确");
+                            var aData = [];
+                            aData =  result2obj.data;
+                            var logFlag = aData[0];
+                            var logObj = aData[1];
+                            alert(logFlag);
+                            if(logFlag){
+                            	var rsListArr = logObj.rsList;
+                            	//存数组到cookie
+                            	$.cookie("rsList",rsListArr.join(","));
+                            	//取cookie里的数组
+                            	var viewArr = $.cookie("rsList").split(",");
+                            	for (var i = 0; i < viewArr.length; i++) {
+                            		console.log("第"+i+"个："+viewArr[i]);
+                            		
+                            	}
+
                                 window.location.href="xppu8.html";
                             }
                             else{

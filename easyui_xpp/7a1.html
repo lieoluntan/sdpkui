@@ -119,6 +119,7 @@
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
 				alert("新增成功");
+				console.log(result);
 				//调用父级弹窗start
             	var $parent = self.parent.$;
             	$parent('#menu_g2').click();
@@ -263,8 +264,16 @@
 	    			<td><input  type="text" id="stuUuid" name="stuUuid" class="v1g3 yzss" placeholder="请选择学生"> </td>
 	    			<td class="name-s">交易时间</td>
 	    			<td><input id="cDate" name="cDate" type="text" class="easyui-datebox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
-	    			<td class="name-s">校区组织</td>
-	    			<td><input  type="text" id="org" name="org" class="v1g3 yzss" placeholder="请输入校区组织"> </td>
+	    			<!--<td class="name-s">校区组织</td>-->
+	    			<!--<td><input  type="text" id="org" name="org" class="v1g3 yzss" placeholder="请输入校区组织"> </td>-->
+						<td class="name-s">所在校区</td>
+						<td>
+							<select  name="org" class="yzss sel_s">
+								<option value="共和校区">共和校区</option>
+								<option value="天目分校">天目分校</option>
+								<option value="所有校区">所有校区</option>
+							</select>
+						</td>
 	    			</tr>
             		</table><!-- end  id= header_3_tb2 -->
 

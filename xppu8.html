@@ -71,14 +71,14 @@ margin:0px; padding:0;text-align:center;}
     $(document).ready(function() {
 
         //一级菜单权限开始
-        $( "#menu_1" ).hide();
-        $( "#menu_2" ).hide();
-        $( "#menu_3" ).hide();
-        $( "#menu_4" ).hide();
-        $( "#menu_5" ).hide();
-        $( "#menu_6" ).hide();
-        $( "#menu_7" ).hide();
-        $( "#menu_8" ).hide();
+        // $( "#menu_1" ).hide();
+        // $( "#menu_2" ).hide();
+        // $( "#menu_3" ).hide();
+        // $( "#menu_4" ).hide();
+        // $( "#menu_5" ).hide();
+        // $( "#menu_6" ).hide();
+        // $( "#menu_7" ).hide();
+        // $( "#menu_8" ).hide();
 
         //取cookie里的数组
         var viewArr = $.cookie("rsList").split(",");
@@ -240,7 +240,8 @@ line-height: 28px;">宋瑛瑛</i>
                         	<li><p style="text-align:center;font-size:24px;line-height:56px;box-sizing:border-box;">校区总览</p></li>
                             <li><a id="menu_a1" href="#one_1">我的今日课程</a></li>
                             <li><a id="menu_a2" href="#one_2">全校今日课程</a></li>
-                            <li><a id="menu_a3" href="#one_3">接近结课学生</a></li>
+                            <li><a id="menu_a3" href="#one_3">学生课消统计</a></li>
+                            <li><a id="menu_a4" href="#one_4">老师课消统计</a></li>
                         </ul>
                         
                   </div>
@@ -299,7 +300,10 @@ line-height: 28px;">宋瑛瑛</i>
                         	<li><p style="text-align:center;font-size:24px;line-height:56px;box-sizing:border-box;">设置</p></li>
                             <li><a id="menu_h1" href="#eight_1">教室新增</a></li>
                             <li><a id="menu_h2" href="#eight_2">教室的管理</a></li> 
-                            <li><a id="menu_h3" href="#eight_3">权限设置</a></li> 
+                            <li><a id="menu_h3" href="#eight_3">用户新增</a></li> 
+                            <li><a id="menu_h4" href="#eight_4">用户的管理</a></li> 
+                            <li><a id="menu_h5" href="#eight_5">角色新增</a></li> 
+                            <li><a id="menu_h6" href="#eight_6">角色的管理</a></li> 
                         </ul>
 
                   </div>
@@ -411,8 +415,16 @@ line-height: 28px;">宋瑛瑛</i>
                             <iframe id="ifr8a2" src="easyui_xpp/8a2.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
                         </div>
                         <div id="eight_3" >
-                            <p style="text-align:center;font-size:30px;box-sizing:border-box;">内容eight_3</p>
-                            <iframe src="easyui_xpp/crudDemo.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
+                            <iframe src="easyui_xpp/8a3.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
+                        </div>
+                        <div id="eight_4" >
+                            <iframe src="easyui_xpp/8a4.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
+                        </div>
+                        <div id="eight_5" >
+                            <iframe  src="easyui_xpp/8a5.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
+                        </div>
+                        <div id="eight_6" >
+                            <iframe  src="easyui_xpp/8a6.html" style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
                         </div>
 
                 </div>

@@ -101,6 +101,21 @@
 			var f2=yzDate();
 			var f3=yzNumBox();
 			var flag = false;
+            //计算总价格，总课数
+            var sumA = document.getElementById("sumPriceA").value;
+            var sumB = document.getElementById("sumPriceB").value;
+
+            var result = new Number(sumA) + new Number(sumB);
+            // alert(result);
+            document.getElementById("totalPrice").value = new Number(sumA) + new Number(sumB);
+
+            var scA = document.getElementById("sumCountA").value;
+            var scB = document.getElementById("sumCountB").value;
+            var result = new Number(scA) + new Number(scB);
+            // alert(result);
+            document.getElementById("totalCount").value = new Number(scA) + new Number(scB);
+            alert("总支付，总次数已更新");
+            //总价格，总课数计算结束
 			if(f1==true&&f2==true&&f3==true){flag = true;}
 			if (flag) {
 			var param = $("#ff").serializeObject();
@@ -363,7 +378,7 @@
 	    			<td class="name-s txt_red">总&nbsp;次&nbsp;数</td>
 	    			<td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
 	    			<td class="name-s"></td>
-	    			<td><a href="javascript:void(0)" class="easyui-linkbutton ca_btn" onclick="cn_totalPrice()">计算按钮</a></td>
+	    			<td><a href="javascript:void(0)" class="easyui-linkbutton ca_btn" onclick="cn_totalPrice()"style="display:none">计算按钮</a></td>
             		</tr><!-- 第三行结束 -->
             		</table><!-- end id  header_3_tb4-->
 

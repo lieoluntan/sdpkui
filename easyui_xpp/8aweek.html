@@ -975,7 +975,7 @@
                     var a2obj = {};
                     a2obj = JSON.parse(result);
                     var a2data = a2obj.data;
-                    alert("a2data");
+                    alert("a2data加日期");
                     G_course = a2data;
                     var DayList = new Array();
                     for(var i=0;i<G_course.length;i++){
@@ -984,9 +984,14 @@
                         }
                     }
 
+
+
                     for(var i=0;i<DayList.length;i++){
                         var one = DayList[i];
-                        $("#Day1").append("<div class='sub-class col-yyw'>"+"<h1>"+one.keDateTime+"</h1>"+"<h1>"+one.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>" );
+                        $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+one.courseName+"</h1>"+"<h1>"+one.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>")
+
+                        $("#Day1").append($html1);
+                        console.log(one.keDateTime);
                     }
                 }
 
@@ -1016,9 +1021,12 @@
                         }
                     }
 
+
+
                     for(var i=0;i<DayList.length;i++){
                         var two = DayList[i];
-                        $("#Day2").append("<div class='sub-class col-yyw'>"+"<h1>"+two.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+two.keStartTime+"-"+two.keEndTime+"</time>"+"<p>"+two.croomName+"/"+two.empName+"</p>"+"</div>"+"</div>" );
+                        $html2 = $("<div class='sub-class col-yyw'>"+"<h1>"+two.courseName+"</h1>"+"<h1>"+two.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+two.keStartTime+"-"+two.keEndTime+"</time>"+"<p>"+two.croomName+"/"+two.empName+"</p>"+"</div>"+"</div>");
+                        $("#Day2").append($html2 );
                     }
                 }
                 /*第三天*/
@@ -1047,9 +1055,12 @@
                         }
                     }
 
+
+
                     for(var i=0;i<DayList.length;i++){
                         var thr = DayList[i];
-                        $("#Day3").append("<div class='sub-class col-yyw'>"+"<h1>"+thr.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+thr.keStartTime+"-"+thr.keEndTime+"</time>"+"<p>"+thr.croomName+"/"+thr.empName+"</p>"+"</div>"+"</div>" );
+                        $html3 = $("<div class='sub-class col-yyw'>"+"<h1>"+thr.courseName+"</h1>"+"<h1>"+thr.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+thr.keStartTime+"-"+thr.keEndTime+"</time>"+"<p>"+thr.croomName+"/"+thr.empName+"</p>"+"</div>"+"</div>" );
+                        $("#Day3").append($html3);
                     }
                 }
 
@@ -1079,9 +1090,12 @@
                         }
                     }
 
+
+
                     for(var i=0;i<DayList.length;i++){
                         var four = DayList[i];
-                        $("#Day4").append("<div class='sub-class col-yyw'>"+"<h1>"+four.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+four.keStartTime+"-"+four.keEndTime+"</time>"+"<p>"+four.croomName+"/"+four.empName+"</p>"+"</div>"+"</div>" );
+                        $html4 = $("<div class='sub-class col-yyw'>"+"<h1>"+four.courseName+"</h1>"+"<h1>"+four.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+four.keStartTime+"-"+four.keEndTime+"</time>"+"<p>"+four.croomName+"/"+four.empName+"</p>"+"</div>"+"</div>");
+                        $("#Day4").append($html4 );
                     }
                 }
 
@@ -1111,9 +1125,12 @@
                         }
                     }
 
+
+
                     for(var i=0;i<DayList.length;i++){
                         var five = DayList[i];
-                        $("#Day5").append("<div class='sub-class col-yyw'>"+"<h1>"+five.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+five.keStartTime+"-"+five.keEndTime+"</time>"+"<p>"+five.croomName+"/"+five.empName+"</p>"+"</div>"+"</div>" );
+                        $html5 = $("<div class='sub-class col-yyw'>"+"<h1>"+five.courseName+"</h1>"+"<h1>"+five.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+five.keStartTime+"-"+five.keEndTime+"</time>"+"<p>"+five.croomName+"/"+five.empName+"</p>"+"</div>"+"</div>");
+                        $("#Day5").append( $html5);
                     }
                 }
 
@@ -1143,9 +1160,12 @@
                         }
                     }
 
+
+
                     for(var i=0;i<DayList.length;i++){
                         var six = DayList[i];
-                        $("#Day6").append("<div class='sub-class col-yyw'>"+"<h1>"+six.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+six.keStartTime+"-"+six.keEndTime+"</time>"+"<p>"+six.croomName+"/"+six.empName+"</p>"+"</div>"+"</div>" );
+                        $html6 = $("<div class='sub-class col-yyw'>"+"<h1>"+six.courseName+"</h1>"+"<h1>"+six.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+six.keStartTime+"-"+six.keEndTime+"</time>"+"<p>"+six.croomName+"/"+six.empName+"</p>"+"</div>"+"</div>");
+                        $("#Day6").append( $html6);
                     }
                 }   
 
@@ -1175,9 +1195,11 @@
                         }
                     }
 
+
                     for(var i=0;i<DayList.length;i++){
                         var seve = DayList[i];
-                        $("#Day7").append("<div class='sub-class col-yyw'>"+"<h1>"+seve.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+seve.keStartTime+"-"+seve.keEndTime+"</time>"+"<p>"+seve.croomName+"/"+seve.empName+"</p>"+"</div>"+"</div>" );
+                        $html7 = $("<div class='sub-class col-yyw'>"+"<h1>"+seve.courseName+"</h1>"+"<h1>"+seve.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+seve.keStartTime+"-"+seve.keEndTime+"</time>"+"<p>"+seve.croomName+"/"+seve.empName+"</p>"+"</div>"+"</div>");
+                        $("#Day7").append($html7 );
                     }
                 }
 
@@ -1194,6 +1216,13 @@
                     setDate(addDate(currentFirstDate,-7));
                     var curDay = cells[0].innerHTML;//获取当前日期字符串
                     var curFl =curDay.split("/");
+                    $("#Day1").empty();
+                    $("#Day2").empty();
+                    $("#Day3").empty();
+                    $("#Day4").empty();
+                    $("#Day5").empty();
+                    $("#Day6").empty();
+                    $("#Day7").empty();
                     $('#date-time').text(curFl[0]+"年"+curFl[1]+'月');
                     $('#mark-txt').show().text("本周");
                 });
@@ -1201,6 +1230,13 @@
                     setDate(addDate(currentFirstDate,+7));
                     var curDay = cells[0].innerHTML;//获取当前日期字符串
                     var curFl =curDay.split("/");
+                    $("#Day1").empty();
+                    $("#Day2").empty();
+                    $("#Day3").empty();
+                    $("#Day4").empty();
+                    $("#Day5").empty();
+                    $("#Day6").empty();
+                    $("#Day7").empty();
                     $('#date-time').text(curFl[0]+"年"+curFl[1]+'月');
                     $('#mark-txt').show().text("本周");
                 });

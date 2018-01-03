@@ -10,6 +10,7 @@
     <!-- <script type="text/javascript" src="xppjs/jquery.js"></script> -->
     <script type="text/javascript" src="easyui_xpp/jquery-easyui-136/jquery.min.js"></script> 
     <script src="xppjs/jquery.idTabs.js"></script>
+    <script type="text/javascript" src="xppjs/jquery.cookie.js"></script>
     <!-- easyui链接文件 -->
     <script type="text/javascript" src="easyui_xpp/jquery-easyui-136/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="easyui_xpp/jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
@@ -68,6 +69,45 @@ margin:0px; padding:0;text-align:center;}
 
     <script type="text/javascript">
     $(document).ready(function() {
+
+        //一级菜单权限开始
+        $( "#menu_1" ).hide();
+        $( "#menu_2" ).hide();
+        $( "#menu_3" ).hide();
+        $( "#menu_4" ).hide();
+        $( "#menu_5" ).hide();
+        $( "#menu_6" ).hide();
+        $( "#menu_7" ).hide();
+        $( "#menu_8" ).hide();
+
+        //取cookie里的数组
+        var viewArr = $.cookie("rsList").split(",");
+        for (var i = 0; i < viewArr.length; i++) {
+        console.log("第"+i+"个："+viewArr[i]);   
+        if(viewArr[i]=="A") {$( "#menu_1" ).show();}  
+        if(viewArr[i]=="B") {$( "#menu_2" ).show();}
+        if(viewArr[i]=="C") {$( "#menu_3" ).show();}
+        if(viewArr[i]=="D") {$( "#menu_4" ).show();}
+        if(viewArr[i]=="E") {$( "#menu_5" ).show();}
+        if(viewArr[i]=="F") {$( "#menu_6" ).show();}
+        if(viewArr[i]=="G") {$( "#menu_7" ).show();}
+        if(viewArr[i]=="H") {$( "#menu_8" ).show();}                              
+        }//end for
+
+        //一级菜单权限结束
+        //二级权限开始
+        for (var i = 0; i < viewArr.length; i++) {
+        // console.log("第"+i+"个："+viewArr[i]);   
+        if(viewArr[i]=="A") {$( "#menu_1" ).show();}  
+        if(viewArr[i]=="B") {$( "#menu_2" ).show();}
+        if(viewArr[i]=="C") {$( "#menu_3" ).show();}
+        if(viewArr[i]=="D") {$( "#menu_4" ).show();}
+        if(viewArr[i]=="E") {$( "#menu_5" ).show();}
+        if(viewArr[i]=="F") {$( "#menu_6" ).show();}
+        if(viewArr[i]=="G") {$( "#menu_7" ).show();}
+        if(viewArr[i]=="H") {$( "#menu_8" ).show();}                              
+        }//end for
+        //二级权限结束
 
         //单击一级菜单
         $( "#menu_1" ).click(function() { 

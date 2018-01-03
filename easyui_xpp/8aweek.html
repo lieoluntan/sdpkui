@@ -975,6 +975,7 @@
                     var a2obj = {};
                     a2obj = JSON.parse(result);
                     var a2data = a2obj.data;
+                    alert("a2data");
                     G_course = a2data;
                     var DayList = new Array();
                     for(var i=0;i<G_course.length;i++){
@@ -985,7 +986,7 @@
 
                     for(var i=0;i<DayList.length;i++){
                         var one = DayList[i];
-                        $("#Day1").append("<div class='sub-class col-yyw'>"+"<h1>"+one.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>" );
+                        $("#Day1").append("<div class='sub-class col-yyw'>"+"<h1>"+one.keDateTime+"</h1>"+"<h1>"+one.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>" );
                     }
                 }
 
@@ -1146,7 +1147,7 @@
                         var six = DayList[i];
                         $("#Day6").append("<div class='sub-class col-yyw'>"+"<h1>"+six.courseName+"</h1>"+"<div class='vision_xx'>"+"<time>"+six.keStartTime+"-"+six.keEndTime+"</time>"+"<p>"+six.croomName+"/"+six.empName+"</p>"+"</div>"+"</div>" );
                     }
-                }
+                }   
 
                 /*第7天*/
                 var send_cData7 = {};

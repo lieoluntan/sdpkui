@@ -68,95 +68,136 @@ margin:0px; padding:0;text-align:center;}
     </style>
 
     <script type="text/javascript">
+
+    var NameOfCookie="rsList";
+        var c = document.cookie.indexOf(NameOfCookie+"="); 
+        // alert(c);
+              if (c != -1)
+              {
+            console.log("第一次js检测已经登陆");
+              }
+              else
+              {
+               alert("没有登陆");
+               window.location.href="login.html";
+              }
+
+
     $(document).ready(function() {
 
-        //一级菜单权限开始
-        // $( "#menu_1" ).hide();
-        // $( "#menu_2" ).hide();
-        // $( "#menu_3" ).hide();
-        // $( "#menu_4" ).hide();
-        // $( "#menu_5" ).hide();
-        // $( "#menu_6" ).hide();
-        // $( "#menu_7" ).hide();
-        // $( "#menu_8" ).hide();
+        var NameOfCookie="rsList";
+        var c = document.cookie.indexOf(NameOfCookie+"="); 
+        // alert(c);
+              if (c != -1)
+              {
+            console.log("jquery里检测已经登陆");
+            funUser();
+              }
+              else
+              {
+               console.log("jquery里检测没有登陆");
+               window.location.href="login.html";
+              }
+
+        //开始判断cookie值
+        // var HasData = {};
+        //  HasData = $.cookie("rsList");
+
+        // if($.cookie("rsList")!=null){
+            
+        // }else if($.cookie("rsList") = null){
+            
+
+        // }
+
+         function funUser(){
+               //一级菜单权限开始
+        $( "#menu_1" ).hide();
+        $( "#menu_2" ).hide();
+        $( "#menu_3" ).hide();
+        $( "#menu_4" ).hide();
+        $( "#menu_5" ).hide();
+        $( "#menu_6" ).hide();
+        $( "#menu_7" ).hide();
+        $( "#menu_8" ).hide();
 
         //取cookie里的数组
-        // var viewArr = $.cookie("rsList").split(",");
-        // for (var i = 0; i < viewArr.length; i++) {
-        // console.log("第"+i+"个："+viewArr[i]);   
-        // if(viewArr[i]=="A") {$( "#menu_1" ).show();}  
-        // if(viewArr[i]=="B") {$( "#menu_2" ).show();}
-        // if(viewArr[i]=="C") {$( "#menu_3" ).show();}
-        // if(viewArr[i]=="D") {$( "#menu_4" ).show();}
-        // if(viewArr[i]=="E") {$( "#menu_5" ).show();}
-        // if(viewArr[i]=="F") {$( "#menu_6" ).show();}
-        // if(viewArr[i]=="G") {$( "#menu_7" ).show();}
-        // if(viewArr[i]=="H") {$( "#menu_8" ).show();}                              
-        // }//end for
+        var viewArr = $.cookie("rsList").split(",");
+        for (var i = 0; i < viewArr.length; i++) {
+        console.log("第"+i+"个："+viewArr[i]);   
+        if(viewArr[i]=="A") {$( "#menu_1" ).show();}  
+        if(viewArr[i]=="B") {$( "#menu_2" ).show();}
+        if(viewArr[i]=="C") {$( "#menu_3" ).show();}
+        if(viewArr[i]=="D") {$( "#menu_4" ).show();}
+        if(viewArr[i]=="E") {$( "#menu_5" ).show();}
+        if(viewArr[i]=="F") {$( "#menu_6" ).show();}
+        if(viewArr[i]=="G") {$( "#menu_7" ).show();}
+        if(viewArr[i]=="H") {$( "#menu_8" ).show();}                              
+        }//end for
 
         //一级菜单权限结束
 
         //二级权限开始
-        // $( "#menu_a1" ).hide();
-        // console.log("进入了隐藏二级菜单!");
-        // $( "#menu_a2" ).hide();
-        // $( "#menu_b1" ).hide();
-        // $( "#menu_b2" ).hide();
+        $( "#menu_a1" ).hide();
+        console.log("进入了隐藏二级菜单!");
+        $( "#menu_a2" ).hide();
+        $( "#menu_b1" ).hide();
+        $( "#menu_b2" ).hide();
         
-        // $( "#menu_c1" ).hide();
-        // $( "#menu_c2" ).hide();
-        // $( "#menu_d1" ).hide();
-        // $( "#menu_d2" ).hide();
+        $( "#menu_c1" ).hide();
+        $( "#menu_c2" ).hide();
+        $( "#menu_d1" ).hide();
+        $( "#menu_d2" ).hide();
 
-        // $( "#menu_e1" ).hide();
-        // $( "#menu_e2" ).hide();
+        $( "#menu_e1" ).hide();
+        $( "#menu_e2" ).hide();
 
-        // $( "#menu_f1" ).hide();
-        // $( "#menu_f2" ).hide();
-        // $( "#menu_f3" ).hide();
-        // $( "#menu_f4" ).hide();
-        // $( "#menu_f5" ).hide();
+        $( "#menu_f1" ).hide();
+        $( "#menu_f2" ).hide();
+        $( "#menu_f3" ).hide();
+        $( "#menu_f4" ).hide();
+        $( "#menu_f5" ).hide();
 
-        // $( "#menu_g1" ).hide();
-        // $( "#menu_g2" ).hide();
+        $( "#menu_g1" ).hide();
+        $( "#menu_g2" ).hide();
 
-        // $( "#menu_h1" ).hide();
-        // $( "#menu_h2" ).hide();
-        // $( "#menu_h3" ).hide();
-        // $( "#menu_h4" ).hide();
-        // $( "#menu_h5" ).hide();
-        // $( "#menu_h6" ).hide();
-        // for (var i = 0; i < viewArr.length; i++) {
-        // // console.log("第"+i+"个："+viewArr[i]);   
-        // if(viewArr[i]=="Aa") {$( "#menu_a1" ).show();}  
-        // if(viewArr[i]=="Ab") {$( "#menu_a2" ).show();}
-        // if(viewArr[i]=="Ba") {$( "#menu_b1" ).show();}
-        // if(viewArr[i]=="Bb") {$( "#menu_b2" ).show();}
-        // if(viewArr[i]=="Ca") {$( "#menu_c1" ).show();}
-        // if(viewArr[i]=="Cb") {$( "#menu_c2" ).show();}
-        // if(viewArr[i]=="Da") {$( "#menu_d1" ).show();}
-        // if(viewArr[i]=="Db") {$( "#menu_d2" ).show();}
+        $( "#menu_h1" ).hide();
+        $( "#menu_h2" ).hide();
+        $( "#menu_h3" ).hide();
+        $( "#menu_h4" ).hide();
+        $( "#menu_h5" ).hide();
+        $( "#menu_h6" ).hide();
+        for (var i = 0; i < viewArr.length; i++) {
+        // console.log("第"+i+"个："+viewArr[i]);   
+        if(viewArr[i]=="Aa") {$( "#menu_a1" ).show();}  
+        if(viewArr[i]=="Ab") {$( "#menu_a2" ).show();}
+        if(viewArr[i]=="Ba") {$( "#menu_b1" ).show();}
+        if(viewArr[i]=="Bb") {$( "#menu_b2" ).show();}
+        if(viewArr[i]=="Ca") {$( "#menu_c1" ).show();}
+        if(viewArr[i]=="Cb") {$( "#menu_c2" ).show();}
+        if(viewArr[i]=="Da") {$( "#menu_d1" ).show();}
+        if(viewArr[i]=="Db") {$( "#menu_d2" ).show();}
 
-        // if(viewArr[i]=="Ea") {$( "#menu_e1" ).show();}  
-        // if(viewArr[i]=="Eb") {$( "#menu_e2" ).show();}
+        if(viewArr[i]=="Ea") {$( "#menu_e1" ).show();}  
+        if(viewArr[i]=="Eb") {$( "#menu_e2" ).show();}
 
-        // if(viewArr[i]=="Fa") {$( "#menu_f1" ).show();}
-        // if(viewArr[i]=="Fb") {$( "#menu_f2" ).show();}
-        // if(viewArr[i]=="Fc") {$( "#menu_f3" ).show();}
-        // if(viewArr[i]=="Fd") {$( "#menu_f4" ).show();}
-        // if(viewArr[i]=="Fe") {$( "#menu_f5" ).show();}
+        if(viewArr[i]=="Fa") {$( "#menu_f1" ).show();}
+        if(viewArr[i]=="Fb") {$( "#menu_f2" ).show();}
+        if(viewArr[i]=="Fc") {$( "#menu_f3" ).show();}
+        if(viewArr[i]=="Fd") {$( "#menu_f4" ).show();}
+        if(viewArr[i]=="Fe") {$( "#menu_f5" ).show();}
 
-        // if(viewArr[i]=="Ga") {$( "#menu_g1" ).show();}
-        // if(viewArr[i]=="Gb") {$( "#menu_g2" ).show();}
+        if(viewArr[i]=="Ga") {$( "#menu_g1" ).show();}
+        if(viewArr[i]=="Gb") {$( "#menu_g2" ).show();}
 
-        // if(viewArr[i]=="Ha") {$( "#menu_h1" ).show();}
-        // if(viewArr[i]=="Hb") {$( "#menu_h2" ).show();}
-        // if(viewArr[i]=="Hc") {$( "#menu_h3" ).show();}
-        // if(viewArr[i]=="Hd") {$( "#menu_h4" ).show();}
-        // if(viewArr[i]=="He") {$( "#menu_h5" ).show();}
-        // if(viewArr[i]=="Hf") {$( "#menu_h6" ).show();}
+        if(viewArr[i]=="Ha") {$( "#menu_h1" ).show();}
+        if(viewArr[i]=="Hb") {$( "#menu_h2" ).show();}
+        if(viewArr[i]=="Hc") {$( "#menu_h3" ).show();}
+        if(viewArr[i]=="Hd") {$( "#menu_h4" ).show();}
+        if(viewArr[i]=="He") {$( "#menu_h5" ).show();}
+        if(viewArr[i]=="Hf") {$( "#menu_h6" ).show();}
                               
-        // }//end for
+        }//end for
         //二级权限结束
 
         //单击一级菜单
@@ -239,6 +280,9 @@ margin:0px; padding:0;text-align:center;}
 
 
         //单击二级菜单结束
+            };//end 方法 funUser
+
+        
 
 } );//end 最外层 $(document).ready
         
@@ -270,8 +314,8 @@ line-height: 28px;">宋瑛瑛</i>
             <div id="menu" class="idTabs" style="background-color:#4A4A4A;height:944px;/*width:145px;*/width:10%;min-width:132px;float:left;">
                 <ul>
                 <li style="height: 45px;"></li>
-                <li ><a id="menu_1" href="#one" style="background-image: url(icon_xpp/menu_1_main.png);background-repeat:no-repeat;background-position: 50% 20%;">总览</a></li>
-                <li ><a id="menu_2" class="selected" href="#two" style="background-image: url(icon_xpp/menu_2_stu.png);background-repeat:no-repeat;background-position: 50% 20%;">学员</a></li>
+                <li ><a id="menu_1" class="selected" href="#one" style="background-image: url(icon_xpp/menu_1_main.png);background-repeat:no-repeat;background-position: 50% 20%;">总览</a></li>
+                <li ><a id="menu_2"  href="#two" style="background-image: url(icon_xpp/menu_2_stu.png);background-repeat:no-repeat;background-position: 50% 20%;">学员</a></li>
                 <li ><a id="menu_3" href="#three" style="background-image: url(icon_xpp/menu_3_cla.png);background-repeat:no-repeat;background-position: 50% 20%;">班级</a></li>
                 <li ><a id="menu_4" href="#four" style="background-image: url(icon_xpp/menu_4_emp.png);background-repeat:no-repeat;background-position: 50% 20%;">员工</a></li>
                 <li ><a id="menu_5" href="#five" style="background-image: url(icon_xpp/menu_5_cour.png);background-repeat:no-repeat;background-position: 50% 20%;">课程</a></li>
@@ -288,7 +332,7 @@ line-height: 28px;">宋瑛瑛</i>
                     <div id="one" >
                         <ul>
                         	<li><p style="text-align:center;font-size:24px;line-height:56px;box-sizing:border-box;">校区总览</p></li>
-                            <li><a id="menu_a1" href="#one_1">我的今日课程</a></li>
+                            <li><a id="menu_a1" href="#one_1" class="selected">我的今日课程</a></li>
                             <li><a id="menu_a2" href="#one_2">全校今日课程</a></li>
                             <li><a id="menu_a3" href="#one_3">学生课消统计</a></li>
                             <li><a id="menu_a4" href="#one_4">老师课消统计</a></li>
@@ -299,7 +343,7 @@ line-height: 28px;">宋瑛瑛</i>
                         <ul>
                         	<li><p style="text-align:center;font-size:24px;line-height:56px;box-sizing:border-box;">学员</p></li>
                             <li><a id="menu_b1" href="#two_1">新增学员</a></li>
-                            <li><a id="menu_b2" href="#two_2"  class="selected">管理学员</a></li>
+                            <li><a id="menu_b2" href="#two_2" >管理学员</a></li>
                         </ul>
                   </div>
                   <div id="three" >

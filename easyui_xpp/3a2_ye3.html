@@ -24,7 +24,7 @@
 
         //------------步骤一--------------------
             //步骤1，加载所有下拉框
-        $( "#btn_combo" ).click(function() { 
+//        $( "#btn_combo" ).click(function() {
             //11月13日暂留
             var send_edit_data = {};
             // 11月13日暂留
@@ -63,12 +63,12 @@
                 success:function(result){
                 //步骤1_a1，在步骤1的ajax的回调函数
                 huiFuncL3(result);
-                alert("下拉框加载完成");
+//                alert("下拉框加载完成");
                 }
              
             });
 
-    });//end 1 外圈 save_1 单击
+//    });//end 1 外圈 save_1 单击
 
     //步骤1_x1，在步骤1的回调,展示课程下拉框
     function huiFunc1(result){
@@ -265,25 +265,26 @@
     var a2data = a2obj.data;
     table_full = $('#content03_2_tb').DataTable( {
 
+        "bLengthChange":false,
         language: {
-        "sProcessing": "处理中...",
-        "sLengthMenu": "显示 _MENU_ 项结果",
-        "sZeroRecords": "没有匹配结果",
-        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-        "sInfoPostFix": "",
-        "sSearch": "搜索:",
-        "sUrl": "",
-        "sEmptyTable": "表中数据为空",
-        "sLoadingRecords": "载入中...",
-        "sInfoThousands": ",",
-        "oPaginate": {
-            "sFirst": "首页",
-            "sPrevious": "上页",
-            "sNext": "下页",
-            "sLast": "末页"
-        },
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "共 _TOTAL_ 项",
+            "sInfoEmpty": "共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            },
         "oAria": {
             "sSortAscending": ": 以升序排列此列",
             "sSortDescending": ": 以降序排列此列"
@@ -558,7 +559,7 @@
 	<div class="add_block">
 	<!--start ye_5_content02_partLeft 左半页开始   -->
 	<div id="ye_5_content02_partLeft" class="main_left">
-		<button id="btn_combo" class="btn-class">初始化下拉框</button>
+		<!--<button id="btn_combo" class="btn-class">初始化下拉框</button>-->
 		<form id="ff" name="ffname" method="post" >
 			<!--start content02_tb1 第一个表格开始 -->
 			<table id="content02_tb1" class="tab-style">
@@ -584,20 +585,20 @@
 				<!-- 第一二行 -->
 				<tr class="tit_tr">
 					<td class="de-part">开始日期</td>
-					<td class="de-part">上课时间</td>
+					<td class="de-part" style="padding-left:8px;">上课时间</td>
 				</tr>
 				<tr class="tit_tr" style="margin-top:5px;">
 					<td class="de-part"><input id="keDateTime" type="text" class="easyui-datebox" required="required" style="width:130px;height: 36px;"></td>
-					<td class="de-part"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true" style="width:130px;height: 36px;"></td>
+					<td class="de-part" style="padding-left:8px;"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true" style="width:130px;height: 36px;"></td>
 				</tr>
 				<!-- 第三四行 -->
 				<tr class="tit_tr">
 					<td class="de-part">时长</td>
-					<td class="de-part">排课次数</td>
+					<td class="de-part" style="padding-left:8px;">排课次数</td>
 				</tr>
 				<tr class="tit_tr" style="margin-top:5px;">
 					<td class="de-part"><input id="keLongTime" class="easyui-numberspinner"  required="required" style="width:130px;height: 36px;"></td>
-					<td class="de-part"><input id="keCount" class="easyui-numberspinner"  required="required" data-options="min:1,max:50,editable:true" style="width:130px;height: 36px;"></td>
+					<td class="de-part" style="padding-left:8px;"><input id="keCount" class="easyui-numberspinner"  required="required" data-options="min:1,max:50,editable:true" style="width:130px;height: 36px;"></td>
 				</tr>
 
 			</table><!--end content02_tb2 第二个表格结束 -->

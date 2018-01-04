@@ -101,6 +101,7 @@
 .dataTables_wrapper .dataTables_filter{
     color:#d7d7d7;
     margin-top:20px;
+    margin-bottom: 20px;
 }
 .dataTables_wrapper .dataTables_filter input{
     width:230px;

@@ -54,7 +54,6 @@
             data: JSON.stringify(send_R4),
             contentType: "application/json;charset=UTF-8",
             success:function(result){
-                console.log(result);
                 //步骤1_a1，在步骤1的ajax的回调函数
                 huiFuncR4(result);
                 // alert("下拉框加载完成");
@@ -67,12 +66,15 @@
             var objR4 = {};
             objR4 = JSON.parse(result);
             var a2dataR4 = objR4.data;
-            $('#stuUuid').combobox({
-                data: a2dataR4,
-                valueField: 'name',
-                textField: 'name',
-                selectOnNavigation: false
-            });
+            for(var i=0;i<a2dataR4.length;i++){
+                $('#stuUuid').append('<option value="'+a2dataR4[i].name+'">'+a2dataR4[i].name+'</option>')
+            }
+            // $('#stuUuid').combobox({
+            //     data: a2dataR4,
+            //     valueField: 'name',
+            //     textField: 'name',
+            //     selectOnNavigation: false
+            // });
 
         }// end 1_x1 外圈
         //end 1 加载所有下拉框 结束
@@ -168,7 +170,6 @@
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
 				alert("新增成功");
-				console.log(result);
 				//调用父级弹窗start
             	var $parent = self.parent.$;
             	$parent('#menu_g2').click();
@@ -312,10 +313,10 @@
 	    			<td class="name-s" style="padding-left:0">学生名称</td>
 	    			<td>
 
-						<!--<select name="stuUuid" id="stuUuid" class="easyui-combobox yzss sel_s">-->
-
-						<!--</select>-->
-						<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">
+						<select name="stuUuid" id="stuUuid" class=" yzss sel_s"  placeholder="输入合同编号">
+							<option >请选择学生</option>
+						</select>
+						<!--<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">-->
 					</td>
 	    			<td class="name-s">交易时间</td>
 	    			<td><input id="cDate" name="cDate" type="text" class="easyui-datebox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
@@ -324,6 +325,7 @@
 						<td class="name-s">所在校区</td>
 						<td>
 							<select  name="org" class="yzss sel_s">
+								<option >请选择校区</option>
 								<option value="共和校区">共和校区</option>
 								<option value="天目分校">天目分校</option>
 								<option value="所有校区">所有校区</option>
@@ -426,7 +428,7 @@
             	<!-- 按钮div开始 -->
             	
 
-            	  <div class="btn-box" style="margin-right: 9px">
+            	  <div class="btn-box">
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-xk" onclick="clearForm()">清空</a>
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="submitForm()">确认</a>
 	   			 </div>

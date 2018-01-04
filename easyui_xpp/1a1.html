@@ -53,6 +53,7 @@
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
                 table = $('#example').DataTable( {
+                    "bLengthChange":false,
                     language: {
         "sProcessing": "处理中...",
         "sLengthMenu": "显示 _MENU_ 项结果",

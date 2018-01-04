@@ -30,26 +30,26 @@
 
     //步骤1,展示列表数据
     var table = $('#example').DataTable( {
-        "bLengthChange":false,
+
         language: {
-            "sProcessing": "处理中...",
-            "sLengthMenu": "显示 _MENU_ 项结果",
-            "sZeroRecords": "没有匹配结果",
-            "sInfo": "共 _TOTAL_ 项",
-            "sInfoEmpty": "共 0 项",
-            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索:",
-            "sUrl": "",
-            "sEmptyTable": "表中数据为空",
-            "sLoadingRecords": "载入中...",
-            "sInfoThousands": ",",
-            "oPaginate": {
-                "sFirst": "首页",
-                "sPrevious": "上页",
-                "sNext": "下页",
-                "sLast": "末页"
-            },
+        "sProcessing": "处理中...",
+        "sLengthMenu": "显示 _MENU_ 项结果",
+        "sZeroRecords": "没有匹配结果",
+        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索:",
+        "sUrl": "",
+        "sEmptyTable": "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands": ",",
+        "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+        },
         "oAria": {
             "sSortAscending": ": 以升序排列此列",
             "sSortDescending": ": 以降序排列此列"
@@ -190,6 +190,21 @@
 
         //*************
         var f1=yzV1();
+            //计算总价格，总课数
+            var sumA = document.getElementById("sumPriceA").value;
+            var sumB = document.getElementById("sumPriceB").value;
+
+            var result = new Number(sumA) + new Number(sumB);
+            // alert(result);
+            document.getElementById("totalPrice").value = new Number(sumA) + new Number(sumB);
+
+            var scA = document.getElementById("sumCountA").value;
+            var scB = document.getElementById("sumCountB").value;
+            var result = new Number(scA) + new Number(scB);
+            // alert(result);
+            document.getElementById("totalCount").value = new Number(scA) + new Number(scB);
+            alert("总支付，总次数已更新");
+            //计算总价格，总课数结束
             var f2=yzDate();
             var f3=yzNumBox();
             var flag = false;
@@ -208,6 +223,7 @@
             param.sumCountB = document.getElementById("sumCountB").value;
             param.totalPrice = document.getElementById("totalPrice").value;
             param.totalCount = document.getElementById("totalCount").value;
+
             $.ajax({
                 
                 url:"/sdpk/aaContract?qqiu=edit",
@@ -216,6 +232,7 @@
                 data: JSON.stringify(param),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
+
                 alert("修改完成");
                 window.location.reload();
                 }
@@ -348,15 +365,15 @@
                     </td>
 
                     <td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
-                    <td ><input id="countA" name="countA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" required="required" data-options="min:0,max:999999,value: 0,editable:true" onchange="countA_cn();"></td>
+                    <td ><input id="countA" name="countA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true" onchange="countA_cn();"></td>
                     </tr><!-- 第一行结束 -->
                     <!--类型一(价格A) 第二行 -->
                     <tr>
                         <td class="name-s" style="padding-left:0;">优惠金额</td>
-                    <td ><input id="delPriceA" name="delPriceA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" required="required" data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_onePriceA();"></td>
+                    <td ><input id="delPriceA" name="delPriceA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_onePriceA();"></td>
 
                     <td class="name-s">送课次数</td>
-                    <td ><input id="countGiveA" name="countGiveA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" required="required" data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_countGiveA();"></td>
+                    <td ><input id="countGiveA" name="countGiveA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_countGiveA();"></td>
                     </tr><!-- 第二行结束 类型一(价格A)-->
 
                     <!--类型一(价格A) 第三行 -->
@@ -389,15 +406,15 @@
                         </select>
                     </td>
                     <td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
-                    <td ><input id="countB" name="countB" onchange="countB_cn();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" required="required" data-options="min:0,max:999999,value: 0,editable:true"></td>
+                    <td ><input id="countB" name="countB" onchange="countB_cn();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true"></td>
                     </tr><!-- 第一行结束 -->
                     <!-- 类型二(价格B)第二行 -->
                     <tr>
                         <td class="name-s" style="padding-left:0">优惠金额</td>
-                    <td ><input id="delPriceB" name="delPriceB" onchange="cn_onePriceB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" required="required" data-options="min:0,max:999999,value: 0,editable:true"></td>
+                    <td ><input id="delPriceB" name="delPriceB" onchange="cn_onePriceB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true"></td>
 
                     <td class="name-s">送课次数</td>
-                    <td ><input id="countGiveB" name="countGiveB" onchange="cn_countGiveB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" required="required" data-options="min:0,max:999999,value: 0,editable:true"></td>
+                    <td ><input id="countGiveB" name="countGiveB" onchange="cn_countGiveB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true"></td>
                     </tr><!-- 第二行结束 类型二(价格B)-->
                     <!-- 类型二(价格B)第三行 -->
                     <tr>
@@ -421,7 +438,7 @@
                     <td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
 
                     <td class="name-s"></td>
-                    <td><a href="javascript:void(0)" class="easyui-linkbutton ca_btn" onclick="cn_totalPrice()">计算按钮</a></td>
+                    <td><a href="javascript:void(0)" class="easyui-linkbutton ca_btn" onclick="cn_totalPrice()"style="display:none">计算按钮</a></td>
                     </tr><!-- 第三行结束 -->
                     </table><!-- end id  header_3_tb4-->
                 
@@ -429,7 +446,7 @@
                 <!-- 按钮div开始 -->
                 <div class="btn-box" style="margin-right: 20px;padding-bottom: 20px;">
                     <button  class="easyui-linkbutton btn-xk" id="close">关闭</button>
-                    <button  class="easyui-linkbutton btn-qr" id="submitForm">确认</button>
+                    <button  class="easyui-linkbutton btn-qr" id="submitForm" onclick="submitForm()">确认</button>
                  </div>
                  <!-- 按钮div结束 -->
     </div><!-- end id=dialog -->
@@ -491,6 +508,7 @@
 
         //^^^^^^^^^^^^此函数没用到
         function submitForm(){
+
             //$('#ff').form('submit');
             
             //要初始化一个对象，不然会报undifine未定义错误
@@ -531,6 +549,7 @@
                 data: JSON.stringify(send_edit_data),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
+
                 alert("修改完成");
                 window.location.reload();
                 }

@@ -30,31 +30,31 @@
 
     //步骤1,展示列表数据
     var table = $('#example').DataTable( {
-        "bLengthChange":false,
+
         language: {
-            "sProcessing": "处理中...",
-            "sLengthMenu": "显示 _MENU_ 项结果",
-            "sZeroRecords": "没有匹配结果",
-            "sInfo": "共 _TOTAL_ 项",
-            "sInfoEmpty": "共 0 项",
-            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索:",
-            "sUrl": "",
-            "sEmptyTable": "表中数据为空",
-            "sLoadingRecords": "载入中...",
-            "sInfoThousands": ",",
-            "oPaginate": {
-                "sFirst": "首页",
-                "sPrevious": "上页",
-                "sNext": "下页",
-                "sLast": "末页"
-            },
-            "oAria": {
-                "sSortAscending": ": 以升序排列此列",
-                "sSortDescending": ": 以降序排列此列"
-            }
-        },//国际化语言结束
+        "sProcessing": "处理中...",
+        "sLengthMenu": "显示 _MENU_ 项结果",
+        "sZeroRecords": "没有匹配结果",
+        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索:",
+        "sUrl": "",
+        "sEmptyTable": "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands": ",",
+        "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+        },
+        "oAria": {
+            "sSortAscending": ": 以升序排列此列",
+            "sSortDescending": ": 以降序排列此列"
+        }
+    },//国际化语言结束
         "ajax": "/sdpk/aaContract?qqiu=list",
         "columns": [
             { "data": "cNum" },
@@ -124,7 +124,42 @@
       }
     });//end 4 外圈 dialog
 
+        var send_R4 = {};
+        send_R4.id = "uuid";
+        send_R4.claUuid = "name";
+        $.ajax({
 
+            url:"/sdpk/aaStudent?qqiu=list",
+            type: "POST",
+            //data: JSON.stringify(param),
+            data: JSON.stringify(send_R4),
+            contentType: "application/json;charset=UTF-8",
+            success:function(result){
+                // console.log(result);
+                //步骤1_a1，在步骤1的ajax的回调函数
+                huiFuncR4(result);
+                // alert("下拉框加载完成");
+            }
+
+        });
+        //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
+        function huiFuncR4(result){
+            // alert("回调中");
+            var objR4 = {};
+            objR4 = JSON.parse(result);
+            var a2dataR4 = objR4.data;
+            for(var i=0;i<a2dataR4.length;i++){
+                $('#stuUuid').append('<option value="'+a2dataR4[i].name+'">'+a2dataR4[i].name+'</option>')
+            }
+            // $('#stuUuid').combobox({
+            //     data: a2dataR4,
+            //     valueField: 'name',
+            //     textField: 'name',
+            //     selectOnNavigation: false
+            // });
+
+        }// end 1_x1 外圈
+        //end 1 加载所有下拉框 结束
     //步骤5，编辑打开事件
     $( "#opener" ).click(function() {
 
@@ -323,7 +358,7 @@
 
     <div id="dialog" title="编辑合同" closed="true" style="width:965px;height: 690px;padding-left:20px;">
                 <!--<p>这是一个动画显示的对话框</p>-->
-                <form id="ff" name="ffname" method="post" >
+                <form id="ff" name="ffname" method="post" > 
                 <table id="header_3_tb1" class="tab-style">
                     <!-- 第一行 -->
                     <tr>
@@ -338,12 +373,22 @@
                     <!-- 第一行 -->
                     <tr>
                     <td class="name-s" style="padding-left:0">学生名称</td>
-                    <td><input  type="text" id="stuUuid" name="stuUuid" class="v1g3 yzss" value="请选择学生"> </td>
+                    <td>
+                        <!--<input  type="text" id="stuUuid" name="stuUuid" class="v1g3 yzss" value="请选择学生">-->
+                        <select name="stuUuid" id="stuUuid"class="yzss sel_s"></select>
+                    </td>
                     <td class="name-s">交易时间</td>
                     <td style="width: 115px;height: 27px;font-size:16px;"><input id="cDate" name="cDate" type="text" class="easyui-datebox" required="required" style="line-height: 34px; height:36px;background-color: white;"></td>
 
                     <td class="name-s">校区组织</td>
-                    <td><input  type="text" id="org" name="org" class="v1g3 yzss" value="请输入校区组织"> </td>
+                    <td>
+                        <!--<input  type="text" id="org" name="org" class="v1g3 yzss" value="请输入校区组织">-->
+                        <select  name="org" class="yzss sel_s">
+                            <option value="共和校区">共和校区</option>
+                            <option value="天目分校">天目分校</option>
+                            <option value="所有校区">所有校区</option>
+                        </select>
+                    </td>
                     </tr>
                     </table><!-- end  id= header_3_tb2 -->
 
@@ -441,10 +486,10 @@
                     <td><a href="javascript:void(0)" class="easyui-linkbutton ca_btn" onclick="cn_totalPrice()"style="display:none">计算按钮</a></td>
                     </tr><!-- 第三行结束 -->
                     </table><!-- end id  header_3_tb4-->
-
+                
                 </form>
                 <!-- 按钮div开始 -->
-                <div class="btn-box" style="margin-right: 23px;padding-bottom: 20px;">
+                <div class="btn-box" style="margin-right: 20px;padding-bottom: 20px;">
                     <button  class="easyui-linkbutton btn-xk" id="close">关闭</button>
                     <button  class="easyui-linkbutton btn-qr" id="submitForm" onclick="submitForm()">确认</button>
                  </div>

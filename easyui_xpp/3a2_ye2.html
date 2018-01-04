@@ -82,7 +82,7 @@
     //获取并显示班主任名
     var empName = a2dataT[0].empName;
     $("#em_empName").html(empName);
-    alert(objT.message);
+    console.log(objT.message);
     
     }// end 1_x1 外圈 
 
@@ -316,7 +316,7 @@
         var croomName = rowData.croomName;
         var weekSome = rowData.weekSome;
         var categoryName = rowData.categoryName;
-        alert("1变量赋值完毕");
+        console.log("1变量赋值完毕");
 
         //传班级uuid到cookie中
         $.cookie('c1_uuid', uuid);
@@ -334,7 +334,7 @@
         $.cookie('c1_weekSome', weekSome);
         $.cookie('c1_categoryName', categoryName);
 
-        alert("1cookie赋值完毕");
+        console.log("1cookie赋值完毕");
 
 
 
@@ -493,7 +493,7 @@
 
                     //cookie中取班级uuid
                     ckUuid_ye2 = $.cookie('UidCla');
-                    alert("ye2是"+ckUuid_ye2);
+                    console.log("ye2是"+ckUuid_ye2);
                     window.location.href="3a2_ye3.html"
 
                     //onclick="window.location='3a2_ye3.html'"

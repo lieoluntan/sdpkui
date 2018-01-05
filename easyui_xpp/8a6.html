@@ -137,6 +137,24 @@
         /* 第四步：点击编辑按钮出现弹窗 */
         //获取选中行的值，并把值给到弹窗相应的位置
         $("#btn-edi").click(function(){
+
+            //每次打开编辑uncheck一遍
+//            var treeNode = $('#tree').combotree('treeaaa');
+
+            var ttNodes = $('#tree').tree('getChecked');
+            console.log("ttNodes类型"+typeof(ttNodes));
+            for(var i=0;i<ttNodes.length;i++){
+                var aNode = ttNodes[i];
+                $('#tree').tree("uncheck",aNode.target);
+                console.log("取消了选中"+i);
+            }
+            
+            //先将回显数据全部清除（重点方法） 
+         //    var root = $("#tree").tree("getRoot");  
+        	// $("#tree").tree("uncheck", root.target); 
+
+            //end每次打开编辑uncheck一遍
+
             var delTableTr = {};//定义一个空的对象
             delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
             //吧获取到的值给到弹窗里面的value

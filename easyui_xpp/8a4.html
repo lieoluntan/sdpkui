@@ -12,6 +12,16 @@
     <link  rel="stylesheet" type="text/css" href="../HMcode/HMcss/8a3.css"/>
     <script>
         $(document).ready(function(){
+
+            /*第零步：把datatables插件的警告窗变成控制台打印*/
+            $.fn.dataTable.ext.errMode = 'none';
+
+            $('#adm-user')
+                .on( 'error.dt', function ( e, settings, techNote, message ) {
+                    console.log( '报告了一个警告 by DataTables: ', message );
+                } )
+                .DataTable();
+
             /* 第一步：展示数据列表 */
             var tabData = $("#adm-user").DataTable({
                  "bLengthChange":false,
@@ -81,6 +91,18 @@
                     }
                 });
             });
+             //步骤4，对话框初始配置
+                $( "#dialog" ).dialog({
+                  autoOpen: false,
+                  show: {
+                    effect: "blind",
+                    duration: 1000
+                  },
+                  hide: {
+                    effect: "explode",
+                    duration: 1000
+                  }
+                });//end 4 外圈 dialog
             /* 第四步：点击编辑按钮出现弹窗 */
             //获取选中行的值，并把值给到弹窗相应的位置
             $("#btn-edi").click(function(){
@@ -182,7 +204,7 @@
     </script>
 </head>
 <body>
-<div class="tab-con">
+<div class="tab-con" id="fen3a3_container">
     <div id="header_1" >
         <h2>用户管理</h2>
     </div>

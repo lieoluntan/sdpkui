@@ -21,6 +21,17 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            /*第零步：把datatables插件的警告窗变成控制台打印*/
+
+            $.fn.dataTable.ext.errMode = 'none';
+
+            $('#example')
+                .on( 'error.dt', function ( e, settings, techNote, message ) {
+                    console.log( '报告了一个警告 by DataTables: ', message );
+                } )
+                .DataTable();
+
             var table = {};//全局变量
 
             //步骤1,展示列表数据
@@ -193,7 +204,7 @@
 
         function clearForm() {
             $('#ff').form('clear');
-        };//end function clearForm
+        }//end function clearForm
 
     </script>
 

@@ -42,6 +42,15 @@
 
     $(document).ready(function() {
 
+		/*第零步：把datatables插件的警告窗变成控制台打印*/
+        $.fn.dataTable.ext.errMode = 'none';
+
+        $('#content03_2_tb')
+            .on( 'error.dt', function ( e, settings, techNote, message ) {
+                console.log( '报告了一个警告 by DataTables: ', message );
+            } )
+            .DataTable();
+
         //初始化加载下拉框000000000
         //11月13日暂留
             var send_edit_data = {};

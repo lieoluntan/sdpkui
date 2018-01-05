@@ -49,7 +49,8 @@
                 columns:[
                     {"data":"uName"},
                     {"data":"uLogUser"},
-                    {"data":"uPassWord"}
+                    {"data":"uPassWord"},
+                    {"data":"empName"}
                 ]
             });
             /* 第二步：选择列表进行操作(鼠标选中事件) */
@@ -108,6 +109,19 @@
                         selFunction(result);
                     }
                 });
+                $.ajax({
+                    url:"/sdpk/aaEmp?qqiu=list",
+                    type: "GET",
+                    //data: JSON.stringify(param),
+                    ContentType: "application/json;charset=UTF-8",
+                    success:function(result){
+                        //步骤1_a1，在步骤1的ajax的回调函数
+                        // console.log(result1);
+                        setFunction(result);
+                        // alert("下拉框加载完成");
+                    }
+
+                });
                 function selFunction(result) {
                     var objSle = {};
                     objSle = JSON.parse(result);
@@ -135,6 +149,21 @@
                     $( "#dialog" ).dialog( "open" );//出现编辑弹窗
 
                 }//end selFunction
+                function setFunction(result){
+                    var objSet = {};
+                    objSet = JSON.parse(result);
+                    var objDate = objSet.data;
+                    $("#ffSel").combobox({
+                        data:objDate,
+                        valueField:"uuid",
+                        textField:"name",
+                        multiple:false,
+                        selectOnNavigation: false
+                    });
+                    var delTableTr = {};//定义一个空的对象
+                    delTableTr = tabData.row(".selected").data();
+                    $('#ffSel').combobox('setValues',[delTableTr.empName]);
+                }
 
 
             });
@@ -162,6 +191,10 @@
                 }
                 if(sendTab.roleList ==""||sendTab.roleList==null){
                     alert("请选择用户角色");
+                    return false;
+                }
+                if(sendTab.empUuid ==""||sendTab.empUuid==null){
+                    alert("请选择公司员工");
                     return false;
                 }
                 /* ajax数据的调用 */
@@ -212,6 +245,7 @@
                 <th style="min-width: 150px">用户姓名</th>
                 <th style="min-width: 150px">用户账号</th>
                 <th style="min-width: 150px">用户密码</th>
+                <th style="min-width: 150px">公司员工</th>
             </tr>
         </thead>
         <tfoot class="tab-tit">
@@ -219,12 +253,14 @@
                 <th style="min-width: 150px">用户姓名</th>
                 <th style="min-width: 150px">用户账号</th>
                 <th style="min-width: 150px">用户密码</th>
+                <th style="min-width: 150px">公司员工</th>
             </tr>
         </tfoot>
         <tbody>
             <tr>
                 <th style="min-width: 150px">李老师</th>
                 <th style="min-width: 150px">sd1001</th>
+                <th style="min-width: 150px">shudai888</th>
                 <th style="min-width: 150px">shudai888</th>
             </tr>
         </tbody>
@@ -251,7 +287,13 @@
             <td>
                 <input id="infoSel" class="easyui-combobox yzss" name="roleList" style="width:250px;height: 34px;">
             </td>
-        </tr>
+            </tr>
+            <tr>
+            <td class="name-s" style="padding-left:0">公司员工</td>
+            <td>
+                <input id="ffSel" class="easyui-combobox yzss" name="empUuid" style="width:250px;height: 34px;">
+            </td>
+            </tr>
         </table>
     </form>
     <div class="btn-box" style="margin-right: 27px;">

@@ -230,35 +230,35 @@
         </tbody>
     </table>
     <!--E--表格结束 -->
-    <!-- S--编辑弹窗 -->
-    <div id="dialog" title="用户编辑" class="easyui-dialog" closed="true" style="width:400px;height: 420px;padding-left: 20px;">
-        <form id="form-id" name="form_data">
-            <table class="tab-style">
-                <tr>
-                    <td class="name-s" style="padding-left:0">用户姓名</td>
-                    <td><input type="text" name="uName" class="yzss" style="width:250px;" value="请输入姓名"></td>
-                </tr>
-                <tr>
-                    <td class="name-s" style="padding-left:0">用户账号</td>
-                    <td><input type="text" name="uLogUser" class="yzss" style="width:250px;" value="请输入账号"></td>
-                </tr>
-                <tr>
-                    <td class="name-s" style="padding-left:0">用户密码</td>
-                    <td><input type="text" name="uPassWord" class="yzss" style="width:250px;" value="请输入密码"></td>
-                </tr><tr>
-                <td class="name-s" style="padding-left:0">用户角色</td>
-                <td>
-                    <input id="infoSel" class="easyui-combobox yzss" name="roleList" style="width:250px;height: 34px;">
-                </td>
-            </tr>
-            </table>
-        </form>
-        <div class="btn-box" style="margin-right: 27px;">
-            <button id="close-d"  class="easyui-linkbutton btn-xk">关闭</button>
-            <button id="confirm-d" class="easyui-linkbutton btn-qr">确认</button>
-        </div>
-    </div>
-    <!-- E--编辑弹窗 -->
 </div>
+<!-- S--编辑弹窗 -->
+<div id="dialog" title="用户编辑" class="easyui-dialog" closed="true" style="width:400px;height: 420px;padding-left: 20px;left:300px;top:160px;">
+    <form id="form-id" name="form_data">
+        <table class="tab-style">
+            <tr>
+                <td class="name-s" style="padding-left:0">用户姓名</td>
+                <td><input type="text" name="uName" class="yzss" style="width:250px;" value="请输入姓名"></td>
+            </tr>
+            <tr>
+                <td class="name-s" style="padding-left:0">用户账号</td>
+                <td><input type="text" name="uLogUser" class="yzss" style="width:250px;" value="请输入账号"></td>
+            </tr>
+            <tr>
+                <td class="name-s" style="padding-left:0">用户密码</td>
+                <td><input type="text" name="uPassWord" class="yzss" style="width:250px;" value="请输入密码"></td>
+            </tr><tr>
+            <td class="name-s" style="padding-left:0">用户角色</td>
+            <td>
+                <input id="infoSel" class="easyui-combobox yzss" name="roleList" style="width:250px;height: 34px;">
+            </td>
+        </tr>
+        </table>
+    </form>
+    <div class="btn-box" style="margin-right: 27px;">
+        <button id="close-d"  class="easyui-linkbutton btn-xk">关闭</button>
+        <button id="confirm-d" class="easyui-linkbutton btn-qr">确认</button>
+    </div>
+</div>
+<!-- E--编辑弹窗 -->
 </body>
 </html>

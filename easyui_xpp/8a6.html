@@ -68,12 +68,6 @@
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
 
-        $('#adm-user')
-            .on( 'error.dt', function ( e, settings, techNote, message ) {
-                console.log( '报告了一个警告 by DataTables: ', message );
-            } )
-            .DataTable();
-
         /* 对话框关闭事件 */
         $(function(){
             $('.panel-tool ,#close-d').click(function(){

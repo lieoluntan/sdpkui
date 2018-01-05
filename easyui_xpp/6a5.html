@@ -244,13 +244,6 @@
 
             /*第零步：把datatables插件的警告窗变成控制台打印*/
             $.fn.dataTable.ext.errMode = 'none';
-
-            $('#content03_2_tb')
-                .on( 'error.dt', function ( e, settings, techNote, message ) {
-                    console.log( '报告了一个警告 by DataTables: ', message );
-                } )
-                .DataTable();
-
             //步骤1，编辑预览排课按钮事件
             $("#viewPkBtn").click(function () {
                 //要初始化一个对象，不然会报undifine未定义错误

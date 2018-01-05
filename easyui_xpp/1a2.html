@@ -33,14 +33,22 @@
                 var myDate = new Date();
                 var aday = myDate.toLocaleDateString();
                 var adayStr = new String(aday);
-                adayStr = adayStr.replace(/\//g,"-"); //把/替换成-，把斜杠替换成减号
+                var dataArr = adayStr.split('/');
+                if(dataArr[1]<10){
+                    dataArr[1] = "0"+dataArr[1];
+                }
+                if(dataArr[2]<10){
+                    dataArr[2] = "0"+dataArr[2];
+                }
+                currentTime =dataArr.join("-");
+                console.log(currentTime);
                 // alert("转换后"+adayStr);
                 //步骤,展示列表数据
                 var send_cData = {};
-                send_cData.keDateTime = adayStr;
+                send_cData.keDateTime = currentTime;
             $.ajax({
 
-                url:"/sdpk/aaPaiKe?qqiu=listKeDate",
+                url:"/sdpk/aaQueKe?qqiu=list",
                 type: "POST",
                 //data: JSON.stringify(param),
                 data: JSON.stringify(send_cData),
@@ -93,6 +101,7 @@
                         { "data": "keStartTime" },
                         { "data": "weekSome" },
                         { "data": "empName" },
+                        { "data": "headTeaName" },
                         { "data": "croomName" },
                         { "data": "keLongTime" }
                     ]
@@ -118,14 +127,23 @@
                 var myDate = new Date();
                 var aday = myDate.toLocaleDateString();
                 var adayStr = new String(aday);
-                adayStr = adayStr.replace(/\//g,"-"); //把/替换成-，把斜杠替换成减号
+                var dataArr = adayStr.split('/');
+                if(dataArr[1]<10){
+                    dataArr[1] = "0"+dataArr[1];
+                }
+                if(dataArr[2]<10){
+                    dataArr[2] = "0"+dataArr[2];
+                }
+                currentTime =dataArr.join("-");
+                console.log(currentTime);
+
                 // alert("转换后"+adayStr);
                 //步骤,展示列表数据
                 var send_cData = {};
-                send_cData.keDateTime = adayStr;
+                send_cData.keDateTime = currentTime;
                 $.ajax({
 
-                    url:"/sdpk/aaPaiKe?qqiu=listKeDate",
+                    url:"/sdpk/aaQueKe?qqiu=list",
                     type: "POST",
                     //data: JSON.stringify(param),
                     data: JSON.stringify(send_cData),
@@ -145,14 +163,22 @@
                 myDate.setDate(myDate.getDate() + 1);
                 var aday = myDate.toLocaleDateString();
                 var adayStr = new String(aday);
-                adayStr = adayStr.replace(/\//g,"-"); //把/替换成-，把斜杠替换成减号
-                alert("转换后"+adayStr);
+                var dataArr = adayStr.split('/');
+                if(dataArr[1]<10){
+                    dataArr[1] = "0"+dataArr[1];
+                }
+                if(dataArr[2]<10){
+                    dataArr[2] = "0"+dataArr[2];
+                }
+                currentTime =dataArr.join("-");
+                console.log(currentTime);
+
                 //步骤,展示列表数据
                 var send_cData = {};
-                send_cData.keDateTime = adayStr;
+                send_cData.keDateTime = currentTime;
                 $.ajax({
 
-                    url:"/sdpk/aaPaiKe?qqiu=listKeDate",
+                    url:"/sdpk/aaQueKe?qqiu=list",
                     type: "POST",
                     //data: JSON.stringify(param),
                     data: JSON.stringify(send_cData),
@@ -233,6 +259,7 @@
                     <th style="min-width:100px;">上课时间</th>
                     <th style="min-width:100px;">星期</th>
                     <th style="min-width:100px;">授课老师</th>
+                    <th style="min-width:100px;">班主任</th>
                     <th style="min-width:100px;">授课教室</th>
                     <th style="min-width:100px;">上课时长</th>
                 </tr>
@@ -245,6 +272,7 @@
                     <th style="min-width:100px;">上课时间</th>
                     <th style="min-width:100px;">星期</th>
                     <th style="min-width:100px;">授课老师</th>
+                    <th style="min-width:100px;">班主任</th>
                     <th style="min-width:100px;">授课教室</th>
                     <th style="min-width:100px;">上课时长</th>
                 </tr>

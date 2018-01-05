@@ -32,7 +32,7 @@
             </li>
             <li  style="margin-top:20px;">
                 <i class="name-s" style="margin-right: -7px;">公司员工</i>
-                <input id="ffList" class="easyui-combobox yzss" data-options="editable:true" style="width:200px;height: 34px;" name="ffList">
+                <input id="ffList" class="easyui-combobox yzss" data-options="editable:true" style="width:200px;height: 34px;" name="empUuid">
             </li>
 
         </ul>
@@ -133,6 +133,10 @@
                     alert("请输入用户姓名");
                     return false;
               }
+            if(objSel.empUuid ==""||objSel.empUuid==null){
+                alert("请选择公司员工");
+                return false;
+            }
             $.ajax({
                 url:"/sdpk/aaUserPK?qqiu=add",
                 type:"POST",

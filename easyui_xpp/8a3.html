@@ -28,8 +28,13 @@
             <li><i class="name-s">用户密码</i><input type="text" id="uPassWord" name="uPassWord" class="yzss" placeholder="请输入密码"></li>
             <li class="fir" style="margin-top:20px;">
                 <i class="name-s" style="margin-right: -7px;">角&nbsp;&nbsp;&nbsp;&nbsp;色</i>
-                <input id="roleList" class="easyui-combobox yzss" style="width:200px;height: 34px;" name="roleList">
+                <input id="roleList" class="easyui-combobox yzss"data-options="editable:true" style="width:200px;height: 34px;" name="roleList">
             </li>
+            <li  style="margin-top:20px;">
+                <i class="name-s" style="margin-right: -7px;">公司员工</i>
+                <input id="ffList" class="easyui-combobox yzss" data-options="editable:true" style="width:200px;height: 34px;" name="ffList">
+            </li>
+
         </ul>
     </form>
     <!--E--表格结束 -->
@@ -76,6 +81,35 @@
             });
 
         }// end huiFuncR4 外圈
+        //获取课程下拉框数据L4和R3
+        $.ajax({
+            url:"/sdpk/aaEmp?qqiu=list",
+            type: "GET",
+            //data: JSON.stringify(param),
+            ContentType: "application/json;charset=UTF-8",
+            success:function(result){
+                //步骤1_a1，在步骤1的ajax的回调函数
+                console.log("查询角色返回"+result);
+                huiFuncF4(result);
+                // alert("下拉框加载完成");
+            }
+
+        });
+        //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
+        function huiFuncF4(result){
+            // alert("回调中");
+            var objF4 = {};
+            objF4 = JSON.parse(result);
+            var a2dataF4 = objF4.data;
+            $('#ffList').combobox({
+                data: a2dataF4,
+                valueField: 'uuid',
+                textField: 'name',
+                multiple:false,
+                selectOnNavigation: false
+            });
+
+        }// end huiFuncF4 外圈
 
         /* 表单提交事件 */
         $('#submit').click(function(){

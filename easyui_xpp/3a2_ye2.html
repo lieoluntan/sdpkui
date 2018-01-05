@@ -137,6 +137,7 @@
     var a2obj = {};
     a2obj = JSON.parse(result);
     var a2data = a2obj.data;
+    console.log(a2data);
     table_ye2 = $('#paike_biao').DataTable( {
         "bLengthChange":false,
         language: {
@@ -179,9 +180,90 @@
         ]
     } );
 
+//        日历点击事件
+        $('#ye_3_content02_date').calendar({
+            onSelect:function (date) {
+                var curYear = date.getFullYear();
+                var curMonth = date.getMonth()+1;
+                if(curMonth<10){
+                    curMonth = "0"+curMonth;
+                }
+                else {
+                    curMonth = curMonth;
+                }
+                var curDate = date.getDate();
+                if(curDate<10){
+                    curDate = "0"+curDate;
+                }else {
+                    curDate = curDate;
+                }
+                var curTime =curYear+"-"+curMonth+"-"+curDate;//获取点击的时间
+                var arrIndex = [];
+                for(var i=0;i<a2data.length;i++){
+                    if(a2data[i].keDateTime == curTime){
+                        arrIndex.push(i);
+                    }
+                }
+//                alert(arrIndex);
+                var currTable={};
+                var xppArr = [];
+                for(var i=0;i<arrIndex.length;i++){
+                    currTable= a2data[arrIndex[i]];
+                    xppArr.push(currTable);
+                }
+                
+                    var curD = $('#paike_biao').DataTable( {
+                        "bLengthChange":false,
+                        language: {
+                            "sProcessing": "处理中...",
+                            "sLengthMenu": "显示 _MENU_ 项结果",
+                            "sZeroRecords": "没有匹配结果",
+                            "sInfo": "共 _TOTAL_ 项",
+                            "sInfoEmpty": "共 0 项",
+                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "sInfoPostFix": "",
+                            "sSearch": "搜索:",
+                            "sUrl": "",
+                            "sEmptyTable": "表中数据为空",
+                            "sLoadingRecords": "载入中...",
+                            "sInfoThousands": ",",
+                            "oPaginate": {
+                                "sFirst": "首页",
+                                "sPrevious": "上页",
+                                "sNext": "下页",
+                                "sLast": "末页"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": 以升序排列此列",
+                                "sSortDescending": ": 以降序排列此列"
+                            }
+                        },//国际化语言结束
+                        destroy:true,//表示可重复加载
+                        "scrollX": true,
+                        scrollY:false,
+                       data: xppArr,
+                        columns: [
+                            { "data": "courseName" },
+                            { "data": "categoryName" },
+                            { "data": "keDateTime" },
+                            { "data": "keStartTime" },
+                            { "data": "weekSome" },
+                            { "data": "empName" },
+                            { "data": "croomName" },
+                            { "data": "keLongTime" }
+                        ]
+                    } );
+                    console.log(2222);
+
+
+            }
+        });
+
+
     }// end  huiFuncList外圈 1_x1
     //步骤1,展示完成
     //步骤1_2展示列表日历数据
+
     function huiFuncListCalend(result){
 
     var keDayList = new Array();
@@ -221,10 +303,11 @@
                                     if (flag) {return '<div class="icon-search md">' + d + '</div>';}else{return d;}
 
                             }//end method formatter
-                
+
                 });//日历
 
     }//end method list2Calend
+
 
     //步骤2，列表选择
     var selectTable = $('#paike_biao tbody').on( 'click', 'tr', function () {

@@ -176,6 +176,7 @@
                 sendTab.uName = $('input[name = "uName"]')[0].value;
                 sendTab.uLogUser = $('input[name = "uLogUser"]')[0].value;
                 sendTab.uPassWord = $('input[name="uPassWord"]')[0].value;
+                sendTab.empUuid = $('#ffSel').combobox("getValues")[0];
                 sendTab.roleList = $('#infoSel').combobox("getValues");
                 if(sendTab.uName==""||sendTab.uName==null){
                     alert("请输入用户姓名");
@@ -194,6 +195,7 @@
                     return false;
                 }
                 if(sendTab.empUuid ==""||sendTab.empUuid==null){
+                    console.log(sendTab.empUuid);
                     alert("请选择公司员工");
                     return false;
                 }

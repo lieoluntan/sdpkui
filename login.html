@@ -71,6 +71,11 @@
                             		
                             	}
 
+                                //存登陆员工uuid到cookie
+                                var ckEmp = logObj.empUuid;
+                                //传班级uuid到cookie中
+                                $.cookie('ckUserEmpUuid', ckEmp);
+
                                 window.location.href="xppu8.html";
                             }
                             else{

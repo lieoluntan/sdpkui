@@ -11,6 +11,7 @@
     <script type="text/javascript" src="DataTables/datatables.js"></script>
     <script type="text/javascript" src="DataTables/Buttons-1.4.2/js/dataTables.buttons.js"></script>
     <script type="text/javascript" src="../xppjs/jquery.serialize-object.js"></script>
+    <script type="text/javascript" src="../xppjs/jquery.cookie.js"></script>
 
     <link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
     <link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
@@ -30,8 +31,28 @@
         $(document).ready(function() {
             /*第零步：把datatables插件的警告窗变成控制台打印*/
             $.fn.dataTable.ext.errMode = 'none';
+            //取出登陆时存的cookie
+            var UserCookie = {};
+            UserCookie.empUuid = $.cookie('ckUserEmpUuid');
+            console.log("取出登陆时存的cookie"+UserCookie.empUuid);
+            var aUrl = "/sdpk/aaMyStu?qqiu=list&&empUuid="+UserCookie.empUuid;
+            console.log("转化后的地址"+ aUrl);
 
             //步骤1,展示列表数据
+            //判断cookie是否存在
+            var NameOfCookie="ckUserEmpUuid";
+            var c = document.cookie.indexOf(NameOfCookie+"="); 
+                // alert(c);
+              if (c != -1)
+              {
+            console.log("2a3.html检测cookie里存在ckUserEmpUuid");
+              }
+              else
+              {
+               console.log("2a3.html检测cookie里不存在ckUserEmpUuid");
+               alert("2a3.html检测cookie里不存在ckUserEmpUuid");
+              }
+            
             var table = $('#example').DataTable( {
                 "bLengthChange":false,
                 language: {
@@ -58,7 +79,7 @@
                         "sSortDescending": ": 以降序排列此列"
                     }
                 },//国际化语言结束
-                "ajax": "/sdpk/aaMyStu?qqiu=list&&empUuid=0158d4bf-edc5-48b8-b364-1d426a94993e",
+                "ajax": aUrl,
                 "columns": [
                     { "data": "name" },
                     { "data": "studentID" },

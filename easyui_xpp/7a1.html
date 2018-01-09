@@ -8,273 +8,380 @@
 	<script type="text/javascript" src="jquery-easyui-136/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery-easyui-136/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="DataTables/datatables.js"></script>
 	<script type="text/javascript" src="../xppjs/jquery.serialize-object.js"></script>
+
 	
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a1.css">
+	<link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
+	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a2.css"/>
 
-	<script>
-		
+	<script type="text/javascript">
+		var data2a = [],table;
+        var RowDataList = {};
 
-		// function submitForm(){
-		// 	//$('#ff').form('submit');
-		// 	var param = $("#ff").serializeObject();
-		// 	param.sumPriceA = document.getElementById("sumPriceA").value;
-		// 	param.sumCountA = document.getElementById("sumCountA").value;
-		// 	param.sumPriceB = document.getElementById("sumPriceB").value;
-		// 	param.sumCountB = document.getElementById("sumCountB").value;
-		// 	param.totalPrice = document.getElementById("totalPrice").value;
-		// 	param.totalCount = document.getElementById("totalCount").value;
-		// 	$.ajax({
-				
-		// 		url:"/sdpk/aaContract?qqiu=add",
-		// 		type: "POST",
-		// 		//data: JSON.stringify(param),
-		// 		data: JSON.stringify(param),
-		// 		contentType: "application/json;charset=UTF-8", 
-		// 		success:function(result){
-		// 		alert("新增成功");
-		// 		}
-			 
-		// 	});
-			
-		// }//end function submitForm
-		// 
+            // function submitForm(){
+            // 	//$('#ff').form('submit');
+            // 	var param = $("#ff").serializeObject();
+            // 	param.sumPriceA = document.getElementById("sumPriceA").value;
+            // 	param.sumCountA = document.getElementById("sumCountA").value;
+            // 	param.sumPriceB = document.getElementById("sumPriceB").value;
+            // 	param.sumCountB = document.getElementById("sumCountB").value;
+            // 	param.totalPrice = document.getElementById("totalPrice").value;
+            // 	param.totalCount = document.getElementById("totalCount").value;
+            // 	$.ajax({
 
-        //获取课程下拉框数据L4和R3
-        var send_R4 = {};
-        send_R4.id = "uuid";
-        send_R4.claUuid = "name";
-        $.ajax({
+            // 		url:"/sdpk/aaContract?qqiu=add",
+            // 		type: "POST",
+            // 		//data: JSON.stringify(param),
+            // 		data: JSON.stringify(param),
+            // 		contentType: "application/json;charset=UTF-8",
+            // 		success:function(result){
+            // 		alert("新增成功");
+            // 		}
 
-            url:"/sdpk/aaStudent?qqiu=list",
-            type: "POST",
-            //data: JSON.stringify(param),
-            data: JSON.stringify(send_R4),
-            contentType: "application/json;charset=UTF-8",
-            success:function(result){
-                //步骤1_a1，在步骤1的ajax的回调函数
-                huiFuncR4(result);
-                // alert("下拉框加载完成");
+            // 	});
+
+            // }//end function submitForm
+            //
+
+            //获取课程下拉框数据L4和R3
+            var send_R4 = {};
+            send_R4.id = "uuid";
+            send_R4.claUuid = "name";
+            $.ajax({
+
+                url: "/sdpk/aaStudent?qqiu=list",
+                type: "POST",
+                //data: JSON.stringify(param),
+                data: JSON.stringify(send_R4),
+                contentType: "application/json;charset=UTF-8",
+                success: function (result) {
+                    //步骤1_a1，在步骤1的ajax的回调函数
+                    huiFuncR4(result);
+                    // alert("下拉框加载完成");
+                }
+
+            });
+
+            //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
+            function huiFuncR4(result) {
+                // alert("回调中");
+                var objR4 = {};
+                objR4 = JSON.parse(result);
+                var a2dataR4 = objR4.data;
+                for (var i = 0; i < a2dataR4.length; i++) {
+                    $('#stuUuid').append('<option value="' + a2dataR4[i].uuid + '">' + a2dataR4[i].name + '</option>')
+                }
+                // $('#stuUuid').combobox({
+                //     data: a2dataR4,
+                //     valueField: 'name',
+                //     textField: 'name',
+                //     selectOnNavigation: false
+                // });
+
+            }// end 1_x1 外圈
+            //end 1 加载所有下拉框 结束
+            //验证第一二行中的3个输入框
+            function yzV1() {
+                var m = {};
+                // m=document.getElementsByTagName("input");
+                m = document.getElementsByClassName("v1g3");
+
+                for (var i = 0; i < m.length; i++) {
+                    if (m[i].value == "" || m[i].value == null) {
+                        alert("请填写输入框的值(前两行)" + m[i].id);
+                        return false;
+                    }
+                }//end for
+                console.log("合同前两行输入框验证，有值！！");
+                return true;
             }
 
-        });
-        //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
-        function huiFuncR4(result){
-            // alert("回调中");
-            var objR4 = {};
-            objR4 = JSON.parse(result);
-            var a2dataR4 = objR4.data;
-            for(var i=0;i<a2dataR4.length;i++){
-                $('#stuUuid').append('<option value="'+a2dataR4[i].name+'">'+a2dataR4[i].name+'</option>')
+            //验证日期输入框
+            function yzDate() {
+                var m = {};
+                // m=document.getElementsByTagName("input");
+                m = document.getElementById("cDate");
+                var c1 = $("#cDate").datebox("getValue");
+
+
+                if (c1 == "" || c1 == null) {
+                    alert("请填写日期框" + c1 + "的值");
+                    return false;
+                }
+                console.log("日期验证，有值！" + c1);
+                return true;
             }
-            // $('#stuUuid').combobox({
-            //     data: a2dataR4,
-            //     valueField: 'name',
-            //     textField: 'name',
-            //     selectOnNavigation: false
-            // });
 
-        }// end 1_x1 外圈
-        //end 1 加载所有下拉框 结束
-		//验证第一二行中的3个输入框
-		function yzV1(){
-				var m = {};
-				// m=document.getElementsByTagName("input");
-				m=document.getElementsByClassName("v1g3");
+            //验证6个数字框
+            function yzNumBox() {
+                var m = {};
+                // m=document.getElementsByTagName("input");
+                m = document.getElementsByClassName("easyui-numberbox");
 
-				for(var i=0;i<m.length;i++)
-				{
-						if(m[i].value==""||m[i].value==null)
-						{
-							alert("请填写输入框的值(前两行)"+m[i].id);
-							return false;
-						}
-				}//end for
-				console.log("合同前两行输入框验证，有值！！");
-				return true;
-			}
-		//验证日期输入框
-		function yzDate(){
-				var m = {};
-				// m=document.getElementsByTagName("input");
-				m=document.getElementById("cDate");
-				var c1 = $("#cDate").datebox("getValue");
+                for (var i = 0; i < m.length; i++) {
 
-				
-						if(c1==""||c1==null)
-						{
-							alert("请填写日期框"+c1+"的值");
-							return false;
-						}
-				console.log("日期验证，有值！"+c1);
-				return true;
-			}
-			//验证6个数字框
-			function yzNumBox(){
-				var m = {};
-				// m=document.getElementsByTagName("input");
-				m=document.getElementsByClassName("easyui-numberbox");
-
-				for(var i=0;i<m.length;i++)
-				{
-
-						if(m[i].value==""||m[i].value==null)
-						{
-							alert("请填写数字输入框的值(类型中)"+m[i].id);
-							return false;
-						}
-				}//end for
-				console.log("6个数字输入框验证，有值！");
-				 return true;
-			}
-
-
-		function submitForm(){
-			//$('#ff').form('submit');
-			var f1=yzV1();
-			var f2=yzDate();
-			var f3=yzNumBox();
-			var flag = false;
-            //计算总价格，总课数
-            var sumA = document.getElementById("sumPriceA").value;
-            var sumB = document.getElementById("sumPriceB").value;
-
-            var result = new Number(sumA) + new Number(sumB);
-            // alert(result);
-            document.getElementById("totalPrice").value = new Number(sumA) + new Number(sumB);
-
-            var scA = document.getElementById("sumCountA").value;
-            var scB = document.getElementById("sumCountB").value;
-            var result = new Number(scA) + new Number(scB);
-            // alert(result);
-            document.getElementById("totalCount").value = new Number(scA) + new Number(scB);
-            alert("总支付，总次数已更新");
-            //总价格，总课数计算结束
-			if(f1==true&&f2==true&&f3==true){flag = true;}
-			if (flag) {
-			var param = $("#ff").serializeObject();
-			param.sumPriceA = document.getElementById("sumPriceA").value;
-			param.sumCountA = document.getElementById("sumCountA").value;
-			param.sumPriceB = document.getElementById("sumPriceB").value;
-			param.sumCountB = document.getElementById("sumCountB").value;
-			param.totalPrice = document.getElementById("totalPrice").value;
-			param.totalCount = document.getElementById("totalCount").value;
-			$.ajax({
-				
-				url:"/sdpk/aaContract?qqiu=add",
-				type: "POST",
-				//data: JSON.stringify(param),
-				data: JSON.stringify(param),
-				contentType: "application/json;charset=UTF-8", 
-				success:function(result){
-				alert("新增成功");
-				//调用父级弹窗start
-            	var $parent = self.parent.$;
-            	$parent('#menu_g2').click();
-        		//调用父级弹窗end
+                    if (m[i].value == "" || m[i].value == null) {
+                        alert("请填写数字输入框的值(类型中)" + m[i].id);
+                        return false;
+                    }
+                }//end for
+                console.log("6个数字输入框验证，有值！");
+                return true;
+            }
+            //验证上课类型
+		    function yzSkSize(){
+                if(document.getElementById("priceType").value=='请选择上课类型'){
+                    console.log(document.getElementById("priceType").value);
+                    alert('请选择上课类型');
+                    return false;
+                }else{
+                    return true;
 				}
-			 
-			});
-
-			}else{
-				alert("补填后，再点击!");
 			}
-			
-			
-			
-		}//end function submitForm
-
-		function clearForm(){
-			$('#ff').form('clear');
-		};//end function clearForm
 
 
-		//类型一（价格A）输入框3个触发事件
-		function cn_onePriceA() {
-			var p1 = document.getElementById("onePriceA").value;
-			var c1 = document.getElementById("countA").value;
-			var d1 = document.getElementById("delPriceA").value;
 
-			var result = new Number(p1) + new Number(c1) + new Number(d1);
-			document.getElementById("sumPriceA").value = new Number(p1) * new Number(c1) - new Number(d1);
-		}
 
-		function cn_countGiveA() {
-			var c1 = document.getElementById("countA").value;
-			var cg1 = document.getElementById("countGiveA").value;
 
-			var result = new Number(c1) + new Number(cg1);
-			document.getElementById("sumCountA").value = new Number(c1) + new Number(cg1);
-		}
+            function submitForm() {
+                //$('#ff').form('submit');
+                var flag = false;
+                var f1 = yzV1();
+                var f2 = yzDate();
+                var f3 = yzNumBox();
+                var f4 = yzSkSize();
+                //总价格，总课数计算结束
+                if (f1 == true && f2 == true && f3 == true) {
+                    flag = true;
+                }
+                if (flag) {
+                    var param = $("#ff").serializeObject();
+                    param.cNum=document.getElementById("cNum").value;
+                    param.stuUuid=document.getElementById("stuUuid").value;
+                    param.cDate=$("#cDate").datebox("getValue");
+                    param.org=document.getElementById("org").value;
+                    param.totalCount=document.getElementById("totalCount").value;
+                    param.totalPrice=document.getElementById("totalPrice").value;
+                    param.conPriceList=[];
 
-		function countA_cn() {
-			var p1 = document.getElementById("onePriceA").value;
-			var c1 = document.getElementById("countA").value;
-			var d1 = document.getElementById("delPriceA").value;
+                    for(var i=0;i<RowDataList.length;i++){
+                        param.conPriceList.push(RowDataList[i]);
+                    }
+                    console.log(param);
+                    $.ajax({
 
-			var result = new Number(p1) + new Number(c1) + new Number(d1);
-			document.getElementById("sumPriceA").value = new Number(p1) * new Number(c1) - new Number(d1);
+                        url: "/sdpk/aaContrtext?qqiu=add",
+                        type: "POST",
+                        //data: JSON.stringify(param),
+                        data: JSON.stringify(param),
+                        contentType: "application/json;charset=UTF-8",
+                        success: function (result) {
+                            alert("新增成功");
+                            //调用父级弹窗start
+                            var $parent = self.parent.$;
+                            $parent('#menu_g2').click();
+                            //调用父级弹窗end
+                        }
 
-			var c2 = document.getElementById("countA").value;
-			var cg2 = document.getElementById("countGiveA").value;
+                    });
 
-			var result2 = new Number(c2) + new Number(cg2);
-			document.getElementById("sumCountA").value = new Number(c2) + new Number(cg2);
-		}
+                } else {
+                    alert("补填后，再点击!");
+                }
 
-		//类型二（价格B）输入框3个触发事件
 
-		function cn_onePriceB() {
-			var p1 = document.getElementById("onePriceB").value;
-			var c1 = document.getElementById("countB").value;
-			var d1 = document.getElementById("delPriceB").value;
+            }//end function submitForm
 
-			var result = new Number(p1) + new Number(c1) + new Number(d1);
-			document.getElementById("sumPriceB").value = new Number(p1) * new Number(c1) - new Number(d1);
-		}
+            function clearForm() {
+                $('#ff').form('clear');
+            };//end function clearForm
 
-		function cn_countGiveB() {
-			var c1 = document.getElementById("countB").value;
-			var cg1 = document.getElementById("countGiveB").value;
 
-			var result = new Number(c1) + new Number(cg1);
-			document.getElementById("sumCountB").value = new Number(c1) + new Number(cg1);
-		}
+            //类型一（价格A）输入框3个触发事件
+            function cn_onePriceA() {
+                var p1 = document.getElementById("onePriceA").value;
+                var c1 = document.getElementById("countA").value;
+                var d1 = document.getElementById("delPriceA").value;
 
-		function countB_cn() {
-			var p1 = document.getElementById("onePriceB").value;
-			var c1 = document.getElementById("countB").value;
-			var d1 = document.getElementById("delPriceB").value;
+                var result = new Number(p1) + new Number(c1) + new Number(d1);
+                document.getElementById("sumPriceA").value = new Number(p1) * new Number(c1) - new Number(d1);
+            }
 
-			var result = new Number(p1) + new Number(c1) + new Number(d1);
-			document.getElementById("sumPriceB").value = new Number(p1) * new Number(c1) - new Number(d1);
+            function cn_countGiveA() {
+                var c1 = document.getElementById("countA").value;
+                var cg1 = document.getElementById("countGiveA").value;
 
-			var c2 = document.getElementById("countB").value;
-			var cg2 = document.getElementById("countGiveB").value;
+                var result = new Number(c1) + new Number(cg1);
+                document.getElementById("sumCountA").value = new Number(c1) + new Number(cg1);
+            }
 
-			var result2 = new Number(c2) + new Number(cg2);
-			document.getElementById("sumCountB").value = new Number(c2) + new Number(cg2);
-		}
+            function countA_cn() {
+                var p1 = document.getElementById("onePriceA").value;
+                var c1 = document.getElementById("countA").value;
+                var d1 = document.getElementById("delPriceA").value;
 
-		//最后总金额，总次数触发
+                var result = new Number(p1) + new Number(c1) + new Number(d1);
+                document.getElementById("sumPriceA").value = new Number(p1) * new Number(c1) - new Number(d1);
 
-		function cn_totalPrice() {
-			var sumA = document.getElementById("sumPriceA").value;
-			var sumB = document.getElementById("sumPriceB").value;
+                var c2 = document.getElementById("countA").value;
+                var cg2 = document.getElementById("countGiveA").value;
 
-			var result = new Number(sumA) + new Number(sumB);
-			// alert(result);
-			document.getElementById("totalPrice").value = new Number(sumA) + new Number(sumB);
+                var result2 = new Number(c2) + new Number(cg2);
+                document.getElementById("sumCountA").value = new Number(c2) + new Number(cg2);
+            }
 
-			var scA = document.getElementById("sumCountA").value;
-			var scB = document.getElementById("sumCountB").value;
-			var result = new Number(scA) + new Number(scB);
-			// alert(result);
-			document.getElementById("totalCount").value = new Number(scA) + new Number(scB);
-			alert("总支付，总次数已更新");
-		}
+            //类型二（价格B）输入框3个触发事件
+
+            function cn_onePriceB() {
+                var p1 = document.getElementById("onePriceB").value;
+                var c1 = document.getElementById("countB").value;
+                var d1 = document.getElementById("delPriceB").value;
+
+                var result = new Number(p1) + new Number(c1) + new Number(d1);
+                document.getElementById("sumPriceB").value = new Number(p1) * new Number(c1) - new Number(d1);
+            }
+
+            function cn_countGiveB() {
+                var c1 = document.getElementById("countB").value;
+                var cg1 = document.getElementById("countGiveB").value;
+
+                var result = new Number(c1) + new Number(cg1);
+                document.getElementById("sumCountB").value = new Number(c1) + new Number(cg1);
+            }
+
+            function countB_cn() {
+                var p1 = document.getElementById("onePriceB").value;
+                var c1 = document.getElementById("countB").value;
+                var d1 = document.getElementById("delPriceB").value;
+
+                var result = new Number(p1) + new Number(c1) + new Number(d1);
+                document.getElementById("sumPriceB").value = new Number(p1) * new Number(c1) - new Number(d1);
+
+                var c2 = document.getElementById("countB").value;
+                var cg2 = document.getElementById("countGiveB").value;
+
+                var result2 = new Number(c2) + new Number(cg2);
+                document.getElementById("sumCountB").value = new Number(c2) + new Number(cg2);
+            }
+
+            //最后总金额，总次数触发
+
+            function cn_totalPrice() {
+                table = $('#example').DataTable();
+                var scA=0,scB=0;
+                
+                var send_RowDataList = new Array();
+                //获取表内所有数组的数据
+                RowDataList = table.rows().data();
+                console.log(RowDataList);
+                for(var i=0;i<RowDataList.length;i++){
+                    scA+=Number(RowDataList[i].sumPriceA);
+                    scB+=Number(RowDataList[i].sumCountA);
+				}
+                document.getElementById("totalPrice").value = scA;
+                var result = new Number(scA) + new Number(scB);
+
+                document.getElementById("totalCount").value = scB;
+                alert("总支付，总次数已更新");
+            }
+            $(document).ready(function() {
+            /*第零步：把datatables插件的警告窗变成控制台打印*/
+            $.fn.dataTable.ext.errMode = 'none';
+            //步骤1,展示列表数据
+
+        })
+
+        function setTable() {
+
+
+
+			table = $('#example').DataTable();
+            var f1 = yzV1();
+            var f2 = yzDate();
+            var f3 = yzNumBox();
+            var f4 = yzSkSize();
+            if(f1 == true && f2 == true && f3 == true &&f4==true){
+                var sumPriceA = document.getElementById("sumPriceA").value;
+                var sumCountA = document.getElementById("sumCountA").value;
+                var delPriceA = document.getElementById("delPriceA").value;
+                var countGiveA = document.getElementById("countGiveA").value;
+                var onePriceA = document.getElementById("onePriceA").value;
+                var countA = document.getElementById("countA").value;
+                var priceType = document.getElementById("priceType").value=='LineUpA'?'线上':'线下';
+
+                
+				    date = {
+                        "onePriceA":onePriceA,
+                        "countGiveA":countGiveA,
+                        "delPriceA":delPriceA,
+                        "countGiveA":countGiveA,
+                        "priceType":priceType,
+                        "sumPriceA":sumPriceA,
+                        "sumCountA":sumCountA
+					}
+                    data2a.push(date);
+                var table = $('#example').DataTable({
+                    "searching":false,
+                    "bLengthChange": false,
+                    language: {
+                        "sProcessing": "处理中...",
+                        "sLengthMenu": "显示 _MENU_ 项结果",
+                        "sZeroRecords": "没有匹配结果",
+                        "sInfo": "共 _TOTAL_ 项",
+                        "sInfoEmpty": "共 0 项",
+                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                        "sInfoPostFix": "",
+                        "sUrl": "",
+                        "sEmptyTable": "表中数据为空",
+                        "sLoadingRecords": "载入中...",
+                        "sInfoThousands": ",",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "上页",
+                            "sNext": "下页",
+                            "sLast": "末页"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": 以升序排列此列",
+                            "sSortDescending": ": 以降序排列此列"
+                        }
+                    },//国际化语言结束
+                    destroy:true,
+                    data:data2a,
+
+                    "columns": [
+                        {"data": "onePriceA"},
+                        {"data": "countGiveA"},
+                        {"data": "delPriceA"},
+                        {"data": "countGiveA"},
+                        {"data": "priceType"},
+                        {"data": "sumPriceA"},
+                        {"data": "sumCountA"}
+
+                    ]
+                });//end 步骤1 外圈  $('#example').DataTable
+
+                //步骤2，列表选择
+                var selectTable = $('#example tbody').on('click', 'tr', function () {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }//end if
+
+                });//end 2 外圈 $('#example tbody').on
+
+
+                }
+			}
+
+
 
 
 
@@ -324,7 +431,7 @@
 	    			<!--<td><input  type="text" id="org" name="org" class="v1g3 yzss" placeholder="请输入校区组织"> </td>-->
 						<td class="name-s">所在校区</td>
 						<td>
-							<select  name="org" class="yzss sel_s">
+							<select  name="org" id="org" class="yzss sel_s">
 								<option >请选择校区</option>
 								<option value="共和校区">共和校区</option>
 								<option value="天目分校">天目分校</option>
@@ -336,7 +443,7 @@
 
             		<!-- 划线说明 -->
             		<div class="tit_style">
-						<h3>金额(1200类型)</h3>
+						<h3>金额</h3>
             		</div><!-- 划线说明结束 -->
 
 
@@ -345,10 +452,11 @@
             		<tr>
 						<td  class="name-s" style="padding-left:0">单&nbsp;&nbsp;&nbsp;&nbsp;价</td>
 	    			<td>
-                        <select id="onePriceA"  name="onePriceA" class="yzss sel_s" onchange="cn_onePriceA();" required="required">
-                            <option value="0">0</option>
-                            <option value="1200">1200</option>
-                        </select>
+                        <!--<select id="onePriceA"  name="onePriceA" class="yzss sel_s" onchange="cn_onePriceA();" required="required">-->
+                            <!--<option value="0">0</option>-->
+                            <!--<option value="1200">1200</option>-->
+                        <!--</select>-->
+						<input type="text"id="onePriceA"  name="onePriceA" class="easyui-numberbox yzss "style="height:36px; line-height: 34px;" onchange="cn_onePriceA();" data-options="min:0,max:999999,value: 0,editable:true">
             		</td>
 	    			<td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
 	    			<td ><input id="countA" name="countA" class="easyui-numberbox yzss"style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true" onchange="countA_cn();"></td>
@@ -368,50 +476,89 @@
 
 	    			<td class="name-s txt_red">上课次数</td>
 	    			<td ><input id="sumCountA" name="sumCountA" class="easyui-textbox yzss border_red"  disabled="true" value="0"></td>
-            		</tr><!-- 第三行结束 -->
+						<td class="name-s">上课类型</td>
+						<td ><select id="priceType"  name="priceType" class="yzss sel_s" onchange="cn_onePriceA();" required="required">-->
+							<option >请选择上课类型</option>
+							<option value="LineUpA">线上</option>
+							<option value="LineDownB">线下</option>
+							</select></td>
+                        </tr><!-- 第三行结束 -->
+						<td class="name-s">
+							<div class="btn-box">
+							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="setTable()">点击添加</a>
+							</div>
+						</td>
             		</table><!-- end id  header_3_tb3-->
 
             		<!-- 划线 -->
             		<div id="header_2">
             		</div><!-- 划线结束 -->
+					<div id="listTable" >
+						<table id="example" class="display tab-mians" cellspacing="0" width="100%">
+							<thead class="tab-tit">
+							<tr>
+								<th style="min-width:140px;">单价</th>
+								<th style="min-width:100px;">数量</th>
+								<th style="min-width:100px;">优惠金额</th>
+								<th style="min-width:100px;">送课次数</th>
+								<th style="min-width:100px;">上课类型</th>
+								<th style="min-width:100px;">支付金额</th>
+								<th style="min-width:100px;">上课次数</th>
+							</tr>
+							</thead>
+							<tfoot class="tab-tit">
+							<tr>
+								<th style="min-width:140px;">单价</th>
+								<th style="min-width:100px;">数量</th>
+								<th style="min-width:100px;">优惠金额</th>
+								<th style="min-width:100px;">送课次数</th>
+								<th style="min-width:100px;">上课类型</th>
+								<th style="min-width:100px;">支付金额</th>
+								<th style="min-width:100px;">上课次数</th>
+							</tr>
+							</tfoot>
+						</table>
+
+
+					</div><!--end div id="listTable" 列表展示结束 -->
 
             <!-- 划线说明 -->
-            		<div class="tit_style">
-						<h3>金额(1500类型)</h3>
-            		</div><!-- 划线说明结束 -->
+            		<!--<div class="tit_style">-->
+						<!--<h3>金额(1500类型)</h3>-->
+            		<!--</div>&lt;!&ndash; 划线说明结束 &ndash;&gt;-->
 
-            <table id="header_3_tb4" class="tab-style">
-            		<!-- 类型二(价格B)第一行 -->
-            		<tr>
-						<td class="name-s" style="padding-left:0">单&nbsp;&nbsp;&nbsp;&nbsp;价</td>
-	    			<td>
-                        <select id="onePriceB"  name="onePriceB" onchange="cn_onePriceB();" class="yzss sel_s">
-                            <option value="0">0</option>
-                            <option value="1500">1500</option>
-                        </select>
-            		</td>
-	    			<td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
-	    			<td ><input id="countB" name="countB" onchange="countB_cn();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true"></td>
-            		</tr><!-- 第一行结束 -->
-            		<!-- 类型二(价格B)第二行 -->
-            		<tr>
-						<td class="name-s" style="padding-left:0">优惠金额</td>
-	    			<td ><input id="delPriceB" name="delPriceB" onchange="cn_onePriceB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" data-options="min:0,max:999999,value: 0,editable:true"></td>
-						<td class="name-s">送课次数</td>
-	    			<td ><input id="countGiveB" name="countGiveB" onchange="cn_countGiveB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" data-options="min:0,max:999999,value: 0,editable:true"></td>
-            		</tr><!-- 第二行结束 类型二(价格B)-->
-					<!-- 类型二(价格B)第三行 -->
-            		<tr>
-						<td class="name-s txt_red" style="padding-left: 0;">支付金额</td>
-	    			<td ><input id="sumPriceB" name="sumPriceB" class="easyui-textbox yzss border_red"  required="required"  disabled="true" value="0"></td>
-	    			<td class="name-s txt_red">上课次数</td>
-	    			<td ><input id="sumCountB" name="sumCountB" class="easyui-textbox yzss border_red" required="required"  disabled="true" value="0"></td>
-            		</tr><!-- 第三行结束 -->
-            		</table><!-- end id  header_3_tb4-->
-            		<!-- 划线说明 -->
-            		<div class="tit_style">
-						<h3>金额(1200类型+1500类型)</h3>
-            		</div><!-- 划线说明结束 -->
+            <!--<table id="header_3_tb4" class="tab-style">-->
+            		<!--&lt;!&ndash; 类型二(价格B)第一行 &ndash;&gt;-->
+            		<!--<tr>-->
+						<!--<td class="name-s" style="padding-left:0">单&nbsp;&nbsp;&nbsp;&nbsp;价</td>-->
+	    			<!--<td>-->
+                        <!--<select id="onePriceB"  name="onePriceB" onchange="cn_onePriceB();" class="yzss sel_s">-->
+                            <!--<option value="0">0</option>-->
+                            <!--<option value="1500">1500</option>-->
+                        <!--</select>-->
+            		<!--</td>-->
+	    			<!--<td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>-->
+	    			<!--<td ><input id="countB" name="countB" onchange="countB_cn();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true"></td>-->
+            		<!--</tr>&lt;!&ndash; 第一行结束 &ndash;&gt;-->
+            		<!--&lt;!&ndash; 类型二(价格B)第二行 &ndash;&gt;-->
+            		<!--<tr>-->
+						<!--<td class="name-s" style="padding-left:0">优惠金额</td>-->
+	    			<!--<td ><input id="delPriceB" name="delPriceB" onchange="cn_onePriceB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" data-options="min:0,max:999999,value: 0,editable:true"></td>-->
+						<!--<td class="name-s">送课次数</td>-->
+	    			<!--<td ><input id="countGiveB" name="countGiveB" onchange="cn_countGiveB();" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" data-options="min:0,max:999999,value: 0,editable:true"></td>-->
+            		<!--</tr>&lt;!&ndash; 第二行结束 类型二(价格B)&ndash;&gt;-->
+					<!--&lt;!&ndash; 类型二(价格B)第三行 &ndash;&gt;-->
+            		<!--<tr>-->
+						<!--<td class="name-s txt_red" style="padding-left: 0;">支付金额</td>-->
+	    			<!--<td ><input id="sumPriceB" name="sumPriceB" class="easyui-textbox yzss border_red"  required="required"  disabled="true" value="0"></td>-->
+	    			<!--<td class="name-s txt_red">上课次数</td>-->
+	    			<!--<td ><input id="sumCountB" name="sumCountB" class="easyui-textbox yzss border_red" required="required"  disabled="true" value="0"></td>-->
+            		<!--</tr>&lt;!&ndash; 第三行结束 &ndash;&gt;-->
+            		<!--</table>&lt;!&ndash; end id  header_3_tb4&ndash;&gt;-->
+            		<!--&lt;!&ndash; 划线说明 &ndash;&gt;-->
+            		<!--<div class="tit_style">-->
+						<!--<h3>金额(1200类型+1500类型)</h3>-->
+            		<!--</div>&lt;!&ndash; 划线说明结束 &ndash;&gt;-->
             		<table id="header_3_tb4" class="tab-style">
 					<!-- 类型二(价格B)第三行 -->
             		<tr>
@@ -420,7 +567,7 @@
 	    			<td class="name-s txt_red">总&nbsp;次&nbsp;数</td>
 	    			<td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
 	    			<td class="name-s"></td>
-	    			<td><a href="javascript:void(0)" class="easyui-linkbutton ca_btn" onclick="cn_totalPrice()"style="display:none">计算按钮</a></td>
+	    			<td><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()">计算</a></td>
             		</tr><!-- 第三行结束 -->
             		</table><!-- end id  header_3_tb4-->
 

@@ -16,7 +16,6 @@
 	<link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
     <link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/3a1_gx.css"/>
-
 	<script type="text/javascript">
 		var table_rela1;//全局变量
         var table_rela2;//全局变量
@@ -283,7 +282,7 @@
                 success:function(result){
                 var obj = {};
                 obj = JSON.parse(result);
-                alert(obj.message);
+//                alert(obj.message);
                 table_rela1.ajax.reload();
    
                 // huiFunc_submit(result);
@@ -310,7 +309,7 @@
                 success:function(result){
                 var obj = {};
                 obj = JSON.parse(result);
-                alert(obj.message);
+//                alert(obj.message);
                 table_rela2.ajax.reload();
    
                 // huiFunc_submit(result);
@@ -338,7 +337,7 @@
                      success:function(result){
                          var obj = {};
                          obj = JSON.parse(result);
-                         alert(obj.message);
+//                         alert(obj.message);
                          table_rela3.ajax.reload();
 
                          // huiFunc_submit(result);

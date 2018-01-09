@@ -97,11 +97,18 @@ margin:0px; padding:0;text-align:center;}
 
 
     $(document).ready(function() {
+
+
         var NameOfCookie="rsList";
         var c = document.cookie.indexOf(NameOfCookie+"="); 
         // alert(c);
               if (c != -1)
               {
+                  //判断已经退出登陆
+                  if($.cookie("rsList")==""){
+                      console.log("检测没有权限，重新登录或联系管理员");
+                      window.location.href="login.html";
+                  };
             console.log("jquery里检测已经登陆");
             funUser();
               }
@@ -294,7 +301,13 @@ margin:0px; padding:0;text-align:center;}
         //单击二级菜单结束
             };//end 方法 funUser
 
-        
+        //登陆调用的funUser方法结束了
+        $( "#btnOut" ).click(function(){
+            $.cookie("ckUserEmpUuid","");//删除cookie用null
+            $.cookie("rsList","");//删除cookie用null
+            console.log("退出登陆!!!");
+            window.location.href="login.html";
+        });
 
 } );//end 最外层 $(document).ready
         
@@ -314,10 +327,13 @@ line-height: 28px;">宋瑛瑛</i>
                 <span class="arrow-box" style="cursor: pointer"><img class="" src="HMcode/HMimages/arrow-ss.png"></span>
                 <ul class="part-xl" style="display:none;width:100px;margin:0;position: absolute;top: 40px; right: -10px;color:#5e5e5e;background-color: white;padding:6px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;-webkit-box-shadow: 0 0 4px #ccc;-moz-box-shadow:0 0 4px #ccc;box-shadow: 0 0 4px #ccc;">
                     <span style="color: white;position: absolute;top: -13px;left:40px;text-shadow: 0 -2px 2px #ccc;">▲</span>
+                    <!-- 
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">个人信息</a> </li>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">密码设置</a> </li>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">账号绑定</a> </li>
-                    <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">退出登录</a> </li>
+                     -->
+                     <!-- 只留退出登录,其它功能后面看需求 -->
+                    <li id="btnOut" style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;" >退出登录</a> </li>
                 </ul>
             </div>
         </div>

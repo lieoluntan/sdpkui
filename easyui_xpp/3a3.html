@@ -178,7 +178,7 @@
         alert(n1); //alert是弹出对话框，会弹出一个123的对话框
  //       document.ffname.name.value="456"; //给控件重新赋值为456
         var n2 = document.ffname.remark.value; //定义个变量n接收表单中的值
-        alert(n2); 
+//        alert(n2);
         //调用父级弹窗start
             // var $parent = self.parent.$;
             // $parent('#pwin').window({
@@ -200,7 +200,7 @@
             var delRowData = {};
             //获取选择那一行的数据
             delRowData = table.row('.selected').data();
-            alert(delRowData.name);
+//            alert(delRowData.name);
             
             // var param = $("#ff").serializeObject();
             var send_edit_data = {};
@@ -261,10 +261,10 @@
             var delRowData = {};
             //获取选择那一行的数据
             delRowData = table.row('.selected').data();
-            alert(delRowData.name);
+//            alert(delRowData.name);
 			    //获取并显示
 			    var test = delRowData.uuid;
-			    alert("关系修改的班级uuid为："+test);
+//			    alert("关系修改的班级uuid为："+test);
 			    var ckSend = delRowData.uuid;
 		        //传班级uuid到cookie中
 		        $.cookie('UidCla', ckSend);

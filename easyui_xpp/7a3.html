@@ -213,7 +213,7 @@
 
 
                 var n1 = document.ffname.cNum.value; //定义个变量n接收表单中的值
-                alert(n1); //alert是弹出对话框，会弹出一个123的对话框
+//                alert(n1); //alert是弹出对话框，会弹出一个123的对话框
                 //调用父级弹窗start
                 // var $parent = self.parent.$;
                 // $parent('#pwin').window({
@@ -365,7 +365,7 @@
 
 </div><!-- end div  id="fen3a3_container"-->
 
-<div id="dialog" title="编辑合同" closed="true" style="width:965px;height: 690px;padding-left:20px;">
+<div id="dialog" title="编辑合同" closed="true" style="width:965px;height: 690px;padding-left:20px;left: 120px;">
     <!--<p>这是一个动画显示的对话框</p>-->
     <form id="ff" name="ffname" method="post" >
         <table id="header_3_tb1" class="tab-style">
@@ -569,7 +569,7 @@
         var delRowData = {};
         //获取选择那一行的数据
         delRowData = table.row('.selected').data();
-        alert(delRowData.cNum);
+//        alert(delRowData.cNum);
 
         // var param = $("#ff").serializeObject();
         var send_edit_data = {};

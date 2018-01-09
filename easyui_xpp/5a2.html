@@ -27,6 +27,15 @@
         .dataTables_wrapper{
             margin-top:-67px;
         }
+        .dataTables_wrapper .dataTables_info{
+            clear: none;
+            float: right;
+            padding-right: 20px;
+            margin-top:20px;
+        }
+        .dataTables_wrapper .dataTables_paginate{
+            float: right;
+        }
     </style>
 
 	<script type="text/javascript">
@@ -37,6 +46,7 @@
         $.fn.dataTable.ext.errMode = 'none';
     //步骤1,展示列表数据
     var table = $('#example').DataTable( {
+        "dom":'frtpi',
         "bLengthChange":false,
         bSort:false,
         language: {
@@ -319,11 +329,13 @@
                     <!-- 第一行结束 -->
 
                     </table> <!-- end id为 header_3_tb4 -->
-
-                    <div class="tit_style">
-                        <h3>添加（老师）</h3>
-                        <button  class="easyui-linkbutton btn-xk" id="btn_dian1">关系添加</button>
-                    </div>
+                    <table class="tab-style">
+                        <tr>
+                            <td class="name-s" style="padding-left:0">关系添加</td>
+                            <td><button  class="easyui-linkbutton btn-qr l-btn l-btn-small" id="btn_dian1" style="padding:0 30px;color: red;font-weight: 600;">＋</button></td>
+                        </tr>
+                        <!-- 第二行结束 -->
+                    </table>
                 
                 </form>
                 <!-- 按钮div开始 -->

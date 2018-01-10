@@ -1,4 +1,4 @@
-﻿--------------------------------------
+--------------------------------------
 --2、学生表t_student
 
 CREATE TABLE t_student (
@@ -106,52 +106,6 @@ CREATE TABLE t_contract (
 );
 
 --------------------------------------
---5-1、合同表t_contrtext
-
-CREATE TABLE t_contrtext (
-  uuid varchar(50) NOT NULL,
-  cNum varchar(50) NOT NULL,
-  stuUuid varchar(50) DEFAULT NULL,
-  cDate varchar(30) DEFAULT NULL,
-  org varchar(30) DEFAULT NULL,
-  totalCount varchar(30) DEFAULT NULL,
-  totalPrice varchar(30) DEFAULT NULL,
-  
-  createDate datetime DEFAULT NULL,
-  modifyDate datetime DEFAULT NULL,
-  createPeople varchar(50) DEFAULT NULL,
-  modifyPeople varchar(50) DEFAULT NULL,
-  
-  PRIMARY KEY (uuid)
-);
-
-
---------------------------------------
---5-2、合同价格表t_conPrice
-
-CREATE TABLE t_conPrice (
-  uuid varchar(50) NOT NULL,
-  contrUuid varchar(50) NOT NULL,
-  
-  
-  onePriceA varchar(30) DEFAULT NULL,
-  countA varchar(30) DEFAULT NULL,
-  delPriceA varchar(30) DEFAULT NULL,
-  countGiveA varchar(30) DEFAULT NULL,
-  sumCountA varchar(30) DEFAULT NULL,
-  sumPriceA varchar(30) DEFAULT NULL,
-  priceType varchar(30) DEFAULT NULL,
- 
-  
-  createDate datetime DEFAULT NULL,
-  modifyDate datetime DEFAULT NULL,
-  createPeople varchar(50) DEFAULT NULL,
-  modifyPeople varchar(50) DEFAULT NULL,
-  
-  PRIMARY KEY (uuid)
-);
-
---------------------------------------
 --6、排课表t_paike_all
 
 CREATE TABLE t_paike_all (
@@ -205,36 +159,6 @@ CREATE TABLE t_classroom (
   remark varchar(250) DEFAULT NULL,
   
   org varchar(50) DEFAULT NULL,
-  createDate datetime DEFAULT NULL,
-  modifyDate datetime DEFAULT NULL,
-  createPeople varchar(50) DEFAULT NULL,
-  modifyPeople varchar(50) DEFAULT NULL,
-  
-  PRIMARY KEY (uuid)
-);
-
---------------------------------------
---9、角色表t_role
-
-CREATE TABLE t_role (
-  uuid varchar(50) NOT NULL,
-  name varchar(50) NOT NULL,
-  
-  createDate datetime DEFAULT NULL,
-  modifyDate datetime DEFAULT NULL,
-  createPeople varchar(50) DEFAULT NULL,
-  modifyPeople varchar(50) DEFAULT NULL,
-  remark varchar(50)Not Null,
-  PRIMARY KEY (uuid)
-);
-
---------------------------------------
---9、资源表t_resource
-
-CREATE TABLE t_resource (
-  uuid varchar(50) NOT NULL,
-  name varchar(50) NOT NULL,
-  
   createDate datetime DEFAULT NULL,
   modifyDate datetime DEFAULT NULL,
   createPeople varchar(50) DEFAULT NULL,
@@ -326,24 +250,3 @@ CREATE TABLE t_userPK (
 );
 
 --------------------------------------
-
---16、用户角色表t_userPK
-
-CREATE TABLE t_userPK_role (
-  uuid varchar(50) NOT NULL,
-  userPkid varchar(50) NOT NULL,
-  Roleid varchar(50) NOT NULL,
-  PRIMARY KEY (uuid)
-);
-
-=======
-
---15、角色资源表t_role_resource
-
-CREATE TABLE t_role_resource (
-  uuid varchar(50) NOT NULL,
-  roleid varchar(50) NOT NULL,
-  resourceid varchar(50) NOT NULL,
-  
-  PRIMARY KEY (uuid)
-);

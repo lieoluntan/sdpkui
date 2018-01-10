@@ -25,6 +25,19 @@
         .dataTables_wrapper .dataTables_paginate{
             float: right;
         }
+        .main-right {
+            width: 80%;
+        }
+        @media screen and (max-width: 1120px) {
+            .main-right {
+                width: 70.5%;
+            }
+        }
+        @media screen and (min-width: 1130px) {
+            .main-right {
+                width: 80%;
+            }
+        }
     </style>
 
     <script type="text/javascript">
@@ -317,6 +330,7 @@
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
                     bSort:false,
+                    scrollX :670,
                     "bLengthChange":false,
                     language: {
                         "sProcessing": "处理中...",

@@ -15,7 +15,17 @@
     <link rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
     <link rel="stylesheet" type="text/css" href="../HMcode/HMcss/6a5.css"/>
-
+    <style>
+        .dataTables_wrapper .dataTables_info{
+            clear: none;
+            float: right;
+            padding-right: 20px;
+            margin-top:0;
+        }
+        .dataTables_wrapper .dataTables_paginate{
+            float: right;
+        }
+    </style>
 
     <script type="text/javascript">
 
@@ -305,6 +315,7 @@
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
                 table_full = $('#content03_2_tb').DataTable({
+                    "dom":'frtpi',
                     bSort:false,
                     "bLengthChange":false,
                     language: {

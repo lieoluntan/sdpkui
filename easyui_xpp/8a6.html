@@ -15,6 +15,15 @@
         .dataTables_wrapper{
             top:-67px;
         }
+        .dataTables_wrapper .dataTables_info{
+            clear: none;
+            float: right;
+            padding-right: 20px;
+            margin-top:20px;
+        }
+        .dataTables_wrapper .dataTables_paginate{
+            float: right;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +90,7 @@
         });
         /* 第一步：展示列表数据 */
         var tabData = $("#adm-user").DataTable({
+            "dom":'frtpi',
             "bLengthChange":false,
             bSort:false,
             language: {

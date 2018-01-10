@@ -22,6 +22,15 @@
         .dataTables_wrapper{
             margin-top:-67px;
         }
+        .dataTables_wrapper .dataTables_info{
+            clear: none;
+            float: right;
+            padding-right: 20px;
+            margin-top:20px;
+        }
+        .dataTables_wrapper .dataTables_paginate{
+            float: right;
+        }
     </style>
 
 	
@@ -37,6 +46,7 @@
 
     //步骤1,展示列表数据
     var table = $('#example').DataTable( {
+        "dom":'frtpi',
         "bLengthChange":false,
         bSort:false,
         language: {

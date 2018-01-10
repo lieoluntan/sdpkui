@@ -16,7 +16,17 @@
 	<link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/3a2_ye2edit.css"/>
 
-
+	<style>
+		.dataTables_wrapper .dataTables_info{
+			clear: none;
+			float: right;
+			padding-right: 20px;
+			margin-top:0;
+		}
+		.dataTables_wrapper .dataTables_paginate{
+			float: right;
+		}
+	</style>
     <script type="text/javascript">
 
     var ckUuid_ye3;//全局变量
@@ -214,6 +224,7 @@
     // a2obj = JSON.parse(result);
     var a2data = ckObjList;
     table_full = $('#content03_2_tb').DataTable( {
+        "dom":'frtpi',
         "bLengthChange":false,
         bSort:false,
         language: {

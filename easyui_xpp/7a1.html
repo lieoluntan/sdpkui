@@ -18,8 +18,23 @@
 	<link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a2.css"/>
 	<style>
+		.dataTables_wrapper .dataTables_info{
+			clear: none;
+			float: right;
+			padding-right: 20px;
+			margin-top:20px;
+		}
+		.dataTables_wrapper .dataTables_paginate{
+			float: right;
+		}
 		.tab-con{
 			overflow-y: scroll;
+			max-width: 1100px;
+			min-width: 1100px;
+			margin:0 auto;
+		}
+		.tab-mians{
+			width: 997px;
 		}
 	</style>
 	<script type="text/javascript">
@@ -344,6 +359,7 @@
 					}
                     data2a.push(date);
                 table = $('#example').DataTable({
+                    "dom":'frtpi',
                     "searching":false,
                     "bLengthChange": false,
                     language: {
@@ -444,7 +460,7 @@
             		<!-- 第一行 -->
             		<tr>
 	    			<td class="name-s" style="padding-left:0">合同编号</td>
-	    			<td><input  type="text" id="cNum" name="cNum" class="easyui-textbox v1g3 yzss"  required style="height: 39px;width: 923px;font-size:16px;" placeholder="输入合同编号"></td>
+	    			<td><input  type="text" id="cNum" name="cNum" class="easyui-textbox v1g3 yzss"  required style="height: 39px;width: 918px;font-size:16px;" placeholder="输入合同编号"></td>
 	    			</tr>
 	    			<!-- 第一行结束 -->
 
@@ -461,11 +477,11 @@
 						</select>
 						<!--<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">-->
 					</td>
-	    			<td class="name-s">交易时间</td>
+	    			<td class="name-s" style="padding-left: 82px;">交易时间</td>
 	    			<td><input id="cDate" name="cDate" type="text" class="easyui-datebox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
 	    			<!--<td class="name-s">校区组织</td>-->
 	    			<!--<td><input  type="text" id="org" name="org" class="v1g3 yzss" placeholder="请输入校区组织"> </td>-->
-						<td class="name-s">所在校区</td>
+						<td class="name-s" style="padding-left: 82px;">所在校区</td>
 						<td>
 							<select  name="org" id="org" class="yzss sel_s">
 								<option >请选择校区</option>
@@ -494,7 +510,7 @@
                         <!--</select>-->
 						<input type="text"id="onePriceA"  name="onePriceA" class="easyui-numberbox yzss "style="height:36px; line-height: 34px;" onchange="cn_onePriceA();" data-options="min:0,max:999999,value: 0,editable:true">
             		</td>
-	    			<td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
+	    			<td class="name-s"style="padding-left: 82px;">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
 	    			<td ><input id="countA" name="countA" class="easyui-numberbox yzss"style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true" onchange="countA_cn();"></td>
             		</tr><!-- 第一行结束 -->
             		<!--类型一(价格A) 第二行 -->
@@ -502,7 +518,7 @@
 						<td class="name-s" style="padding-left:0;">优惠金额</td>
 	    			<td ><input id="delPriceA" name="delPriceA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_onePriceA();"></td>
 
-	    			<td class="name-s">送课次数</td>
+	    			<td class="name-s"style="padding-left: 82px;">送课次数</td>
 	    			<td ><input id="countGiveA" name="countGiveA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_countGiveA();"></td>
             		</tr><!-- 第二行结束 类型一(价格A)-->
 					<!--类型一(价格A) 第三行 -->
@@ -510,23 +526,20 @@
 						<td  class="name-s txt_red" style="padding-left:0">支付金额</td>
 	    			<td ><input id="sumPriceA" name="sumPriceA"  class="easyui-textbox yzss border_red" disabled="true" value="0"></td>
 
-	    			<td class="name-s txt_red">上课次数</td>
+	    			<td class="name-s txt_red"style="padding-left: 82px;">上课次数</td>
 	    			<td ><input id="sumCountA" name="sumCountA" class="easyui-textbox yzss border_red"  disabled="true" value="0"></td>
-						<td class="name-s">上课类型</td>
+						<td class="name-s"style="padding-left: 82px;">上课类型</td>
 						<td ><select id="priceType"  name="priceType" class="yzss sel_s" onchange="cn_onePriceA();" required="required">-->
 							<option >请选择上课类型</option>
 							<option value="LineUpA">线上</option>
 							<option value="LineDownB">线下</option>
 							</select></td>
                         </tr><!-- 第三行结束 -->
-						<td class="name-s">
-							<div class="btn-box">
-							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="setTable()">添加</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" id="delbut" >删除</a>
-							</div>
-						</td>
             		</table><!-- end id  header_3_tb3-->
-
+						<div class="btn-box" style="text-align: left;margin-bottom: 20px;">
+							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="margin-left: 0;" onclick="setTable()">添加</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" id="delbut" >删除</a>
+						</div>
             		<!-- 划线 -->
             		<div id="header_2">
             		</div><!-- 划线结束 -->
@@ -599,24 +612,18 @@
             		<table id="header_3_tb4" class="tab-style">
 					<!-- 类型二(价格B)第三行 -->
             		<tr>
-                    <td class="name-s txt_red">线&nbsp;下&nbsp;次&nbsp;数</td>
+                    <td class="name-s txt_red" style="padding-left: 0;">线下次数</td>
                     <td ><input id="sumLineDownB" name="sumLineDownB" class="yzss border_red" required="required"  disabled="true" value="0"></td>
-                    <td class="name-s txt_red">线&nbsp;上&nbsp;次&nbsp;数</td>
+                    <td class="name-s txt_red"style="padding-left: 82px;">线上次数</td>
                     <td ><input id="sumLineUpA" name="sumLineUpA" class="yzss border_red" required="required"  disabled="true" value="0"></td>
 					</tr>
 						<tr>
-					<td class="name-s txt_red" >&nbsp;&nbsp;总&nbsp;支&nbsp;付&nbsp;</td>
+					<td class="name-s txt_red" style="padding-left: 0;padding-right:2px;">总&nbsp;支&nbsp;付&nbsp;</td>
 					<td ><input id="totalPrice" name="totalPrice" required="required"  disabled="true" value="0" class="yzss border_red"></td>
-					<td class="name-s txt_red">&nbsp;&nbsp;总&nbsp;次&nbsp;数&nbsp;</td>
-					<td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
-
+					<td class="name-s txt_red"style="padding-left: 82px;padding-right: 2px;">总&nbsp;次&nbsp;数&nbsp;</td>
+					<td><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+							<td class="name-s" style="padding-left: 193px;padding-right: 0"><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()" style="padding:0 60px;">计算</a></td>
 					</tr>
-
-                    <tr>
-
-                        <td class="name-s"></td>
-                        <td><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()">计算</a></td>
-                    </tr>
             		<!-- 第三行结束 -->
             		</table><!-- end id  header_3_tb4-->
 
@@ -624,7 +631,7 @@
             	<!-- 按钮div开始 -->
             	
 
-            	  <div class="btn-box">
+            	  <div class="btn-box" style="margin-right: 5px;">
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-xk" onclick="clearForm()">清空</a>
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="submitForm()">确认</a>
 	   			 </div>

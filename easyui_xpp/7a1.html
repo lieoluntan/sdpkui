@@ -17,9 +17,14 @@
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a1.css">
 	<link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a2.css"/>
-
+	<style>
+		.tab-con{
+			overflow-y: scroll;
+		}
+	</style>
 	<script type="text/javascript">
-		var data2a = [],table;
+		var data2a = [],index=0;
+		var table ={};
         var RowDataList = {};
 
             // function submitForm(){
@@ -135,7 +140,6 @@
             //验证上课类型
 		    function yzSkSize(){
                 if(document.getElementById("priceType").value=='请选择上课类型'){
-                    console.log(document.getElementById("priceType").value);
                     alert('请选择上课类型');
                     return false;
                 }else{
@@ -166,12 +170,18 @@
                     param.org=document.getElementById("org").value;
                     param.totalCount=document.getElementById("totalCount").value;
                     param.totalPrice=document.getElementById("totalPrice").value;
+                    param.sumLineDownB=document.getElementById("sumLineDownB").value;
+                    param.sumLineUpA=document.getElementById("sumLineUpA").value;
                     param.conPriceList=[];
 
                     for(var i=0;i<RowDataList.length;i++){
+                        if(RowDataList[i].priceType=='线上'){
+                            RowDataList[i].priceType='LineUpA';
+						}else if(RowDataList[i].priceType=='线下'){
+                            RowDataList[i].priceType='LineDownB';
+						}
                         param.conPriceList.push(RowDataList[i]);
                     }
-                    console.log(param);
                     $.ajax({
 
                         url: "/sdpk/aaContrtext?qqiu=add",
@@ -272,20 +282,28 @@
 
             function cn_totalPrice() {
                 table = $('#example').DataTable();
-                var scA=0,scB=0;
-                
+                var scA=0,scB=0,suA=0,sdB=0;
+
                 var send_RowDataList = new Array();
                 //获取表内所有数组的数据
                 RowDataList = table.rows().data();
-                console.log(RowDataList);
                 for(var i=0;i<RowDataList.length;i++){
-                    scA+=Number(RowDataList[i].sumPriceA);
-                    scB+=Number(RowDataList[i].sumCountA);
+                    if(RowDataList[i]!=''){
+                        scA+=Number(RowDataList[i].sumPriceA);
+                        scB+=Number(RowDataList[i].sumCountA);
+                    }
+                    if(RowDataList[i].priceType=='线上'){
+                        suA+=Number(RowDataList[i].sumCountA);
+                    }else if(RowDataList[i].priceType=='线下'){
+                        sdB+=Number(RowDataList[i].sumCountA);
+                    }
+
 				}
                 document.getElementById("totalPrice").value = scA;
                 var result = new Number(scA) + new Number(scB);
-
                 document.getElementById("totalCount").value = scB;
+                document.getElementById("sumLineUpA").value = suA;
+                document.getElementById("sumLineDownB").value = sdB;
                 alert("总支付，总次数已更新");
             }
             $(document).ready(function() {
@@ -293,13 +311,12 @@
             $.fn.dataTable.ext.errMode = 'none';
             //步骤1,展示列表数据
 
-        })
+
+
+
+        });
 
         function setTable() {
-
-
-
-			table = $('#example').DataTable();
             var f1 = yzV1();
             var f2 = yzDate();
             var f3 = yzNumBox();
@@ -312,8 +329,9 @@
                 var onePriceA = document.getElementById("onePriceA").value;
                 var countA = document.getElementById("countA").value;
                 var priceType = document.getElementById("priceType").value=='LineUpA'?'线上':'线下';
+                 index = index+1;
 
-                
+
 				    date = {
                         "onePriceA":onePriceA,
                         "countGiveA":countGiveA,
@@ -321,10 +339,11 @@
                         "countGiveA":countGiveA,
                         "priceType":priceType,
                         "sumPriceA":sumPriceA,
-                        "sumCountA":sumCountA
+                        "sumCountA":sumCountA,
+						"index":index
 					}
                     data2a.push(date);
-                var table = $('#example').DataTable({
+                table = $('#example').DataTable({
                     "searching":false,
                     "bLengthChange": false,
                     language: {
@@ -364,26 +383,43 @@
 
                     ]
                 });//end 步骤1 外圈  $('#example').DataTable
-
-                //步骤2，列表选择
-                var selectTable = $('#example tbody').on('click', 'tr', function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected');
-                    }
-                    else {
-                        table.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                    }//end if
-
-                });//end 2 外圈 $('#example tbody').on
-
-
                 }
+            //步骤3，删除按钮单击事件
+            $('#delbut').click( function () {
+                //要初始化一个对象，不然会报undifine未定义错误
+                var delRowData = {};
+                //获取选择那一行的数据
+                delRowData = table.row('.selected').data();
+                table.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+                Array.prototype.remove=function(dx)
+                {
+                    if(isNaN(dx)||dx>this.length){return false;}
+                    for(var i=0,n=0;i<this.length;i++)
+                    {
+                        if(this[i]!=this[dx])
+                        {
+                            this[n++]=this[i]
+                        }
+                    }
+                    this.length-=1
+                }
+                data2a.remove(delRowData.index);
+            } );//end 3 外圈 $('#delbut').click
+
+            var selectTable = $('#example tbody tr').click(function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                }//end if
+
+            });//end 2 外圈 $('#example tbody').on
 			}
 
-
-
-
+        //步骤2，列表选择
 
 
 	</script>
@@ -485,7 +521,8 @@
                         </tr><!-- 第三行结束 -->
 						<td class="name-s">
 							<div class="btn-box">
-							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="setTable()">点击添加</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="setTable()">添加</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" id="delbut" >删除</a>
 							</div>
 						</td>
             		</table><!-- end id  header_3_tb3-->
@@ -562,13 +599,25 @@
             		<table id="header_3_tb4" class="tab-style">
 					<!-- 类型二(价格B)第三行 -->
             		<tr>
-						<td class="name-s txt_red" style="padding-left:0">总&nbsp;支&nbsp;付</td>
-	    			<td ><input id="totalPrice" name="totalPrice" required="required"  disabled="true" value="0" class="yzss border_red"></td>
-	    			<td class="name-s txt_red">总&nbsp;次&nbsp;数</td>
-	    			<td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
-	    			<td class="name-s"></td>
-	    			<td><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()">计算</a></td>
-            		</tr><!-- 第三行结束 -->
+                    <td class="name-s txt_red">线&nbsp;下&nbsp;次&nbsp;数</td>
+                    <td ><input id="sumLineDownB" name="sumLineDownB" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+                    <td class="name-s txt_red">线&nbsp;上&nbsp;次&nbsp;数</td>
+                    <td ><input id="sumLineUpA" name="sumLineUpA" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+					</tr>
+						<tr>
+					<td class="name-s txt_red" >&nbsp;&nbsp;总&nbsp;支&nbsp;付&nbsp;</td>
+					<td ><input id="totalPrice" name="totalPrice" required="required"  disabled="true" value="0" class="yzss border_red"></td>
+					<td class="name-s txt_red">&nbsp;&nbsp;总&nbsp;次&nbsp;数&nbsp;</td>
+					<td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+
+					</tr>
+
+                    <tr>
+
+                        <td class="name-s"></td>
+                        <td><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()">计算</a></td>
+                    </tr>
+            		<!-- 第三行结束 -->
             		</table><!-- end id  header_3_tb4-->
 
             	</form>

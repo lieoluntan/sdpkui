@@ -25,15 +25,23 @@
         }
         #dialog .dataTables_wrapper{
             top:0;
+            width:890px;
+        }
+        #dialog  #example_filter{
+            display: none;
         }
         .dataTables_wrapper .dataTables_info{
             clear: none;
             float: right;
             padding-right: 20px;
             margin-top:20px;
+            font-size: 16px;
         }
         .dataTables_wrapper .dataTables_paginate{
             float: right;
+        }
+        table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td{
+            text-align: center;
         }
     </style>
 
@@ -528,16 +536,12 @@
                         <option value="LineDownB">线下</option>
                     </select></td>
                     </tr><!-- 第三行结束 -->
-                    <tr>
-                    <td class="name-s">
-                        <div class="btn-box">
-                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="setTable()">添加</a>
-                            <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" id="delbu" >删除</a>
-                        </div>
-                    </td>
-                    </tr>
                     </table><!-- end id  header_3_tb3-->
 
+                            <div class="btn-box"style="text-align: left;margin-bottom: 20px;margin-left: 5px;">
+                                <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="margin-left: 0;" onclick="setTable()">添加</a>
+                                <a href="javascript:void(0)" class="easyui-linkbutton btn-qr" id="delbu" >删除</a>
+                            </div>
                     <div id="header_2">
                     </div><!-- 划线结束 -->
                     <div id="listTable" >
@@ -623,30 +627,30 @@
                     <table id="header_3_tb4" class="tab-style">
                         <!-- 类型二(价格B)第三行 -->
                         <tr>
-                            <td class="name-s txt_red">线&nbsp;下&nbsp;次&nbsp;数</td>
+                            <td class="name-s txt_red" style="padding-left: 0;">线下次数</td>
                             <td ><input id="sumLineDownB" name="sumLineDownB" class="yzss border_red" required="required"  disabled="true" value="0"></td>
-                            <td class="name-s txt_red">线&nbsp;上&nbsp;次&nbsp;数</td>
+                            <td class="name-s txt_red"style="padding-left: 82px;">线上次数</td>
                             <td ><input id="sumLineUpA" name="sumLineUpA" class="yzss border_red" required="required"  disabled="true" value="0"></td>
                         </tr>
                         <tr>
-                            <td class="name-s txt_red" >&nbsp;&nbsp;总&nbsp;支&nbsp;付&nbsp;</td>
+                            <td class="name-s txt_red" style="padding-left: 0;padding-right:2px;">总&nbsp;支&nbsp;付&nbsp;</td>
                             <td ><input id="totalPrice" name="totalPrice" required="required"  disabled="true" value="0" class="yzss border_red"></td>
-                            <td class="name-s txt_red">&nbsp;&nbsp;总&nbsp;次&nbsp;数&nbsp;</td>
+                            <td class="name-s txt_red"style="padding-left: 82px;padding-right: 2px;">总&nbsp;次&nbsp;数&nbsp;</td>
                             <td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
-
+                            <td class="name-s" style="padding-left: 108px;padding-right: 0" ><a style="padding:0 50px;"href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="padding:0 60px;" onclick="cn_totalPrice()">计算</a></td>
                         </tr>
 
                         <tr>
 
                             <td class="name-s"></td>
-                            <td><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()">计算</a></td>
+
                         </tr>
                         <!-- 第三行结束 -->
                     </table><!-- end id  header_3_tb4-->
 
                 </form>
                 <!-- 按钮div开始 -->
-                <div class="btn-box" style="margin-right: 20px;padding-bottom: 20px;">
+                <div class="btn-box" style="margin-right: 25px;padding-bottom: 20px;">
                     <button  class="easyui-linkbutton btn-xk" id="close">关闭</button>
                     <button  class="easyui-linkbutton btn-qr" id="submitForm" onclick="submitForm()">确认</button>
                  </div>

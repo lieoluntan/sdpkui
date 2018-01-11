@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>合同展示</title>
 	
-    <script type="text/javascript" src="jquery-easyui-136/jquery.min.js"></script>  
-
+    <script type="text/javascript" src="jquery-easyui-136/jquery.min.js"></script>
+    <script type="text/javascript" src="../xppjs/jquery.cookie.js"></script>
 	<script type="text/javascript" src="jquery-easyui-136/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="DataTables/datatables.js"></script>
@@ -44,7 +44,19 @@
         var tabledata={};
 
     $(document).ready(function() {
+        //按钮权限开始
+        function funBtn(){
+            $( "#delbut" ).hide();
+            $( "#opener" ).hide();
 
+            var viewArr = $.cookie("rsList").split(",");
+            for (var i = 0; i < viewArr.length; i++) {
+                console.log("第"+i+"个："+viewArr[i]);
+                if(viewArr[i]=="Gb2") {$( "#delbut" ).show();}
+                if(viewArr[i]=="Gb1") {$( "#opener" ).show();}
+            }//end for
+        }
+        funBtn();
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
 

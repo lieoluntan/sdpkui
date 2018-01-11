@@ -79,6 +79,10 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
+                for(var i=0;i<a2data.length;i++){
+                    a2data[i].keStartTime = a2data[i].keStartTime.substring(0,5);
+                    a2data[i].time=a2data[i].weekSome+' '+a2data[i].keStartTime;
+                }
                 table = $('#example').DataTable( {
                    "dom":'frtpi',
                     "bLengthChange":false,
@@ -113,8 +117,8 @@
                         { "data": "courseName" },
                         { "data": "categoryName" },
                         { "data": "keDateTime" },
-                        { "data": "keStartTime" },
-                        { "data": "weekSome" },
+                        // { "data": "keStartTime" },
+                        { "data": "time" },
                         { "data": "empName" },
                         { "data": "croomName" },
                         { "data": "keLongTime" }
@@ -281,8 +285,8 @@
                     <th style="min-width:100px;">课程名称</th>
                     <th style="min-width:100px;">类别</th>
                     <th style="min-width:100px;">上课日期</th>
-                    <th style="min-width:100px;">上课时间</th>
-                    <th style="min-width:100px;">星期</th>
+                    <!--<th style="min-width:100px;display:none;">上课时间</th>-->
+                    <th style="min-width:100px;">时间</th>
                     <th style="min-width:100px;">授课老师</th>
                     <th style="min-width:100px;">授课教室</th>
                     <th style="min-width:100px;">上课时长</th>
@@ -293,8 +297,8 @@
                     <th style="min-width:100px;">课程名称</th>
                     <th style="min-width:100px;">类别</th>
                     <th style="min-width:100px;">上课日期</th>
-                    <th style="min-width:100px;">上课时间</th>
-                    <th style="min-width:100px;">星期</th>
+                    <!--<th style="min-width:100px;display:none;">上课时间</th>-->
+                    <th style="min-width:100px;">时间</th>
                     <th style="min-width:100px;">授课老师</th>
                     <th style="min-width:100px;">授课教室</th>
                     <th style="min-width:100px;">上课时长</th>

@@ -14,6 +14,125 @@
     <link   rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
     <link  rel="stylesheet" type="text/css" href="../HMcode/HMcss/8a4.css"/>
+    <script>
+        $(document).ready(function(){
+            /* 清空事件 */
+            $('#clearAll').click(function(){
+                $(':input').val("");
+            });
+
+            //获取课程下拉框数据L4和R3
+            $.ajax({
+                url:"/sdpk/aaRole?qqiu=list",
+                type: "GET",
+                //data: JSON.stringify(param),
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    //步骤1_a1，在步骤1的ajax的回调函数
+                    console.log("查询角色返回"+result);
+                    huiFuncR4(result);
+                    // alert("下拉框加载完成");
+                }
+
+            });
+
+            //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
+            function huiFuncR4(result){
+                // alert("回调中");
+                var objR4 = {};
+                objR4 = JSON.parse(result);
+                var a2dataR4 = objR4.data;
+                $('#roleList').combobox({
+                    data: a2dataR4,
+                    valueField: 'uuid',
+                    textField: 'name',
+                    multiple:true,
+                    selectOnNavigation: false
+                });
+
+            }// end huiFuncR4 外圈
+            //获取课程下拉框数据L4和R3
+            $.ajax({
+                url:"/sdpk/aaEmp?qqiu=list",
+                type: "GET",
+                //data: JSON.stringify(param),
+                ContentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    //步骤1_a1，在步骤1的ajax的回调函数
+                    console.log("查询角色返回"+result);
+                    huiFuncF4(result);
+                    // alert("下拉框加载完成");
+                }
+
+            });
+            //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
+            function huiFuncF4(result){
+                // alert("回调中");
+                var objF4 = {};
+                objF4 = JSON.parse(result);
+                var a2dataF4 = objF4.data;
+                $('#ffList').combobox({
+                    data: a2dataF4,
+                    valueField: 'uuid',
+                    textField: 'name',
+                    multiple:false,
+                    selectOnNavigation: false
+                });
+
+            }// end huiFuncF4 外圈
+
+            /* 表单提交事件 */
+            $('#submit').click(function(){
+                var objSel = {};
+                objSel = $('#count-tab').serializeObject();
+                objSel.roleList = $('#roleList').combobox("getValues");
+                console.log(objSel);
+                if(objSel.roleList ==""||objSel.roleList==null){
+                    alert("请选择用户角色");
+                    return false;
+                }
+                if(objSel.uLogUser ==""||objSel.uLogUser==null){
+                    alert("请输入用户账号");
+                    return false;
+                }
+                if(objSel.uPassWord ==""||objSel.uPassWord==null){
+                    alert("请输入用户密码");
+                    return false;
+                }
+                if(objSel.uName ==""||objSel.uName==null){
+                    alert("请输入用户姓名");
+                    return false;
+                }
+                if(objSel.empUuid ==""||objSel.empUuid==null){
+                    alert("请选择公司员工");
+                    return false;
+                }
+                $.ajax({
+                    url:"/sdpk/aaUserPK?qqiu=add",
+                    type:"POST",
+                    contentType:"application/json;charset=UTF-8",
+                    data:JSON.stringify(objSel),
+                    success:function(result){
+                        var obj = {};
+                        obj = JSON.parse(result);
+                      alert(obj.message);
+                        var $parent = self.parent.$;
+                        $parent('#menu_h2').click();
+                    }
+                });
+            });
+
+//        控制页面下拉框
+            $('.combo ,.combo .combo-text').css({
+                "height":"36px",
+                "lineHeight":"34px",
+                "display":"inline-block",
+                "fontSize":"16px",
+                "color":"#646464"
+            });
+            $('.combo-arrow').css("height","34px");
+        })
+    </script>
 </head>
 <body>
 <div class="tab-con">
@@ -39,127 +158,10 @@
     </form>
     <!--E--表格结束 -->
     <div class="btn-box" style="margin-right: 3px;">
-        <button  class="easyui-linkbutton btn-xk" id="clearAll">清空</button>
-        <button  class="easyui-linkbutton btn-qr" id="submit">确认</button>
+        <button  class="btn-xk" id="clearAll">清空</button>
+        <button  class="btn-qr" id="submit">确认</button>
     </div>
 </div>
 </body>
-<script>
-    $(document).ready(function(){
-        /* 清空事件 */
-        $('#clearAll').click(function(){
-            $(':input').val("");
-        });
 
-        //获取课程下拉框数据L4和R3
-        $.ajax({
-            url:"/sdpk/aaRole?qqiu=list",
-            type: "GET",
-            //data: JSON.stringify(param),
-            contentType: "application/json;charset=UTF-8",
-            success:function(result){
-                //步骤1_a1，在步骤1的ajax的回调函数
-                console.log("查询角色返回"+result);
-                huiFuncR4(result);
-                // alert("下拉框加载完成");
-            }
-
-        });
-
-        //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
-        function huiFuncR4(result){
-            // alert("回调中");
-            var objR4 = {};
-            objR4 = JSON.parse(result);
-            var a2dataR4 = objR4.data;
-            $('#roleList').combobox({
-                data: a2dataR4,
-                valueField: 'uuid',
-                textField: 'name',
-                multiple:true,
-                selectOnNavigation: false
-            });
-
-        }// end huiFuncR4 外圈
-        //获取课程下拉框数据L4和R3
-        $.ajax({
-            url:"/sdpk/aaEmp?qqiu=list",
-            type: "GET",
-            //data: JSON.stringify(param),
-            ContentType: "application/json;charset=UTF-8",
-            success:function(result){
-                //步骤1_a1，在步骤1的ajax的回调函数
-                console.log("查询角色返回"+result);
-                huiFuncF4(result);
-                // alert("下拉框加载完成");
-            }
-
-        });
-        //步骤1_xR3，在步骤1的ajax的回调函数,展示列表数据
-        function huiFuncF4(result){
-            // alert("回调中");
-            var objF4 = {};
-            objF4 = JSON.parse(result);
-            var a2dataF4 = objF4.data;
-            $('#ffList').combobox({
-                data: a2dataF4,
-                valueField: 'uuid',
-                textField: 'name',
-                multiple:false,
-                selectOnNavigation: false
-            });
-
-        }// end huiFuncF4 外圈
-
-        /* 表单提交事件 */
-        $('#submit').click(function(){
-            var objSel = {};
-            objSel = $('#count-tab').serializeObject();
-            objSel.roleList = $('#roleList').combobox("getValues");
-            console.log(objSel);
-            if(objSel.roleList ==""||objSel.roleList==null){
-                alert("请选择用户角色");
-                return false;
-            }
-            if(objSel.uLogUser ==""||objSel.uLogUser==null){
-                 alert("请输入用户账号");
-                 return false;
-             }
-             if(objSel.uPassWord ==""||objSel.uPassWord==null){
-                   alert("请输入用户密码");
-                   return false;
-              }
-              if(objSel.uName ==""||objSel.uName==null){
-                    alert("请输入用户姓名");
-                    return false;
-              }
-            if(objSel.empUuid ==""||objSel.empUuid==null){
-                alert("请选择公司员工");
-                return false;
-            }
-            $.ajax({
-                url:"/sdpk/aaUserPK?qqiu=add",
-                type:"POST",
-                contentType:"application/json;charset=UTF-8",
-                data:JSON.stringify(objSel),
-                success:function(result){
-                    var obj = {};
-                    obj = JSON.parse(result);
-//                    alert(obj.message);
-                }
-            });
-        });
-
-//        控制页面下拉框
-        $('.combo ,.combo .combo-text').css({
-            "height":"36px",
-            "lineHeight":"34px",
-            "display":"inline-block",
-            "fontSize":"16px",
-            "color":"#646464"
-        });
-        $('.combo-arrow').css("height","34px");
-
-    });
-</script>
 </html>

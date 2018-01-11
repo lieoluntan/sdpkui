@@ -41,7 +41,18 @@
 	<script type="text/javascript">
 
     $(document).ready(function() {
-
+        //按钮权限开始
+        function funBtn(){
+            $( "#delbut" ).hide();
+            $( "#opener" ).hide();
+            var viewArr = $.cookie("rsList").split(",");
+            for (var i = 0; i < viewArr.length; i++) {
+                console.log("第"+i+"个："+viewArr[i]);
+                if(viewArr[i]=="Eb2") {$( "#delbut" ).show();}
+                if(viewArr[i]=="Eb1") {$( "#opener" ).show();}
+            }//end for
+        }
+        funBtn();
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
     //步骤1,展示列表数据

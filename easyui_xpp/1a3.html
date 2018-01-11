@@ -441,9 +441,9 @@
                 <tr>
 
                     <td class="name-s" style="padding-left:0">选择年份</td>
-                    <td><input id="nDate" name="cDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
+                    <td><input id="nDate" name="cDate" type="text" class="easyui-combobox yzss sel_s" style="line-height: 34px; height:36px;background-color: white;width:200px;" required="required"></td>
                     <td class="name-s">选择月份</td>
-                    <td><input id="yDate" name="cDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
+                    <td><input id="yDate" name="cDate" type="text" class="easyui-combobox yzss sel_s" style="line-height: 34px; height:36px;width:200px;background-color: white;" required="required"></td>
                 </tr>
             </table>
             <div class="tab-style">
@@ -508,7 +508,9 @@
         $('.close-item').click(function(){
             $('.alert-main').hide()
         })
-    })
+    });
+//    下拉宽度问题
+    $('.combo .validatebox-text').css("width","165px;");
 </script>
 <!-- E--公用弹窗 -->
 </body>

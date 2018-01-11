@@ -250,6 +250,17 @@
                 {"data": "sumCountA"}
             ]
         } );//end 步骤1 外圈  $('#example').DataTable
+        var selectTable = $('#example tbody tr').click(function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+
+            }//end if
+
+        });//end 2 外圈 $('#example tbody').on
          document.ffname.cNum.value= delRowData.cNum;
          document.ffname.stuUuid.value= delRowData.stuUuid;
          document.ffname.cDate.value= delRowData.cDate;
@@ -365,7 +376,6 @@
     $( "#close" ).click(function() { 
 
         $( "#dialog" ).dialog( "close" );
-
         });//end 7 外圈 close
     
 } );//end 最外层 $(document).ready
@@ -776,7 +786,6 @@
                     }
                     param.conPriceList.push(RowDataList[i]);
                 }
-                console.log(param);
                 $.ajax({
 
                     url:"/sdpk/aaContrtext?qqiu=edit",
@@ -787,7 +796,7 @@
                     success:function(result){
 
                     alert("修改完成");
-                    // window.location.reload();
+                    window.location.reload();
                     }
 
                 });

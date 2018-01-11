@@ -35,12 +35,29 @@
 
     <script type="text/javascript">
         var table = {};//全局变量
-        var teaValue,ndataValue,ydataValue;
+        var currentTime;
+        var teaValue;
         $(document).ready(function(){
             /*第零步：把datatables插件的警告窗变成控制台打印*/
             $.fn.dataTable.ext.errMode = 'none';
 
 /*回调函数*/
+            var myDate = new Date();
+            var aday = myDate.toLocaleDateString();
+            var adayStr = new String(aday);
+            var dataArr = adayStr.split('/');
+            if(dataArr[1]<10){
+                dataArr[1] = "0"+dataArr[1];
+            }
+            if(dataArr[2]<10){
+                dataArr[2] = "0"+dataArr[2];
+            }
+            currentTime =dataArr.join("-");
+
+            // alert("转换后"+adayStr);
+            //步骤,展示列表数据
+            var send_cData = {};
+            send_cData.keDateTime = currentTime;
             function huidiao(result){
 
                 var a2obj = {};
@@ -157,10 +174,7 @@
             /*获取下拉框的值*/
             $('#sel-data').change(function(){
                 teaValue = $('#selTeacher').val();
-                ndataValue = $("#nDate").combobox("getValue");
-                ydataValue = $("#yDate").combobox("getValue");
-                var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today=2018-01-03";
-                console.log(url);
+                var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today="+currentTime;
                 $.ajax({
                     url:String(url),
                     type:"POST",
@@ -172,10 +186,8 @@
             });
             $('#nDate').combobox({
                 onChange:function () {
-                    teaValue = $('#selTeacher').val();
-                    ndataValue = $("#nDate").combobox("getValue");
-                    ydataValue = $("#yDate").combobox("getValue");
-                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+ndataValue+"&&month="+ydataValue+"&&today=2018-01-03";
+                    thisYear = $("#nDate").combobox("getValue");
+                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today=2018-01-03";
                     $.ajax({
                         url:String(url),
                         type:"POST",
@@ -188,10 +200,8 @@
             });
             $('#yDate').combobox({
                 onChange:function () {
-                    teaValue = $('#selTeacher').val();
-                    ydataValue = $("#yDate").combobox("getValue");
-                    ndataValue = $("#nDate").combobox("getValue");
-                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+ndataValue+"&&month="+ydataValue+"&&today=2018-01-03";
+                    thisMonth = $("#nDate").combobox("getValue");
+                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today=2018-01-03";
                     $.ajax({
                         url:String(url),
                         type:"POST",

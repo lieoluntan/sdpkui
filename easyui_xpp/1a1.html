@@ -10,6 +10,7 @@
     <script type="text/javascript" src="jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="DataTables/datatables.js"></script>
     <script type="text/javascript" src="../xppjs/jquery.serialize-object.js"></script>
+    <script type="text/javascript" src="../xppjs/jquery.cookie.js"></script>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
@@ -42,17 +43,26 @@
             var table = {};//全局变量
 
             //步骤1,展示列表数据
-                var myDate = new Date();
-                var aday = myDate.toLocaleDateString();
-                var adayStr = new String(aday);
-                adayStr = adayStr.replace(/\//g,"-"); //把/替换成-，把斜杠替换成减号
-                // alert("转换后"+adayStr);
-                //步骤,展示列表数据
-                var send_cData = {};
-                send_cData.keDateTime = adayStr;
+            var myDate = new Date();
+            var aday = myDate.toLocaleDateString();
+            var adayStr = new String(aday);
+            var dataArr = adayStr.split('/');
+            if(dataArr[1]<10){
+                dataArr[1] = "0"+dataArr[1];
+            }
+            if(dataArr[2]<10){
+                dataArr[2] = "0"+dataArr[2];
+            }
+            currentTime =dataArr.join("-");
+            console.log(currentTime);
+            // alert("转换后"+adayStr);
+            //步骤,展示列表数据
+            var send_cData = {};
+            send_cData.uuid = $.cookie('ckUserEmpUuid');
+            send_cData.keDateTime = currentTime;
+            send_cData.empUuid = $.cookie('ckUserEmpUuid');
             $.ajax({
-
-                url:"/sdpk/aaPaiKe?qqiu=listKeDate",
+                url:"/sdpk/aaQueKeMy?qqiu=list",
                 type: "POST",
                 //data: JSON.stringify(param),
                 data: JSON.stringify(send_cData),
@@ -70,6 +80,7 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
+                console.log(a2obj);
                 table = $('#example').DataTable( {
                    "dom":'frtpi',
                     "bLengthChange":false,

@@ -243,10 +243,10 @@
                 <tr>
 
                         <td class="name-s" style="padding-left:0">选择年份</td>
-                        <td><input id="nDate" name="nDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
+                        <td><input id="nDate" name="nDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;width: 200px;" required="required"></td>
                         <td class="name-s">选择月份</td>
                         <td>
-                            <input id="yDate" name="yDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required">
+                            <input id="yDate" name="yDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;width: 200px;" required="required">
                         </td>
 
                 </tr>
@@ -255,9 +255,9 @@
             <div class="tab-style">
                 <!-- 第二行 -->
                 <ul class="tj-block">
-                    <li style="padding-left: 2px;">月份总课数<em id="zykid"></em></li>
-                    <li>月已消课<em id="yxkid"></em></li>
-                    <li>月未消课<em id="wxkid"></em></li>
+                    <li style="padding-left: 2px;">月份总课数<em id="zykid">0</em></li>
+                    <li>月已消课<em id="yxkid">0</em></li>
+                    <li>月未消课<em id="wxkid">0</em></li>
                 </ul>
             </div>
         </div>
@@ -314,7 +314,9 @@
         $('.close-item').click(function(){
             $('.alert-main').hide()
         })
-    })
+    });
+    //    下拉宽度问题
+    $('.combo .validatebox-text').css("width","165px;");
 </script>
 <!-- E--公用弹窗 -->
 </body>

@@ -26,6 +26,10 @@
         .dataTables_wrapper .dataTables_paginate{
             float: right;
         }
+        .tab-tab {
+            padding:10px;
+            box-sizing: border-box;
+        }
     </style>
     <!-- 11月09新增start -->
 
@@ -151,6 +155,7 @@
     table_ye2 = $('#paike_biao').DataTable( {
         "dom":'frtpi',
         "bLengthChange":false,
+        scrollX :670,
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",

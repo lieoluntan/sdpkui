@@ -17,9 +17,29 @@
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a1.css">
 	<link   rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
 	<link   rel="stylesheet" type="text/css" href="../HMcode/HMcss/7a2.css"/>
-
+	<style>
+		.dataTables_wrapper .dataTables_info{
+			clear: none;
+			float: right;
+			padding-right: 20px;
+			margin-top:20px;
+		}
+		.dataTables_wrapper .dataTables_paginate{
+			float: right;
+		}
+		.tab-con{
+			overflow-y: scroll;
+			max-width: 1100px;
+			min-width: 1100px;
+			margin:0 auto;
+		}
+		.tab-mians{
+			width: 997px;
+		}
+	</style>
 	<script type="text/javascript">
-		var data2a = [],table;
+		var data2a = [],index=0;
+		var table ={};
         var RowDataList = {};
 
             // function submitForm(){
@@ -135,7 +155,6 @@
             //验证上课类型
 		    function yzSkSize(){
                 if(document.getElementById("priceType").value=='请选择上课类型'){
-                    console.log(document.getElementById("priceType").value);
                     alert('请选择上课类型');
                     return false;
                 }else{
@@ -166,12 +185,18 @@
                     param.org=document.getElementById("org").value;
                     param.totalCount=document.getElementById("totalCount").value;
                     param.totalPrice=document.getElementById("totalPrice").value;
+                    param.sumLineDownB=document.getElementById("sumLineDownB").value;
+                    param.sumLineUpA=document.getElementById("sumLineUpA").value;
                     param.conPriceList=[];
 
                     for(var i=0;i<RowDataList.length;i++){
+                        if(RowDataList[i].priceType=='线上'){
+                            RowDataList[i].priceType='LineUpA';
+						}else if(RowDataList[i].priceType=='线下'){
+                            RowDataList[i].priceType='LineDownB';
+						}
                         param.conPriceList.push(RowDataList[i]);
                     }
-                    console.log(param);
                     $.ajax({
 
                         url: "/sdpk/aaContrtext?qqiu=add",
@@ -272,20 +297,28 @@
 
             function cn_totalPrice() {
                 table = $('#example').DataTable();
-                var scA=0,scB=0;
-                
+                var scA=0,scB=0,suA=0,sdB=0;
+
                 var send_RowDataList = new Array();
                 //获取表内所有数组的数据
                 RowDataList = table.rows().data();
-                console.log(RowDataList);
                 for(var i=0;i<RowDataList.length;i++){
-                    scA+=Number(RowDataList[i].sumPriceA);
-                    scB+=Number(RowDataList[i].sumCountA);
+                    if(RowDataList[i]!=''){
+                        scA+=Number(RowDataList[i].sumPriceA);
+                        scB+=Number(RowDataList[i].sumCountA);
+                    }
+                    if(RowDataList[i].priceType=='线上'){
+                        suA+=Number(RowDataList[i].sumCountA);
+                    }else if(RowDataList[i].priceType=='线下'){
+                        sdB+=Number(RowDataList[i].sumCountA);
+                    }
+
 				}
                 document.getElementById("totalPrice").value = scA;
                 var result = new Number(scA) + new Number(scB);
-
                 document.getElementById("totalCount").value = scB;
+                document.getElementById("sumLineUpA").value = suA;
+                document.getElementById("sumLineDownB").value = sdB;
                 alert("总支付，总次数已更新");
             }
             $(document).ready(function() {
@@ -293,13 +326,12 @@
             $.fn.dataTable.ext.errMode = 'none';
             //步骤1,展示列表数据
 
-        })
+
+
+
+        });
 
         function setTable() {
-
-
-
-			table = $('#example').DataTable();
             var f1 = yzV1();
             var f2 = yzDate();
             var f3 = yzNumBox();
@@ -312,8 +344,9 @@
                 var onePriceA = document.getElementById("onePriceA").value;
                 var countA = document.getElementById("countA").value;
                 var priceType = document.getElementById("priceType").value=='LineUpA'?'线上':'线下';
+                 index = index+1;
 
-                
+
 				    date = {
                         "onePriceA":onePriceA,
                         "countGiveA":countGiveA,
@@ -321,10 +354,12 @@
                         "countGiveA":countGiveA,
                         "priceType":priceType,
                         "sumPriceA":sumPriceA,
-                        "sumCountA":sumCountA
+                        "sumCountA":sumCountA,
+						"index":index
 					}
                     data2a.push(date);
-                var table = $('#example').DataTable({
+                table = $('#example').DataTable({
+                    "dom":'frtpi',
                     "searching":false,
                     "bLengthChange": false,
                     language: {
@@ -364,26 +399,43 @@
 
                     ]
                 });//end 步骤1 外圈  $('#example').DataTable
-
-                //步骤2，列表选择
-                var selectTable = $('#example tbody').on('click', 'tr', function () {
-                    if ($(this).hasClass('selected')) {
-                        $(this).removeClass('selected');
-                    }
-                    else {
-                        table.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                    }//end if
-
-                });//end 2 外圈 $('#example tbody').on
-
-
                 }
+            //步骤3，删除按钮单击事件
+            $('#delbut').click( function () {
+                //要初始化一个对象，不然会报undifine未定义错误
+                var delRowData = {};
+                //获取选择那一行的数据
+                delRowData = table.row('.selected').data();
+                table.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+                Array.prototype.remove=function(dx)
+                {
+                    if(isNaN(dx)||dx>this.length){return false;}
+                    for(var i=0,n=0;i<this.length;i++)
+                    {
+                        if(this[i]!=this[dx])
+                        {
+                            this[n++]=this[i]
+                        }
+                    }
+                    this.length-=1
+                }
+                data2a.remove(delRowData.index);
+            } );//end 3 外圈 $('#delbut').click
+
+            var selectTable = $('#example tbody tr').click(function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                }//end if
+
+            });//end 2 外圈 $('#example tbody').on
 			}
 
-
-
-
+        //步骤2，列表选择
 
 
 	</script>
@@ -408,7 +460,7 @@
             		<!-- 第一行 -->
             		<tr>
 	    			<td class="name-s" style="padding-left:0">合同编号</td>
-	    			<td><input  type="text" id="cNum" name="cNum" class="easyui-textbox v1g3 yzss"  required style="height: 39px;width: 923px;font-size:16px;" placeholder="输入合同编号"></td>
+	    			<td><input  type="text" id="cNum" name="cNum" class="easyui-textbox v1g3 yzss"  required style="height: 39px;width: 918px;font-size:16px;" placeholder="输入合同编号"></td>
 	    			</tr>
 	    			<!-- 第一行结束 -->
 
@@ -425,11 +477,11 @@
 						</select>
 						<!--<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">-->
 					</td>
-	    			<td class="name-s">交易时间</td>
+	    			<td class="name-s" style="padding-left: 82px;">交易时间</td>
 	    			<td><input id="cDate" name="cDate" type="text" class="easyui-datebox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>
 	    			<!--<td class="name-s">校区组织</td>-->
 	    			<!--<td><input  type="text" id="org" name="org" class="v1g3 yzss" placeholder="请输入校区组织"> </td>-->
-						<td class="name-s">所在校区</td>
+						<td class="name-s" style="padding-left: 82px;">所在校区</td>
 						<td>
 							<select  name="org" id="org" class="yzss sel_s">
 								<option >请选择校区</option>
@@ -458,7 +510,7 @@
                         <!--</select>-->
 						<input type="text"id="onePriceA"  name="onePriceA" class="easyui-numberbox yzss "style="height:36px; line-height: 34px;" onchange="cn_onePriceA();" data-options="min:0,max:999999,value: 0,editable:true">
             		</td>
-	    			<td class="name-s">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
+	    			<td class="name-s"style="padding-left: 82px;">数&nbsp;&nbsp;&nbsp;&nbsp;量</td>
 	    			<td ><input id="countA" name="countA" class="easyui-numberbox yzss"style="height:36px; line-height: 34px;"  data-options="min:0,max:999999,value: 0,editable:true" onchange="countA_cn();"></td>
             		</tr><!-- 第一行结束 -->
             		<!--类型一(价格A) 第二行 -->
@@ -466,7 +518,7 @@
 						<td class="name-s" style="padding-left:0;">优惠金额</td>
 	    			<td ><input id="delPriceA" name="delPriceA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;"data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_onePriceA();"></td>
 
-	    			<td class="name-s">送课次数</td>
+	    			<td class="name-s"style="padding-left: 82px;">送课次数</td>
 	    			<td ><input id="countGiveA" name="countGiveA" class="easyui-numberbox yzss" style="height:36px; line-height: 34px;" data-options="min:0,max:999999,value: 0,editable:true" onchange="cn_countGiveA();"></td>
             		</tr><!-- 第二行结束 类型一(价格A)-->
 					<!--类型一(价格A) 第三行 -->
@@ -474,22 +526,20 @@
 						<td  class="name-s txt_red" style="padding-left:0">支付金额</td>
 	    			<td ><input id="sumPriceA" name="sumPriceA"  class="easyui-textbox yzss border_red" disabled="true" value="0"></td>
 
-	    			<td class="name-s txt_red">上课次数</td>
+	    			<td class="name-s txt_red"style="padding-left: 82px;">上课次数</td>
 	    			<td ><input id="sumCountA" name="sumCountA" class="easyui-textbox yzss border_red"  disabled="true" value="0"></td>
-						<td class="name-s">上课类型</td>
+						<td class="name-s"style="padding-left: 82px;">上课类型</td>
 						<td ><select id="priceType"  name="priceType" class="yzss sel_s" onchange="cn_onePriceA();" required="required">-->
 							<option >请选择上课类型</option>
 							<option value="LineUpA">线上</option>
 							<option value="LineDownB">线下</option>
 							</select></td>
                         </tr><!-- 第三行结束 -->
-						<td class="name-s">
-							<div class="btn-box">
-							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="setTable()">点击添加</a>
-							</div>
-						</td>
             		</table><!-- end id  header_3_tb3-->
-
+						<div class="btn-box" style="text-align: left;margin-bottom: 20px;">
+							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" style="margin-left: 0;" onclick="setTable()">添加</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" id="delbut" >删除</a>
+						</div>
             		<!-- 划线 -->
             		<div id="header_2">
             		</div><!-- 划线结束 -->
@@ -562,20 +612,26 @@
             		<table id="header_3_tb4" class="tab-style">
 					<!-- 类型二(价格B)第三行 -->
             		<tr>
-						<td class="name-s txt_red" style="padding-left:0">总&nbsp;支&nbsp;付</td>
-	    			<td ><input id="totalPrice" name="totalPrice" required="required"  disabled="true" value="0" class="yzss border_red"></td>
-	    			<td class="name-s txt_red">总&nbsp;次&nbsp;数</td>
-	    			<td ><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
-	    			<td class="name-s"></td>
-	    			<td><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()">计算</a></td>
-            		</tr><!-- 第三行结束 -->
+                    <td class="name-s txt_red" style="padding-left: 0;">线下次数</td>
+                    <td ><input id="sumLineDownB" name="sumLineDownB" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+                    <td class="name-s txt_red"style="padding-left: 82px;">线上次数</td>
+                    <td ><input id="sumLineUpA" name="sumLineUpA" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+					</tr>
+						<tr>
+					<td class="name-s txt_red" style="padding-left: 0;padding-right:2px;">总&nbsp;支&nbsp;付&nbsp;</td>
+					<td ><input id="totalPrice" name="totalPrice" required="required"  disabled="true" value="0" class="yzss border_red"></td>
+					<td class="name-s txt_red"style="padding-left: 82px;padding-right: 2px;">总&nbsp;次&nbsp;数&nbsp;</td>
+					<td><input id="totalCount" name="totalCount" class="yzss border_red" required="required"  disabled="true" value="0"></td>
+							<td class="name-s" style="padding-left: 193px;padding-right: 0"><a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="cn_totalPrice()" style="padding:0 60px;">计算</a></td>
+					</tr>
+            		<!-- 第三行结束 -->
             		</table><!-- end id  header_3_tb4-->
 
             	</form>
             	<!-- 按钮div开始 -->
             	
 
-            	  <div class="btn-box">
+            	  <div class="btn-box" style="margin-right: 5px;">
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-xk" onclick="clearForm()">清空</a>
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="submitForm()">确认</a>
 	   			 </div>

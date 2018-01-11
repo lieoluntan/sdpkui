@@ -20,10 +20,20 @@
 			clear: none;
 			float: right;
 			padding-right: 20px;
-			margin-top:20px;
+			margin-top:0;
 		}
 		.dataTables_wrapper .dataTables_paginate{
 			float: right;
+		}
+		@media screen and (max-width: 1120px) {
+			.main-right {
+				width: 70.5%;
+			}
+		}
+		@media screen and (min-width: 1130px) {
+			.main-right {
+				width: 80%;
+			}
 		}
 	</style>
     <script type="text/javascript">
@@ -280,6 +290,7 @@
         "dom":'frtpi',
         bSort:false,
         "bLengthChange":false,
+        scrollX :670,
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",

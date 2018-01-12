@@ -43,7 +43,7 @@
     <script type="text/javascript">
 
         var ckUuid_ye3;//全局变量
-
+        var pktype = [{"pkType":"LineUpA","name":"线上"},{"pkType":"LineDownB","name":"线下"}];
         $(document).ready(function () {
             //按钮权限开始
             function funBtn(){
@@ -52,7 +52,6 @@
 
                 var viewArr = $.cookie("rsList").split(",");
                 for (var i = 0; i < viewArr.length; i++) {
-                    console.log("第"+i+"个："+viewArr[i]);
                     if(viewArr[i]=="Fe2") {$( "#delbut" ).show();}
                     if(viewArr[i]=="Fe1") {$( "#opener" ).show();}
                 }//end for
@@ -75,6 +74,8 @@
                 contentType: "application/json;charset=UTF-8",
                 success: function (result) {
                     //步骤1_a1，完成下拉框L3
+
+                    console.log(result);
                     huiFunc0_cla(result);
                 }
 
@@ -244,6 +245,12 @@
                     textField: 'empName',
                     selectOnNavigation: false
                 });
+                $('#L4ee_dlg').combobox({
+                    data: pktype,
+                    valueField: 'pkType',
+                    textField: 'name',
+                    selectOnNavigation: false
+                });
 
             }// end 1_x2 外圈
 
@@ -252,10 +259,19 @@
                 // alert("回调中");
                 var objL3 = {};
                 objL3 = JSON.parse(result);
+
                 var a2dataL3 = objL3.data;
+
+                console.log(a2dataL3);
                 $('#L3ee').combobox({
                     data: a2dataL3,
                     valueField: 'uuid',
+                    textField: 'name',
+                    selectOnNavigation: false
+                });
+                $('#L4ee').combobox({
+                    data: pktype,
+                    valueField: 'pkType',
                     textField: 'name',
                     selectOnNavigation: false
                 });
@@ -313,6 +329,8 @@
                 send_edit_data.five = document.ffname.week5.checked;
                 send_edit_data.six = document.ffname.week6.checked;
                 send_edit_data.seven = document.ffname.week7.checked;
+                send_edit_data.pkType = document.ffname.pkType.value;
+                console.log(send_edit_data);
 
                 $.ajax({
 
@@ -325,6 +343,7 @@
                         alert("预览排课完成");
                         //步骤1_a1，在步骤1的ajax的回调函数
                         huiFunc(result);
+                        console.log(result);
                     }
 
                 });
@@ -340,6 +359,7 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
+
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
                     bSort:false,
@@ -375,7 +395,7 @@
                     columns: [
                         {"data": "courseName"},
                         {"data": "courConflict"},
-                        {"data": "categoryName"},
+                        {"data": "pkTypeName"},
                         {"data": "keDateTime"},
                         {"data": "keStartTime"},
                         {"data": "weekSome"},
@@ -471,6 +491,9 @@
                 aTemple = {};
                 aTemple = rowData.classroomUuid;
                 $('#L3ee_dlg').combobox('setValue', aTemple);
+                aTemple = {};
+                aTemple = rowData.pkType;
+                $('#L4ee_dlg').combobox('setValue', aTemple);
 
                 var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
                 //alert(n1); //alert是弹出对话框，会弹出一个123的对话框
@@ -513,9 +536,10 @@
                 send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
                 send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
                 send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
+                send_edit_data.pkType = document.ffnameDlg.pkType.value;
                 send_edit_data.status = "正常";
 
-
+                console.log(send_edit_data);
                 $.ajax({
 
                     url: "/sdpk/aaPaiKe?qqiu=queryConflict",
@@ -546,6 +570,7 @@
                 var rowData = {};
                 //获取选择那一行的数据
                 rowData = table_full.row('.selected').data();
+                console.log(a2data);
                 rowData.courseUuid = a2data[0].courseUuid;
                 rowData.keDateTime = a2data[0].keDateTime;
                 rowData.keStartTime = a2data[0].keStartTime;
@@ -554,7 +579,7 @@
                 rowData.empConflict = a2data[0].empConflict;
                 rowData.classroomUuid = a2data[0].classroomUuid;
                 rowData.croomConflict = a2data[0].croomConflict;
-
+                rowData.pkTypeName = a2data[0].pkType=='LineUpA'?'线上':'线下';
                 rowData.courConflict = a2data[0].courConflict;
                 rowData.courseName = a2data[0].courseName;
                 rowData.empName = a2data[0].empName;
@@ -692,6 +717,20 @@
                         <td>
                             <input id="L3ee" name="classroomUuid" data-options="editable:false" class="easyui-combobox"
                                    style="width:270px;height: 36px;">
+                        </td>
+                    </tr>
+                    <tr class="tit_tr">
+                        <td>上课类型</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--<input id="L4ee" name="pkType" data-options="editable:false" class="easyui-combobox"-->
+                                   <!--style="width:270px;height: 36px;">-->
+                            <select id="L4ee" name="pkType"style="width:270px;height: 36px;"class=" yzss sel_s">
+                                <option ></option>
+                                <option value="LineUpA">线上</option>
+                                <option value="LineDownB">线下</option>
+                            </select>
                         </td>
                     </tr>
 
@@ -899,6 +938,14 @@
                 <td class="name-c">授课老师</td>
                 <td>
                     <input id="L2ee_dlg" name="empUuid" data-options="editable:false" class="easyui-combobox"
+                           style="width:260px;height: 34px;">
+                </td>
+
+            </tr>
+            <tr style="display: block;margin-top:20px;">
+                <td class="name-c">上课类型</td>
+                <td>
+                    <input id="L4ee_dlg" name="pkType" data-options="editable:false" class="easyui-combobox"
                            style="width:260px;height: 34px;">
                 </td>
 

@@ -328,18 +328,18 @@ margin:0px; padding:0;text-align:center;}
 
              $( "#menu_h3" ).click(function(){
                  document.getElementById('ifr8a3').src="easyui_xpp/8a3.html";
-                 // alert("点击了用户新增");
+                 console.log("点击了用户新增");
              });
              $( "#menu_h4" ).click(function(){
-                 document.getElementById('ifr8a4').src="easyui_xpp/8a4.html";
+                 document.getElementById('ifr8a4').contentWindow.location.reload();
                  // alert("点击了用户的管理");
              });
              $( "#menu_h5" ).click(function(){
                  document.getElementById('ifr8a5').src="easyui_xpp/8a5.html";
-                 // alert("点击了角色新增");
+                 console.log("点击了角色新增");
              });
              $( "#menu_h6" ).click(function(){
-                 document.getElementById('ifr8a6').src="easyui_xpp/8a6.html";
+                 document.getElementById('ifr8a6').contentWindow.location.reload();
                  // alert("点击了角色的管理");
              });
 

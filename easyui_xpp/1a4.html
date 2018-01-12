@@ -124,9 +124,9 @@
             var data = [];//创建年度数组
             var startYear;//起始年份
             var thisYear=new Date().getUTCFullYear();//今年
-            var endYear=thisYear+6;//结束年份
+            var endYear=thisYear+8;//结束年份
 //数组添加值（2012-2016）//根据情况自己修改
-            for(startYear=thisYear;startYear<endYear;startYear++){
+            for(startYear=endYear-11;startYear<endYear;startYear++){
                 data.push({"year":startYear});
             }
             $("#nDate").combobox("loadData", data);//下拉框加载数据
@@ -242,8 +242,12 @@
                     <tr>
                         <td class="name-s" style="padding-left:0">选择老师</td>
                         <td>
-                            <select id="selTeacher" style="height: 36px;" class="yzss sel_s" name="teacher">
-                                <option selected="selected" disabled="disabled"  style='display: none' value=''>请选择老师</option>
+                            <!--<select id="selTeacher" style="height: 36px;" class="yzss sel_s" name="teacher">-->
+                                <!--<option selected="selected"  style='display: none' value='allGet'>全部老师</option>-->
+                            <!--</select>-->
+                            <select name="selTeacher" id="selTeacher" class=" yzss sel_s"  placeholder="输入合同编号">
+                                <option >请选择老师</option>
+                                <option value="allGet">全部老师</option>
                             </select>
                         </td>
                     </tr>

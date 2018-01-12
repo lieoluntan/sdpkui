@@ -176,10 +176,10 @@
             });
             var data = [];//创建年度数组
             var startYear;//起始年份
-            var thisYear=new Date().getUTCFullYear()-2;//今年
-            var endYear=thisYear+6;//结束年份
+            var thisYear=new Date().getUTCFullYear();//今年
+            var endYear=thisYear+8;//结束年份
 //数组添加值（2012-2016）//根据情况自己修改
-            for(startYear=endYear-5;startYear<endYear;startYear++){
+            for(startYear=endYear-11;startYear<endYear;startYear++){
                 data.push({"year":startYear});
             }
             $("#nDate").combobox("loadData", data);//下拉框加载数据
@@ -200,8 +200,6 @@
                 thisMonth = '0'+thisMonth;
             }
             var thisYear=new Date().getUTCFullYear();//本年
-            console.log(thisMonth);
-            console.log(thisYear);
             var year,month,uuid,newUrl;
             //数组添加值（1-12月）为固定值
             for(startMonth;startMonth<13;startMonth++){
@@ -275,21 +273,20 @@
                     console.log(newUrl);
                 }
             });
-
             //获取关系一班级下拉框数据
-            $.ajax({
-
-                url: String(newUrl),
-                type: "POST",
-                //data: JSON.stringify(param),
-                data: JSON.stringify(send_edit_data),
-                contentType: "application/json;charset=UTF-8",
-                success: function (result) {
-                    //步骤1_a1，完成下拉框L3
-                    console.log(result);
-                }
-
-            });
+            // $.ajax({
+            //
+            //     url: String(newUrl),
+            //     type: "POST",
+            //     //data: JSON.stringify(param),
+            //     data: JSON.stringify(send_edit_data),
+            //     contentType: "application/json;charset=UTF-8",
+            //     success: function (result) {
+            //         //步骤1_a1，完成下拉框L3
+            //         console.log(result);
+            //     }
+            //
+            // });
             //步骤2，列表选择
             var selectTable = $('#example tbody').on('click', 'tr', function () {
                 if ($(this).hasClass('selected')) {
@@ -431,6 +428,7 @@
 
                         <select name="stuUuid" id="stuUuid" class=" yzss sel_s"  placeholder="输入合同编号">
                             <option >请选择学生</option>
+                            <option value="allGet">全部学生</option>
                         </select>
                         <!--<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">-->
                     </td>

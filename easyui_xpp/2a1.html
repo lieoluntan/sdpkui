@@ -46,6 +46,7 @@
 			if (flag) {
 			//$('#ff').form('submit');
 			var param = $("#ff").serializeObject();
+			console.log(param);
 			$.ajax({
 				
 				url:"/sdpk/aaStudent?qqiu=add",
@@ -140,7 +141,7 @@
 	    		<table class="tab-style">
             		<tr>
 	    			<td class="name-s" style="padding-left:0">备注</td>
-	    			<td><input  type="text" name="remark" class="yzss" style="width:949px;" placeholder="输入学员备注信息"></input></td>
+	    			<td><input  type="text" name="remark" class="yzss" style="width:949px;" value="无"></input></td>
 	    			</tr>
 	    			<!-- 第二行结束 -->
 
@@ -162,6 +163,18 @@
 	    			</tr>
 	    			<!-- 第一行结束 -->
             		</table>
+					<table class="tab-style">
+						<!-- 第一行 -->
+						<tr>
+							<td class="name-s" style="padding-left:0;padding-right: 12px;">关系2</td>
+							<td><input  type="text" name="parentRela2" class="yz-box yzss" placeholder="请输入与学员关系"></input></td>
+							<td class="name-s" style="padding-right: 12px;">姓名2</td>
+							<td><input  type="text" name="parentName2" class="yz-box yzss" placeholder="请输入家长姓名"></input></td>
+							<td class="name-s" style="padding-right: 12px;">电话2</td>
+							<td><input  type="text" name="parentPhone2" class="yz-box yzss" placeholder="请输入家长手机或电话"></input></td>
+						</tr>
+						<!-- 第一行结束 -->
+					</table>
             	</form>
             	<!-- 按钮div开始 -->
             	<div class="btn-box" style="margin-right: 14px;">

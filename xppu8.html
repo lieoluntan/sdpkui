@@ -130,6 +130,11 @@ margin:0px; padding:0;text-align:center;}
         // }
 
          function funUser(){
+
+            //取出cookie用户名ckUserName
+            var ck_uName = $.cookie("ckUserName");
+            console.log("取出用户名"+ck_uName);
+            $(".user-name").html(ck_uName);
                //一级菜单权限开始
         $( "#menu_1" ).hide();
         $( "#menu_2" ).hide();

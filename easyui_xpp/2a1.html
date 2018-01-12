@@ -55,7 +55,8 @@
 				data: JSON.stringify(param),
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
-				alert("新增完成");
+				var obj = JSON.parse(result);
+				alert(obj.message);
 				//调用父级弹窗start
             	var $parent = self.parent.$;
             	$parent('#menu_b2').click();
@@ -155,11 +156,11 @@
             		<!-- 第一行 -->
             		<tr>
 	    			<td class="name-s" style="padding-left:0">关系</td>
-	    			<td><input  type="text" name="parentRela" class="yz-box yzss" placeholder="请输入与学员关系"></input></td>
+	    			<td><input  type="text" name="parentRela" class="yzss" value="无"></input></td>
 	    			<td class="name-s">姓名</td>
-	    			<td><input  type="text" name="parentName" class="yz-box yzss" placeholder="请输入家长姓名"></input></td>
+	    			<td><input  type="text" name="parentName" class="yzss" value="无"></input></td>
 	    			<td class="name-s">电话</td>
-	    			<td><input  type="text" name="parentPhone" class="yz-box yzss" placeholder="请输入家长手机或电话"></input></td>
+	    			<td><input  type="text" name="parentPhone" class="yzss" value="无"></input></td>
 	    			</tr>
 	    			<!-- 第一行结束 -->
             		</table>
@@ -167,11 +168,11 @@
 						<!-- 第一行 -->
 						<tr>
 							<td class="name-s" style="padding-left:0;padding-right: 12px;">关系2</td>
-							<td><input  type="text" name="parentRela2" class="yz-box yzss" placeholder="请输入与学员关系"></input></td>
+							<td><input  type="text" name="parentRela2" class=" yzss" value="无"></input></td>
 							<td class="name-s" style="padding-right: 12px;">姓名2</td>
-							<td><input  type="text" name="parentName2" class="yz-box yzss" placeholder="请输入家长姓名"></input></td>
+							<td><input  type="text" name="parentName2" class="yzss" value="无"></input></td>
 							<td class="name-s" style="padding-right: 12px;">电话2</td>
-							<td><input  type="text" name="parentPhone2" class="yz-box yzss" placeholder="请输入家长手机或电话"></input></td>
+							<td><input  type="text" name="parentPhone2" class=" yzss" value="无"></input></td>
 						</tr>
 						<!-- 第一行结束 -->
 					</table>

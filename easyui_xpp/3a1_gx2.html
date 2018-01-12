@@ -77,13 +77,14 @@
             send_R3.id = "stu01";
             $.ajax({
                 
-                url:"/sdpk/aaContract?qqiu=list",
+                url:"/sdpk/aaContrtext?qqiu=list",
                 type: "POST",
                 //data: JSON.stringify(param),
                 data: JSON.stringify(send_R3),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
                 //步骤1_a1，在步骤1的ajax的回调函数
+                    console.log(result);
                 huiFuncR3(result);
                 // alert("下拉框加载完成");
                 }

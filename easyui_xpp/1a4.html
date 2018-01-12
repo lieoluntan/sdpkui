@@ -122,7 +122,8 @@
                 editable:false
             });
             var data = [];//创建年度数组
-            var startYear;//起始年份
+            var startYear,Year,Month;//起始年份
+            
             var thisYear=new Date().getUTCFullYear();//今年
             var endYear=thisYear+8;//结束年份
 //数组添加值（2012-2016）//根据情况自己修改
@@ -167,27 +168,61 @@
             });
             function teachSel(mes) {
                 var teaData = JSON.parse(mes).data;
-                for(var i=0;i<teaData.length;i++){
-                    $('#selTeacher').append('<option value="'+teaData[i].uuid+'">'+teaData[i].name+'</option>');
-                }
+                teaData.unshift({'uuid':'allGet','name':'全部老师'});
+                // for(var i=0;i<teaData.length;i++){
+                //     $('#selTeacher').append('<option value="'+teaData[i].uuid+'">'+teaData[i].name+'</option>');
+                // }
+                $('#selTeacher').combobox({
+                    data: teaData,
+                    valueField: 'uuid',
+                    textField: 'name',
+                    panelHeight:'auto',
+                    value:"请选择老师",
+                    editable:false
+                });
             }
             /*获取下拉框的值*/
-            $('#sel-data').change(function(){
-                teaValue = $('#selTeacher').val();
-                var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today="+currentTime;
-                $.ajax({
-                    url:String(url),
-                    type:"POST",
-                    contentType:"application/json;charset=UTF-8",
-                    success:function (result) {
-                        huidiao(result)
-                    }
-                });
-            });
+            // $('#sel-data').change(function(){
+            //     teaValue = $('#selTeacher').val();
+            //     var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today="+currentTime;
+            //     console.log(url);
+            //     $.ajax({
+            //         url:String(url),
+            //         type:"POST",
+            //         contentType:"application/json;charset=UTF-8",
+            //         success:function (result) {
+            //             huidiao(result)
+            //         }
+            //     });
+            // });
+            $('#selTeacher').combobox({
+                onChange: function () {
+                    teaValue = $('#selTeacher').combobox('getValue');
+                    year = $('#nDate').combobox('getValue')||thisYear;
+                    month = $('#yDate').combobox('getValue')||thisMonth;
+                    var url = '/sdpk/aaQuery?qqiu=list&empUuid='+teaValue+'&year='+year+'&&month='+month+'&&today='+currentTime;
+                    $.ajax({
+
+                        url: String(url),
+                        type: "POST",
+                        //data: JSON.stringify(param),
+                        data: JSON.stringify(send_edit_data),
+                        contentType: "application/json;charset=UTF-8",
+                        success: function (result) {
+                            //步骤1_a1，完成下拉框L3
+                            huidiao(result);
+                        }
+
+                    });
+                    console.log(url);
+                }
+            })
             $('#nDate').combobox({
                 onChange:function () {
-                    thisYear = $("#nDate").combobox("getValue");
-                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today=2018-01-03";
+                    Year = $("#nDate").combobox("getValue");
+                    Month = $("#yDate").combobox("getValue")||thisMonth;
+                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+Year+"&&month="+Month+"&&today="+currentTime;
+                    console.log(url);
                     $.ajax({
                         url:String(url),
                         type:"POST",
@@ -200,8 +235,10 @@
             });
             $('#yDate').combobox({
                 onChange:function () {
-                    thisMonth = $("#nDate").combobox("getValue");
-                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+thisYear+"&&month="+thisMonth+"&&today=2018-01-03";
+                    Month = $("#yDate").combobox("getValue");
+                    Year = $("#nDate").combobox("getValue")||thisYear;
+                    var url = "/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+Year+"&&month="+Month+"&&today="+currentTime;
+                    console.log(url);
                     $.ajax({
                         url:String(url),
                         type:"POST",
@@ -219,6 +256,12 @@
         function clearForm() {
             $('#ff').form('clear');
         };//end function clearForm
+
+
+
+
+
+
 
     </script>
 
@@ -245,10 +288,11 @@
                             <!--<select id="selTeacher" style="height: 36px;" class="yzss sel_s" name="teacher">-->
                                 <!--<option selected="selected"  style='display: none' value='allGet'>全部老师</option>-->
                             <!--</select>-->
-                            <select name="selTeacher" id="selTeacher" class=" yzss sel_s"  placeholder="输入合同编号">
+                            <!-- <select name="selTeacher" id="selTeacher" class=" yzss sel_s"  placeholder="输入合同编号">
                                 <option >请选择老师</option>
                                 <option value="allGet">全部老师</option>
-                            </select>
+                            </select> -->
+                            <input name="selTeacher" id="selTeacher" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="selTeacher">
                         </td>
                     </tr>
                 </table>

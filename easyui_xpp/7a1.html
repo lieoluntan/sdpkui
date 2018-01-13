@@ -107,7 +107,6 @@
             //验证第一二行中的3个输入框
             function yzV1() {
                 var m = {};
-                // m=document.getElementsByTagName("input");
                 m = document.getElementsByClassName("v1g3");
 
                 for (var i = 0; i < m.length; i++) {
@@ -158,8 +157,24 @@
                     return true;
 				}
 			}
-
-
+        //验证学生名称
+        function yzxsmc(){
+            if(document.getElementById("stuUuid").value=='请选择学生'){
+                alert('请选择学生名称');
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //验证所在校区
+        function yzszxq(){
+            if(document.getElementById("org").value=='请选择校区'){
+                alert('请选择所在校区');
+                return false;
+            }else{
+                return true;
+            }
+        }
 
 
 
@@ -167,11 +182,13 @@
                 //$('#ff').form('submit');
                 var flag = false;
                 var f1 = yzV1();
+                var f5 = yzxsmc();
                 var f2 = yzDate();
+                var f6 = yzszxq();
                 var f3 = yzNumBox();
                 var f4 = yzSkSize();
                 //总价格，总课数计算结束
-                if (f1 == true && f2 == true && f3 == true) {
+                if (f1 == true && f2 == true && f3 == true&& f4 == true&& f5 == true&& f6 == true) {
                     flag = true;
                 }
                 if (flag) {
@@ -331,10 +348,12 @@
 
         function setTable() {
             var f1 = yzV1();
+            var f5 = yzxsmc();
             var f2 = yzDate();
+            var f6 = yzszxq();
             var f3 = yzNumBox();
             var f4 = yzSkSize();
-            if(f1 == true && f2 == true && f3 == true &&f4==true){
+            if(f1 == true && f2 == true && f3 == true &&f4==true&&f5==true&&f6==true){
                 var sumPriceA = document.getElementById("sumPriceA").value;
                 var sumCountA = document.getElementById("sumCountA").value;
                 var delPriceA = document.getElementById("delPriceA").value;
@@ -450,9 +469,6 @@
 			<div id="header_1">
 				<h2>新增合同</h2>
 			</div>
-            <div id="header_2">
-            </div>
-
             <div id="header_3_form">
             	<form id="ff" method="post" > 
             		<table id="header_3_tb1" class="tab-style">
@@ -630,7 +646,7 @@
             	<!-- 按钮div开始 -->
             	
 
-            	  <div class="btn-box" style="margin-right: 5px;">
+            	  <div class="btn-box" style="margin-right: 8px;">
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-xk" onclick="clearForm()">清空</a>
 	    			<a href="javascript:void(0)" class="easyui-linkbutton btn-qr" onclick="submitForm()">确认</a>
 	   			 </div>

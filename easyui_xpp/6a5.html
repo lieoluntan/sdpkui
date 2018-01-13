@@ -363,7 +363,7 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
-
+                var obj = $('#content02_tb3');
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
                     bSort:false,
@@ -692,7 +692,7 @@
                         <td>选择班级</td>
                     </tr>
                     <tr>
-                        <td><input id="L0_cla" name="claUuid" data-options="editable:true" class="easyui-combobox" style="width:270px;height: 36px;">
+                        <td><input id="L0_cla" name="claUuid" data-options="editable:false" class="easyui-combobox" style="width:270px;height: 36px;">
                         </td>
                     </tr>
                     <tr class="tit_tr">

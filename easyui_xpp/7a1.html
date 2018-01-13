@@ -116,6 +116,7 @@
                         return false;
                     }
                 }//end for
+                console.log("合同前两行输入框验证，有值！！");
                 return true;
             }
 
@@ -131,6 +132,7 @@
                     alert("请填写日期框" + c1 + "的值");
                     return false;
                 }
+                console.log("日期验证，有值！" + c1);
                 return true;
             }
 
@@ -147,6 +149,7 @@
                         return false;
                     }
                 }//end for
+                console.log("6个数字输入框验证，有值！");
                 return true;
             }
             //验证上课类型
@@ -202,8 +205,8 @@
                         data: JSON.stringify(param),
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {
-                            result = JSON.parse(result);
-                            alert(result.message);
+                            var obj = JSON.parse(result);
+                            alert(obj.message);
                             //调用父级弹窗start
                             var $parent = self.parent.$;
                             $parent('#menu_g2').click();
@@ -348,7 +351,6 @@
 				    date = {
                         "onePriceA":onePriceA,
                         "countGiveA":countGiveA,
-						"countA":countA,
                         "delPriceA":delPriceA,
                         "countGiveA":countGiveA,
                         "priceType":priceType,
@@ -389,7 +391,7 @@
 
                     "columns": [
                         {"data": "onePriceA"},
-                        {"data": "countA"},
+                        {"data": "countGiveA"},
                         {"data": "delPriceA"},
                         {"data": "countGiveA"},
                         {"data": "priceType"},

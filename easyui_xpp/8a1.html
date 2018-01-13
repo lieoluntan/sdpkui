@@ -31,7 +31,8 @@
 				data: JSON.stringify(param),
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
-				alert("新增成功");
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
 				//调用父级弹窗start
             	var $parent = self.parent.$;
             	$parent('#menu_h2').click();

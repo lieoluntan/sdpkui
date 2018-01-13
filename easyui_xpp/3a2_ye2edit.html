@@ -435,7 +435,8 @@
                 data: JSON.stringify(send_edit_data),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
-                alert("编辑完成");
+                    var obj = JSON.parse(result);
+                alert(obj.message);
    
                 huiFunc_submit(result);
                 $( "#dialog" ).dialog( "close" );
@@ -520,7 +521,6 @@
                 data: JSON.stringify(send_RowDataList[0]),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
-                alert("修改执行中");
                 var result2obj = {};
                 result2obj = JSON.parse(result);
                 alert(result2obj.message);

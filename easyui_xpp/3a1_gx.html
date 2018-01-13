@@ -282,7 +282,7 @@
                 success:function(result){
                 var obj = {};
                 obj = JSON.parse(result);
-//                alert(obj.message);
+                alert(obj.message);
                 table_rela1.ajax.reload();
    
                 // huiFunc_submit(result);
@@ -309,7 +309,7 @@
                 success:function(result){
                 var obj = {};
                 obj = JSON.parse(result);
-//                alert(obj.message);
+                alert(obj.message);
                 table_rela2.ajax.reload();
    
                 // huiFunc_submit(result);
@@ -337,7 +337,7 @@
                      success:function(result){
                          var obj = {};
                          obj = JSON.parse(result);
-//                         alert(obj.message);
+                         alert(obj.message);
                          table_rela3.ajax.reload();
 
                          // huiFunc_submit(result);
@@ -409,9 +409,9 @@
                 data: JSON.stringify(send_data),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
                     table_rela1.ajax.reload();
-                    alert("删除完成");
-
                 }
              
             });//end $.ajax
@@ -444,8 +444,9 @@
                 data: JSON.stringify(send_data),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
                     table_rela2.ajax.reload();
-                    alert("删除完成");
 
                 }
              
@@ -477,9 +478,9 @@
                      data: JSON.stringify(send_data),
                      contentType: "application/json;charset=UTF-8",
                      success:function(result){
+                         var obj = JSON.parse(result);
+                         alert(obj.message);
                          table_rela3.ajax.reload();
-                         alert("删除完成");
-
                      }
 
                  });//end $.ajax

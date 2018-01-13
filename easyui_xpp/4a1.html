@@ -61,7 +61,6 @@
 			//$('#ff').form('submit');
 			var param = $("#ff").serializeObject();
 			param.workDate = $('#workDate').datebox('getValue');
-			console.log(param);
 			$.ajax({
 				
 				url:"/sdpk/aaEmp?qqiu=add",
@@ -70,8 +69,8 @@
 				data: JSON.stringify(param),
 				contentType: "application/json;charset=UTF-8", 
 				success:function(result){
-				    result = JSON.parse(result);
-				alert(result.message);
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
 				//调用父级弹窗start
             	var $parent = self.parent.$;
             	$parent('#menu_d2').click();
@@ -155,8 +154,8 @@
 	    			<td class="name-s" style="padding-left:0;width: 80px;">部&nbsp;&nbsp;&nbsp;&nbsp;门</td>
 	    			<td>
 		    			<select  name="depart" class="yz-box yzss sel_s">
-							<option value="部门1">部门1</option>
-							<option value="部门2">部门2</option>
+							<option value="部门1value">部门1</option>
+							<option value="部门2value">部门2</option>
 						</select>
 	    			</td>
 	    			<td class="name-s" style="width: 80px;">职&nbsp;&nbsp;&nbsp;&nbsp;位</td>

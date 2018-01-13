@@ -377,7 +377,8 @@
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
                     // table_ye2.ajax.reload();
-                    alert("删除完成");
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
 
                 }
              

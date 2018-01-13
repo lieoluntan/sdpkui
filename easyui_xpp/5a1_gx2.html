@@ -149,7 +149,7 @@
                 success:function(result){
                 var obj = {};
                 obj = JSON.parse(result);
-//                alert(obj.message);
+               alert(obj.message);
                 table_rela4.ajax.reload();
    
                 // huiFunc_submit(result);
@@ -197,8 +197,9 @@
                 data: JSON.stringify(send_data),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
                     table_rela4.ajax.reload();
-                    alert("删除完成");
 
                 }
              

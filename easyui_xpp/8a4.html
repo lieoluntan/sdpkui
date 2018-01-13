@@ -109,7 +109,7 @@
                     success:function(result){
                         var obj = {};
                         obj = JSON.parse(result);
-                        //alert(obj.message);
+                        alert(obj.message);
                         window.location.reload();//页面刷新
                     }
                 });
@@ -145,7 +145,6 @@
                     ContentType: "application/json;charset=UTF-8",
                     success:function(result){
                         //步骤1_a1，在步骤1的ajax的回调函数
-                        // console.log(result1);
                         setFunction(result);
                         // alert("下拉框加载完成");
                     }

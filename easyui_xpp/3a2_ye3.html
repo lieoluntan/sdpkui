@@ -47,13 +47,13 @@
 //        $( "#btn_combo" ).click(function() {
             //11月13日暂留
             var send_edit_data = {};
+        	var pktype = [{"pkType":"LineUpA","name":"线上"},{"pkType":"LineDownB","name":"线下"}];
             // 11月13日暂留
             send_edit_data.claUuid = "测试备用";
             //~todo~:get传送url参数方式访问
             ckUuid_ye3 = $.cookie('UidCla');
             // alert("ye3班级uuid"+ckUuid_ye3);
             var newUrl = '/sdpk/aaAnd_ClassCourse?qqiu=getListBycla&classUuid='+ckUuid_ye3;
-            console.log(newUrl);
             //获取关系一班级下拉框数据  
             $.ajax({
                 
@@ -110,7 +110,6 @@
                     // 11月13日暂留,语句无作用  end
                     var coUuid = rec.courseUuid;
                     var newUrl = '/sdpk/aaCourse_Emp?qqiu=getListByCour&courseUuid='+coUuid;
-                    console.log(newUrl);
                     //获取关系一班级下拉框数据  
                     $.ajax({
                         
@@ -145,7 +144,6 @@
                     // 11月13日暂留,语句无作用  end
                     var coUuid = rec.courseUuid;
                     var newUrl = '/sdpk/aaCourse_Emp?qqiu=getListByCour&courseUuid='+coUuid;
-                    console.log(newUrl);
                     //获取关系一班级下拉框数据  
                     $.ajax({
                         
@@ -186,6 +184,18 @@
                 textField: 'empName',
                 selectOnNavigation: false
             });
+	$('#L4ee_dlg').combobox({
+		data: pktype,
+		valueField: 'pkType',
+		textField: 'name',
+		selectOnNavigation: false
+	});
+	$('#L4ee').combobox({
+		data: pktype,
+		valueField: 'pkType',
+		textField: 'name',
+		selectOnNavigation: false
+	});
 
     }// end 1_x2 外圈 
 
@@ -259,6 +269,7 @@
             send_edit_data.five = document.ffname.week5.checked;
             send_edit_data.six = document.ffname.week6.checked;
             send_edit_data.seven = document.ffname.week7.checked;
+            send_edit_data.pkType = document.ffname.pkType.value;
  
             $.ajax({
                 
@@ -323,7 +334,7 @@
         columns: [
             { "data": "courseName" },
             { "data": "courConflict" },
-            { "data": "categoryName" },
+            { "data": "pkTypeName" },
             { "data": "keDateTime" },
             { "data": "keStartTime" },
             { "data": "weekSome" },
@@ -417,6 +428,9 @@
          // document.ffnameDlg.classroomUuid.value= rowData.classroomUuid;
          aTemple = {}; aTemple = rowData.classroomUuid;
          $('#L3ee_dlg').combobox('setValue', aTemple);
+        aTemple = {};
+        aTemple = rowData.pkTypeName;
+        $('#L4ee').combobox('setValue', aTemple);
  
         var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
         //alert(n1); //alert是弹出对话框，会弹出一个123的对话框
@@ -439,11 +453,9 @@
     //TODO:提交表单数据到服务器调用查询冲突接口
     $( "#submitForm" ).click(function() { 
         //要初始化一个对象，不然会报undifine未定义错误
-        console.log("点击了确定");
             var delRowData = {};
             //获取选择那一行的数据
             delRowData = table_full.row('.selected').data();
-            console.log("选择行的日期"+delRowData.keDateTime);
             
             // var param = $("#ff").serializeObject();
             var send_edit_data = {};
@@ -455,13 +467,11 @@
 
             //日期框通过获取id来取值，用表单获取不到easyui日期框的值
             var ceshi = $('#keDateTime').datebox('getValue');
-            console.log(ceshi);
             send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
             send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
             send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
+        	send_edit_data.pkType = document.ffnameDlg.pkType.value;
             send_edit_data.status = "正常";
-        
-   
             $.ajax({
                 
                 url:"/sdpk/aaPaiKe?qqiu=queryConflict",
@@ -483,7 +493,6 @@
     });//end 6 外圈 submitForm
     //步骤6_x1，冲突查询返回的数据赋值到选择行上
     function huiFunc_submit(result){
-    console.log("回调huiFunc_submit中");
     var a2obj = {};
     a2obj = JSON.parse(result);
     var a2data = {};
@@ -501,7 +510,7 @@
          rowData.empConflict = a2data[0].empConflict;
          rowData.classroomUuid = a2data[0].classroomUuid;
          rowData.croomConflict = a2data[0].croomConflict;
-
+		 rowData.pkTypeName = a2data[0].pkType=='LineUpA'?'线上':'线下';
          rowData.courConflict = a2data[0].courConflict;
          rowData.courseName = a2data[0].courseName;
          rowData.empName = a2data[0].empName;
@@ -530,8 +539,7 @@
 			{
 				send_RowDataList[i] = RowDataList[i];
 			}
-            
-            console.log(send_RowDataList);
+
 
             var conflictFlag = false;
             //查询员工冲突是否存在
@@ -603,6 +611,14 @@
 				<tr><td>
 					<input id="L3ee"  name="classroomUuid" data-options="editable:false" class="easyui-combobox yzss" style="width:270px;height: 36px;">
 				</td></tr>
+				<tr class="tit_tr"><td>上课类型</td></tr>
+				<tr style="display: block;margin-top:20px;">
+					<td>
+						<input id="L4ee_dlg" name="pkType" data-options="editable:false" class="easyui-combobox yzss"
+							   style="width:270px;height: 36px;">
+					</td>
+
+				</tr>
 
 			</table><!-- end content02_tb1 第一个表格结束 -->
 
@@ -794,6 +810,14 @@
             		</td>
 
 	    			</tr>
+					<tr style="display: block;margin-top:20px;">
+						<td class="name-c">上课类型</td>
+						<td>
+							<input id="L4ee" name="pkType" data-options="editable:false" class="easyui-combobox"
+								   style="width:270px;height: 34px;">
+						</td>
+
+					</tr>
 
 	    			<tr style="display: block;margin-top:20px;">
 	    			<td class="name-c">教&nbsp;&nbsp;&nbsp;&nbsp;室</td>

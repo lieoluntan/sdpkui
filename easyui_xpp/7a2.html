@@ -59,7 +59,6 @@
 
             var viewArr = $.cookie("rsList").split(",");
             for (var i = 0; i < viewArr.length; i++) {
-                console.log("第"+i+"个："+viewArr[i]);
                 if(viewArr[i]=="Gb2") {$( "#delbut" ).show();}
                 if(viewArr[i]=="Gb1") {$( "#opener" ).show();}
             }//end for
@@ -100,7 +99,7 @@
         "ajax": "/sdpk/aaContrtext?qqiu=list",
         "columns": [
             { "data": "cNum" },
-            { "data": "stuUuid" },
+            { "data": "stuName" },
             { "data": "cDate" },
             { "data": "org" },
             { "data": "totalCount" },
@@ -143,8 +142,7 @@
                 data: JSON.stringify(send_data),
                 contentType: "application/json;charset=UTF-8", 
                 success:function(result){
-                    var obj = JSON.parse(result);
-                    alert(obj.message);
+                    alert("删除完成");
                     window.location.reload();
 
                 }
@@ -192,7 +190,7 @@
             objR4 = JSON.parse(result);
             var a2dataR4 = objR4.data;
             for(var i=0;i<a2dataR4.length;i++){
-                $('#stuUuid').append('<option value="'+a2dataR4[i].name+'">'+a2dataR4[i].name+'</option>')
+                $('#stuUuid').append('<option value="'+a2dataR4[i].uuid+'">'+a2dataR4[i].name+'</option>')
             }
             // $('#stuUuid').combobox({
             //     data: a2dataR4,
@@ -217,7 +215,7 @@
             index = i+1;
             date = {
                 "onePriceA":tabledata.conPriceList[i].onePriceA,
-                "countGiveA":tabledata.conPriceList[i].countGiveA,
+                "countA":tabledata.conPriceList[i].countA,
                 "delPriceA":tabledata.conPriceList[i].delPriceA,
                 "countGiveA":tabledata.conPriceList[i].countGiveA,
                 "priceType":tabledata.conPriceList[i].priceType=='LineUpA'?'线上':'线下',
@@ -263,7 +261,7 @@
             "data": data2a,
             "columns": [
                 {"data": "onePriceA"},
-                {"data": "countGiveA"},
+                {"data": "countA"},
                 {"data": "delPriceA"},
                 {"data": "countGiveA"},
                 {"data": "priceType"},
@@ -691,7 +689,6 @@
                             return false;
                         }
                 }//end for
-                console.log("合同前两行输入框验证，有值！！");
                 return true;
             }
         //验证日期输入框
@@ -707,7 +704,6 @@
                             alert("请填写日期框"+c1+"的值");
                             return false;
                         }
-                console.log("日期验证，有值！"+c1);
                 return true;
             }
             //验证6个数字框
@@ -724,7 +720,6 @@
                             return false;
                         }
                 }//end for
-                console.log("6个数字输入框验证，有值！");
                 return true;
             }
             //验证上课类型
@@ -811,10 +806,9 @@
                     // data: JSON.stringify(send_edit_data),
                     contentType: "application/json;charset=UTF-8",
                     success:function(result){
-
-                        var obj = JSON.parse(result);
-                        alert(obj.message);
-                    window.location.reload();
+                    result = JSON.parse(result);
+                    alert(result.message);
+                    // window.location.reload();
                     }
 
                 });
@@ -921,7 +915,6 @@
             document.getElementById("sumLineUpA").value = suA;
             document.getElementById("sumLineDownB").value = sdB;
             alert("总支付，总次数已更新");
-            console.log(tabledata.uuid);
         }
 
         function setTable() {
@@ -929,7 +922,6 @@
             var f2 = yzDate();
             var f3 = yzNumBox();
             var f4 = yzSkSize();
-            console.log(tabledata);
             if(f1 == true && f2 == true && f3 == true &&f4==true){
                 var sumPriceA = document.getElementById("sumPriceA").value;
                 var sumCountA = document.getElementById("sumCountA").value;
@@ -943,7 +935,7 @@
 
                 date = {
                     "onePriceA":onePriceA,
-                    "countGiveA":countGiveA,
+                    "countA":countA,
                     "delPriceA":delPriceA,
                     "countGiveA":countGiveA,
                     "priceType":priceType,
@@ -983,7 +975,7 @@
 
                     "columns": [
                         {"data": "onePriceA"},
-                        {"data": "countGiveA"},
+                        {"data": "countA"},
                         {"data": "delPriceA"},
                         {"data": "countGiveA"},
                         {"data": "priceType"},

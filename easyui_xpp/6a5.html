@@ -249,6 +249,12 @@
                     textField: 'name',
                     selectOnNavigation: false
                 });
+                $('#L4ee').combobox({
+                    data: pktype,
+                    valueField: 'pkType',
+                    textField: 'name',
+                    selectOnNavigation: false
+                });
 
             }// end 1_x2 外圈
 
@@ -584,6 +590,7 @@
                 rowData.croomName = a2data[0].croomName;
                 rowData.weekSome = a2data[0].weekSome;
                 rowData.categoryName = a2data[0].categoryName;
+                rowData.pkType = a2data[0].pkType;
 
 
                 //重新画选择行数据
@@ -643,6 +650,7 @@
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {
                             var result2obj = {};
+
                             result2obj = JSON.parse(result);
                             alert(result2obj.message);
                         }
@@ -721,13 +729,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <!--<input id="L4ee" name="pkType" data-options="editable:false" class="easyui-combobox"-->
-                                   <!--style="width:270px;height: 36px;">-->
-                            <select id="L4ee" name="pkType"style="width:270px;height: 36px;"class=" yzss sel_s">
-                                <option ></option>
-                                <option value="LineUpA">线上</option>
-                                <option value="LineDownB">线下</option>
-                            </select>
+                            <input id="L4ee" name="pkType" data-options="editable:false" class="easyui-combobox"
+                                   style="width:270px;height: 36px;">
+                            <!--<select id="L4ee" name="pkType"style="width:270px;height: 36px;"class=" yzss sel_s">-->
+                                <!--<option ></option>-->
+                                <!--<option value="LineUpA">线上</option>-->
+                                <!--<option value="LineDownB">线下</option>-->
+                            <!--</select>-->
                         </td>
                     </tr>
 

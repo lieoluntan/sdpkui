@@ -363,7 +363,6 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
-                var obj = $('#content02_tb3');
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
                     bSort:false,
@@ -419,17 +418,17 @@
                         // }
                         if (aData.courConflict) {
 
-                            $('td:eq(1)', nRow).html('<b style="color:red;>冲突</b>');
+                            $('td:eq(1)', nRow).html('<b style="color:red;">冲突</b>');
 
                         }
                         if (aData.empConflict) {
 
-                            $('td:eq(7)', nRow).html('<b style="color:red;>冲突</b>');
+                            $('td:eq(7)', nRow).html('<b style="color:red;">冲突</b>');
 
                         }
                         if (aData.croomConflict) {
 
-                            $('td:eq(9)', nRow).html('<b style="color:red;>冲突</b>');
+                            $('td:eq(9)', nRow).html('<b style="color:red;">冲突</b>');
 
                         }
 

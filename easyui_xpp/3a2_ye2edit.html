@@ -26,6 +26,12 @@
 		.dataTables_wrapper .dataTables_paginate{
 			float: right;
 		}
+		.btn-box{
+			margin-right: 0;
+		}
+		.tab-mians{
+			width: 100%;
+		}
 	</style>
     <script type="text/javascript">
 
@@ -556,56 +562,49 @@
 		<!-- start  ye_6_content03_partRight  右半页开始-->
 	     <div id="ye_6_content03_partRight">
 
-	     	<div id="content03_1_div">
-
-
-
-	     	<table id="content03_2_tb" class="display tab-mians" cellspacing="0" width="100%">
+	     	<table id="content03_2_tb" class="display tab-mians" cellspacing="0" style="width: 100%">
 
 	     	<!--start 表头 -->
                         <thead class="tab-tit">
                             <tr>
-                                <th style="width:120px;">课程</th>
-                                <th style="width:80px;">(冲突)</th>
-                                <th style="width:80px;">类别</th>
-                                <th style="width:140px;">上课日期</th>
-                                <th style="width:120px;">上课时间</th>
-                                <th style="width:100px;">星期</th>
-                                <th style="width:110px;">老师</th>
-                                <th style="width:80px;">(冲突)</th>
-                                <th style="width:110px;">教室</th>
-                                <th style="width:80px;">(冲突)</th>
+                                <th style="min-width:120px;">课程</th>
+                                <th style="min-width:80px;">(冲突)</th>
+                                <th style="min-width:80px;">类别</th>
+                                <th style="min-width:140px;">上课日期</th>
+                                <th style="min-width:120px;">上课时间</th>
+                                <th style="min-width:100px;">星期</th>
+                                <th style="min-width:110px;">老师</th>
+                                <th style="min-width:80px;">(冲突)</th>
+                                <th style="min-width:110px;">教室</th>
+                                <th style="min-width:80px;">(冲突)</th>
                             </tr>
                         </thead>
                         <!--end 表头 -->
+						<tbody></tbody>
                         <!-- start 表尾 -->
                         <tfoot class="tab-tit">
                            <tr>
-							   <th style="width:120px;">课程</th>
-							   <th style="width:80px;">(冲突)</th>
-							   <th style="width:80px;">类别</th>
-							   <th style="width:140px;">上课日期</th>
-							   <th style="width:120px;">上课时间</th>
-							   <th style="width:100px;">星期</th>
-							   <th style="width:110px;">老师</th>
-							   <th style="width:80px;">(冲突)</th>
-							   <th style="width:110px;">教室</th>
-							   <th style="width:80px;">(冲突)</th>
+							   <th style="min-width:120px;">课程</th>
+							   <th style="min-width:80px;">(冲突)</th>
+							   <th style="min-width:80px;">类别</th>
+							   <th style="min-width:140px;">上课日期</th>
+							   <th style="min-width:120px;">上课时间</th>
+							   <th style="min-width:100px;">星期</th>
+							   <th style="min-width:110px;">老师</th>
+							   <th style="min-width:80px;">(冲突)</th>
+							   <th style="min-width:110px;">教室</th>
+							   <th style="min-width:80px;">(冲突)</th>
                             </tr>
                         </tfoot>
                         <!-- end 表尾 -->
 
-                        <tbody>
 
-                        </tbody>
 
 	     	</table><!-- end content03_2_tb -->
 
-	     	</div><!--end content03_1_div -->
+<!--end content03_1_div -->
 
 	     	<div id="content03_2_div">
-
-	     	<div></div>
 
 	     	<button id="confirmAdd" class="btn-class btn-conf"> 确认保存</button>
 
@@ -683,7 +682,7 @@ height: 490px;padding-left:20px;">
             $('.close-item').click(function(){
                 $('.alert-main').hide()
             })
-        })
+        });
 	</script>
 	<!-- E--公用弹窗 -->
 </body>

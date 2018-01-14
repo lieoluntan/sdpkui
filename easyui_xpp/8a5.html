@@ -75,7 +75,8 @@
                     var obj = {};
                     obj = JSON.parse(result);
                     alert(obj.message);
-                    obj.message=='信息值：成功'?window.location.href="8a6.html":'';
+                    var $parent = self.parent.$;
+                    $parent('#menu_h6').click();
                 }
             });
         });

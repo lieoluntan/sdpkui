@@ -809,7 +809,8 @@
                     success:function(result){
                     result = JSON.parse(result);
                     alert(result.message);
-                    // window.location.reload();
+                    $( "#dialog" ).dialog( "close" );
+                    window.location.reload();
                     }
 
                 });

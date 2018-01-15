@@ -270,7 +270,11 @@
             send_edit_data.six = document.ffname.week6.checked;
             send_edit_data.seven = document.ffname.week7.checked;
             send_edit_data.pkType = document.ffname.pkType.value;
- 
+			/*验证下拉框*/
+            if(send_edit_data.courseUuid == ""||send_edit_data.empUuid==""||send_edit_data.classroomUuid==""){
+                alert("请选择下拉框的值");
+                return false;
+            }
             $.ajax({
                 
                 url:"/sdpk/aaPaiKe?qqiu=listPreview",

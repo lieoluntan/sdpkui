@@ -75,6 +75,8 @@
                     var obj = {};
                     obj = JSON.parse(result);
                     alert(obj.message);
+                    var $parent = self.parent.$;
+                    $parent('#menu_h6').click();
                 }
             });
         });

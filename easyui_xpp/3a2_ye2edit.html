@@ -57,7 +57,7 @@
     //end 全局函数
 
     $(document).ready(function() {
-
+        var pktype = [{"pkType":"LineUpA","name":"线上"},{"pkType":"LineDownB","name":"线下"}];
 		/*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
         //初始化加载下拉框000000000
@@ -171,6 +171,12 @@
                 textField: 'name',
                 selectOnNavigation: false
             });
+	$('#L4ee_dlg').combobox({
+		data: pktype,
+		valueField: 'pkType',
+		textField: 'name',
+		selectOnNavigation: false
+	});
 
     }// end 1_x1 外圈 
     //步骤1,结束
@@ -210,6 +216,8 @@
         ckObj. croomName = $.cookie('c1_croomName');
         ckObj. weekSome = $.cookie('c1_weekSome');
         ckObj. categoryName = $.cookie('c1_categoryName');
+		 ckObj. pkTypeName = $.cookie('c1_pkTypeName');
+		 ckObj. pkType = $.cookie('c1_pkType');
         //冲突自己定义为false
         ckObj.courConflict = false;
         ckObj.empConflict = false;
@@ -229,6 +237,7 @@
     // var a2obj = {};
     // a2obj = JSON.parse(result);
     var a2data = ckObjList;
+    console.log(a2data);
     table_full = $('#content03_2_tb').DataTable( {
         "dom":'frtpi',
         "bLengthChange":false,
@@ -264,7 +273,7 @@
         columns: [
             { "data": "courseName" },
             { "data": "courConflict" },
-            { "data": "categoryName" },
+            { "data": "pkTypeName" },
             { "data": "keDateTime" },
             { "data": "keStartTime" },
             { "data": "weekSome" },
@@ -388,7 +397,10 @@
          // document.ffnameDlg.classroomUuid.value= rowData.classroomUuid;
          aTemple = {}; aTemple = rowData.classroomUuid;
          $('#L3ee_dlg').combobox('setValue', aTemple);
- 
+        aTemple = {};
+        aTemple = rowData.pkType;
+        $('#L4ee_dlg').combobox('setValue', aTemple);
+        console.log(rowData);
         var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
         //alert(n1); //alert是弹出对话框，会弹出一个123的对话框
         //调用父级弹窗start
@@ -414,7 +426,7 @@
             var delRowData = {};
             //获取选择那一行的数据
             delRowData = table_full.row('.selected').data();
-            console.log("选择行的日期"+delRowData.keDateTime);
+            console.log(delRowData);
             
             // var param = $("#ff").serializeObject();
             var send_edit_data = {};
@@ -430,6 +442,8 @@
             send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
             send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
             send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
+            console.log(send_edit_data);
+        	send_edit_data.pkType = document.ffnameDlg.pkType.value;
             send_edit_data.status = "正常";
         
    
@@ -472,14 +486,14 @@
          rowData.empConflict = a2data[0].empConflict;
          rowData.classroomUuid = a2data[0].classroomUuid;
          rowData.croomConflict = a2data[0].croomConflict;
-
+         rowData.pkTypeName = a2data[0].pkType=='LineUpA'?'线上':'线下';
          rowData.courConflict = a2data[0].courConflict;
          rowData.courseName = a2data[0].courseName;
          rowData.empName = a2data[0].empName;
          rowData.croomName = a2data[0].croomName;
          rowData.weekSome = a2data[0].weekSome;
          rowData.categoryName = a2data[0].categoryName;
-
+         rowData.pkType = a2data[0].pkType;
 
          //重新画选择行数据
          table_full.row( '.selected' ).data( rowData ).draw();
@@ -530,6 +544,7 @@
                 var result2obj = {};
                 result2obj = JSON.parse(result);
                 alert(result2obj.message);
+                window.location.href='3a2_ye2.html';
                 }
              
             });
@@ -618,7 +633,7 @@
 
 		<!-- 最后放对话框div -->
 		<div id="dialog" title="调课" closed="true" class="alert-w" style="width:420px;
-height: 490px;padding-left:20px;">
+height: 560px;padding-left:20px;">
                 <!--<p>对话框</p>-->
                 <form id="ff" name="ffnameDlg" method="post" > 
 		<!-- 对话框展现内容 -->
@@ -654,6 +669,14 @@ height: 490px;padding-left:20px;">
             		</td>
 
 	    			</tr>
+					<tr >
+						<td class="name-c">上课类型</td>
+						<td>
+							<input id="L4ee_dlg" name="pkType" data-options="editable:false" class="easyui-combobox"
+								   style="width:260px;height: 34px;">
+						</td>
+
+					</tr>
 
 	    			<tr>
 	    			<td class="name-c">教&nbsp;&nbsp;&nbsp;&nbsp;室</td>

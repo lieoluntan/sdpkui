@@ -32,6 +32,9 @@
         .dataTables_wrapper .dataTables_paginate{
             float: right;
         }
+        .btn-l{
+            float: left;
+        }
     </style>
     <!-- <script src="../js/jquery-1.8.2.js" type="text/javascript"></script> -->
 
@@ -267,7 +270,7 @@
 
     //11月14日新增代码
     //步骤8，点击查看排课进行跳转,cookie传送班级uuid
-    $( "#btnDetail" ).click(function() { 
+    $( "#associated-ht" ).click(function() {
 
         var sRowData = {};
         sRowData = table.row('.selected').data();
@@ -279,7 +282,7 @@
         });//end 8 外圈 close
 
     //步骤9，编辑关系页面一
-    $( "#btn_dian1" ).click(function() { 
+    $( "#associated-bzr" ).click(function() {
 
     	//要初始化一个对象，不然会报undifine未定义错误
             var delRowData = {};
@@ -314,15 +317,17 @@
 		<div id="ye_2_blank"></div>
 
 		<div id="ye_3_text_container">
-			<div id="header_1" style="background-color:#FFFFFF;width:940px;height: 35px;float:left;">
+			<div id="header_1" style="background-color:#FFFFFF;width:100%;height: 35px;">
                 <h2>我的班级</h2>
             </div>
             <!-- 留空开始 -->
-	    	<div style="background-color:#FFFFFF;width:500px;height: 30px;float:left;box-sizing:border-box; position: relative;z-index: 999;">
+	    	<div style="background-color:#FFFFFF;height: 30px;box-sizing:border-box;z-index: 999;position: relative;width: 500px;">
 			
             <button id="delbut" class="btn-class">删除</button>
             <button id="opener" class="btn-class">编辑</button>
             <button id="btnDetail" class="btn-class">查看排课</button>
+            <button id="associated-bzr" class="btn-class">关联班主任</button>
+            <button id="associated-ht" class="btn-class">关联合同</button>
 	    	</div>
 	    	
             		<!-- 第一个表格结束 -->
@@ -411,11 +416,11 @@
                     </tr>
                     <!-- 第二行结束 -->
                     </table><!-- end  id= header_3_tb3 -->
-                    <table class="tab-style">
+                    <!--<table class="tab-style">
                         <tr>
                             <td class="name-s" style="padding-left:0">关系添加</td>
                             <td><button  class="easyui-linkbutton btn-qr l-btn l-btn-small" id="btn_dian1" style="padding:0 30px;color: red;font-weight: 600;">＋</button></td>
-                        </tr>
+                        </tr>-->
                         <!-- 第二行结束 -->
                     </table>
 

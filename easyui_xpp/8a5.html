@@ -61,11 +61,16 @@
                 return false;
             }
             var treeNodes = $("#tree").tree('getChecked');//获取已选中的元素
+            var treeNode = $("#tree").tree('getChecked','indeterminate');//获取已选中的元素
             var treeCount=[];//存储已选元素的id
             for(var i=0;i<treeNodes.length;i++){
-                treeCount[i] = treeNodes[i].id;
+                treeCount.push(treeNodes[i].id);
+            }
+            for(var i=0;i<treeNode.length;i++){
+                treeCount.push(treeNode[i].id);
             }
             send_data.rsList = treeCount;
+            console.log(send_data);
             $.ajax({
                 url:"/sdpk/aaRole?qqiu=add",
                 type: "POST",

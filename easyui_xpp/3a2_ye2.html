@@ -34,7 +34,7 @@
     <!-- 11月09新增start -->
 
     <script type="text/javascript">
-    var table_ye2;//全局变量
+    var table_ye2,a2data,curD;//全局变量
     $(document).ready(function() {
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
@@ -151,6 +151,7 @@
     var a2obj = {};
     a2obj = JSON.parse(result);
     var a2data = a2obj.data;
+    console.log(a2data);
     table_ye2 = $('#paike_biao').DataTable( {
         bSort:false,
         "dom":'frtpi',
@@ -186,7 +187,7 @@
         data: a2data,
         columns: [
             { "data": "courseName" },
-            { "data": "categoryName" },
+            { "data": "pkTypeName" },
             { "data": "keDateTime" },
             { "data": "keStartTime" },
             { "data": "weekSome" },
@@ -195,6 +196,236 @@
             { "data": "keLongTime" }
         ]
     } );
+        //步骤2，列表选择
+        var selectTable = $('#paike_biao tbody tr').click(function () {
+            // alert("选择了");
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+                console.log(1);
+            }
+            else {
+                table_ye2.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                console.log(2);
+            }//end if
+
+
+
+        } );//end 2 外圈 $('#example tbody').on
+
+        //步骤3，删除按钮单击事件
+        $('#delbut').click( function () {
+
+            //要初始化一个对象，不然会报undifine未定义错误
+            var delRowData = {};
+            //获取选择那一行的数据
+            delRowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
+            //获取选择行中的uuid字段
+            console.log(delRowData);
+            var Auuid = delRowData.uuid;
+
+            //post请求体传给后台的js对象
+            var send_data = {};
+            send_data.uuid = Auuid;
+            // alert( "选择的行的uuid: "+send_data);
+            //调用ajax方法传给后台接口
+            $.ajax({
+
+                url:"/sdpk/aaPaiKe?qqiu=delete",
+                type: "POST",
+                //data: JSON.stringify(param),
+                data: JSON.stringify(send_data),
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    table_ye2.ajax.reload();
+                    curD.ajax.reload();
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
+
+                }
+
+            });//end $.ajax
+
+            table_ye2.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+            curD.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+        } );//end 3 外圈 $('#delbut').click
+        //步骤4，对话框初始配置
+        $( "#dialog" ).dialog({
+            autoOpen: false,
+            show: {
+                effect: "blind",
+                duration: 1000
+            },
+            hide: {
+                effect: "explode",
+                duration: 1000
+            }
+        });//end 4 外圈 dialog
+
+        //步骤5，编辑打开事件
+        $( "#opener" ).click(function() {
+
+
+
+            // alert("加载完表单打开");
+            // $( "#dialog" ).dialog( "open" );
+
+            //表单加载11月21日
+            //要初始化一个对象，不然会报undifine未定义错误
+            var rowData = {};
+            //获取选择那一行的数据
+            rowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
+            console.log(rowData.pkType);
+            //获取选择那一行的数据结束
+            // alert(sRowData.name);
+            var uuid = rowData.uuid;
+            var claUuid = rowData.claUuid;
+            var courseUuid = rowData.courseUuid;
+            var empUuid = rowData.empUuid;
+            var classroomUuid = rowData.classroomUuid;
+            var keDateTime = rowData.keDateTime;
+            var keStartTime = rowData.keStartTime;
+            var keLongTime = rowData.keLongTime;
+            var status = rowData.status;
+            var courseName = rowData.courseName;
+            var empName = rowData.empName;
+            var croomName = rowData.croomName;
+            var weekSome = rowData.weekSome;
+            var categoryName = rowData.categoryName;
+            var pkTypeName = rowData.pkTypeName;
+            var pkType = rowData.pkType;
+            console.log("1变量赋值完毕");
+
+            //传班级uuid到cookie中
+            $.cookie('c1_uuid', uuid);
+            $.cookie('c1_claUuid', claUuid);
+            $.cookie('c1_courseUuid', courseUuid);
+            $.cookie('c1_empUuid', empUuid);
+            $.cookie('c1_classroomUuid', classroomUuid);
+            $.cookie('c1_keDateTime', keDateTime);
+            $.cookie('c1_keStartTime', keStartTime);
+            $.cookie('c1_keLongTime', keLongTime);
+            $.cookie('c1_status', status);
+            $.cookie('c1_courseName', courseName);
+            $.cookie('c1_empName', empName);
+            $.cookie('c1_croomName', croomName);
+            $.cookie('c1_weekSome', weekSome);
+            $.cookie('c1_categoryName', categoryName);
+            $.cookie('c1_pkTypeName', pkTypeName);
+            $.cookie('c1_pkType', pkType);
+            console.log("1cookie赋值完毕");
+
+
+
+            window.location.href="3a2_ye2edit.html"
+            //将选择行的数据，放到cookie中
+
+            //跳转到3a2_ye2edit页面
+
+            //  var aTemple = {};
+            //   aTemple = rowData.courseUuid;
+            //  $('#L1ee_dlg').combobox('setValue', aTemple);
+            //  document.ffnameDlg.keDateTime_Dlg.value= rowData.keDateTime;
+            //  var dateTime = rowData.keDateTime;
+            //  $('#keDateTime_Dlg').datebox('setValue', dateTime);
+            //  document.ffnameDlg.keStartTime.value= rowData.keStartTime;
+            //  document.ffnameDlg.keLongTime.value= rowData.keLongTime;
+            //  aTemple = {}; aTemple = rowData.empUuid;
+            //  $('#L2ee_dlg').combobox('setValue', aTemple);
+
+            //  aTemple = {}; aTemple = rowData.classroomUuid;
+            //  $('#L3ee_dlg').combobox('setValue', aTemple);
+
+            // var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
+            //表单加载 end 11月21日
+
+
+        });//end 5 外圈 opener 结束打开对话框
+        //步骤6，编辑确定事件
+        //TODO:提交表单数据到服务器调用查询冲突接口
+        $( "#submitForm" ).click(function() {
+            //要初始化一个对象，不然会报undifine未定义错误
+            console.log("点击了确定");
+            var delRowData = {};
+            //获取选择那一行的数据
+            delRowData = table_ye2.row('.selected').data();
+            console.log("选择行的日期"+delRowData.keDateTime);
+
+            // var param = $("#ff").serializeObject();
+            var send_edit_data = {};
+            send_edit_data.uuid = delRowData.uuid;
+            send_edit_data.claUuid = $.cookie('UidCla');
+            send_edit_data.courseUuid = document.ffnameDlg.courseUuid.value;
+            send_edit_data.empUuid = document.ffnameDlg.empUuid.value;
+            send_edit_data.classroomUuid = document.ffnameDlg.classroomUuid.value;
+
+            //日期框通过获取id来取值，用表单获取不到easyui日期框的值
+            var ceshi = $('#keDateTime_Dlg').datebox('getValue');
+            console.log(ceshi);
+            send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
+            send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
+            send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
+            send_edit_data.status = "正常";
+
+
+            $.ajax({
+
+                url:"/sdpk/aaPaiKe?qqiu=queryConflict",
+                type: "POST",
+                //data: JSON.stringify(param),
+                data: JSON.stringify(send_edit_data),
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
+
+                    huiFunc_submit(result);
+                    $( "#dialog" ).dialog( "close" );
+                }
+
+            });
+
+
+        });//end 6 外圈 submitForm
+
+        //步骤6_x1，冲突查询返回的数据赋值到选择行上
+        function huiFunc_submit(result){
+            console.log("回调huiFunc_submit中");
+            var a2obj = {};
+            a2obj = JSON.parse(result);
+            var a2data = {};
+            a2data = a2obj.data;
+
+            //要初始化一个对象，不然会报undifine未定义错误
+            var rowData = {};
+            //获取选择那一行的数据
+            rowData = table_ye2.row('.selected').data();
+            rowData.courseUuid = a2data[0].courseUuid;
+            rowData.keDateTime = a2data[0].keDateTime;
+            rowData.keStartTime = a2data[0].keStartTime;
+            rowData.keLongTime = a2data[0].keLongTime;
+            rowData.empUuid = a2data[0].empUuid;
+            rowData.empConflict = a2data[0].empConflict;
+            rowData.classroomUuid = a2data[0].classroomUuid;
+            rowData.croomConflict = a2data[0].croomConflict;
+
+            rowData.courConflict = a2data[0].courConflict;
+            rowData.courseName = a2data[0].courseName;
+            rowData.empName = a2data[0].empName;
+            rowData.croomName = a2data[0].croomName;
+            rowData.weekSome = a2data[0].weekSome;
+            rowData.categoryName = a2data[0].categoryName;
+
+
+            //重新画选择行数据
+            table_ye2.row( '.selected' ).data( rowData ).draw();
+
+            var allData = {};
+            allData = table_ye2.data();
+            //alert("更新行结束");
+
+
+        }// end 1_x1 外圈
 
 //        日历点击事件
         $('#ye_3_content02_date').calendar({
@@ -227,8 +458,8 @@
                     currTable= a2data[arrIndex[i]];
                     xppArr.push(currTable);
                 }
-                
-                    var curD = $('#paike_biao').DataTable( {
+
+                     curD = $('#paike_biao').DataTable( {
                         "dom":'frtpi',
                         "bLengthChange":false,
                         bSort:false,
@@ -262,7 +493,7 @@
                        data: xppArr,
                         columns: [
                             { "data": "courseName" },
-                            { "data": "categoryName" },
+                            { "data": "pkTypeName" },
                             { "data": "keDateTime" },
                             { "data": "keStartTime" },
                             { "data": "weekSome" },
@@ -272,8 +503,232 @@
                         ]
                     } );
                     console.log(2222);
+                //步骤2，列表选择
+                var selectTable = $('#paike_biao tbody tr').click(function () {
+                    // alert("选择了");
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                        console.log(1);
+                    }
+                    else {
+                        curD.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                        console.log(2);
+                    }//end if
 
 
+
+                } );//end 2 外圈 $('#example tbody').on
+
+                //步骤3，删除按钮单击事件
+                $('#delbut').click( function () {
+
+                    //要初始化一个对象，不然会报undifine未定义错误
+                    var delRowData = {};
+                    //获取选择那一行的数据
+                     delRowData = curD.row('.selected').data();
+                    //获取选择行中的uuid字段
+                    console.log(delRowData);
+                    var Auuid = delRowData.uuid;
+
+                    //post请求体传给后台的js对象
+                    var send_data = {};
+                    send_data.uuid = Auuid;
+                    // alert( "选择的行的uuid: "+send_data);
+                    //调用ajax方法传给后台接口
+                    $.ajax({
+
+                           url:"/sdpk/aaPaiKe?qqiu=delete",
+                           type: "POST",
+                           //data: JSON.stringify(param),
+                           data: JSON.stringify(send_data),
+                           contentType: "application/json;charset=UTF-8",
+                           success:function(result){
+                               curD.ajax.reload();
+                               var obj = JSON.parse(result);
+                               alert(obj.message);
+
+                           }
+
+                    });//end $.ajax
+
+                    curD.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+                } );//end 3 外圈 $('#delbut').click
+                    //步骤4，对话框初始配置
+                $( "#dialog" ).dialog({
+                    autoOpen: false,
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    hide: {
+                        effect: "explode",
+                        duration: 1000
+                    }
+                });//end 4 外圈 dialog
+
+                //步骤5，编辑打开事件
+                $( "#opener" ).click(function() {
+
+
+
+                    // alert("加载完表单打开");
+                    // $( "#dialog" ).dialog( "open" );
+
+                    //表单加载11月21日
+                    //要初始化一个对象，不然会报undifine未定义错误
+                    var rowData = {};
+                    //获取选择那一行的数据
+                    rowData = curD.row('.selected').data();
+                    //获取选择那一行的数据结束
+                    // alert(sRowData.name);
+                    var uuid = rowData.uuid;
+                    var claUuid = rowData.claUuid;
+                    var courseUuid = rowData.courseUuid;
+                    var empUuid = rowData.empUuid;
+                    var classroomUuid = rowData.classroomUuid;
+                    var keDateTime = rowData.keDateTime;
+                    var keStartTime = rowData.keStartTime;
+                    var keLongTime = rowData.keLongTime;
+                    var status = rowData.status;
+                    var courseName = rowData.courseName;
+                    var empName = rowData.empName;
+                    var croomName = rowData.croomName;
+                    var weekSome = rowData.weekSome;
+                    var categoryName = rowData.categoryName;
+                    var pkTypeName = rowData.pkTypeName;
+                    console.log("1变量赋值完毕");
+
+                    //传班级uuid到cookie中
+                    $.cookie('c1_uuid', uuid);
+                    $.cookie('c1_pkTypeName', pkTypeName);
+                    $.cookie('c1_claUuid', claUuid);
+                    $.cookie('c1_courseUuid', courseUuid);
+                    $.cookie('c1_empUuid', empUuid);
+                    $.cookie('c1_classroomUuid', classroomUuid);
+                    $.cookie('c1_keDateTime', keDateTime);
+                    $.cookie('c1_keStartTime', keStartTime);
+                    $.cookie('c1_keLongTime', keLongTime);
+                    $.cookie('c1_status', status);
+                    $.cookie('c1_courseName', courseName);
+                    $.cookie('c1_empName', empName);
+                    $.cookie('c1_croomName', croomName);
+                    $.cookie('c1_weekSome', weekSome);
+                    $.cookie('c1_categoryName', categoryName);
+
+                    console.log("1cookie赋值完毕");
+
+
+
+                    window.location.href="3a2_ye2edit.html"
+                    //将选择行的数据，放到cookie中
+
+                    //跳转到3a2_ye2edit页面
+
+                    //  var aTemple = {};
+                    //   aTemple = rowData.courseUuid;
+                    //  $('#L1ee_dlg').combobox('setValue', aTemple);
+                    //  document.ffnameDlg.keDateTime_Dlg.value= rowData.keDateTime;
+                    //  var dateTime = rowData.keDateTime;
+                    //  $('#keDateTime_Dlg').datebox('setValue', dateTime);
+                    //  document.ffnameDlg.keStartTime.value= rowData.keStartTime;
+                    //  document.ffnameDlg.keLongTime.value= rowData.keLongTime;
+                    //  aTemple = {}; aTemple = rowData.empUuid;
+                    //  $('#L2ee_dlg').combobox('setValue', aTemple);
+
+                    //  aTemple = {}; aTemple = rowData.classroomUuid;
+                    //  $('#L3ee_dlg').combobox('setValue', aTemple);
+
+                    // var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
+                    //表单加载 end 11月21日
+
+
+                });//end 5 外圈 opener 结束打开对话框
+                //步骤6，编辑确定事件
+                //TODO:提交表单数据到服务器调用查询冲突接口
+                $( "#submitForm" ).click(function() {
+                    //要初始化一个对象，不然会报undifine未定义错误
+                    console.log("点击了确定");
+                    var delRowData = {};
+                    //获取选择那一行的数据
+                    delRowData = curD.row('.selected').data();
+                    console.log("选择行的日期"+delRowData.keDateTime);
+
+                    // var param = $("#ff").serializeObject();
+                    var send_edit_data = {};
+                    send_edit_data.uuid = delRowData.uuid;
+                    send_edit_data.claUuid = $.cookie('UidCla');
+                    send_edit_data.courseUuid = document.ffnameDlg.courseUuid.value;
+                    send_edit_data.empUuid = document.ffnameDlg.empUuid.value;
+                    send_edit_data.classroomUuid = document.ffnameDlg.classroomUuid.value;
+
+                    //日期框通过获取id来取值，用表单获取不到easyui日期框的值
+                    var ceshi = $('#keDateTime_Dlg').datebox('getValue');
+                    console.log(ceshi);
+                    send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
+                    send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
+                    send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
+                    send_edit_data.status = "正常";
+
+
+                    $.ajax({
+
+                        url:"/sdpk/aaPaiKe?qqiu=queryConflict",
+                        type: "POST",
+                        //data: JSON.stringify(param),
+                        data: JSON.stringify(send_edit_data),
+                        contentType: "application/json;charset=UTF-8",
+                        success:function(result){
+                            var obj = JSON.parse(result);
+                            alert(obj.message);
+
+                            huiFunc_submit(result);
+                            $( "#dialog" ).dialog( "close" );
+                        }
+
+                    });
+
+
+                });//end 6 外圈 submitForm
+
+                //步骤6_x1，冲突查询返回的数据赋值到选择行上
+                function huiFunc_submit(result){
+                    console.log("回调huiFunc_submit中");
+                    var a2obj = {};
+                    a2obj = JSON.parse(result);
+                    var a2data = {};
+                    a2data = a2obj.data;
+
+                    //要初始化一个对象，不然会报undifine未定义错误
+                    var rowData = {};
+                    //获取选择那一行的数据
+                    rowData = curD.row('.selected').data();
+                    rowData.courseUuid = a2data[0].courseUuid;
+                    rowData.keDateTime = a2data[0].keDateTime;
+                    rowData.keStartTime = a2data[0].keStartTime;
+                    rowData.keLongTime = a2data[0].keLongTime;
+                    rowData.empUuid = a2data[0].empUuid;
+                    rowData.empConflict = a2data[0].empConflict;
+                    rowData.classroomUuid = a2data[0].classroomUuid;
+                    rowData.croomConflict = a2data[0].croomConflict;
+
+                    rowData.courConflict = a2data[0].courConflict;
+                    rowData.courseName = a2data[0].courseName;
+                    rowData.empName = a2data[0].empName;
+                    rowData.croomName = a2data[0].croomName;
+                    rowData.weekSome = a2data[0].weekSome;
+                    rowData.categoryName = a2data[0].categoryName;
+
+
+                    //重新画选择行数据
+                    curD.row( '.selected' ).data( rowData ).draw();
+
+                    var allData = {};
+                    allData = curD.data();
+                    //alert("更新行结束");
+
+
+                }// end 1_x1 外圈
             }
         });
 
@@ -287,7 +742,7 @@
     var keDayList = new Array();
     var a2obj = {};
     a2obj = JSON.parse(result);
-    var a2data = a2obj.data;
+     a2data = a2obj.data;
     $.each(a2data, function (index, obj) {
                 // alert(index + "...日期有..." + obj.keDateTime);
                 var dateStr = new String(obj.keDateTime);
@@ -327,229 +782,10 @@
     }//end method list2Calend
 
 
-    //步骤2，列表选择
-    var selectTable = $('#paike_biao tbody').on( 'click', 'tr', function () {
-        // alert("选择了");
-        if ( $(this).hasClass('selected') ) {
-            $(this).removeClass('selected');
-        }
-        else {
-            table_ye2.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }//end if 
-
-        
-
-    } );//end 2 外圈 $('#example tbody').on
-
-    //步骤3，删除按钮单击事件
-    $('#delbut').click( function () {
-
-        //要初始化一个对象，不然会报undifine未定义错误
-        var delRowData = {};
-        //获取选择那一行的数据
-         delRowData = table_ye2.row('.selected').data();
-         //获取选择行中的uuid字段
-         var Auuid = delRowData.uuid;
-         
-         //post请求体传给后台的js对象
-         var send_data = {};
-         send_data.uuid = Auuid;
-         // alert( "选择的行的uuid: "+send_data);
-         //调用ajax方法传给后台接口
-         $.ajax({
-                
-                url:"/sdpk/aaPaiKe?qqiu=delete",
-                type: "POST",
-                //data: JSON.stringify(param),
-                data: JSON.stringify(send_data),
-                contentType: "application/json;charset=UTF-8", 
-                success:function(result){
-                    // table_ye2.ajax.reload();
-                    var obj = JSON.parse(result);
-                    alert(obj.message);
-
-                }
-             
-            });//end $.ajax
-
-         table_ye2.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
-    } );//end 3 外圈 $('#delbut').click
-
-    //步骤4，对话框初始配置
-    $( "#dialog" ).dialog({
-      autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 1000
-      },
-      hide: {
-        effect: "explode",
-        duration: 1000
-      }
-    });//end 4 外圈 dialog
-
-    //步骤5，编辑打开事件
-    $( "#opener" ).click(function() {
-        
-        
-        
-        // alert("加载完表单打开");
-      // $( "#dialog" ).dialog( "open" );
-     
-     //表单加载11月21日
-        //要初始化一个对象，不然会报undifine未定义错误
-        var rowData = {};
-        //获取选择那一行的数据
-         rowData = table_ye2.row('.selected').data();
-         //获取选择那一行的数据结束
-         // alert(sRowData.name);
-        var uuid = rowData.uuid;
-        var claUuid = rowData.claUuid;
-        var courseUuid = rowData.courseUuid;
-        var empUuid = rowData.empUuid;
-        var classroomUuid = rowData.classroomUuid;
-        var keDateTime = rowData.keDateTime;
-        var keStartTime = rowData.keStartTime;
-        var keLongTime = rowData.keLongTime;
-        var status = rowData.status;
-        var courseName = rowData.courseName;
-        var empName = rowData.empName;
-        var croomName = rowData.croomName;
-        var weekSome = rowData.weekSome;
-        var categoryName = rowData.categoryName;
-        console.log("1变量赋值完毕");
-
-        //传班级uuid到cookie中
-        $.cookie('c1_uuid', uuid);
-        $.cookie('c1_claUuid', claUuid);
-        $.cookie('c1_courseUuid', courseUuid);
-        $.cookie('c1_empUuid', empUuid);
-        $.cookie('c1_classroomUuid', classroomUuid);
-        $.cookie('c1_keDateTime', keDateTime);
-        $.cookie('c1_keStartTime', keStartTime);
-        $.cookie('c1_keLongTime', keLongTime);
-        $.cookie('c1_status', status);
-        $.cookie('c1_courseName', courseName);
-        $.cookie('c1_empName', empName);
-        $.cookie('c1_croomName', croomName);
-        $.cookie('c1_weekSome', weekSome);
-        $.cookie('c1_categoryName', categoryName);
-
-        console.log("1cookie赋值完毕");
 
 
 
-        window.location.href="3a2_ye2edit.html"
-         //将选择行的数据，放到cookie中
-         
-         //跳转到3a2_ye2edit页面
-         
-        //  var aTemple = {};
-        //   aTemple = rowData.courseUuid;
-        //  $('#L1ee_dlg').combobox('setValue', aTemple);
-        //  document.ffnameDlg.keDateTime_Dlg.value= rowData.keDateTime;
-        //  var dateTime = rowData.keDateTime;
-        //  $('#keDateTime_Dlg').datebox('setValue', dateTime);
-        //  document.ffnameDlg.keStartTime.value= rowData.keStartTime;
-        //  document.ffnameDlg.keLongTime.value= rowData.keLongTime;
-        //  aTemple = {}; aTemple = rowData.empUuid;
-        //  $('#L2ee_dlg').combobox('setValue', aTemple);
-         
-        //  aTemple = {}; aTemple = rowData.classroomUuid;
-        //  $('#L3ee_dlg').combobox('setValue', aTemple);
- 
-        // var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
-        //表单加载 end 11月21日
-        
 
-    });//end 5 外圈 opener 结束打开对话框
-
-    //步骤6，编辑确定事件
-    //TODO:提交表单数据到服务器调用查询冲突接口
-    $( "#submitForm" ).click(function() { 
-        //要初始化一个对象，不然会报undifine未定义错误
-        console.log("点击了确定");
-            var delRowData = {};
-            //获取选择那一行的数据
-            delRowData = table_ye2.row('.selected').data();
-            console.log("选择行的日期"+delRowData.keDateTime);
-            
-            // var param = $("#ff").serializeObject();
-            var send_edit_data = {};
-            send_edit_data.uuid = delRowData.uuid;
-            send_edit_data.claUuid = $.cookie('UidCla');
-            send_edit_data.courseUuid = document.ffnameDlg.courseUuid.value;
-            send_edit_data.empUuid = document.ffnameDlg.empUuid.value;
-            send_edit_data.classroomUuid = document.ffnameDlg.classroomUuid.value;
-
-            //日期框通过获取id来取值，用表单获取不到easyui日期框的值
-            var ceshi = $('#keDateTime_Dlg').datebox('getValue');
-            console.log(ceshi);
-            send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
-            send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
-            send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
-            send_edit_data.status = "正常";
-        
-   
-            $.ajax({
-                
-                url:"/sdpk/aaPaiKe?qqiu=queryConflict",
-                type: "POST",
-                //data: JSON.stringify(param),
-                data: JSON.stringify(send_edit_data),
-                contentType: "application/json;charset=UTF-8", 
-                success:function(result){
-                    var obj = JSON.parse(result);
-                alert(obj.message);
-
-                huiFunc_submit(result);
-                $( "#dialog" ).dialog( "close" );
-                }
-             
-            });
-
-
-    });//end 6 外圈 submitForm
-
-    //步骤6_x1，冲突查询返回的数据赋值到选择行上
-    function huiFunc_submit(result){
-    console.log("回调huiFunc_submit中");
-    var a2obj = {};
-    a2obj = JSON.parse(result);
-    var a2data = {};
-     a2data = a2obj.data;
-
-    //要初始化一个对象，不然会报undifine未定义错误
-        var rowData = {};
-        //获取选择那一行的数据
-         rowData = table_ye2.row('.selected').data();
-         rowData.courseUuid = a2data[0].courseUuid;
-         rowData.keDateTime = a2data[0].keDateTime;
-         rowData.keStartTime = a2data[0].keStartTime;
-         rowData.keLongTime = a2data[0].keLongTime;
-         rowData.empUuid = a2data[0].empUuid;
-         rowData.empConflict = a2data[0].empConflict;
-         rowData.classroomUuid = a2data[0].classroomUuid;
-         rowData.croomConflict = a2data[0].croomConflict;
-
-         rowData.courConflict = a2data[0].courConflict;
-         rowData.courseName = a2data[0].courseName;
-         rowData.empName = a2data[0].empName;
-         rowData.croomName = a2data[0].croomName;
-         rowData.weekSome = a2data[0].weekSome;
-         rowData.categoryName = a2data[0].categoryName;
-
-
-         //重新画选择行数据
-         table_ye2.row( '.selected' ).data( rowData ).draw();
-
-    	var allData = {};
-    	 allData = table_ye2.data();
-         //alert("更新行结束");
-
-
-    }// end 1_x1 外圈 
 
     
     

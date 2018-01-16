@@ -102,26 +102,26 @@
             { "data": "classDate" },
             { "data": "status" },
             { "data": "remark" }
-        ],
-        initComplete: function () {
-            var api = this.api();
-            api.columns().indexes().flatten().each( function ( i ) {
-                var column = api.column( i );
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }//end initComplete
+        ]
+        // initComplete: function () {
+        //     var api = this.api();
+        //     api.columns().indexes().flatten().each( function ( i ) {
+        //         var column = api.column( i );
+        //         var select = $('<select><option value=""></option></select>')
+        //             .appendTo( $(column.footer()).empty() )
+        //             .on( 'change', function () {
+        //                 var val = $.fn.dataTable.util.escapeRegex(
+        //                     $(this).val()
+        //                 );
+        //                 column
+        //                     .search( val ? '^'+val+'$' : '', true, false )
+        //                     .draw();
+        //             } );
+        //         column.data().unique().sort().each( function ( d, j ) {
+        //             select.append( '<option value="'+d+'">'+d+'</option>' )
+        //         } );
+        //     } );
+        // }//end initComplete
     } );//end 步骤1 外圈  $('#example').DataTable
 
      //步骤2，列表选择
@@ -270,7 +270,7 @@
 
     //11月14日新增代码
     //步骤8，点击查看排课进行跳转,cookie传送班级uuid
-    $( "#associated-ht" ).click(function() {
+    $( "#btnDetail" ).click(function() {
 
         var sRowData = {};
         sRowData = table.row('.selected').data();
@@ -300,6 +300,27 @@
 				//关闭对话框
 				// $( "#dialog" ).dialog( "close" );
 				// alert("班级编辑对话框已关闭");
+
+        });//end 7 外圈 close
+        //步骤10，编辑合同关系页面
+        $( "#associated-ht" ).click(function() {
+
+            //要初始化一个对象，不然会报undifine未定义错误
+            var delRowData = {};
+            //获取选择那一行的数据
+            delRowData = table.row('.selected').data();
+//            alert(delRowData.name);
+            //获取并显示
+            var test = delRowData.uuid;
+//			    alert("关系修改的班级uuid为："+test);
+            var ckSend = delRowData.uuid;
+            //传班级uuid到cookie中
+            $.cookie('UidCla', ckSend);
+            window.location.href="3a1_gx2.html";
+
+            //关闭对话框
+            // $( "#dialog" ).dialog( "close" );
+            // alert("班级编辑对话框已关闭");
 
         });//end 7 外圈 close
 

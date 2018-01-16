@@ -165,25 +165,32 @@ margin:0px; padding:0;text-align:center;}
         $( "#menu_a1" ).hide();
         console.log("进入了隐藏二级菜单!");
         $( "#menu_a2" ).hide();
+             $( "#menu_a3" ).hide();
+             $( "#menu_a4" ).hide();
+             $( "#menu_a5" ).hide();
         $( "#menu_b1" ).hide();
         $( "#menu_b2" ).hide();
+             $( "#menu_b3" ).hide();
         
         $( "#menu_c1" ).hide();
         $( "#menu_c2" ).hide();
+             $( "#menu_c3" ).hide();
         $( "#menu_d1" ).hide();
         $( "#menu_d2" ).hide();
 
         $( "#menu_e1" ).hide();
         $( "#menu_e2" ).hide();
 
-        $( "#menu_f1" ).hide();
-        $( "#menu_f2" ).hide();
-        $( "#menu_f3" ).hide();
-        $( "#menu_f4" ).hide();
+        $( "#menu_f1" ).hide();//按老师浏览暂不开放
+        $( "#menu_f2" ).hide();//按学生浏览暂不开放
+        $( "#menu_f3" ).hide();//按教室浏览暂不开放
+        $( "#menu_f4" ).hide();//按日期浏览暂不开放
         $( "#menu_f5" ).hide();
+             $( "#menu_f6" ).hide();
 
         $( "#menu_g1" ).hide();
         $( "#menu_g2" ).hide();
+             $( "#menu_g3" ).hide();//我的合同 暂不开放
 
         $( "#menu_h1" ).hide();
         $( "#menu_h2" ).hide();
@@ -193,26 +200,38 @@ margin:0px; padding:0;text-align:center;}
         $( "#menu_h6" ).hide();
         for (var i = 0; i < viewArr.length; i++) {
         // console.log("第"+i+"个："+viewArr[i]);   
-        if(viewArr[i]=="Aa") {$( "#menu_a1" ).show();}  
-        if(viewArr[i]=="Ab") {$( "#menu_a2" ).show();}
+        if(viewArr[i]=="Ae") {$( "#menu_a1" ).show();}  //我的今日课，班主任
+        if(viewArr[i]=="Ab") {$( "#menu_a2" ).show();} //全校今日课程
+        if(viewArr[i]=="Ac") {$( "#menu_a3" ).show();} //学生课消统计
+        if(viewArr[i]=="Ad") {$( "#menu_a4" ).show();} //老师课消统计
+        if(viewArr[i]=="Aa") {$( "#menu_a5" ).show();} //我的今日课，老师
+
         if(viewArr[i]=="Ba") {$( "#menu_b1" ).show();}
         if(viewArr[i]=="Bb") {$( "#menu_b2" ).show();}
+        if(viewArr[i]=="Bc") {$( "#menu_b3" ).show();}
+
+
         if(viewArr[i]=="Ca") {$( "#menu_c1" ).show();}
         if(viewArr[i]=="Cb") {$( "#menu_c2" ).show();}
+        if(viewArr[i]=="Cc") {$( "#menu_c3" ).show();}
+
+
         if(viewArr[i]=="Da") {$( "#menu_d1" ).show();}
         if(viewArr[i]=="Db") {$( "#menu_d2" ).show();}
 
         if(viewArr[i]=="Ea") {$( "#menu_e1" ).show();}  
         if(viewArr[i]=="Eb") {$( "#menu_e2" ).show();}
 
-        if(viewArr[i]=="Fa") {$( "#menu_f1" ).show();}
-        if(viewArr[i]=="Fb") {$( "#menu_f2" ).show();}
-        if(viewArr[i]=="Fc") {$( "#menu_f3" ).show();}
-        if(viewArr[i]=="Fd") {$( "#menu_f4" ).show();}
+//        if(viewArr[i]=="Fa") {$( "#menu_f1" ).show();}//按老师浏览暂不开放
+//        if(viewArr[i]=="Fb") {$( "#menu_f2" ).show();}//按学生浏览暂不开放
+//        if(viewArr[i]=="Fc") {$( "#menu_f3" ).show();}//按教室浏览暂不开放
+//        if(viewArr[i]=="Fd") {$( "#menu_f4" ).show();}//按日期浏览暂不开放
         if(viewArr[i]=="Fe") {$( "#menu_f5" ).show();}
+            if(viewArr[i]=="Ff") {$( "#menu_f6" ).show();}
 
         if(viewArr[i]=="Ga") {$( "#menu_g1" ).show();}
         if(viewArr[i]=="Gb") {$( "#menu_g2" ).show();}
+//            if(viewArr[i]=="Gc") {$( "#menu_g3" ).show();}//我的合同暂不开放
 
         if(viewArr[i]=="Ha") {$( "#menu_h1" ).show();}
         if(viewArr[i]=="Hb") {$( "#menu_h2" ).show();}
@@ -226,15 +245,15 @@ margin:0px; padding:0;text-align:center;}
 
         //单击一级菜单
         $( "#menu_1" ).click(function() { 
-        document.getElementById("menu_a1").click();
+        document.getElementById("menu_a0").click();
         });//end 7 外圈 单击
 
         $( "#menu_2" ).click(function() { 
-        document.getElementById("menu_b2").click();
+        document.getElementById("menu_b3").click();
         });//end 7 外圈 单击
 
         $( "#menu_3" ).click(function() { 
-        document.getElementById("menu_c2").click();
+        document.getElementById("menu_c3").click();
         });//end 7 外圈 单击
 
         $( "#menu_4" ).click(function() { 
@@ -259,6 +278,12 @@ margin:0px; padding:0;text-align:center;}
         });//end 7 外圈 单击
 
         //单击二级菜单************************************************************
+             $( "#menu_a0" ).click(function(){
+
+                 document.getElementById('ifr1a0').src="easyui_xpp/1a0.html";
+                 // alert("点击了我的今日课程--班主任");
+                 console.log("点击了我的今日课程--班主任");
+             });
              $( "#menu_a1" ).click(function(){
 
                  document.getElementById('ifr1a1').src="easyui_xpp/1a1.html";
@@ -520,8 +545,9 @@ line-height: 28px;">宋瑛瑛</i>
                     <div id="one" >
                         <ul>
                         	<li><p style="text-align:center;font-size:24px;line-height:56px;box-sizing:border-box;">校区总览</p></li>
+                        	<li><a id="menu_a0" href="#one_0" class="selected">欢迎页</a></li>
                             <li><a id="menu_a1" href="#one_1" >我的今日课-班主任</a></li>
-                            <li><a id="menu_a5" href="#one_5" class="selected">我的今日课-老师</a></li>
+                            <li><a id="menu_a5" href="#one_5" >我的今日课-老师</a></li>
                             <li><a id="menu_a2" href="#one_2" >全校今日课程</a></li>
                             <li><a id="menu_a3" href="#one_3">学生课消统计</a></li>
                             <li><a id="menu_a4" href="#one_4">老师课消统计</a></li>
@@ -604,6 +630,10 @@ line-height: 28px;">宋瑛瑛</i>
                 <div id="menu_blank"></div>
                 <div id="menu_content" class="idTabs" style="background-color:#FFFFFF;width:96%;margin-left: 2%;margin-right:2%;height:850px;float:left;">
                 <!-- <b>内容区域</b><br> -->
+
+                        <div id="one_0">
+                           <iframe id="ifr1a0" name="ifrname" src="easyui_xpp/1a0.html"    style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;"frameborder="0"></iframe>
+                        </div>
 
                         <div id="one_1">
                            <iframe id="ifr1a1" name="ifrname"   style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;"frameborder="0"></iframe>

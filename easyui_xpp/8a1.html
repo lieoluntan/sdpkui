@@ -23,23 +23,28 @@
 		function submitForm(){
 			//$('#ff').form('submit');
 			var param = $("#ff").serializeObject();
-			$.ajax({
-				
-				url:"/sdpk/aaClassRoom?qqiu=add",
-				type: "POST",
-				//data: JSON.stringify(param),
-				data: JSON.stringify(param),
-				contentType: "application/json;charset=UTF-8", 
-				success:function(result){
-                    var obj = JSON.parse(result);
-                    alert(obj.message);
-				//调用父级弹窗start
-            	var $parent = self.parent.$;
-            	$parent('#menu_h2').click();
-        		//调用父级弹窗end
-				}
-			 
-			});
+            if(param.name==''){
+                alert('教室名称不能为空');
+			}else{
+                $.ajax({
+
+                    url:"/sdpk/aaClassRoom?qqiu=add",
+                    type: "POST",
+                    //data: JSON.stringify(param),
+                    data: JSON.stringify(param),
+                    contentType: "application/json;charset=UTF-8",
+                    success:function(result){
+                        var obj = JSON.parse(result);
+                        alert(obj.message);
+                        //调用父级弹窗start
+                        var $parent = self.parent.$;
+                        $parent('#menu_h2').click();
+                        //调用父级弹窗end
+                    }
+
+                });
+			}
+
 			
 		}//end function submitForm
 

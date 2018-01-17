@@ -197,22 +197,32 @@
         ]
     } );
         //步骤2，列表选择
-        var selectTable = $('#paike_biao tbody tr').click(function () {
-            // alert("选择了");
+        // var selectTable = $('#paike_biao tbody tr').click(function () {
+        //     console.log(1);
+        //     // alert("选择了");
+        //     if ( $(this).hasClass('selected') ) {
+        //         $(this).removeClass('selected');
+        //         console.log(1);
+        //     }
+        //     else {
+        //         table_ye2.$('tr.selected').removeClass('selected');
+        //         $(this).addClass('selected');
+        //         console.log(2);
+        //     }//end if
+
+
+
+        // } );//end 2 外圈 $('#example tbody').on
+        $('body').delegate('#paike_biao tbody tr','click',function(){
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                console.log(1);
             }
             else {
                 table_ye2.$('tr.selected').removeClass('selected');
+                $('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
-                console.log(2);
             }//end if
-
-
-
-        } );//end 2 外圈 $('#example tbody').on
-
+        })
         //步骤3，删除按钮单击事件
         $('#delbut').click( function () {
 
@@ -517,21 +527,19 @@
                         ]
                     } );
                 //步骤2，列表选择
-                var selectTable = $('#paike_biao tbody tr').click(function () {
-                    // alert("选择了");
-                    if ( $(this).hasClass('selected') ) {
-                        $(this).removeClass('selected');
-                        console.log(1);
-                    }
-                    else {
-                        curD.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                        console.log(2);
-                    }//end if
+                // var selectTable = $('#paike_biao tbody tr').click(function () {
+                //     // alert("选择了");
+                //     if ( $(this).hasClass('selected') ) {
+                //         $(this).removeClass('selected');
+                //         console.log(1);
+                //     }
+                //     else {
+                //         curD.$('tr.selected').removeClass('selected');
+                //         $(this).addClass('selected');
+                //         console.log(2);
+                //     }//end if
 
-
-
-                } );//end 2 外圈 $('#example tbody').on
+                // } );//end 2 外圈 $('#example tbody').on
 
                 //步骤3，删除按钮单击事件
                 $('#delbut').click( function () {

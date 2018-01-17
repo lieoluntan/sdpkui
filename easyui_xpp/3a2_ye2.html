@@ -275,7 +275,21 @@
             var rowData = {};
             //获取选择那一行的数据
             rowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
-            console.log(rowData.pkType);
+            var time = Number(rowData.keDateTime.split("-").join(""));
+            var currtTime = new Date().toLocaleDateString().split('/');
+            if(currtTime[1]<10){
+                currtTime[1] = "0"+currtTime[1];
+            }
+            if(currtTime[2]<10){
+                currtTime[2] = "0"+currtTime[2];
+            }
+            currtTime = Number(currtTime.join(""));
+            if(time<currtTime){
+                alert("此课程已过期！");
+                return false;
+            }else{
+                alert("可调课！");
+            }
             //获取选择那一行的数据结束
             // alert(sRowData.name);
             var uuid = rowData.uuid;
@@ -579,6 +593,20 @@
                     var rowData = {};
                     //获取选择那一行的数据
                     rowData = curD.row('.selected').data();
+                    var time = Number(rowData.keDateTime.split("-").join(""));
+                    var currtTime = new Date().toLocaleDateString().split('/');
+                    if(currtTime[1]<10){
+                        currtTime[1] = "0"+currtTime[1];
+                    }
+                    if(currtTime[2]<10){
+                        currtTime[2] = "0"+currtTime[2];
+                    }
+                    currtTime = Number(currtTime.join(""));
+                    if(time<currtTime){
+                        return false;
+                    }else{
+                        return true;
+                    }
                     //获取选择那一行的数据结束
                     // alert(sRowData.name);
                     var uuid = rowData.uuid;

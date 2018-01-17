@@ -547,7 +547,6 @@
 
                 console.log(send_edit_data);
                 $.ajax({
-
                     url: "/sdpk/aaPaiKe?qqiu=queryConflict",
                     type: "POST",
                     //data: JSON.stringify(param),
@@ -655,8 +654,8 @@
 
                             result2obj = JSON.parse(result);
                             alert(result2obj.message);
-                            var $parent = self.parent.parent.$;
-                            $parent('#menu_3').click();
+                            // var $parent = self.parent.parent.$;
+                            // $parent('#menu_3').click();
                         }
 
                     });

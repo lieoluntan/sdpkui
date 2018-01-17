@@ -18,6 +18,7 @@
     <style>
         .dataTables_wrapper{
             overflow: hidden;
+            margin-top:-67px;
             margin-bottom: 20px;
         }
         .dataTables_wrapper .dataTables_info{
@@ -421,7 +422,7 @@
 </head>
 <body>
 
-<div id="fen3a3_container" class="tab-con">
+<div id="fen3a3_container" class="tab-con" style="overflow: hidden">
 
     <div id="ye_1_blank"></div>
     <div id="ye_2_blank"></div>
@@ -443,24 +444,16 @@
                         <!--</select>-->
                         <input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">
                     </td>
-                </tr>
-            </table>
-            <table class="tab-style">
-                <!-- 第三行 -->
-                <tr>
-
-                    <td class="name-s" style="padding-left:0">选择年份</td>
+                    <td class="name-s" style="padding-left:88px">选择年份</td>
                     <td><input id="nDate" name="cDate" type="text" class="easyui-combobox yzss sel_s" style="line-height: 34px; height:36px;background-color: white;width:200px;" required="required"></td>
-                    <td class="name-s">选择月份</td>
+                    <td class="name-s" style="padding-left:88px">选择月份</td>
                     <td><input id="yDate" name="cDate" type="text" class="easyui-combobox yzss sel_s" style="line-height: 34px; height:36px;width:200px;background-color: white;" required="required"></td>
                 </tr>
             </table>
             <div class="tab-style">
                 <!-- 第二行 -->
                 <ul class="tj-block">
-                    <li style="padding-left: 2px;">月份总课数<em id="sumTeaMon">0</em></li>
-                    <li>月已消课<em id="sumDayBefore">0</em></li>
-                    <li>月未消课<em id="sumDayAfter">0</em></li>
+                    <li style="padding-left: 2px;line-height: 40px;">月份总课数<em id="sumTeaMon">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月已消课<em id="sumDayBefore">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月未消课<em id="sumDayAfter">0</em></li>
                 </ul>
             </div>
         </div>

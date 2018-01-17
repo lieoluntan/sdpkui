@@ -20,6 +20,7 @@
         .dataTables_wrapper{
             overflow: hidden;
             margin-bottom: 20px;
+            margin-top:-67px;
         }
         .dataTables_wrapper .dataTables_info{
             clear: none;
@@ -268,7 +269,7 @@
 </head>
 <body>
 
-<div id="fen3a3_container" class="tab-con">
+<div id="fen3a3_container" class="tab-con" style="overflow: hidden">
 
     <div id="ye_1_blank"></div>
     <div id="ye_2_blank"></div>
@@ -294,28 +295,19 @@
                             </select> -->
                             <input name="selTeacher" id="selTeacher" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="selTeacher">
                         </td>
-                    </tr>
-                </table>
-                <table class="tab-style">
-                <!-- 第三行 -->
-                <tr>
-
-                        <td class="name-s" style="padding-left:0">选择年份</td>
+                        <td class="name-s" style="padding-left:88px">选择年份</td>
                         <td><input id="nDate" name="nDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;width: 200px;" required="required"></td>
-                        <td class="name-s">选择月份</td>
+                        <td class="name-s" style="padding-left:88px">选择月份</td>
                         <td>
                             <input id="yDate" name="yDate" type="text" class="easyui-combobox yzss" style="line-height: 34px; height:36px;background-color: white;width: 200px;" required="required">
                         </td>
-
-                </tr>
-            </table>
+                    </tr>
+                </table>
             </form>
             <div class="tab-style">
                 <!-- 第二行 -->
                 <ul class="tj-block">
-                    <li style="padding-left: 2px;">月份总课数<em id="zykid">0</em></li>
-                    <li>月已消课<em id="yxkid">0</em></li>
-                    <li>月未消课<em id="wxkid">0</em></li>
+                    <li style="padding-left: 2px;line-height: 40px;">月份总课数<em id="zykid">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月已消课<em id="yxkid">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月未消课<em id="wxkid">0</em></li>
                 </ul>
             </div>
         </div>

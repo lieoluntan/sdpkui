@@ -180,6 +180,11 @@ CREATE TABLE t_paike_all (
   pkType varchar(30) DEFAULT NULL,
   pkTypeName varchar(30) DEFAULT NULL,
   
+  courseName varchar(30) DEFAULT NULL,
+  empName varchar(30) DEFAULT NULL,
+  croomName varchar(30) DEFAULT NULL,
+  claName varchar(30) DEFAULT NULL,
+  
   createDate datetime DEFAULT NULL,
   modifyDate datetime DEFAULT NULL,
   createPeople varchar(50) DEFAULT NULL,
@@ -217,6 +222,7 @@ CREATE TABLE t_classroom (
   name varchar(50) NOT NULL,
   campus varchar(50) DEFAULT NULL,
   remark varchar(250) DEFAULT NULL,
+  openAndclose varchar(10) DEFAULT NULL,
   
   org varchar(50) DEFAULT NULL,
   createDate datetime DEFAULT NULL,

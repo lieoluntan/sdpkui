@@ -10,7 +10,7 @@
     <script type="text/javascript" src="jquery-easyui-136/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="DataTables/datatables.js"></script>
     <script type="text/javascript" src="../xppjs/jquery.serialize-object.js"></script>
-
+    <script type="text/javascript" src="../xppjs/jquery.cookie.js"></script>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/gray/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-136/themes/icon.css"/>
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
@@ -36,6 +36,17 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            //按钮权限开始
+            function funBtn(){
+                $( "#today1" ).hide();
+                $( "#today2" ).hide();
+                var viewArr = $.cookie("rsList").split(",");
+                for (var i = 0; i < viewArr.length; i++) {
+                    if(viewArr[i]=="Ab1") {$( "#today1" ).show();}
+                    if(viewArr[i]=="Ab2") {$( "#today2" ).show();}
+                }//end for
+            }
+            funBtn();
             /*第零步：把datatables插件的警告窗变成控制台打印*/
 
             $.fn.dataTable.ext.errMode = 'none';

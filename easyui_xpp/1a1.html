@@ -35,7 +35,17 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
+            //按钮权限开始
+            function funBtn(){
+                $( "#today1" ).hide();
+                $( "#today2" ).hide();
+                var viewArr = $.cookie("rsList").split(",");
+                for (var i = 0; i < viewArr.length; i++) {
+                    if(viewArr[i]=="Aa1") {$( "#today1" ).show();}
+                    if(viewArr[i]=="Aa2") {$( "#today2" ).show();}
+                }//end for
+            }
+            funBtn();
             /*第零步：把datatables插件的警告窗变成控制台打印*/
 
             $.fn.dataTable.ext.errMode = 'none';

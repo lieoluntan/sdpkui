@@ -30,6 +30,12 @@
             padding:10px;
             box-sizing: border-box;
         }
+        .dataTables_wrapper .dataTables_filter{
+            padding-bottom:10px;
+        }
+        .dataTables_wrapper .dataTables_scroll{
+            padding-top:0;
+        }
     </style>
     <!-- 11月09新增start -->
 
@@ -197,22 +203,32 @@
         ]
     } );
         //步骤2，列表选择
-        var selectTable = $('#paike_biao tbody tr').click(function () {
-            // alert("选择了");
+        // var selectTable = $('#paike_biao tbody tr').click(function () {
+        //     console.log(1);
+        //     // alert("选择了");
+        //     if ( $(this).hasClass('selected') ) {
+        //         $(this).removeClass('selected');
+        //         console.log(1);
+        //     }
+        //     else {
+        //         table_ye2.$('tr.selected').removeClass('selected');
+        //         $(this).addClass('selected');
+        //         console.log(2);
+        //     }//end if
+
+
+
+        // } );//end 2 外圈 $('#example tbody').on
+        $('body').delegate('#paike_biao tbody tr','click',function(){
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                console.log(1);
             }
             else {
                 table_ye2.$('tr.selected').removeClass('selected');
+                $('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
-                console.log(2);
             }//end if
-
-
-
-        } );//end 2 外圈 $('#example tbody').on
-
+        })
         //步骤3，删除按钮单击事件
         $('#delbut').click( function () {
 
@@ -275,7 +291,21 @@
             var rowData = {};
             //获取选择那一行的数据
             rowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
-            console.log(rowData.pkType);
+            var time = Number(rowData.keDateTime.split("-").join(""));
+            var currtTime = new Date().toLocaleDateString().split('/');
+            if(currtTime[1]<10){
+                currtTime[1] = "0"+currtTime[1];
+            }
+            if(currtTime[2]<10){
+                currtTime[2] = "0"+currtTime[2];
+            }
+            currtTime = Number(currtTime.join(""));
+            if(time<currtTime){
+                alert("此课程已过期！");
+                return false;
+            }else{
+                alert("可调课！");
+            }
             //获取选择那一行的数据结束
             // alert(sRowData.name);
             var uuid = rowData.uuid;
@@ -488,8 +518,8 @@
                             }
                         },//国际化语言结束
                         destroy:true,//表示可重复加载
-                        "scrollX": true,
-                        scrollY:false,
+                         scrollCollapse: false,
+//                       scrollX: 690,
                        data: xppArr,
                         columns: [
                             { "data": "courseName" },
@@ -502,23 +532,20 @@
                             { "data": "keLongTime" }
                         ]
                     } );
-                    console.log(2222);
                 //步骤2，列表选择
-                var selectTable = $('#paike_biao tbody tr').click(function () {
-                    // alert("选择了");
-                    if ( $(this).hasClass('selected') ) {
-                        $(this).removeClass('selected');
-                        console.log(1);
-                    }
-                    else {
-                        curD.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                        console.log(2);
-                    }//end if
+                // var selectTable = $('#paike_biao tbody tr').click(function () {
+                //     // alert("选择了");
+                //     if ( $(this).hasClass('selected') ) {
+                //         $(this).removeClass('selected');
+                //         console.log(1);
+                //     }
+                //     else {
+                //         curD.$('tr.selected').removeClass('selected');
+                //         $(this).addClass('selected');
+                //         console.log(2);
+                //     }//end if
 
-
-
-                } );//end 2 外圈 $('#example tbody').on
+                // } );//end 2 外圈 $('#example tbody').on
 
                 //步骤3，删除按钮单击事件
                 $('#delbut').click( function () {
@@ -580,6 +607,20 @@
                     var rowData = {};
                     //获取选择那一行的数据
                     rowData = curD.row('.selected').data();
+                    var time = Number(rowData.keDateTime.split("-").join(""));
+                    var currtTime = new Date().toLocaleDateString().split('/');
+                    if(currtTime[1]<10){
+                        currtTime[1] = "0"+currtTime[1];
+                    }
+                    if(currtTime[2]<10){
+                        currtTime[2] = "0"+currtTime[2];
+                    }
+                    currtTime = Number(currtTime.join(""));
+                    if(time<currtTime){
+                        return false;
+                    }else{
+                        return true;
+                    }
                     //获取选择那一行的数据结束
                     // alert(sRowData.name);
                     var uuid = rowData.uuid;
@@ -857,7 +898,7 @@
 </head>
 <body>
 	
-	<div id="fen_3a2detail_container" style="height: 850px;background-color:#FFFFFF;">
+	<div id="fen_3a2detail_container" style="height: 850px;overflow-y:hidden;background-color:#FFFFFF;">
 
 		<div id="ye_1_content01" class="class-xq">
 				<div id="litle_a1" class="xq-logo">

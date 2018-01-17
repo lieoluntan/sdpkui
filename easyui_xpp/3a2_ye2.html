@@ -488,8 +488,8 @@
                             }
                         },//国际化语言结束
                         destroy:true,//表示可重复加载
-                        "scrollX": true,
-                        scrollY:false,
+                         scrollCollapse: false,
+//                       scrollX: 690,
                        data: xppArr,
                         columns: [
                             { "data": "courseName" },
@@ -502,7 +502,6 @@
                             { "data": "keLongTime" }
                         ]
                     } );
-                    console.log(2222);
                 //步骤2，列表选择
                 var selectTable = $('#paike_biao tbody tr').click(function () {
                     // alert("选择了");
@@ -857,7 +856,7 @@
 </head>
 <body>
 	
-	<div id="fen_3a2detail_container" style="height: 850px;background-color:#FFFFFF;">
+	<div id="fen_3a2detail_container" style="height: 850px;overflow-y:hidden;background-color:#FFFFFF;">
 
 		<div id="ye_1_content01" class="class-xq">
 				<div id="litle_a1" class="xq-logo">

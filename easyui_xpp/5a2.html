@@ -48,7 +48,7 @@
             var viewArr = $.cookie("rsList").split(",");
             for (var i = 0; i < viewArr.length; i++) {
                 console.log("第"+i+"个："+viewArr[i]);
-                if(viewArr[i]=="Eb2") {$( "#delbut" ).show();}
+//                if(viewArr[i]=="Eb2") {$( "#delbut" ).show();}
                 if(viewArr[i]=="Eb1") {$( "#opener" ).show();}
             }//end for
         }
@@ -313,7 +313,7 @@
             <h2 >课程管理</h2>
             </div>
             <div style="position: relative;z-index: 999;width:500px;">
-			<button id="delbut" class="btn-class">删除</button>
+			<button id="delbut" class="btn-class" style="display: none">删除</button>
             <button id="opener" class="btn-class">编辑</button>
 	    	</div>
 			<!-- 留空结束 -->

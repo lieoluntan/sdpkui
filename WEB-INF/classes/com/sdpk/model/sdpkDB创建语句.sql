@@ -16,7 +16,9 @@ CREATE TABLE t_student (
   
   parentName2 varchar(30) DEFAULT NULL,
   parentPhone2 varchar(30) DEFAULT NULL,
-  address2 varchar(30) DEFAULT NULL,
+  parentRela2 varchar(30) DEFAULT NULL,
+  
+  openAndclose varchar(10) DEFAULT NULL,
   
   sex varchar(30) DEFAULT NULL,
   org varchar(30) DEFAULT NULL,

@@ -64,7 +64,7 @@
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
         var empUuid =  $.cookie('ckUserEmpUuid');
-        console.log(empUuid);
+        var tabShowText;
     //步骤1,展示列表数据
       table = $('#example').DataTable( {
           "dom":'frtpi',
@@ -101,8 +101,62 @@
           //  { "data": "empUuid" },
             { "data": "classDate" },
             { "data": "status" },
-            { "data": "remark" }
-        ]
+            { "data": "remark" },
+            {
+                "data": null,
+                "searchable": true,
+                "title": "状态"
+            }
+        ],
+          "columnDefs":[{
+              "targets": -1,
+              "data": tabShowText,
+              "name": "状态",
+              "cellType": "th",
+              "orderDataType": "dom-text",
+              "orderSequence": [ "desc","asc", "asc" ],
+              "className": "my_class",
+              "contentPadding": "mmm",
+              "createdCell": function (td, cellData, rowData, row, col) {
+                  console.log(cellData);
+                  if ( cellData.openAndclose == 'open' ) {
+                      tabShowText = '已开启';
+                      $(td).context.innerHTML="<button style='color: white;border:none;border-radius: 5px;background-color: #36cb91;line-height: 30px;text-align: center;width: 100px;font-size: 14px;'>"+ tabShowText +"</button>";
+
+                  }else{
+                      tabShowText = '已关闭';
+                      $(td).context.innerHTML="<button style='color: white;border:none;border-radius: 5px;background-color: #ff4949;line-height: 30px;text-align: center;width: 100px;font-size: 14px;'>"+ tabShowText +"</button>";
+
+                  }
+              }
+
+
+          }]
+      } );//end 步骤1 外圈  $('#example').DataTable
+          //        按钮事件
+        $('#example tbody').on( 'click', 'button', function () {
+            var send_data = {};
+            send_data.uuid = table.row( $(this).parents('tr') ).data().uuid;
+            table.row( $(this).parents('tr') ).data().openAndclose == 'open'?send_data.openAndclose = 'close':send_data.openAndclose = 'open';
+            console.log(send_data);
+            $.ajax({
+
+                url:'/sdpk/aaCla?qqiu=on_off',
+                type: "POST",
+                //data: JSON.stringify(param),
+                data: JSON.stringify(send_data),
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    var obj = JSON.parse(result);
+                    console.log(obj);
+                    alert(obj.message);
+                    table.row( $(this).parents('tr') ).ajax.reload();
+
+                }
+
+            });//end $.ajax
+        } );
+
         // initComplete: function () {
         //     var api = this.api();
         //     api.columns().indexes().flatten().each( function ( i ) {
@@ -122,7 +176,6 @@
         //         } );
         //     } );
         // }//end initComplete
-    } );//end 步骤1 外圈  $('#example').DataTable
 
      //步骤2，列表选择
     var selectTable = $('#example tbody').on( 'click', 'tr', function () {
@@ -362,8 +415,8 @@
                                 <!--<th>班主任</th> -->
                                 <th style="min-width:180px;">开课日期</th>
                                 <th style="min-width:120px;">班级类型</th>
-                                <th style="min-width:540px;">备注</th>
-                                
+                                <th style="min-width:120px;">备注</th>
+                                <th style="min-width:240px;">状态</th>
                         
                             </tr>
                         </thead>
@@ -375,8 +428,8 @@
                                <!--<th>班主任</th> -->
                                 <th style="min-width:180px;">开课日期</th>
                                 <th style="min-width:120px;">班级类型</th>
-                                <th style="min-width:540px;">备注</th>
-                        
+                                <th style="min-width:120px;">备注</th>
+                                <th style="min-width:240px;">状态</th>
                             </tr>
                         </tfoot>
                         <!-- end 表尾 -->

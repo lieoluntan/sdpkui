@@ -70,6 +70,7 @@ CREATE TABLE t_course (
   category varchar(30) DEFAULT NULL,
   describeA varchar(255) DEFAULT NULL,
   org varchar(30) DEFAULT NULL,
+  openAndclose varchar(10) DEFAULT NULL,
   
   createDate datetime DEFAULT NULL,
   modifyDate datetime DEFAULT NULL,

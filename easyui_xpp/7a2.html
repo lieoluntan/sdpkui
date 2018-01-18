@@ -66,7 +66,7 @@
         funBtn();
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
-
+        var tabShowText;
     //步骤1,展示列表数据
     var table = $('#exampled').DataTable( {
         "dom":'frtpi',
@@ -103,10 +103,60 @@
             { "data": "cDate" },
             { "data": "org" },
             { "data": "totalCount" },
-            { "data": "totalPrice" }
-        ]
-    } );//end 步骤1 外圈  $('#example').DataTable
+            { "data": "totalPrice" },
+            {
+                "data": null,
+                "searchable": true,
+                "title": "状态"
+            }
+        ],
+        "columnDefs":[{
+            "targets": -1,
+            "data": tabShowText,
+            "name": "状态",
+            "cellType": "th",
+            "orderDataType": "dom-text",
+            "orderSequence": [ "desc","asc", "asc" ],
+            "className": "my_class",
+            "contentPadding": "mmm",
+            "createdCell": function (td, cellData, rowData, row, col) {
+                console.log(cellData);
+                if ( cellData.openAndclose == 'open' ) {
+                    tabShowText = '已开启';
+                    $(td).context.innerHTML="<button style='color: white;border:none;border-radius: 5px;background-color: #36cb91;line-height: 30px;text-align: center;width: 100px;font-size: 14px;'>"+ tabShowText +"</button>";
 
+                }else{
+                    tabShowText = '已关闭';
+                    $(td).context.innerHTML="<button style='color: white;border:none;border-radius: 5px;background-color: #ff4949;line-height: 30px;text-align: center;width: 100px;font-size: 14px;'>"+ tabShowText +"</button>";
+
+                }
+            }
+
+
+        }]
+    } );//end 步骤1 外圈  $('#example').DataTable
+        //        按钮事件
+        $('#exampled tbody').on( 'click', 'button', function () {
+            var send_data = {};
+            send_data.uuid = table.row( $(this).parents('tr') ).data().uuid;
+            table.row( $(this).parents('tr') ).data().openAndclose == 'open'?send_data.openAndclose = 'close':send_data.openAndclose = 'open';
+            console.log(send_data);
+            $.ajax({
+
+                url:"/sdpk/aaContrtext?qqiu=on_off",
+                type: "POST",
+                //data: JSON.stringify(param),
+                data: JSON.stringify(send_data),
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    var obj = JSON.parse(result);
+                    alert(obj.message);
+                    table.row( $(this).parents('tr') ).ajax.reload();
+
+                }
+
+            });//end $.ajax
+        } );
     //步骤2，列表选择
     var selectTable = $('#exampled tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
@@ -443,6 +493,7 @@
                                 <th style="min-width:100px;">校区</th>
                                 <th style="min-width:100px;">总课数</th>
                                 <th style="min-width:100px;">总支付</th>
+                                <th style="min-width:100px;">状态</th>
                             </tr>
                         </thead>
                         <tfoot class="tab-tit">
@@ -453,6 +504,7 @@
                             <th style="min-width:100px;">校区</th>
                             <th style="min-width:100px;">总课数</th>
                             <th style="min-width:100px;">总支付</th>
+                            <th style="min-width:100px;">状态</th>
                         </tr>
                         </tfoot>
                     </table>

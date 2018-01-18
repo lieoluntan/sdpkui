@@ -52,6 +52,7 @@ CREATE TABLE t_employee (
   workDate varchar(30) DEFAULT NULL,
   fullhalf varchar(30) DEFAULT NULL,
   jobRemark varchar(30) DEFAULT NULL,
+  openAndclose varchar(10) DEFAULT NULL,
   
   createDate datetime DEFAULT NULL,
   modifyDate datetime DEFAULT NULL,

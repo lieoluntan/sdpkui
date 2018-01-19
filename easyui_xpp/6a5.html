@@ -366,6 +366,7 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
+
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
                     bSort:false,
@@ -410,6 +411,10 @@
                         {"data": "croomName"},
                         {"data": "croomConflict"}
                     ],
+                    "columnDefs":[{
+                        "targets": 1,
+                        "name": "无"
+                    }],
                     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 
                         // aData 一行数据，td:eq(2)第3个单元格
@@ -422,23 +427,26 @@
                         if (aData.courConflict) {
 
                             $('td:eq(1)', nRow).html('<b style="color:red;">冲突</b>');
-
+                        }else {
+                            $('td:eq(1)', nRow).html('无');
                         }
                         if (aData.empConflict) {
 
                             $('td:eq(7)', nRow).html('<b style="color:red;">冲突</b>');
 
+                        }else {
+                            $('td:eq(7)', nRow).html('无');
                         }
                         if (aData.croomConflict) {
 
                             $('td:eq(9)', nRow).html('<b style="color:red;">冲突</b>');
-
+                        } else{
+                            $('td:eq(9)', nRow).html('无');
                         }
 
 
                     }//end method fnRowCallback 给每行指定数据显示红色字体
                 });
-
             }// end 1_x1 外圈
 
 

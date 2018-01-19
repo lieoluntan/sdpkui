@@ -294,17 +294,21 @@
             if (aData.courConflict) {
 
                 $('td:eq(1)', nRow).html('<b style="color:red;">冲突</b>');
-
+            }else {
+                $('td:eq(1)', nRow).html('无');
             }
             if (aData.empConflict) {
 
                 $('td:eq(7)', nRow).html('<b style="color:red;">冲突</b>');
 
+            }else {
+                $('td:eq(7)', nRow).html('无');
             }
             if (aData.croomConflict) {
 
                 $('td:eq(9)', nRow).html('<b style="color:red;">冲突</b>');
-
+            } else{
+                $('td:eq(9)', nRow).html('无');
             }
 
 

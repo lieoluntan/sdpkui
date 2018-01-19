@@ -3,7 +3,7 @@
 <head>
     <meta name="content-type" content="text/html; charset=utf-8">
     <meta charset="UTF-8">
-    <title>树袋老师</title>
+    <title>原型utf8</title>
 
     <!-- idTabs链接文件 -->
     
@@ -457,16 +457,20 @@ margin:0px; padding:0;text-align:center;}
 } );//end 最外层 $(document).ready
         
     </script>
-
+    <style>
+        #menu_sub p{
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 <body style="margin:0;padding:0;min-width:1440px;">
-    <div id="container" style="height: 1024px;background-color:#F2F2F2;">
+    <div id="container" style="height: 984px;background-color:#F2F2F2;">
 
-        <div id="header" style="background-color:#FFFFFF;height: 80px;box-shadow: 0 2px 2px #ccc; position:relative;">
-            <img style="display: block;width:62px;height:52px;float: left;margin-left:38px;margin-top:14px;" title="logo" src="HMcode/HMimages/logo-02.png">
-            <h1 style="font-size:32px; color:#000; line-height: 80px; text-align: center;padding:0;margin:0;">树袋老师</h1>
-            <div class="xl-box" style="position:absolute; right:43px;top: 26px;color:#5e5e5e;">
+        <div id="header" style="background-color:#FFFFFF;height: 50px;box-shadow: 0 2px 2px #ccc; position:relative;">
+            <img style="display: block;max-width:100%;height:40px;float: left;margin-left:20px;margin-top:5px;" title="logo" src="HMcode/HMimages/logo-02.png">
+            <h1 style="font-size:25px; color:#000; line-height: 50px; text-align: center;padding:0;margin:0;">树袋老师</h1>
+            <div class="xl-box" style="position:absolute; right:43px;top: 15px;color:#5e5e5e;">
                 <i class="user-name" style="font-style: normal;font-size:16px;
 line-height: 28px;">宋瑛瑛</i>
                 <span class="arrow-box" style="cursor: pointer"><img class="" src="HMcode/HMimages/arrow-ss.png"></span>
@@ -477,14 +481,14 @@ line-height: 28px;">宋瑛瑛</i>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">密码设置</a> </li>
                     <li style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;">账号绑定</a> </li>
                      -->
-                     <!-- 只留退出登录,其它功能后面看需求 -->
+                    <!-- 只留退出登录,其它功能后面看需求 -->
                     <li id="btnOut" style="padding:0;margin:0; list-style: none;font-size:16px;line-height: 34px;text-align: center"><a href="#" style="color:#5e5e5e; text-decoration: none;" >退出登录</a> </li>
                 </ul>
             </div>
         </div>
         <!--<div id="pwinShowDown" class="div-a" style="width:1440px;height: 5px;"></div>-->
 
-            <div id="menu" class="idTabs" style="background-color:#4A4A4A;height:944px;/*width:145px;*/width:10%;min-width:132px;float:left;">
+            <div id="menu" class="idTabs" style="background-color:#4A4A4A;height:944px;/*width:145px;*/width:9%;min-width:110px;float:left;">
                 <ul>
                 <li style="height: 45px;"></li>
                 <li>
@@ -551,6 +555,7 @@ line-height: 28px;">宋瑛瑛</i>
                             <li><a id="menu_a2" href="#one_2" >全校今日课程</a></li>
                             <li><a id="menu_a3" href="#one_3">学生课消统计</a></li>
                             <li><a id="menu_a4" href="#one_4">老师课消统计</a></li>
+                            <li><a id="menu_a6" href="#one_6">我的月课-老师</a></li>
                         </ul>
                         
                   </div>
@@ -641,6 +646,9 @@ line-height: 28px;">宋瑛瑛</i>
                         <div id="one_5">
                             <iframe id="ifr1a5" src="easyui_xpp/1a5.html" name="ifrname"   style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;"frameborder="0"></iframe>
                         </div>
+                    <div id="one_6">
+                        <iframe id="ifr1a6" src="easyui_xpp/1a6.html" name="ifrname"   style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;"frameborder="0"></iframe>
+                    </div>
                         <div id="one_2">
                            <iframe id="ifr1a2"  name="ifrname"  style="box-sizing:border-box;overflow-x: scroll;overflow-y: hidden;min-width:1120px;width:100%;height: 850px;" frameborder="0"></iframe>
                         </div>

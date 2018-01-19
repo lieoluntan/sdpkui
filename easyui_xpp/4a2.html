@@ -57,7 +57,7 @@
     	//步骤1,展示列表数据
     var table = $('#example').DataTable( {
         "dom":'frtpi',
-        bSort:false,
+        bSort:true,
         "bLengthChange":false,
         language: {
             "sProcessing": "处理中...",
@@ -398,17 +398,21 @@
                     <td  class="name-s" style="padding-left:0">部门</td>
                     <td>
                         <select  name="depart" class="yzss sel_s">
-                            <option value="部门1">部门1</option>
-                            <option value="部门2">部门2</option>
+                            <option >请选择</option>
+                            <option value="产品部">产品部</option>
+                            <option value="市场部">市场部</option>
+                            <option value="教学部">教学部</option>
+                            <option value="人事行政部">人事行政部</option>
                         </select>
                     </td>
                     <td class="name-s">职位</td>
                     <td>
-                        <select  name="job" class="yzss sel_s">
-                            <option value="校长">校长</option>
-                            <option value="主任">主任</option>
-                            <option value="任课老师">任课老师</option>
-                        </select>
+                        <input  type="text" name="job" class="yz-box yzss " placeholder="请输入职位">
+                        <!--<select  name="job" class="yzss sel_s">-->
+                            <!--<option value="校长">校长</option>-->
+                            <!--<option value="主任">主任</option>-->
+                            <!--<option value="任课老师">任课老师</option>-->
+                        <!--</select>-->
                     </td>
                     <td class="name-s">班主任</td>
                     <td>

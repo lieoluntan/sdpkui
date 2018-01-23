@@ -35,6 +35,9 @@
         .dataTables_wrapper .dataTables_paginate{
             float: right;
         }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
 	<script type="text/javascript">
 
@@ -45,7 +48,7 @@
             $( "#opener" ).hide();
             var viewArr = $.cookie("rsList").split(",");
             for (var i = 0; i < viewArr.length; i++) {
-                console.log("第"+i+"个："+viewArr[i]);
+//                console.log("第"+i+"个："+viewArr[i]);
                 // if(viewArr[i]=="Db2") {$( "#delbut" ).show();}
                 if(viewArr[i]=="Db1") {$( "#opener" ).show();}
             }//end for
@@ -91,7 +94,7 @@
             { "data": "depart" },
             { "data": "job" },
             // { "data": "permissionTempl" },
-            { "data": "remark" },
+            { "data": "fullhalf" },
             {
                 "data": null,
                 "searchable": true,
@@ -209,6 +212,7 @@
         var delRowData = {};
         //获取选择那一行的数据
          delRowData = table.row('.selected').data();
+         console.log(delRowData);
          document.ffname.name.value= delRowData.name;
          document.ffname.empNum.value= delRowData.empNum;
          document.ffname.phone.value= delRowData.phone;
@@ -321,7 +325,7 @@
                                 <th style="min-width:160px;">手机号</th>
                                 <th style="min-width:140px;">部门</th>
                                 <th style="min-width:140px;">职位</th>
-                                <th style="min-width:200px;">其他备注</th>
+                                <th style="min-width:200px;">全职/兼职</th>
                                 <th style="min-width:200px;">状态</th>
                             </tr>
                         </thead>
@@ -332,7 +336,7 @@
                                 <th style="min-width:160px;">手机号</th>
                                 <th style="min-width:140px;">部门</th>
                                 <th style="min-width:140px;">职位</th>
-                                <th style="min-width:200px;">其他备注</th>
+                                <th style="min-width:200px;">全职/兼职</th>
                                 <th style="min-width:200px;">状态</th>
                             </tr>
                         </tfoot>
@@ -385,8 +389,8 @@
                     <td  class="name-s">是否全职</td>
                     <td>
                         <select  name="fullhalf" class="yzss sel_s" >
-                            <option value="full">全职</option>
-                            <option value="half">兼职</option>
+                            <option value="全职">全职</option>
+                            <option value="兼职">兼职</option>
                         </select>
                     </td>
                     </tr>

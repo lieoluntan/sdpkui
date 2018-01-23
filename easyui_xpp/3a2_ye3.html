@@ -38,6 +38,9 @@
 		tbody tr:hover {
 			background-color: transparent;
 		}
+		table.dataTable.display tbody tr.even td.sorting_1{
+			background-color: white;
+		}
 	</style>
     <script type="text/javascript">
 
@@ -323,7 +326,7 @@
     var a2data = a2obj.data;
     table_full = $('#content03_2_tb').DataTable( {
         "dom":'frtpi',
-        bSort:false,
+        bSort:true,
         "bLengthChange":false,
         scrollX :670,
         language: {

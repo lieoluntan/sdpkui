@@ -36,6 +36,9 @@
         .dataTables_wrapper .dataTables_paginate{
             float: right;
         }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
 
     <script type="text/javascript">
@@ -79,7 +82,7 @@
             var table = $('#example').DataTable( {
                 "dom":'frtpi',
                 "bLengthChange":false,
-                bSort:false,
+                bSort:true,
                 language: {
                     "sProcessing": "处理中...",
                     "sLengthMenu": "显示 _MENU_ 项结果",

@@ -35,12 +35,12 @@
     font-size:14px;
     margin-right: 10px;
 }
-#example_length,#exampled_length{
+#examplePrice_length,#exampleMain_length{
     margin-top: 30px;
     margin-bottom: 30px;
     color:#999999;
 }
-#example_length select,#exampled_length select{
+#examplePrice_length select,#exampleMain_length select{
     width:90px;
     line-height: 36px;
     height: 36px;
@@ -62,12 +62,12 @@
     color:#999;
     background:url(../HMimages/arrow.jpg) no-repeat scroll right center transparent;
 }
-#example_filter,#exampled_filter{
+#examplePrice_filter,#exampleMain_filter{
     color:#d7d7d7;
     margin-top:30px;
     margin-bottom: 20px;
 }
-#example_filter input ,#exampled_filter input{
+#examplePrice_filter input ,#exampleMain_filter input{
     width:230px;
     height:36px;
     border:1px solid #d9d9d9;

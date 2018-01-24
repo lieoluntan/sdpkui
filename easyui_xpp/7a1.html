@@ -93,14 +93,14 @@
                 objR4 = JSON.parse(result);
                 var a2dataR4 = objR4.data;
                 for (var i = 0; i < a2dataR4.length; i++) {
-                    $('#stuUuid').append('<option value="' + a2dataR4[i].uuid + '">' + a2dataR4[i].name + '</option>')
+//                    $('#stuUuid').append('<option value="' + a2dataR4[i].uuid + '">' + a2dataR4[i].name + '</option>')
                 }
-                // $('#stuUuid').combobox({
-                //     data: a2dataR4,
-                //     valueField: 'name',
-                //     textField: 'name',
-                //     selectOnNavigation: false
-                // });
+                 $('#stuUuid').combobox({
+                     data: a2dataR4,
+                     valueField: 'name',
+                     textField: 'name',
+                     selectOnNavigation: false
+                 });
 
             }// end 1_x1 外圈
             //end 1 加载所有下拉框 结束
@@ -487,10 +487,10 @@
 	    			<td class="name-s" style="padding-left:0">学生名称</td>
 	    			<td>
 
-						<select name="stuUuid" id="stuUuid" class=" yzss sel_s"  placeholder="输入合同编号">
-							<option >请选择学生</option>
-						</select>
-						<!--<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">-->
+						<!--<select name="stuUuid" id="stuUuid" class=" yzss sel_s"  placeholder="输入合同编号">-->
+							<!--<option >请选择学生</option>-->
+						<!--</select>-->
+						<input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">
 					</td>
 	    			<td class="name-s" style="padding-left: 82px;">交易时间</td>
 	    			<td><input id="cDate" name="cDate" type="text" class="easyui-datebox yzss" style="line-height: 34px; height:36px;background-color: white;" required="required"></td>

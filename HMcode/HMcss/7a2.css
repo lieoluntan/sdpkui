@@ -35,12 +35,12 @@
     font-size:14px;
     margin-right: 10px;
 }
-#examplePrice_length,#exampleMain_length{
+#examplePrice_length,#exampleMain_length,#example_length{
     margin-top: 30px;
     margin-bottom: 30px;
     color:#999999;
 }
-#examplePrice_length select,#exampleMain_length select{
+#examplePrice_length select,#exampleMain_length select,#example_length select{
     width:90px;
     line-height: 36px;
     height: 36px;
@@ -62,12 +62,12 @@
     color:#999;
     background:url(../HMimages/arrow.jpg) no-repeat scroll right center transparent;
 }
-#examplePrice_filter,#exampleMain_filter{
+#examplePrice_filter,#exampleMain_filter,#example_filter{
     color:#d7d7d7;
     margin-top:30px;
     margin-bottom: 20px;
 }
-#examplePrice_filter input ,#exampleMain_filter input{
+#examplePrice_filter input ,#exampleMain_filter input,#example_filter input{
     width:230px;
     height:36px;
     border:1px solid #d9d9d9;

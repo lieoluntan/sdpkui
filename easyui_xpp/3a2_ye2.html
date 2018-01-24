@@ -258,39 +258,44 @@
         })
         //步骤3，删除按钮单击事件
         $('#delbut').click( function () {
+            var msg = "确定删除此条信息么？";
+            if(confirm(msg) == true){
+                //要初始化一个对象，不然会报undifine未定义错误
+                var delRowData = {};
+                //获取选择那一行的数据
+                delRowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
+                //获取选择行中的uuid字段
+                console.log(delRowData);
+                var Auuid = delRowData.uuid;
 
-            //要初始化一个对象，不然会报undifine未定义错误
-            var delRowData = {};
-            //获取选择那一行的数据
-            delRowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
-            //获取选择行中的uuid字段
-            console.log(delRowData);
-            var Auuid = delRowData.uuid;
+                //post请求体传给后台的js对象
+                var send_data = {};
+                send_data.uuid = Auuid;
+                // alert( "选择的行的uuid: "+send_data);
+                //调用ajax方法传给后台接口
+                $.ajax({
 
-            //post请求体传给后台的js对象
-            var send_data = {};
-            send_data.uuid = Auuid;
-            // alert( "选择的行的uuid: "+send_data);
-            //调用ajax方法传给后台接口
-            $.ajax({
+                    url:"/sdpk/aaPaiKe?qqiu=delete",
+                    type: "POST",
+                    //data: JSON.stringify(param),
+                    data: JSON.stringify(send_data),
+                    contentType: "application/json;charset=UTF-8",
+                    success:function(result){
+                        table_ye2.ajax.reload();
+                        curD.ajax.reload();
+                        var obj = JSON.parse(result);
+                        alert(obj.message);
 
-                url:"/sdpk/aaPaiKe?qqiu=delete",
-                type: "POST",
-                //data: JSON.stringify(param),
-                data: JSON.stringify(send_data),
-                contentType: "application/json;charset=UTF-8",
-                success:function(result){
-                    table_ye2.ajax.reload();
-                    curD.ajax.reload();
-                    var obj = JSON.parse(result);
-                    alert(obj.message);
+                    }
 
-                }
+                });//end $.ajax
 
-            });//end $.ajax
+                table_ye2.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+                curD.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+            }else {
+                return false;
+            }
 
-            table_ye2.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
-            curD.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
         } );//end 3 外圈 $('#delbut').click
         //步骤4，对话框初始配置
         $( "#dialog" ).dialog({
@@ -575,37 +580,42 @@
 
                 //步骤3，删除按钮单击事件
                 $('#delbut').click( function () {
+                    var msg = "确定删除此条信息么？";
+                    if(confirm(msg) == true){
+                        var delRowData = {};
+                        //获取选择那一行的数据
+                        delRowData = curD.row('.selected').data();
+                        //获取选择行中的uuid字段
+                        console.log(delRowData);
+                        var Auuid = delRowData.uuid;
 
+                        //post请求体传给后台的js对象
+                        var send_data = {};
+                        send_data.uuid = Auuid;
+                        // alert( "选择的行的uuid: "+send_data);
+                        //调用ajax方法传给后台接口
+                        $.ajax({
+
+                            url:"/sdpk/aaPaiKe?qqiu=delete",
+                            type: "POST",
+                            //data: JSON.stringify(param),
+                            data: JSON.stringify(send_data),
+                            contentType: "application/json;charset=UTF-8",
+                            success:function(result){
+                                curD.ajax.reload();
+                                var obj = JSON.parse(result);
+                                alert(obj.message);
+
+                            }
+
+                        });//end $.ajax
+
+                        curD.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+                    }else {
+                        return false;
+                    }
                     //要初始化一个对象，不然会报undifine未定义错误
-                    var delRowData = {};
-                    //获取选择那一行的数据
-                     delRowData = curD.row('.selected').data();
-                    //获取选择行中的uuid字段
-                    console.log(delRowData);
-                    var Auuid = delRowData.uuid;
 
-                    //post请求体传给后台的js对象
-                    var send_data = {};
-                    send_data.uuid = Auuid;
-                    // alert( "选择的行的uuid: "+send_data);
-                    //调用ajax方法传给后台接口
-                    $.ajax({
-
-                           url:"/sdpk/aaPaiKe?qqiu=delete",
-                           type: "POST",
-                           //data: JSON.stringify(param),
-                           data: JSON.stringify(send_data),
-                           contentType: "application/json;charset=UTF-8",
-                           success:function(result){
-                               curD.ajax.reload();
-                               var obj = JSON.parse(result);
-                               alert(obj.message);
-
-                           }
-
-                    });//end $.ajax
-
-                    curD.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
                 } );//end 3 外圈 $('#delbut').click
                     //步骤4，对话框初始配置
                 $( "#dialog" ).dialog({

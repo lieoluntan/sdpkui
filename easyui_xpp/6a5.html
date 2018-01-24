@@ -53,6 +53,21 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
             border:1px solid transparent;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
 
     <script type="text/javascript">
@@ -381,7 +396,7 @@
 
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
-                    bSort:false,
+                    bSort:true,
                     scrollX :670,
                     "bLengthChange":false,
                     language: {

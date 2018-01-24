@@ -48,6 +48,21 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
             border:1px solid transparent;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
     <!-- 11月09新增start -->
 
@@ -171,7 +186,7 @@
     var a2data = a2obj.data;
     console.log(a2data);
     table_ye2 = $('#paike_biao').DataTable( {
-        bSort:false,
+        bSort:true,
         "dom":'frtpi',
         "bLengthChange":false,
         scrollX :670,
@@ -504,7 +519,6 @@
                      curD = $('#paike_biao').DataTable( {
                         "dom":'frtpi',
                         "bLengthChange":false,
-                        bSort:false,
                         language: {
                             "sProcessing": "处理中...",
                             "sLengthMenu": "显示 _MENU_ 项结果",

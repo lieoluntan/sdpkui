@@ -170,6 +170,7 @@
                 if (flag) {
                     var param = $("#ff").serializeObject();
                     param.cNum = document.getElementById("cNum").value;
+                    param.cRemark = document.getElementById("cRemark").value;
                     param.stuUuid = $('#stuUuid').combobox("getValues")[0];
                     param.cDate = $("#cDate").datebox("getValue");
                     param.org = document.getElementById("org").value;
@@ -463,7 +464,11 @@
 							</select>
 						</td>
 	    			</tr>
-            		</table><!-- end  id= header_3_tb2 -->
+					<tr>
+						<td class="name-s" style="padding-left:0">合同备注</td>
+						<td><input  type="text" id="cRemark" name="cRemark" class=" v1g3 yzss"  style="height: 39px;width: 918px;font-size:16px;" value="无"></td>
+					</tr>
+				</table><!-- end  id= header_3_tb2 -->
 
             		<!-- 划线说明 -->
             		<div class="tit_style">

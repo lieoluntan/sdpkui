@@ -431,7 +431,12 @@
 
     //步骤3，删除按钮单击事件
     $('#delbut').click( function () {
-         table_full.row('.selected').remove().draw( false );//图形删除，没有传到后台接口
+        var msg = "确定删除此条排课信息么？";
+        if(confirm(msg) == true){
+            table_full.row('.selected').remove().draw(false);//图形删除，没有传到后台接口
+        }else {
+            return false;
+        }
     } );//end 3 外圈 $('#delbut').click
 
     //步骤4，对话框初始配置

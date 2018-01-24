@@ -31,6 +31,21 @@
         .dataTables_wrapper .dataTables_paginate{
             float: right;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
 
 	
@@ -59,7 +74,7 @@
     var table = $('#example').DataTable( {
         "dom":'frtpi',
         "bLengthChange":false,
-        bSort:false,
+        bSort:true,
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",
@@ -395,8 +410,8 @@
                     <td class="name-s" style="padding-left:0">校区</td>
                     <td>
                         <select  name="org" class="yzss sel_s">
-                            <option value="共和路校区">共和路校区</option>
                             <option value="所有校区">所有校区</option>
+                            <option value="企业公馆校区">企业公馆校区</option>
                         </select>
                     </td>
                     <td class="name-s">学号</td>

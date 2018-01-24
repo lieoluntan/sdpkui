@@ -35,6 +35,33 @@
         .btn-l{
             float: left;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
     <!-- <script src="../js/jquery-1.8.2.js" type="text/javascript"></script> -->
 
@@ -69,7 +96,7 @@
       table = $('#example').DataTable( {
           "dom":'frtpi',
           "bLengthChange":false,
-          bSort:false,
+          bSort:true,
           language: {
               "sProcessing": "处理中...",
               "sLengthMenu": "显示 _MENU_ 项结果",
@@ -457,9 +484,8 @@
                     <td class="name-s">所属校区</td>
                     <td>
                         <select  name="org" class="yzss sel_s">
-                            <option value="共和校区">共和校区</option>
-                            <option value="天目分校">天目分校</option>
                             <option value="所有校区">所有校区</option>
+                            <option value="企业公馆校区">企业公馆校区</option>
                         </select>
                     </td>
 

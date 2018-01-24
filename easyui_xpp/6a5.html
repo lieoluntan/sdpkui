@@ -41,6 +41,33 @@
         tbody tr:hover {
             background-color: transparent;
         }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+            border:1px solid transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+            box-shadow: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+            border:1px solid transparent;
+        }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
 
     <script type="text/javascript">
@@ -366,9 +393,10 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
+
                 table_full = $('#content03_2_tb').DataTable({
                     "dom":'frtpi',
-                    bSort:false,
+                    bSort:true,
                     scrollX :670,
                     "bLengthChange":false,
                     language: {
@@ -410,6 +438,10 @@
                         {"data": "croomName"},
                         {"data": "croomConflict"}
                     ],
+                    "columnDefs":[{
+                        "targets": 1,
+                        "name": "无"
+                    }],
                     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 
                         // aData 一行数据，td:eq(2)第3个单元格
@@ -422,23 +454,26 @@
                         if (aData.courConflict) {
 
                             $('td:eq(1)', nRow).html('<b style="color:red;">冲突</b>');
-
+                        }else {
+                            $('td:eq(1)', nRow).html('无');
                         }
                         if (aData.empConflict) {
 
                             $('td:eq(7)', nRow).html('<b style="color:red;">冲突</b>');
 
+                        }else {
+                            $('td:eq(7)', nRow).html('无');
                         }
                         if (aData.croomConflict) {
 
                             $('td:eq(9)', nRow).html('<b style="color:red;">冲突</b>');
-
+                        } else{
+                            $('td:eq(9)', nRow).html('无');
                         }
 
 
                     }//end method fnRowCallback 给每行指定数据显示红色字体
                 });
-
             }// end 1_x1 外圈
 
 
@@ -456,7 +491,13 @@
 
             //步骤3，删除按钮单击事件
             $('#delbut').click(function () {
-                table_full.row('.selected').remove().draw(false);//图形删除，没有传到后台接口
+                var msg = "确定删除此条排课信息么？";
+                if(confirm(msg) == true){
+                    table_full.row('.selected').remove().draw(false);//图形删除，没有传到后台接口
+                }else {
+                    return false;
+                }
+
             });//end 3 外圈 $('#delbut').click
 
             //步骤4，对话框初始配置

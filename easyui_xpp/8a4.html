@@ -24,6 +24,33 @@
                     .dataTables_wrapper .dataTables_paginate{
                         float: right;
                     }
+            .dataTables_wrapper .dataTables_paginate .paginate_button{
+                border:1px solid transparent;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+                border:1px solid transparent;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+                box-shadow: none;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+                border:1px solid transparent;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button{
+                border:1px solid transparent;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+                border:1px solid transparent;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button:active{
+                box-shadow: none;
+            }
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+                border:1px solid transparent;
+            }
+            table.dataTable.display tbody tr.even td.sorting_1{
+                background-color: white;
+            }
     	</style>
     <script>
         $(document).ready(function(){
@@ -46,7 +73,7 @@
             var tabData = $("#adm-user").DataTable({
             "dom":'frtpi',
                  "bLengthChange":false,
-                 bSort:false,
+                 bSort:true,
                                     language: {
                                         "sProcessing": "处理中...",
                                         "sLengthMenu": "显示 _MENU_ 项结果",

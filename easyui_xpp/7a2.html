@@ -257,9 +257,15 @@
             objR4 = JSON.parse(result);
             var a2dataR4 = objR4.data;
             console.log(a2dataR4);
-            for(var i=0;i<a2dataR4.length;i++){
-                $('#stuUuid').append('<option value="'+a2dataR4[i].uuid+'">'+a2dataR4[i].name+'</option>')
-            }
+            // for(var i=0;i<a2dataR4.length;i++){
+            //     $('#stuUuid').append('<option value="'+a2dataR4[i].uuid+'">'+a2dataR4[i].name+'</option>')
+            // }
+            $('#stuUuid').combobox({
+                data: a2dataR4,
+                valueField: 'uuid',
+                textField: 'name',
+                selectOnNavigation: false
+            });
 
         }// end 1_x1 外圈
         //end 1 加载所有下拉框 结束
@@ -296,7 +302,7 @@
             "dom":'frtpi',
             "bLengthChange":false,
              "destroy": true,
-
+             searching : false,
              bSort:false,
             language: {
                 "sProcessing": "处理中...",
@@ -335,7 +341,8 @@
         } );//end 步骤1 外圈  $('#examplePrice').DataTable
 
          document.ffname.cNum.value= delRowData.cNum;
-         document.ffname.stuUuid.value= delRowData.stuUuid;
+         // document.ffname.stuUuid.value= delRowData.stuUuid;
+        $('#stuUuid').combobox('setValue', delRowData.stuUuid);
          document.ffname.cDate.value= delRowData.cDate;
          var dateTime = delRowData.cDate;
          $('#cDate').datebox('setValue', dateTime);
@@ -370,20 +377,18 @@
 
     });//end 5 外圈 opener 结束打开对话框
 
-        //选择事件写在函数体外
-        var selectTable = $('#examplePrice tbody tr').click(function () {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            }
-            else {
-                tablePrice.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-
-            }//end if
-
-        });//end 2 外圈 $('#examplePrice tbody').on
-
-
+        // //选择事件写在函数体外
+        // var selectTable = $('#examplePrice tbody tr').click(function () {
+        //     if ($(this).hasClass('selected')) {
+        //         $(this).removeClass('selected');
+        //     }
+        //     else {
+        //         tablePrice.$('tr.selected').removeClass('selected');
+        //         $(this).addClass('selected');
+        //
+        //     }//end if
+        //
+        // });//end 2 外圈 $('#examplePrice tbody').on
 
         //步骤2，列表选择
         var selectTable = $('#examplePrice tbody').on( 'click', 'tr', function () {
@@ -512,7 +517,9 @@
                     <td class="name-s" style="padding-left:0">学生名称</td>
                     <td>
                         <!--<input  type="text" id="stuUuid" name="stuUuid" class="v1g3 yzss" value="请选择学生">-->
-                        <select name="stuUuid" id="stuUuid"class="yzss sel_s"></select>
+                        <!--<select name="stuUuid" id="stuUuid"class="yzss sel_s"></select>-->
+                        <input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">
+
                     </td>
                     <td class="name-s">交易时间</td>
                     <td style="width: 115px;height: 27px;font-size:16px;"><input id="cDate" name="cDate" type="text" class="easyui-datebox" required="required" style="line-height: 34px; height:36px;background-color: white;"></td>
@@ -691,7 +698,7 @@
 
                 for(var i=0;i<m.length;i++)
                 {
-                        if(m[i].value==""||m[i].value==null||m[i].value=='0')
+                        if(m[i].value==""||m[i].value==null)
                         {
                             alert("请填写数字输入框的值(类型中)"+m[i].id);
                             return false;
@@ -728,7 +735,7 @@
                 var param = $("#ff").serializeObject();
                 param.uuid = tabledata.uuid;
                 param.cNum = document.getElementById("cNum").value;
-                param.stuUuid = document.getElementById("stuUuid").value;
+                param.stuUuid = $('#stuUuid').combobox("getValues")[0];
                 param.cDate = $("#cDate").datebox("getValue");
                 param.org = document.getElementById("org").value;
                 param.totalCount = document.getElementById("totalCount").value;
@@ -901,6 +908,7 @@
                     "dom":'frtpi',
                     bSort:false,
                     "bLengthChange":false,
+                    searching : false,
                     scrollX :670,
                     language: {
                         "sProcessing": "处理中...",

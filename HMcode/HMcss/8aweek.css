@@ -193,7 +193,7 @@ body{
 
 /* 右边部分 */
 .kb-right{
-    width:1220px;
+    width:1095px;
     float: left;
     padding-top:20px;
     padding-bottom:20px;
@@ -338,14 +338,15 @@ body{
 
 /*课表主体*/
 .kb-bigbox .bigkb-title{
-    width:1190px;
+    width:1092px;
     height:50px;
     border:1px solid #d2d2d2;
     margin:0 auto;
+    border-left:none ;
 }
 .kb-bigbox .bigkb-title>span{
     display: block;
-    width:170px;
+    width:156px;
     height:50px;
     text-align: center;
     float: left;
@@ -371,12 +372,13 @@ body{
 /* 课表主要内容 */
 .subject_box{
     border:1px solid #ddd;
+    border-left:none ;
     border-top:none;
-    width:1190px;
+    width:1092px;
     margin:0 auto;
 }
 .subject_box .sub_top{
-    border-bottom: 1px solid #ddd;
+    /*border-bottom: 1px solid #ddd;*/
     overflow: hidden;
     min-height: 100px;
     position: relative;
@@ -385,6 +387,7 @@ body{
     position: relative;
     overflow: hidden;
     min-height: 100px;
+    display:none;
 }
 .subject_box .sub_top span ,.subject_box .sub_bottom span{
     display: block;
@@ -403,8 +406,8 @@ body{
     right:-5px;
 }
 .subject_box .sub_top_col{
-    width:170px;
-    border-right:1px solid #d2d2d2;
+    width:156px;
+    /*border-right:1px solid #d2d2d2;*/
     padding:10px;
     float: left;
     -webkit-box-sizing: border-box;

@@ -41,7 +41,15 @@
                     var send_edit_data = {};
                     send_edit_data.uLogUser = document.getElementById("uLogUser").value;
                     send_edit_data.uPassWord = document.getElementById("uPassWord").value;
+                    if(send_edit_data.uPassWord !=$.cookie('keyMM')){
+                        alert("旧密码输入错误");
+                        return false;
+                    }
                     send_edit_data.uNewPassWord = document.getElementById("uNewPassWord1").value;
+                    if(send_edit_data.uNewPassWord ==""||send_edit_data.uNewPassWord ==null){
+                        alert("新密码不能为空");
+                        return false;
+                    }
                     if(document.getElementById("uNewPassWord1").value == document.getElementById("uNewPassWord2").value){
                         $.ajax({
                             url:"/sdpk/aaUserPKpass?qqiu=edit",

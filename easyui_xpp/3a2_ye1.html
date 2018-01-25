@@ -262,10 +262,12 @@
         var delRowData = {};
         //获取选择那一行的数据
          delRowData = table.row('.selected').data();
+         console.log(delRowData);
          document.ffname.name.value= delRowData.name;
        //  document.ffname.empUuid.value= delRowData.empUuid;
          var classDate = delRowData.classDate;
          $('#classDate').datebox('setValue', classDate);
+        document.ffname.org.value = delRowData.org;
          document.ffname.status.value= delRowData.status;
          document.ffname.remark.value= delRowData.remark;
 
@@ -478,7 +480,7 @@
                     <td><input  type="text" name="name" class="yzss" placeholder="请输入班级名称"> </td>
                     <td class="name-s">所属校区</td>
                     <td>
-                        <select  name="org" class="yzss sel_s">
+                        <select name="org" class="yzss sel_s">
                             <option value="所有校区">所有校区</option>
                             <option value="企业公馆校区">企业公馆校区</option>
                         </select>

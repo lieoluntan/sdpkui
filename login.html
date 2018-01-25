@@ -78,7 +78,9 @@
                                 //存用户名uName
                                 var ck_uName = logObj.uName;
                                 $.cookie('ckUserName', ck_uName);
-
+                                //存储用户账号
+                                var ckLog = logObj.uLogUser;
+                                $.cookie('ckUlog',ckLog);
                                 window.location.href="xppu8.html";
                             }
                             else{

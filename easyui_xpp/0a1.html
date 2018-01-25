@@ -36,7 +36,7 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $('#uLogUser').value = $.cookie('ckUserName');
+                $('#uLogUser').val($.cookie('ckUlog'));
                 $( "#btn_denlu" ).click(function() {
                     var send_edit_data = {};
                     send_edit_data.uLogUser = document.getElementById("uLogUser").value;
@@ -51,6 +51,7 @@
                             success:function(result){
                                 var obj = JSON.parse(result);
                                 alert(obj.message);
+                                window.location.href="../login.html";
                             }//end 方法 success
                         });
                     }else {

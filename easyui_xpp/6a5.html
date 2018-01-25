@@ -68,6 +68,9 @@
         table.dataTable.display tbody tr.even td.sorting_1{
             background-color: white;
         }
+        .alert-main p{
+            color: #4c4c4c;
+        }
     </style>
 
     <script type="text/javascript">
@@ -349,6 +352,10 @@
                 send_edit_data.claUuid = $.cookie('UidCla');
                 send_edit_data.courseUuid = document.ffname.courseUuid.value;
                 send_edit_data.empUuid = document.ffname.empUuid.value;
+                if(send_edit_data.empUuid==""||send_edit_data==null){
+                    alert("授课老师不能为空");
+                    return false;
+                }
                 send_edit_data.classroomUuid = document.ffname.classroomUuid.value;
 
                 //日期框通过获取id来取值，用表单获取不到easyui日期框的值
@@ -692,9 +699,16 @@
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {
                             var result2obj = {};
-
                             result2obj = JSON.parse(result);
-                            alert(result2obj.message);
+                            var arrMain = result2obj.message;
+                            if(arrMain.indexOf("没有保存")>0){
+                                var arr = arrMain.split("没有保存");
+                                console.log(arr);
+                                $('.alert-con').html(arr[0]+ "<b style='color: red;font-size: 20px;'>"+"没有保存"+"</b>"+arr[1]);
+                                $('.alert-main').show();
+                            } else{
+                               alert(arrMain);
+                            }
                             // var $parent = self.parent.parent.$;
                             // $parent('#menu_3').click();
                         }
@@ -1021,6 +1035,18 @@
     </div>
     <!-- 按钮div结束 -->
 </div><!-- end id=dialog -->
+<!-- S--公用弹窗 -->
+<div class="alert-main">
+    <p class="alert-con"></p>
+    <a class="close-item">×</a>
+</div>
+<script>
+    $(function () {
+        $('.close-item').click(function(){
+            $('.alert-main').hide()
+        })
+    })
+</script>
 </body>
 <script>
     /* 复选框样式 */

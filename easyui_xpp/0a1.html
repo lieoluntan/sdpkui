@@ -33,67 +33,38 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-     <!--   <script type="text/javascript">
+        <script type="text/javascript">
 
             $(document).ready(function() {
-
+                $('#uLogUser').value = $.cookie('ckUserName');
                 $( "#btn_denlu" ).click(function() {
-//                    alert("开始点击");
                     var send_edit_data = {};
                     send_edit_data.uLogUser = document.getElementById("uLogUser").value;
-//             alert(send_edit_data.uLogUser);
                     send_edit_data.uPassWord = document.getElementById("uPassWord").value;
-//                    alert("密码:"+send_edit_data.uPassWord);
-                    $.ajax({
-                        url:"/sdpk/aaDengLu?qqiu=denglu",
-                        type: "POST",
-                        data: JSON.stringify(send_edit_data),
-                        contentType: "application/json;charset=UTF-8",
-                        success:function(result){
-                            //步骤1_a1，在步骤1的ajax的回调函
-//                            alert("登录执行中");
-                            var result2obj = {};
-                            result2obj = JSON.parse(result);
-                            var aData = [];
-                            aData =  result2obj.data;
-                            var logFlag = aData[0];
-                            var logObj = aData[1];
-                            console.log(logFlag);
-                            if(logFlag){
-                                var rsListArr = [];
-                            	 rsListArr = logObj.rsList;
-                            	//存数组到cookie
-                            	$.cookie("rsList",rsListArr.join(","));
-                            	//取cookie里的数组
-                            	var viewArr = $.cookie("rsList").split(",");
-                            	for (var i = 0; i < viewArr.length; i++) {
-                            		console.log("第"+i+"个："+viewArr[i]);
-                            		
-                            	}
+                    send_edit_data.uNewPassWord = document.getElementById("uNewPassWord1").value;
+                    if(document.getElementById("uNewPassWord1").value == document.getElementById("uNewPassWord2").value){
+                        $.ajax({
+                            url:"/sdpk/aaUserPKpass?qqiu=edit",
+                            type: "POST",
+                            data: JSON.stringify(send_edit_data),
+                            contentType: "application/json;charset=UTF-8",
+                            success:function(result){
+                                var obj = JSON.parse(result);
+                                alert(obj.message);
+                            }//end 方法 success
+                        });
+                    }else {
+                        alert("两次输入的密码不一致，请重新输入");
+                        return false;
+                    }
 
-                                //存登陆员工uuid到cookie
-                                var ckEmp = logObj.empUuid;
-                                //传班级uuid到cookie中
-                                $.cookie('ckUserEmpUuid', ckEmp);
-                                //存用户名uName
-                                var ck_uName = logObj.uName;
-                                $.cookie('ckUserName', ck_uName);
-
-                                window.location.href="xppu8.html";
-                            }
-                            else{
-                                alert(result2obj.message);
-                            }
-                        }//end 方法 success
-
-                    });
                 });//end 7 外圈 close
 
 
             } );//end 最外层 $(document).ready
 
 
-        </script>-->
+        </script>
         <style>
             *{
                 margin:0;
@@ -207,8 +178,8 @@
             </div>
                 <input id="uLogUser" name="uLogUser" class="username" value="请输入账号" disabled="disabled">
                 <input type="password" id="uPassWord" name="uPassWord" class="password"  placeholder="请输入密码">
-                <input type="password"  name="" class="password"  placeholder="请输入修改密码">
-                <input type="password"  name="" class="password"  placeholder="请确认修改密码">
+                <input type="password"  name="uNewPassWord" id="uNewPassWord1" class="password"  placeholder="请输入修改密码">
+                <input type="password"  name="uNewPassWord" id="uNewPassWord2" class="password"  placeholder="请确认修改密码">
                 <button id="btn_denlu" class="login-btn">确认修改</button>
 <!--
                 <div class="error"><span>+</span></div>

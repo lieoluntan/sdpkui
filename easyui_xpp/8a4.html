@@ -61,7 +61,7 @@
 
                 var viewArr = $.cookie("rsList").split(",");
                 for (var i = 0; i < viewArr.length; i++) {
-                    console.log("第"+i+"个："+viewArr[i]);
+//                    console.log("第"+i+"个："+viewArr[i]);
                     if(viewArr[i]=="Hd2") {$( "#btn-del" ).show();}
                     if(viewArr[i]=="Hd1") {$( "#btn-edi" ).show();}
                 }//end for
@@ -155,74 +155,74 @@
                 });//end 4 外圈 dialog
             /* 第四步：点击编辑按钮出现弹窗 */
             //获取选中行的值，并把值给到弹窗相应的位置
-            $("#btn-edi").click(function(){
-//            获取下拉框的所有内容
-                $.ajax({
-                    url:"/sdpk/aaRole?qqiu=list",
-                    type:"GET",
-                    contentType:"application/json;charset=UTF-8",
-                    success:function(result){
-                        selFunction(result);
-                    }
-                });
-                $.ajax({
-                    url:"/sdpk/aaEmp?qqiu=list",
-                    type: "GET",
-                    //data: JSON.stringify(param),
-                    ContentType: "application/json;charset=UTF-8",
-                    success:function(result){
-                        //步骤1_a1，在步骤1的ajax的回调函数
-                        setFunction(result);
-                        // alert("下拉框加载完成");
-                    }
+            /* S--获取下拉数据 */
 
-                });
-                function selFunction(result) {
-                    var objSle = {};
-                    objSle = JSON.parse(result);
-                    var objData = objSle.data;
-                    $("#infoSel").combobox({
-                        data:objData,
-                        valueField:"uuid",
-                        textField:"name",
-                        multiple:true,
-                        selectOnNavigation: false
-                    });
-                    //加载完了下拉框1111111111111111111111111111111111
-                    var delTableTr = {};//定义一个空的对象
-                    delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
-//                    console.log(delTableTr);
-                    //吧获取到的值给到弹窗里面的value
-                    $('input[name = "uName"]')[0].value = delTableTr.uName;
-                    $('input[name = "uLogUser"]')[0].value = delTableTr.uLogUser;
-                    $('input[name="uPassWord"]')[0].value = delTableTr.uPassWord;
-                    var selShhuz = delTableTr.role;
-                    var arr=[];
-                    for(var i = 0;i<selShhuz.length;i++){
-                        arr[i]=selShhuz[i].uuid;
-                    }
-                    $('#infoSel').combobox('setValues',arr);
-                    $( "#dialog" ).dialog( "open" );//出现编辑弹窗
-
-                }//end selFunction
-                function setFunction(result){
-                    var objSet = {};
-                    objSet = JSON.parse(result);
-                    var objDate = objSet.data;
-                    console.log(objDate);
-                    $("#ffSel").combobox({
-                        data:objDate,
-                        valueField:"uuid",
-                        textField:"name",
-                        multiple:false,
-                        selectOnNavigation: false
-                    });
-                    var delTableTr = {};//定义一个空的对象
-                    delTableTr = tabData.row(".selected").data();
-                   console.log(delTableTr);
-                    $('#ffSel').combobox('setValues',[delTableTr.empName]);
+            $.ajax({
+                url:"/sdpk/aaRole?qqiu=list",
+                type:"GET",
+                contentType:"application/json;charset=UTF-8",
+                success:function(result){
+                    selFunction(result);
+                }
+            });
+            $.ajax({
+                url:"/sdpk/aaEmp?qqiu=list",
+                type: "GET",
+                //data: JSON.stringify(param),
+                ContentType: "application/json;charset=UTF-8",
+                success:function(result){
+                    //步骤1_a1，在步骤1的ajax的回调函数
+                    setFunction(result);
+                    // alert("下拉框加载完成");
                 }
 
+            });
+            function selFunction(result) {
+                var objSle = {};
+                objSle = JSON.parse(result);
+                var objData = objSle.data;
+                $("#infoSel").combobox({
+                    data:objData,
+                    valueField:"uuid",
+                    textField:"name",
+                    multiple:true,
+                    selectOnNavigation: false
+                });
+
+
+            }//end selFunction
+            function setFunction(result){
+                var objSet = {};
+                objSet = JSON.parse(result);
+                var objDate = objSet.data;
+                $("#ffSel").combobox({
+                    data:objDate,
+                    valueField:"uuid",
+                    textField:"name",
+                    multiple:false,
+                    selectOnNavigation: false
+                });
+            }
+
+            /* E--获取下拉数据 */
+
+            $("#btn-edi").click(function(){
+//            获取下拉框的所有内容
+                var delTableTr = {};//定义一个空的对象
+                delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
+//                    console.log(delTableTr);
+                //吧获取到的值给到弹窗里面的value
+                $('input[name = "uName"]')[0].value = delTableTr.uName;
+                $('input[name = "uLogUser"]')[0].value = delTableTr.uLogUser;
+                $('input[name="uPassWord"]')[0].value = delTableTr.uPassWord;
+                var selShhuz = delTableTr.role;
+                var arr=[];
+                for(var i = 0;i<selShhuz.length;i++){
+                    arr[i]=selShhuz[i].uuid;
+                }
+                $('#infoSel').combobox('setValues',arr);
+                $('#ffSel').combobox('setValues',[delTableTr.empUuid]);
+                $( "#dialog" ).dialog( "open" );//出现编辑弹窗
 
             });
             /* 第五步：点击提交按钮事件 */

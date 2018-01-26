@@ -58,24 +58,28 @@
             var myDate = new Date();
             var curYear = myDate.getFullYear();
             var curMonth = myDate.getMonth()+1;
+            var curDay = myDate.getDate();
             if(curMonth<10){
                 curMonth = "0"+ curMonth;
             }
-            currentTime =curYear+"-"+curMonth;
+            if(curDay<10){
+                curDay = "0"+ curDay;
+            }
+            currentTime =curYear+"-"+curMonth+"-"+curDay;
             teaValue = $.cookie('ckUserEmpUuid');
             $.ajax({
-                url:"/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+curYear+"&&month="+curMonth+"&&today="+currentTime,
+                url:"/sdpk/aaQueryMonthHead?qqiu=list&empUuid="+teaValue+"&year="+curYear+"&&month="+curMonth+"&&today="+currentTime,
                 type:"POST",
                 contentType:"application/json;charset=UTF-8",
                 success:function (result) {
                     huidiao(result);
+                    console.log(JSON.parse(result));
                 }
             });
             //步骤,展示列表数据
             var send_cData = {};
             send_cData.keDateTime = currentTime;
             send_cData.empUuid = $.cookie('ckUserEmpUuid');
-            console.log(send_cData);
             function huidiao(result){
                 var a2obj = {};
                 a2obj = JSON.parse(result);
@@ -113,7 +117,7 @@
                         }
                     },//国际化语言结束
                     destroy:true,//表示可重复加载
-                    data: a2data[0],
+                    data: a2data,
                     columns: [
                         { "data": "courseName" },
                         { "data": "pkTypeName" },
@@ -134,17 +138,22 @@
                 var myDate = new Date();
                 var curYear = myDate.getFullYear();
                 var curMonth = myDate.getMonth()+1;
+                var curDay = myDate.getDate();
                 if(curMonth<10){
                     curMonth = "0"+ curMonth;
                 }
-                currentTime =curYear+"-"+curMonth;
+                if(curDay<10){
+                    curDay = "0"+ curDay;
+                }
+                currentTime =curYear+"-"+curMonth+"-"+curDay;
                 teaValue = $.cookie('ckUserEmpUuid');
                 $.ajax({
-                    url:"/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+curYear+"&&month="+curMonth+"&&today="+currentTime,
+                    url:"/sdpk/aaQueryMonthHead?qqiu=list&empUuid="+teaValue+"&year="+curYear+"&&month="+curMonth+"&&today="+currentTime,
                     type:"POST",
                     contentType:"application/json;charset=UTF-8",
                     success:function (result) {
                         huidiao(result);
+                        console.log(JSON.parse(result));
                     }
                 });
             });
@@ -153,20 +162,25 @@
                 var myDate = new Date();
                 var curYear = myDate.getFullYear();
                 var curMonth = myDate.getMonth()+2;
+                var curDay = myDate.getDate();
                 if(curMonth<10){
                     curMonth = "0"+ curMonth;
                 }else if(curMonth>12){
                     curMonth = 1;
                     curYear = curYear +1;
                 }
-                currentTime =curYear+"-"+curMonth;
+                if(curDay<10){
+                    curDay = "0"+ curDay;
+                }
+                currentTime =curYear+"-"+curMonth+"-"+curDay;
                 teaValue = $.cookie('ckUserEmpUuid');
                 $.ajax({
-                    url:"/sdpk/aaQuery?qqiu=list&empUuid="+teaValue+"&year="+curYear+"&&month="+curMonth+"&&today="+currentTime,
+                    url:"/sdpk/aaQueryMonthHead?qqiu=list&empUuid="+teaValue+"&year="+curYear+"&&month="+curMonth+"&&today="+currentTime,
                     type:"POST",
                     contentType:"application/json;charset=UTF-8",
                     success:function (result) {
                         huidiao(result);
+                        console.log(JSON.parse(result));
                     }
                 });
             });

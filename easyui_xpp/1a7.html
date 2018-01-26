@@ -73,13 +73,13 @@
                 contentType:"application/json;charset=UTF-8",
                 success:function (result) {
                     huidiao(result);
+                    console.log(JSON.parse(result));
                 }
             });
             //步骤,展示列表数据
             var send_cData = {};
             send_cData.keDateTime = currentTime;
             send_cData.empUuid = $.cookie('ckUserEmpUuid');
-            console.log(send_cData);
             function huidiao(result){
                 var a2obj = {};
                 a2obj = JSON.parse(result);

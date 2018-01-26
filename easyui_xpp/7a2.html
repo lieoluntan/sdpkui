@@ -291,6 +291,7 @@
         //获取选择那一行的数据
          delRowData = tableMain.row('.selected').data();
          tabledata = delRowData;
+         console.log(tabledata);
         $.fn.dataTable.ext.errMode = 'none';
         for(var i=0;i<tabledata.conPriceList
             .length;i++){
@@ -359,7 +360,7 @@
          var dateTime = delRowData.cDate;
          $('#cDate').datebox('setValue', dateTime);
          document.ffname.org.value= delRowData.org;
-         document.ffname.cRemark.value= delRowData.cRemark;
+         document.ffname.cRemark.value= delRowData.remark;
          document.ffname.totalCount.value= delRowData.totalCount;
          document.ffname.totalPrice.value= delRowData.totalPrice;
          document.ffname.sumLineDownB.value= delRowData.sumLineDownB;
@@ -444,7 +445,7 @@
             var param = $("#ff").serializeObject();
             param.uuid = tabledata.uuid;
             param.cNum = document.getElementById("cNum").value;
-            param.cRemark = document.getElementById("cRemark").value;
+            param.remark = document.getElementById("cRemark").value;
             param.stuUuid = $('#stuUuid').combobox("getValues")[0];
             param.cDate = $("#cDate").datebox("getValue");
             param.org = document.getElementById("org").value;
@@ -600,7 +601,7 @@
                     </tr>
                     <tr>
                         <td class="name-s" style="padding-left:0">合同备注</td>
-                        <td><input  type="text" id="cRemark" name="cRemark" class=" v1g3 yzss"  style="height: 39px;width: 815px;font-size:16px;" value="无"></td>
+                        <td><input  type="text" id="cRemark" name="cRemark" class=" v1g3 yzss"  style="height: 39px;width: 815px;font-size:16px;"></td>
                     </tr>
                     </table><!-- end  id= header_3_tb2 -->
 

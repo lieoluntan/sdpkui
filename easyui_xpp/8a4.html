@@ -191,6 +191,7 @@
                     //加载完了下拉框1111111111111111111111111111111111
                     var delTableTr = {};//定义一个空的对象
                     delTableTr = tabData.row(".selected").data();//吧选中行的所有数据给到这个新的对象
+//                    console.log(delTableTr);
                     //吧获取到的值给到弹窗里面的value
                     $('input[name = "uName"]')[0].value = delTableTr.uName;
                     $('input[name = "uLogUser"]')[0].value = delTableTr.uLogUser;
@@ -208,6 +209,7 @@
                     var objSet = {};
                     objSet = JSON.parse(result);
                     var objDate = objSet.data;
+                    console.log(objDate);
                     $("#ffSel").combobox({
                         data:objDate,
                         valueField:"uuid",
@@ -217,6 +219,7 @@
                     });
                     var delTableTr = {};//定义一个空的对象
                     delTableTr = tabData.row(".selected").data();
+                   console.log(delTableTr);
                     $('#ffSel').combobox('setValues',[delTableTr.empName]);
                 }
 
@@ -233,6 +236,7 @@
                 sendTab.uPassWord = $('input[name="uPassWord"]')[0].value;
                 sendTab.empUuid = $('#ffSel').combobox("getValues")[0];
                 sendTab.roleList = $('#infoSel').combobox("getValues");
+                console.log(sendTab);
                 if(sendTab.uName==""||sendTab.uName==null){
                     alert("请输入用户姓名");
                     return false;
@@ -264,7 +268,7 @@
                         var obj = {};
                         obj = JSON.parse(result);
                         alert(obj.message);
-                        window.location.reload();
+                       window.location.reload();
                     }
                 });
             });

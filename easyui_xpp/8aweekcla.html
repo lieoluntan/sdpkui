@@ -92,15 +92,15 @@
                 <li class="licur">周课表</li>
             </ul>
         </div>
-        <div class="zt-box">
-            <span class="skz">上课中</span>
+        <div class="zt-box" style="margin:0;padding:0;height: 20px;">
+            <!--<span class="skz">上课中</span>
             <span class="wsk">未上课</span>
             <span class="yyw">已延误</span>
             <span class="yxk">已下课</span>
             <ul class="ztb">
                 <li class="curli">详细版</li>
                 <li>简约版</li>
-            </ul>
+            </ul>-->
         </div>
         <!-- S--课表 -->
         <div class="kb-bigbox">
@@ -523,7 +523,7 @@
     var G_day_6;
     var G_day_7;
     var allData,teaData=[];
-    var setDate,addDates,addDate,cells,chgData,oneDay;
+    var setDate,addDates,addDate,cells,chgData,oneDay,currq;
     var weekSea=[],oneData=[];
     $(document).ready(function(){
         $.ajax({
@@ -556,6 +556,18 @@
                 value: "请选择班级",
                 editable: false
             });
+            $('#grade').combobox("setValue",a2dataR4[0].uuid);
+            teaData.length=0;
+            empUuid = $('#grade').combobox('getValue');
+            $("#Day1").empty();
+            $("#Day2").empty();
+            $("#Day3").empty();
+            $("#Day4").empty();
+            $("#Day5").empty();
+            $("#Day6").empty();
+            $("#Day7").empty();
+            weekSea.length=0;
+            teaFun();
 
         }// end 1_x1 外圈
         $('#grade').combobox({
@@ -679,72 +691,136 @@
                      weekCourse7(weekSea[6]);
                  }
                 //        ajax数据交互
-                //        第一天
-                /* 遍历后台数据 */
-                function weekCourse(result) {
-                    for(var i=0;i<result.length;i++){
-                        var one = result[i];
-                        $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+one.courseName+"</h1>"+"<h1>"+one.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>")
-                        $("#Day1").append($html1);
-                    }
-                }
-                /*第二天*/
-                /* 遍历后台数据 */
-                function weekCourse2(result) {
-                    for(var i=0;i<result.length;i++){
-                        var two = result[i];
-                        $html2 = $("<div class='sub-class col-yyw'>"+"<h1>"+two.courseName+"</h1>"+"<h1>"+two.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+two.keStartTime+"-"+two.keEndTime+"</time>"+"<p>"+two.croomName+"/"+two.empName+"</p>"+"</div>"+"</div>");
-                        $("#Day2").append($html2 );
-                    }
-                }
-                /*第三天*/
-                /* 遍历后台数据 */
-                function weekCourse3(result) {
-                    for(var i=0;i<result.length;i++){
-                        var thr = result[i];
-                        $html3 = $("<div class='sub-class col-yyw'>"+"<h1>"+thr.courseName+"</h1>"+"<h1>"+thr.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+thr.keStartTime+"-"+thr.keEndTime+"</time>"+"<p>"+thr.croomName+"/"+thr.empName+"</p>"+"</div>"+"</div>" );
-                        $("#Day3").append($html3);
-                    }
-                }
 
-                /*第4天*/
-                /* 遍历后台数据 */
-                function weekCourse4(result) {
-                    for(var i=0;i<result.length;i++){
-                        var four = result[i];
-                        $html4 = $("<div class='sub-class col-yyw'>"+"<h1>"+four.courseName+"</h1>"+"<h1>"+four.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+four.keStartTime+"-"+four.keEndTime+"</time>"+"<p>"+four.croomName+"/"+four.empName+"</p>"+"</div>"+"</div>");
-                        $("#Day4").append($html4 );
-                    }
-                }
+                 /*日期格式格式转换开始*/
+                 var myDate = new Date();
+                 var curYear = myDate.getFullYear();
+                 var curMonth = myDate.getMonth()+1;
+                 if(curMonth<10){
+                     curMonth = "0"+curMonth;
+                 }
+                 var curDay = myDate.getDate();
+                 if(curDay<10){
+                     curDay = "0"+curDay;
+                 }
+                 currq = parseInt(curYear.toString()+curMonth.toString()+curDay.toString());
+                 /*日期格式格式转换结束*/
 
-                /*第5天*/
-                /* 遍历后台数据 */
-                function weekCourse5(result) {
-                    for(var i=0;i<result.length;i++){
-                        var five = result[i];
-                        $html5 = $("<div class='sub-class col-yyw'>"+"<h1>"+five.courseName+"</h1>"+"<h1>"+five.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+five.keStartTime+"-"+five.keEndTime+"</time>"+"<p>"+five.croomName+"/"+five.empName+"</p>"+"</div>"+"</div>");
-                        $("#Day5").append( $html5);
-                    }
-                }
-                /*第6天*/
-                /* 遍历后台数据 */
-                function weekCourse6(result) {
-                    for(var i=0;i<result.length;i++){
-                        var six = result[i];
-                        $html6 = $("<div class='sub-class col-yyw'>"+"<h1>"+six.courseName+"</h1>"+"<h1>"+six.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+six.keStartTime+"-"+six.keEndTime+"</time>"+"<p>"+six.croomName+"/"+six.empName+"</p>"+"</div>"+"</div>");
-                        $("#Day6").append( $html6);
-                    }
-                }
+                 //        第一天
+                 /* 遍历后台数据 */
+                 function weekCourse(result) {
+                     for(var i=0;i<result.length;i++){
+                         var one = result[i];
+                         var timeArr = one.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+one.courseName+"</h1>"+"<h1>"+one.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+one.courseName+"</h1>"+"<h1>"+one.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+one.keStartTime+"-"+one.keEndTime+"</time>"+"<p>"+one.croomName+"/"+one.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day1").append($html1);
+                     }
+                 }
+                 /*第二天*/
+                 /* 遍历后台数据 */
+                 function weekCourse2(result) {
+                     for(var i=0;i<result.length;i++){
+                         var two = result[i];
+                         var timeArr = two.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+two.courseName+"</h1>"+"<h1>"+two.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+two.keStartTime+"-"+two.keEndTime+"</time>"+"<p>"+two.croomName+"/"+two.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+two.courseName+"</h1>"+"<h1>"+two.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+two.keStartTime+"-"+two.keEndTime+"</time>"+"<p>"+two.croomName+"/"+two.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day2").append($html1);
+                     }
+                 }
+                 /*第三天*/
+                 /* 遍历后台数据 */
+                 function weekCourse3(result) {
+                     for(var i=0;i<result.length;i++){
+                         var thr = result[i];
+                         var timeArr = thr.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+thr.courseName+"</h1>"+"<h1>"+thr.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+thr.keStartTime+"-"+thr.keEndTime+"</time>"+"<p>"+thr.croomName+"/"+thr.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+thr.courseName+"</h1>"+"<h1>"+thr.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+thr.keStartTime+"-"+thr.keEndTime+"</time>"+"<p>"+thr.croomName+"/"+thr.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day3").append($html1);
+                     }
+                 }
 
-                /*第7天*/
-                /* 遍历后台数据 */
-                function weekCourse7(result) {
-                    for(var i=0;i<result.length;i++){
-                        var seve = result[i];
-                        $html7 = $("<div class='sub-class col-yyw'>"+"<h1>"+seve.courseName+"</h1>"+"<h1>"+seve.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+seve.keStartTime+"-"+seve.keEndTime+"</time>"+"<p>"+seve.croomName+"/"+seve.empName+"</p>"+"</div>"+"</div>");
-                        $("#Day7").append($html7);
-                    }
-                }
+                 /*第4天*/
+                 /* 遍历后台数据 */
+                 function weekCourse4(result) {
+                     for(var i=0;i<result.length;i++){
+                         var four = result[i];
+                         var timeArr = four.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+four.courseName+"</h1>"+"<h1>"+four.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+four.keStartTime+"-"+four.keEndTime+"</time>"+"<p>"+four.croomName+"/"+four.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+four.courseName+"</h1>"+"<h1>"+four.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+four.keStartTime+"-"+four.keEndTime+"</time>"+"<p>"+four.croomName+"/"+four.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day4").append($html1);
+                     }
+                 }
+
+                 /*第5天*/
+                 /* 遍历后台数据 */
+                 function weekCourse5(result) {
+                     for(var i=0;i<result.length;i++){
+                         var five = result[i];
+                         var timeArr = five.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+five.courseName+"</h1>"+"<h1>"+five.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+five.keStartTime+"-"+five.keEndTime+"</time>"+"<p>"+five.croomName+"/"+five.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+five.courseName+"</h1>"+"<h1>"+five.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+five.keStartTime+"-"+five.keEndTime+"</time>"+"<p>"+five.croomName+"/"+five.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day5").append($html1);
+                     }
+                 }
+                 /*第6天*/
+                 /* 遍历后台数据 */
+                 function weekCourse6(result) {
+                     for(var i=0;i<result.length;i++){
+                         var six = result[i];
+                         var timeArr = six.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+six.courseName+"</h1>"+"<h1>"+six.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+six.keStartTime+"-"+six.keEndTime+"</time>"+"<p>"+six.croomName+"/"+six.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+six.courseName+"</h1>"+"<h1>"+six.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+six.keStartTime+"-"+six.keEndTime+"</time>"+"<p>"+six.croomName+"/"+six.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day6").append($html1);
+                     }
+                 }
+
+                 /*第7天*/
+                 /* 遍历后台数据 */
+                 function weekCourse7(result) {
+                     for(var i=0;i<result.length;i++){
+                         var seve = result[i];
+                         var timeArr = seve.keDateTime.split('-');
+                         var timeStr = timeArr[0]+timeArr[1]+timeArr[2];
+                         var timeNum = parseInt(timeStr);
+                         if(timeNum<currq){
+                             $html1= $("<div class='sub-class col-yyw'>"+"<h1>"+seve.courseName+"</h1>"+"<h1>"+seve.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+seve.keStartTime+"-"+seve.keEndTime+"</time>"+"<p>"+seve.croomName+"/"+seve.empName+"</p>"+"</div>"+"</div>")
+                         }else {
+                             $html1= $("<div class='sub-class col-wsk'>"+"<h1>"+seve.courseName+"</h1>"+"<h1>"+seve.keDateTime+"</h1>"+"<div class='vision_xx'>"+"<time>"+seve.keStartTime+"-"+seve.keEndTime+"</time>"+"<p>"+seve.croomName+"/"+seve.empName+"</p>"+"</div>"+"</div>")
+                         }
+                         $("#Day7").append($html1);
+                     }
+                 }
             };//end date
             //对周课表进行操作  有个小问题，当现实到当前时间时 标记框不消失
             if($('.kb-zkb').is(":visible")){

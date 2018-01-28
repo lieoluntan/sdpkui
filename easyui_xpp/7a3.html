@@ -361,7 +361,7 @@
                 var dateTime = delRowData.cDate;
                 $('#cDate').datebox('setValue', dateTime);
                 document.ffname.org.value= delRowData.org;
-                document.ffname.cRemark.value= delRowData.cRemark;
+                document.ffname.cRemark.value= delRowData.remark;
                 document.ffname.totalCount.value= delRowData.totalCount;
                 document.ffname.totalPrice.value= delRowData.totalPrice;
                 document.ffname.sumLineDownB.value= delRowData.sumLineDownB;
@@ -446,7 +446,7 @@
                 var param = $("#ff").serializeObject();
                 param.uuid = tabledata.uuid;
                 param.cNum = document.getElementById("cNum").value;
-                param.cRemark = document.getElementById("cRemark").value;
+                param.remark = document.getElementById("cRemark").value;
                 param.stuUuid = $('#stuUuid').combobox("getValues")[0];
                 param.cDate = $("#cDate").datebox("getValue");
                 param.org = document.getElementById("org").value;

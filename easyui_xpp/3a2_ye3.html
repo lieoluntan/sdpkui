@@ -56,7 +56,7 @@
 	</style>
     <script type="text/javascript">
 
-    var ckUuid_ye3;//全局变量
+    var ckUuid_ye3,pktype;//全局变量
 
     $(document).ready(function() {
 
@@ -65,7 +65,7 @@
 //        $( "#btn_combo" ).click(function() {
             //11月13日暂留
             var send_edit_data = {};
-        	var pktype = [{"pkType":"LineUpA","name":"线上"},{"pkType":"LineDownB","name":"线下"}];
+        	pktype = [{"pkType":"LineUpA","name":"线上"},{"pkType":"LineDownB","name":"线下"}];
             // 11月13日暂留
             send_edit_data.claUuid = "测试备用";
             //~todo~:get传送url参数方式访问
@@ -147,39 +147,7 @@
                 }//end  方法onSelect
             });
 
-    //对话框重复一份
-    $('#L1ee_dlg').combobox({
-               data: a2data,
-                valueField: 'courseUuid',
-                textField: 'courseName',
-                selectOnNavigation: false,
 
-                //选择事件，选重的时候同时加载数据表
-                onSelect: function(rec){
-                    // 11月13日暂留,语句无作用 start
-                    var send_edit_data = {};
-                    send_edit_data.claUuid = "测试备用";
-                    // 11月13日暂留,语句无作用  end
-                    var coUuid = rec.courseUuid;
-                    var newUrl = '/sdpk/aaCourse_Emp?qqiu=getListByCour&courseUuid='+coUuid;
-                    //获取关系一班级下拉框数据  
-                    $.ajax({
-                        
-                        url:String(newUrl),
-                        type: "POST",
-                        //data: JSON.stringify(param),
-                        data: JSON.stringify(send_edit_data),
-                        contentType: "application/json;charset=UTF-8", 
-                        success:function(result){
-                        //步骤1_a1，完成下拉框L3
-                        huiFunc2(result);
-                        }
-                     
-                    });
-                    // alert("ajax重载了");
-
-                }//end  方法onSelect
-            });
 
     }// end 1_x1 外圈 
 
@@ -195,20 +163,8 @@
                 textField: 'empName',
                 selectOnNavigation: false
             });
-    //对话框重复一份
-    $('#L2ee_dlg').combobox({
-               data: a2data2,
-                valueField: 'empUuid',
-                textField: 'empName',
-                selectOnNavigation: false
-            });
+
 	$('#L4ee_dlg').combobox({
-		data: pktype,
-		valueField: 'pkType',
-		textField: 'name',
-		selectOnNavigation: false
-	});
-	$('#L4ee').combobox({
 		data: pktype,
 		valueField: 'pkType',
 		textField: 'name',
@@ -229,13 +185,7 @@
                 textField: 'name',
                 selectOnNavigation: false
             });
-    //对话框重复一份
-    $('#L3ee_dlg').combobox({
-               data: a2dataL3,
-                valueField: 'uuid',
-                textField: 'name',
-                selectOnNavigation: false
-            });
+
 
     }// end 1_x1 外圈 
 
@@ -271,9 +221,9 @@
             // send_edit_data.uuid = delRowData.uuid;
             send_edit_data.id = "001";
             send_edit_data.claUuid = $.cookie('UidCla');
-            send_edit_data.courseUuid = document.ffname.courseUuid.value;
-            send_edit_data.empUuid = document.ffname.empUuid.value;
-            send_edit_data.classroomUuid = document.ffname.classroomUuid.value;
+            send_edit_data.courseUuid = $("#L1ee").combobox('getValue');
+            send_edit_data.empUuid = $("#L2ee").combobox('getValue');
+            send_edit_data.classroomUuid = $("#L3ee").combobox('getValue');
 
             //日期框通过获取id来取值，用表单获取不到easyui日期框的值
             send_edit_data.keDateTime = $('#keDateTime').datebox('getValue');
@@ -455,41 +405,163 @@
     //步骤5，编辑打开事件
     $( "#opener" ).click(function() {
 
+
         //要初始化一个对象，不然会报undifine未定义错误
         var rowData = {};
         //获取选择那一行的数据
-         rowData = table_full.row('.selected').data();
-         // document.ffnameDlg.courseUuid.value= rowData.courseUuid;
-         var aTemple = {};
-          aTemple = rowData.courseUuid;
-         $('#L1ee_dlg').combobox('setValue', aTemple);
-         document.ffnameDlg.keDateTime_Dlg.value= rowData.keDateTime;
-         var dateTime = rowData.keDateTime;
-         $('#keDateTime_Dlg').datebox('setValue', dateTime);
-         document.ffnameDlg.keStartTime.value= rowData.keStartTime;
-         document.ffnameDlg.keLongTime.value= rowData.keLongTime;
-         // document.ffnameDlg.empUuid.value= rowData.empUuid;
-         aTemple = {}; aTemple = rowData.empUuid;
-         $('#L2ee_dlg').combobox('setValue', aTemple);
-         
-         // document.ffnameDlg.classroomUuid.value= rowData.classroomUuid;
-         aTemple = {}; aTemple = rowData.classroomUuid;
-         $('#L3ee_dlg').combobox('setValue', aTemple);
-        aTemple = {};
-        aTemple = rowData.pkTypeName;
-        $('#L4ee').combobox('setValue', aTemple);
- 
+        rowData = table_full.row('.selected').data();
+		//
+        ckUuid_ye3 = $.cookie('UidCla');
+        // alert("ye3班级uuid"+ckUuid_ye3);
+        var newUrl = '/sdpk/aaAnd_ClassCourse?qqiu=getListBycla&classUuid='+ckUuid_ye3;
+        //获取关系一班级下拉框数据
+        $.ajax({
+
+            url:String(newUrl),
+            type: "POST",
+            //data: JSON.stringify(param),
+            // data: JSON.stringify(send_edit_data),
+            contentType: "application/json;charset=UTF-8",
+            success:function(result){
+                //步骤1_a1，完成下拉框L3
+                huiEditFunc1(result);
+            }
+
+        });
+        var newsUrl = '/sdpk/aaCourse_Emp?qqiu=getListByCour&courseUuid='+rowData.courseUuid;
+        $.ajax({
+
+            url:String(newsUrl),
+            type: "POST",
+            //data: JSON.stringify(param),
+            // data: JSON.stringify(send_edit_data),
+            contentType: "application/json;charset=UTF-8",
+            success:function(result){
+                //步骤1_a1，完成下拉框L3
+                huiEditFunc2(result);
+                $('#L2ee_dlg').combobox('setValue', rowData.empUuid);
+                $('#L4ee').combobox('setValue', rowData.pkTypeName);
+            }
+
+        });
+        //获取教室下拉框数据
+        var send_croom = {};
+        send_croom.id = "stu01";
+        send_croom.claUuid = "list参数随便传";
+        $.ajax({
+
+            url:"/sdpk/aaClassRoom?qqiu=list",
+            type: "POST",
+            //data: JSON.stringify(param),
+            data: JSON.stringify(send_croom),
+            contentType: "application/json;charset=UTF-8",
+            success:function(result){
+                //步骤1_a1，在步骤1的ajax的回调函数
+                huiEditFuncL3(result);
+//                alert("下拉框加载完成");
+            }
+
+        });
+
+//    });//end 1 外圈 save_1 单击
+
+        //步骤1_x1，在步骤1的回调,展示课程下拉框
+        function huiEditFunc1(result){
+            // alert("回调中");
+            var a2obj = {};
+            a2obj = JSON.parse(result);
+            var a2data = a2obj.data;
+
+            //对话框重复一份
+            $('#L1ee_dlg').combobox({
+                data: a2data,
+                valueField: 'courseUuid',
+                textField: 'courseName',
+                selectOnNavigation: false,
+                //选择事件，选重的时候同时加载数据表
+                onSelect: function(rec){
+                    // 11月13日暂留,语句无作用 start
+                    var send_edit_data = {};
+                    send_edit_data.claUuid = "测试备用";
+                    // 11月13日暂留,语句无作用  end
+                    var coUuid = rec.courseUuid;
+                    var newUrl = '/sdpk/aaCourse_Emp?qqiu=getListByCour&courseUuid='+coUuid;
+                    //获取关系一班级下拉框数据
+                    $.ajax({
+
+                        url:String(newUrl),
+                        type: "POST",
+                        //data: JSON.stringify(param),
+                        data: JSON.stringify(send_edit_data),
+                        contentType: "application/json;charset=UTF-8",
+                        success:function(result){
+                            //步骤1_a1，完成下拉框L3
+                            huiEditFunc2(result);
+
+                        }
+
+                    });
+                    // alert("ajax重载了");
+
+                }//end  方法onSelect
+            });
+            $('#L1ee_dlg').combobox('setValue', rowData.courseUuid);
+        }// end 1_x1 外圈
+
+        //步骤1_x2，在步骤1_x1的huiFunc1的回调函数,是第二次回调
+        function huiEditFunc2(result){
+            // alert("回调中");
+            var obj2 = {};
+            obj2 = JSON.parse(result);
+            var a2data2 = obj2.data;
+            //对话框重复一份
+            $('#L2ee_dlg').combobox({
+                data: a2data2,
+                valueField: 'empUuid',
+                textField: 'empName',
+                selectOnNavigation: false
+            });
+            $('#L4ee').combobox({
+                data: pktype,
+                valueField: 'pkType',
+                textField: 'name',
+                selectOnNavigation: false
+            });
+
+        }// end 1_x2 外圈
+
+        //步骤1_xL3，在步骤1的ajax的回调函数,展示列表数据
+        function huiEditFuncL3(result){
+            // alert("回调中");
+            var objL3 = {};
+            objL3 = JSON.parse(result);
+            var a2dataL3 = objL3.data;
+            //对话框重复一份
+            $('#L3ee_dlg').combobox({
+                data: a2dataL3,
+                valueField: 'uuid',
+                textField: 'name',
+                selectOnNavigation: false
+            });
+            $('#L3ee_dlg').combobox('setValue', rowData.classroomUuid);
+        }// end 1_x1 外圈
+
+
+
+        console.log(rowData);
+        // document.ffnameDlg.courseUuid.value= rowData.courseUuid;
+        var aTemple = {};
+        aTemple = rowData.courseUuid;
+
+        document.ffnameDlg.keDateTime_Dlg.value= rowData.keDateTime;
+        var dateTime = rowData.keDateTime;
+        $('#keDateTime_Dlg').datebox('setValue', dateTime);
+        document.ffnameDlg.keStartTime.value= rowData.keStartTime;
+        document.ffnameDlg.keLongTime.value= rowData.keLongTime;
+        // document.ffnameDlg.empUuid.value= rowData.empUuid;
+
         var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
-        //alert(n1); //alert是弹出对话框，会弹出一个123的对话框
-        //调用父级弹窗start
-            // var $parent = self.parent.$;
-            // $parent('#pwin').window({
-            //     modal:true,
-            //     width:1000,
-            //     height:800,
-            //     content:$('#dialog').html(),
-            //     title:'父级窗口'
-            // });
+
         //调用父级弹窗end
       $( "#dialog" ).dialog( "open" );
     
@@ -508,17 +580,18 @@
             var send_edit_data = {};
             send_edit_data.uuid = delRowData.uuid;
             send_edit_data.claUuid = $.cookie('UidCla');
-            send_edit_data.courseUuid = document.ffnameDlg.courseUuid.value;
-            send_edit_data.empUuid = document.ffnameDlg.empUuid.value;
-            send_edit_data.classroomUuid = document.ffnameDlg.classroomUuid.value;
+            send_edit_data.courseUuid = $("#L1ee_dlg").combobox('getValue');
+            send_edit_data.empUuid = $("#L2ee_dlg").combobox('getValue');
+            send_edit_data.classroomUuid = $("#L3ee_dlg").combobox('getValue');
 
             //日期框通过获取id来取值，用表单获取不到easyui日期框的值
             var ceshi = $('#keDateTime').datebox('getValue');
             send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
             send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
             send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
-        	send_edit_data.pkType = document.ffnameDlg.pkType.value;
+        	send_edit_data.pkType = $('#L4ee').datebox('getValue');
             send_edit_data.status = "正常";
+            console.log(send_edit_data);
             $.ajax({
                 
                 url:"/sdpk/aaPaiKe?qqiu=queryConflict",
@@ -586,8 +659,6 @@
 			{
 				send_RowDataList[i] = RowDataList[i];
 			}
-
-
             var conflictFlag = false;
             //查询员工冲突是否存在
             for (var i=0;i<send_RowDataList.length;i++)
@@ -603,7 +674,7 @@
             if(conflictFlag){
                 alert("请修改冲突或删除冲突行,再次点击保存");
             }else{
-
+				console.log(send_RowDataList);
                 $.ajax({
                 url:"/sdpk/aaPaiKe?qqiu=add_batch",
                 type: "POST",

@@ -83,7 +83,7 @@
     <div class="kb-right">
         <div class="databox-title">
             <div class="data-left">
-                <span id="date-time">2017年12月</span>
+                <span id="date-time"></span>
                 <i class="icon-arrow-left" id="prev">&lang;</i>
                 <i class="icon-arrow-right" id="next">&rang;</i>
 
@@ -714,6 +714,7 @@
                      curDay = "0"+curDay;
                  }
                  currq = parseInt(curYear.toString()+curMonth.toString()+curDay.toString());
+                 $('#date-time').text(curYear+"年"+curMonth+'月');
                  /*日期格式格式转换结束*/
                  //        第一天
                  /* 遍历后台数据 */

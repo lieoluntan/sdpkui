@@ -94,6 +94,11 @@
                     });
                 });//end 7 外圈 close
 
+                $("#uPassWord").keyup(function () {
+                    if (event.which == 13){
+                        $("#btn_denlu").trigger("click");
+                    }
+                });
 
             } );//end 最外层 $(document).ready
 

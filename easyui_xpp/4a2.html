@@ -68,6 +68,32 @@
         funBtn();
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
+
+        //	部门管理下拉框
+        var part = {};
+        $.ajax({
+            url:"/sdpk/aaDepartment?qqiu=list",
+            type:"GET",
+            data:JSON.stringify(part),
+            contentType:"application/json;charset=UTF-8",
+            success: function (result) {
+                //步骤1_a1，在步骤1的ajax的回调函数
+                huidiao(result);
+//                        alert("下拉框加载完成");
+            }
+        });
+        function huidiao(result){
+            var obj = JSON.parse(result);
+            var objData = obj.data;
+            $('#depart').combobox({
+                data: objData,
+                valueField:'name',
+                textField:'name',
+                selectOnNavigation: false
+            });
+        }
+
+
         var tabShowText;
     	//步骤1,展示列表数据
     var table = $('#example').DataTable( {
@@ -228,7 +254,7 @@
          document.ffname.name.value= delRowData.name;
          document.ffname.empNum.value= delRowData.empNum;
          document.ffname.phone.value= delRowData.phone;
-         document.ffname.depart.value= delRowData.depart;
+         $('#depart').combobox("setValue",delRowData.depart);
          document.ffname.job.value= delRowData.job;
          document.ffname.remark.value= delRowData.remark;
 
@@ -412,13 +438,7 @@
                     <tr>
                     <td  class="name-s" style="padding-left:0">部门</td>
                     <td>
-                        <select  name="depart" class="yzss sel_s">
-                            <option >请选择</option>
-                            <option value="产品部">产品部</option>
-                            <option value="市场部">市场部</option>
-                            <option value="教学部">教学部</option>
-                            <option value="人事行政部">人事行政部</option>
-                        </select>
+                        <input id="depart"  name="depart" class="easyui-combobox yz-box yzss sel_s" value="请选择部门" style="height: 34px;">
                     </td>
                     <td class="name-s">职位</td>
                     <td>

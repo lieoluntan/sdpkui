@@ -224,6 +224,7 @@
         scrollY:false,
         data: a2data,
         columns: [
+            { "data": "claName" },
             { "data": "courseName" },
 //            { "data": "categoryName" },
             { "data": "pkTypeName" },
@@ -300,8 +301,9 @@
                         scrollY:false,
                        data: xppArr,
                         columns: [
+                            { "data": "claName" },
                             { "data": "courseName" },
-                            { "data": "categoryName" },
+                            { "data": "pkTypeName" },
                             { "data": "keDateTime" },
                             { "data": "keStartTime" },
                             { "data": "weekSome" },
@@ -310,7 +312,6 @@
                             { "data": "keLongTime" }
                         ]
                     } );
-                    console.log(2222);
 
 
             }
@@ -711,6 +712,7 @@
                     <!--start 表头 -->
                     <thead class="tab-tit">
                     <tr>
+                        <th style="min-width:90px;">班级名称</th>
                         <th style="min-width:90px;">课程名称</th>
                         <th style="min-width:65px;">类别</th>
                         <th style="min-width:110px;">上课日期</th>
@@ -725,6 +727,7 @@
                     <!-- start 表尾 -->
                     <tfoot class="tab-tit">
                     <tr>
+                        <th style="min-width:90px;">班级名称</th>
                         <th style="min-width:90px;">课程名称</th>
                         <th style="min-width:65px;">类别</th>
                         <th style="min-width:110px;">上课日期</th>

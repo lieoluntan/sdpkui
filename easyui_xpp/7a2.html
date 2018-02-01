@@ -113,7 +113,7 @@
                 "sSortDescending": ": 以降序排列此列"
             }
         },//国际化语言结束
-        "ajax": "/sdpk/aaContrtext?qqiu=list",
+        "ajax": "/sdpk/aaMyContrtext?qqiu=speedList",
         "columns": [
             { "data": "cNum" },
             { "data": "stuName" },
@@ -138,7 +138,6 @@
             "className": "my_class",
             "contentPadding": "mmm",
             "createdCell": function (td, cellData, rowData, row, col) {
-                console.log(cellData);
                 if ( cellData.openAndclose == 'open' ) {
                     tabShowText = '已开启';
                     $(td).context.innerHTML="<button style='color: white;border:none;border-radius: 5px;background-color: #36cb91;line-height: 30px;text-align: center;width: 100px;font-size: 14px;'>"+ tabShowText +"</button>";
@@ -269,7 +268,6 @@
             var objR4 = {};
             objR4 = JSON.parse(result);
             var a2dataR4 = objR4.data;
-            console.log(a2dataR4);
             // for(var i=0;i<a2dataR4.length;i++){
             //     $('#stuUuid').append('<option value="'+a2dataR4[i].uuid+'">'+a2dataR4[i].name+'</option>')
             // }
@@ -288,11 +286,29 @@
         data2a=[];
 
         //要初始化一个对象，不然会报undifine未定义错误
-        var delRowData = {},date={};
+        var delRowData = {},date = {},send_one = {};
         //获取选择那一行的数据
          delRowData = tableMain.row('.selected').data();
-         tabledata = delRowData;
-         console.log(tabledata);
+         send_one.uuid = delRowData.uuid;
+
+          //查询单条数据
+          $.ajax({
+
+            url:"/sdpk/aaContrtext?qqiu=getOne",
+            type: "POST",
+            //data: JSON.stringify(param),
+            data: JSON.stringify(send_one),
+            async:false,
+            contentType: "application/json;charset=UTF-8",
+            success:function(result){
+              // console.log(result);
+              //步骤1_a1，在步骤1的ajax的回调函数
+              tabledata = JSON.parse(result).data[0];
+              // alert("下拉框加载完成");
+            }
+
+          });
+
         $.fn.dataTable.ext.errMode = 'none';
         for(var i=0;i<tabledata.conPriceList
             .length;i++){
@@ -309,7 +325,6 @@
         }
 
         RowDataList = date;
-         console.log(data2a);
 
         //步骤1,展示列表数据
          tablePrice = $('#examplePrice').DataTable( {

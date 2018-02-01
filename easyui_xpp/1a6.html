@@ -43,6 +43,9 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
             border:1px solid transparent;
         }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
     <!-- <script src="../js/jquery-1.8.2.js" type="text/javascript"></script> -->
 
@@ -115,6 +118,7 @@
                     destroy:true,//表示可重复加载
                     data: a2data[0],
                     columns: [
+                        { "data": "claName" },
                         { "data": "courseName" },
                         { "data": "pkTypeName" },
                         { "data": "keDateTime" },
@@ -244,6 +248,7 @@
             <table id="example" class="display tab-mians" cellspacing="0" width="100%">
                 <thead class="tab-tit">
                 <tr>
+                    <th style="min-width:100px;">班级名称</th>
                     <th style="min-width:100px;">课程名称</th>
                     <th style="min-width:100px;">类别</th>
                     <th style="min-width:100px;">上课日期</th>
@@ -257,6 +262,7 @@
                 </thead>
                 <tfoot class="tab-tit">
                 <tr>
+                    <th style="min-width:100px;">班级名称</th>
                     <th style="min-width:100px;">课程名称</th>
                     <th style="min-width:100px;">类别</th>
                     <th style="min-width:100px;">上课日期</th>

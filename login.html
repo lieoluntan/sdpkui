@@ -94,11 +94,16 @@
                     });
                 });//end 7 外圈 close
 
-                $("#uPassWord").keyup(function () {
+                $("#uPassWord").keyup(function (event) {
                     if (event.which == 13){
                         $("#btn_denlu").trigger("click");
                     }
                 });
+                $("#uPassWord").onkeydown=function(){
+                    if(keycode==13){
+                        $("#btn_denlu").trigger("click");
+                    }
+                }
 
             } );//end 最外层 $(document).ready
 

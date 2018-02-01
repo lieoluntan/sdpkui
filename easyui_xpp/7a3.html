@@ -115,7 +115,7 @@
                         "sSortDescending": ": 以降序排列此列"
                     }
                 },//国际化语言结束
-                "ajax": "/sdpk/aaMyContrtext?qqiu=list&&empUuid="+empUuid,
+                "ajax": "/sdpk/aaMyContrtext?qqiu=speedMyList&&empUuid="+empUuid,
                 "columns": [
                     { "data": "cNum" },
                     { "data": "stuName" },
@@ -288,12 +288,30 @@
             $( "#opener" ).click(function() {
 
                 data2a=[];
+              //要初始化一个对象，不然会报undifine未定义错误
+              var delRowData = {},date = {},send_one = {};
+              //获取选择那一行的数据
+              delRowData = tableMain.row('.selected').data();
+              send_one.uuid = delRowData.uuid;
 
-                //要初始化一个对象，不然会报undifine未定义错误
-                var delRowData = {},date={};
-                //获取选择那一行的数据
-                delRowData = tableMain.row('.selected').data();
-                tabledata = delRowData;
+              //查询单条数据
+              $.ajax({
+
+                url:"/sdpk/aaContrtext?qqiu=getOne",
+                type: "POST",
+                //data: JSON.stringify(param),
+                data: JSON.stringify(send_one),
+                async:false,
+                contentType: "application/json;charset=UTF-8",
+                success:function(result){
+                  // console.log(result);
+                  //步骤1_a1，在步骤1的ajax的回调函数
+                  tabledata = JSON.parse(result).data[0];
+                  // alert("下拉框加载完成");
+                }
+
+              });
+
                 $.fn.dataTable.ext.errMode = 'none';
                 for(var i=0;i<tabledata.conPriceList
                     .length;i++){

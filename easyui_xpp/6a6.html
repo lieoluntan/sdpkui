@@ -77,8 +77,19 @@
     $(document).ready(function() {
         /*第零步：把datatables插件的警告窗变成控制台打印*/
         $.fn.dataTable.ext.errMode = 'none';
-    
-    //-----------第二部分列表展示和功能------------
+
+        function ajaxLoading(){
+            $("<div class=\"datagrid-mask\"></div>").css({display:"block",width:"100%",height:$(window).height()}).appendTo("body");
+            $("<div class=\"datagrid-mask-msg\"></div>").html("努力加载中").appendTo("body").css({display:"block",left:($(document.body).outerWidth(true) - 190) / 2,top:($(window).height() - 45) / 2});
+        }
+        function ajaxLoadEnd(){
+            $(".datagrid-mask").remove();
+            $(".datagrid-mask-msg").remove();
+        }
+
+
+
+        //-----------第二部分列表展示和功能------------
     //步骤1,展示列表数据，默认本月
         var data =new Date();
         var curYear = data.getFullYear();
@@ -98,6 +109,7 @@
             url:"/sdpk/aaQueKeAll?qqiu=list",
             type:"POST",
             contentType:"application/json;charset=UTF-8",
+            beforeSend: ajaxLoading,
             success:function (result) {
                 var shuj = JSON.parse(result);
                 var allTime = shuj.data;
@@ -106,6 +118,7 @@
                     dayList.push(allTime[i].keDateTime);
                 }
                 list2Calend(dayList);
+                ajaxLoadEnd();
             }
         });
         function  curMon(curYear,curMonth,curTime) {

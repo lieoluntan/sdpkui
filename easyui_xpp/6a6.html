@@ -132,11 +132,13 @@
 
         //数组转日历并展示
         function list2Calend(dayList){
+            var opts;
             $('#ye_3_content02_date').calendar({
                current:new Date(),
                 formatter: function(date){
                     var d = date.getDate();
-                    var opts = $(this).calendar('options');
+                    opts = $(this).calendar('options');
+
                     var flag = false;
                     //for循环遍历
                     for(var i=0;i<dayList.length;i++){
@@ -156,6 +158,16 @@
                 }
 
             });//日历
+
+            /*月份点击开始*/
+            var optClick = opts.months;
+            optClick.on("click",function () {
+                alert(111);
+            });
+
+            console.log(opts.month);
+            console.log(opts.current);
+            /*月份点击结束*/
             var data =new Date();
             var curYear = data.getFullYear();
             var curMonth = data.getMonth()+1;
@@ -406,8 +418,8 @@
                 var courseAll = {};
                 courseAll.keDateTime =curTime;
                 $.ajax({
-                    url:"/sdpk/aaQueKeAll?qqiu=list",
-                    type:"POST",
+                    url:"/sdpk/aaQueKeAll?qqiu=speedList",
+                    type:"GET",
                     contentType:"application/json;charset=UTF-8",
                     beforeSend: ajaxLoading,
                     success:function (result) {

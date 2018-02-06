@@ -91,6 +91,7 @@
 
         //-----------第二部分列表展示和功能------------
     //步骤1,展示列表数据，默认本月
+
         var data =new Date();
         var curYear = data.getFullYear();
         var curMonth = data.getMonth()+1;
@@ -105,12 +106,18 @@
 
         var courseAll = {};
         courseAll.keDateTime =curTime;
-        $.ajax({
-            url:"/sdpk/aaQueKeAll?qqiu=list",
-            type:"POST",
-            contentType:"application/json;charset=UTF-8",
+            $.ajax({
+            async:false,
             beforeSend: ajaxLoading,
+            url:"/sdpk/aaQueKeAll?qqiu=speedList",
+            type:"GET",
+            contentType:"application/json;charset=UTF-8",
             success:function (result) {
+                $("#ye_3_content02_date").css({
+                    "width":"370px",
+                    "height":"480px"
+
+                });
                 var shuj = JSON.parse(result);
                 var allTime = shuj.data;
                 var dayList = [];
@@ -121,26 +128,124 @@
                 ajaxLoadEnd();
             }
         });
+
+
+        //数组转日历并展示
+        function list2Calend(dayList){
+            $('#ye_3_content02_date').calendar({
+               current:new Date(),
+                formatter: function(date){
+                    var d = date.getDate();
+                    var opts = $(this).calendar('options');
+                    var flag = false;
+                    //for循环遍历
+                    for(var i=0;i<dayList.length;i++){
+                        var str = new String(dayList[i]);
+                        str = str.replace(/-/g,"/");
+                        var oneDay = new Date(str );
+                        var y1 = oneDay.getFullYear(); //获取完整的年份(4位,1970-????)
+                        var m1 = oneDay.getMonth()+1; //获取当前月份(0-11,0代表1月)
+                        var d1 = oneDay.getDate(); //获取当前日(1-31)
+//                        console.log(y1,m1,d1);
+                        if (opts.year==y1&&opts.month == m1 && d == d1){
+                            // alert("匹配了"+opts.year+"___"+opts.month+"___"+d);
+                            flag = true;
+                        }
+                    }//end for循环遍历
+                    if (flag) {return '<div class="icon-search md">' + d + '</div>';}else{return d;}
+                }
+
+            });//日历
+            var data =new Date();
+            var curYear = data.getFullYear();
+            var curMonth = data.getMonth()+1;
+            var curDay = data.getDate();
+            if(curMonth<10){
+                curMonth = "0"+curMonth;
+            }
+            if(curDay<10){
+                curDay = "0"+curDay;
+            }
+            /*点击月份+++++开始*/
+            $('.calendar-nextmonth').on("click",function(){
+                $('.calendar-body td').removeClass(".calendar-selected");
+                var dataAll = {};
+                curMonth =Number(curMonth)+1;
+                if(curMonth>12){
+                    curMonth ='0'+1;
+                    curYear = curYear+1;
+                }else if(curMonth>=0&&curMonth<10) {
+                    curMonth = "0"+curMonth;
+                }
+                curTime =curYear+"-"+curMonth+"-"+curDay;
+                console.log(curTime);
+                curMon(curYear,curMonth,curTime);
+
+            });
+            /*点击月份+++++结束*/
+            /*点击月份----开始*/
+            $('.calendar-prevmonth').on("click",function(){
+                $('.calendar-body td').removeClass(".calendar-selected");
+                var dataAll = {};
+                curMonth =Number(curMonth)-1;
+                if(curMonth<1){
+                    curMonth =12;
+                    curYear = curYear-1;
+                }else if(curMonth>=1&&curMonth<10) {
+                    curMonth = "0"+curMonth;
+                }
+                curTime =curYear+"-"+curMonth+"-"+curDay;
+                console.log(curTime);
+                curMon(curYear,curMonth,curTime);
+
+            });
+            /*点击月份----结束*/
+            /*点击年份++++开始*/
+            $('.calendar-nextyear').on("click",function(){
+                $('.calendar-body td').removeClass(".calendar-selected");
+                var dataAll = {};
+                curYear =Number(curYear)+1;
+                curTime =curYear+"-"+curMonth+"-"+curDay;
+                console.log(curTime);
+                curMon(curYear,curMonth,curTime);
+            });
+            /*点击年份++++结束*/
+            /*点击年份----开始*/
+            $('.calendar-prevyear').on("click",function(){
+                $('.calendar-body td').removeClass(".calendar-selected");
+                var dataAll = {};
+                curYear =Number(curYear)-1;
+                curTime =curYear+"-"+curMonth+"-"+curDay;
+                console.log(curTime);
+                curMon(curYear,curMonth,curTime);
+            });
+            /*点击年份----结束*/
+            /*点击日历月份按钮----开始*/
+            /*$('td.calendar-menu-month').on("click",function () {
+                alert("点击事件起作用了");
+                var mm = $(this).attr("abbr");
+
+            })*/
+            /*点击日历月份按钮----结束*/
+        }
+
         function  curMon(curYear,curMonth,curTime) {
             var send_cData = {};
-            var newUrl = "/sdpk/aaQuery?qqiu=list&empUuid=allGet&year="+curYear+"&&month=" +curMonth+"&&today="+curTime;
+            var newUrl = "/sdpk/aaQueKeAll?qqiu=monthList&year="+curYear+"&month="+curMonth+"&today="+curTime;
             $.ajax({
 
                 url:newUrl,
                 type: "GET",
+                async:true,
                 //data: JSON.stringify(param),
                 data: JSON.stringify(send_cData),
+                beforeSend: ajaxLoading,
                 contentType: "application/json;charset=UTF-8",
+
                 success:function(result){
                     huiFuncList(result);
-//                    var shuj = JSON.parse(result);
-//                    var allTime = shuj.data[0];
-//                    var dayList = [];
-//                    for(var i=0;i<allTime.length;i++){
-//                        dayList.push(allTime[i].keDateTime);
-//                    }
-//                    console.log(dayList);
-//                    list2Calend(dayList);
+                    ajaxLoadEnd();
+
                 }
 
             });
@@ -151,7 +256,7 @@
                 var a2obj = {};
                 a2obj = JSON.parse(result);
                 var a2data = a2obj.data;
-                var a2dataAll = a2data[0];
+                var a2dataAll = a2data;
                 table_ye2 = $('#paike_biao').DataTable( {
                     "dom":'frtpi',
                     bSort:true,
@@ -222,14 +327,13 @@
                                 arrIndex.push(i);
                             }
                         }
-//                alert(arrIndex);
                         var currTable={};
                         var xppArr = [];
                         for(var i=0;i<arrIndex.length;i++){
                             currTable= a2dataAll[arrIndex[i]];
                             xppArr.push(currTable);
                         }
-//                        console.log(xppArr);
+//                       console.log(xppArr);
                         var curD = $('#paike_biao').DataTable( {
                             "dom":'frtpi',
                             "bLengthChange":false,
@@ -275,10 +379,7 @@
                         } );
 
 
-                    }
-                    /*onNavigate:function(year,_609){
-                     console.log(609);
-                     }*/
+                    },
                 });
 
 
@@ -308,15 +409,10 @@
                     url:"/sdpk/aaQueKeAll?qqiu=list",
                     type:"POST",
                     contentType:"application/json;charset=UTF-8",
+                    beforeSend: ajaxLoading,
                     success:function (result) {
                        huidata(result);
-//                        var shuj = JSON.parse(result);
-//                        var allTime = shuj.data;
-//                        var dayList = [];
-//                        for(var i=0;i<allTime.length;i++){
-//                            dayList.push(allTime[i].keDateTime);
-//                        }
-//                        list2Calend(dayList);
+                        ajaxLoadEnd();
                     }
                 });
                 function huidata(result) {
@@ -399,7 +495,7 @@
                                 currTable= objData[arrIndex[i]];
                                 xppArr.push(currTable);
                             }
-//                        console.log(xppArr);
+                       console.log(xppArr);
                             var curD = $('#paike_biao').DataTable( {
                                 "dom":'frtpi',
                                 "bLengthChange":false,
@@ -470,94 +566,6 @@
     return keDayList;
     }// end  huiFuncList外圈 1_x1
 
-     //数组转日历并展示
-     function list2Calend(dayList){
-            $('#ye_3_content02_date').calendar({
-                current:new Date(),
-                formatter: function(date){
-                    var d = date.getDate();
-                    var opts = $(this).calendar('options');
-                    var flag = false;
-                    //for循环遍历
-                    for(var i=0;i<dayList.length;i++){
-                        var str = new String(dayList[i]);
-                        str = str.replace(/-/g,"/");
-                        var oneDay = new Date(str );
-                        var y1 = oneDay.getFullYear(); //获取完整的年份(4位,1970-????)
-                        var m1 = oneDay.getMonth()+1; //获取当前月份(0-11,0代表1月)
-                        var d1 = oneDay.getDate(); //获取当前日(1-31)
-//                        console.log(y1,m1,d1);
-                        if (opts.year==y1&&opts.month == m1 && d == d1){
-                            // alert("匹配了"+opts.year+"___"+opts.month+"___"+d);
-                            flag = true;
-                        }
-                    }//end for循环遍历
-                    if (flag) {return '<div class="icon-search md">' + d + '</div>';}else{return d;}
-
-                }//end method formatter
-
-            });//日历
-            var data =new Date();
-            var curYear = data.getFullYear();
-            var curMonth = data.getMonth()+1;
-            var curDay = data.getDate();
-            if(curMonth<10){
-                curMonth = "0"+curMonth;
-            }
-            if(curDay<10){
-                curDay = "0"+curDay;
-            }
-            /*点击月份+++++开始*/
-                $('.calendar-nextmonth').on("click",function(){
-                    var dataAll = {};
-                    curMonth =Number(curMonth)+1;
-                    if(curMonth>12){
-                        curMonth ='0'+1;
-                        curYear = curYear+1;
-                    }else if(curMonth>=0&&curMonth<10) {
-                        curMonth = "0"+curMonth;
-                    }
-                    curTime =curYear+"-"+curMonth+"-"+curDay;
-                    console.log(curTime);
-                    curMon(curYear,curMonth,curTime);
-
-            });
-            /*点击月份+++++结束*/
-            /*点击月份----开始*/
-                $('.calendar-prevmonth').on("click",function(){
-                    var dataAll = {};
-                    curMonth =Number(curMonth)-1;
-                    if(curMonth<1){
-                        curMonth =12;
-                        curYear = curYear-1;
-                    }else if(curMonth>=1&&curMonth<10) {
-                        curMonth = "0"+curMonth;
-                    }
-                    curTime =curYear+"-"+curMonth+"-"+curDay;
-                    console.log(curTime);
-                    curMon(curYear,curMonth,curTime);
-
-                });
-            /*点击月份----结束*/
-            /*点击年份++++开始*/
-                $('.calendar-nextyear').on("click",function(){
-                    var dataAll = {};
-                    curYear =Number(curYear)+1;
-                    curTime =curYear+"-"+curMonth+"-"+curDay;
-                    console.log(curTime);
-                    curMon(curYear,curMonth,curTime);
-                });
-            /*点击年份++++结束*/
-            /*点击年份----开始*/
-                $('.calendar-prevyear').on("click",function(){
-                    var dataAll = {};
-                    curYear =Number(curYear)-1;
-                    curTime =curYear+"-"+curMonth+"-"+curDay;
-                    console.log(curTime);
-                    curMon(curYear,curMonth,curTime);
-                });
-            /*点击年份----结束*/
-        }
 
 } );
 
@@ -771,11 +779,7 @@
 <script>
     //修改日历宽度
     $(function(){
-        $("#ye_3_content02_date").css({
-            "width":"370px",
-            "height":"480px"
 
-        });
     });
     /*  */
     $('.validatebox-invalid').css("border","none");

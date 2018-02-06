@@ -42,6 +42,9 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
             border:1px solid transparent;
         }
+        table.dataTable.display tbody tr.even td.sorting_1{
+            background-color: white;
+        }
     </style>
 
     <!-- <script src="../js/jquery-1.8.2.js" type="text/javascript"></script> -->
@@ -50,6 +53,14 @@
 
 
         $(document).ready(function () {
+            function ajaxLoading(){
+                $("<div class=\"datagrid-mask\"></div>").css({display:"block",width:"100%",height:$(window).height()}).appendTo("body");
+                $("<div class=\"datagrid-mask-msg\"></div>").html("努力加载中").appendTo("body").css({display:"block",left:($(document.body).outerWidth(true) - 190) / 2,top:($(window).height() - 45) / 2});
+            }
+            function ajaxLoadEnd(){
+                $(".datagrid-mask").remove();
+                $(".datagrid-mask-msg").remove();
+            }
             /*第零步：把datatables插件的警告窗变成控制台打印*/
 
             $.fn.dataTable.ext.errMode = 'none';
@@ -73,21 +84,6 @@
             //步骤,展示列表数据
             var send_cData = {};
             send_cData.keDateTime = currentTime;
-            // $.ajax({
-            //
-            //     url:"/sdpk/aaQueKe?qqiu=list",
-            //     type: "POST",
-            //     //data: JSON.stringify(param),
-            //     data: JSON.stringify(send_cData),
-            //     contentType: "application/json;charset=UTF-8",
-            //     success:function(result){
-            //         //步骤1_a1，在步骤1的ajax的回调函数
-            //         huiFuncList(result);
-            //     }
-            //
-            // });
-
-            //步骤1_x1，在步骤1的ajax的回调函数,展示列表数据
             function huiFuncList(result){
 
                 var a2obj = {};
@@ -241,12 +237,14 @@
 
                         url: String(newUrl),
                         type: "POST",
+                        beforeSend: ajaxLoading,
                         //data: JSON.stringify(param),
                         data: JSON.stringify(send_edit_data),
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {
                             //步骤1_a1，完成下拉框L3
                             huiFuncList(result);
+                            ajaxLoadEnd();
                         }
 
                     });
@@ -263,12 +261,14 @@
 
                         url: String(newUrl),
                         type: "POST",
+                        beforeSend: ajaxLoading,
                         //data: JSON.stringify(param),
                         data: JSON.stringify(send_edit_data),
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {
                             //步骤1_a1，完成下拉框L3
                             huiFuncList(result);
+                            ajaxLoadEnd();
                         }
 
                     });
@@ -284,13 +284,14 @@
 
                         url: String(newUrl),
                         type: "POST",
+                        beforeSend: ajaxLoading,
                         //data: JSON.stringify(param),
                         data: JSON.stringify(send_edit_data),
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {
                             //步骤1_a1，完成下拉框L3
                             huiFuncList(result);
-
+                            ajaxLoadEnd();
                         }
 
                     });
@@ -323,102 +324,6 @@
 
             });//end 2 外圈 $('#example tbody').on
 
-            //步骤3，今天按钮单击事件
-            $('#today1').click(function () {
-                var myDate = new Date();
-                var aday = myDate.toLocaleDateString();
-                var adayStr = new String(aday);
-                var dataArr = adayStr.split('/');
-                if(dataArr[1]<10){
-                    dataArr[1] = "0"+dataArr[1];
-                }
-                if(dataArr[2]<10){
-                    dataArr[2] = "0"+dataArr[2];
-                }
-                currentTime =dataArr.join("-");
-                console.log(currentTime);
-
-                // alert("转换后"+adayStr);
-                //步骤,展示列表数据
-                var send_cData = {};
-                send_cData.keDateTime = currentTime;
-                $.ajax({
-
-                    url:"/sdpk/aaQueKe?qqiu=list",
-                    type: "POST",
-                    //data: JSON.stringify(param),
-                    data: JSON.stringify(send_cData),
-                    contentType: "application/json;charset=UTF-8",
-                    success:function(result){
-                        //步骤1_a1，在步骤1的ajax的回调函数
-                        huiFuncList(result);
-                    }
-
-                });
-                //要初始化一个对象，不然会报undifine未定义错误
-            });//end 3 外圈 $('#today1').click
-
-            //步骤4，明天按钮单击事件
-            $('#today2').click(function () {
-                var myDate = new Date();
-                myDate.setDate(myDate.getDate() + 1);
-                var aday = myDate.toLocaleDateString();
-                var adayStr = new String(aday);
-                var dataArr = adayStr.split('/');
-                if(dataArr[1]<10){
-                    dataArr[1] = "0"+dataArr[1];
-                }
-                if(dataArr[2]<10){
-                    dataArr[2] = "0"+dataArr[2];
-                }
-                currentTime =dataArr.join("-");
-                console.log(currentTime);
-
-                //步骤,展示列表数据
-                var send_cData = {};
-                send_cData.keDateTime = currentTime;
-                $.ajax({
-
-                    url:"/sdpk/aaQueKe?qqiu=list",
-                    type: "POST",
-                    //data: JSON.stringify(param),
-                    data: JSON.stringify(send_cData),
-                    contentType: "application/json;charset=UTF-8",
-                    success:function(result){
-                        //步骤1_a1，在步骤1的ajax的回调函数
-                        huiFuncList(result);
-                    }
-
-                });
-                //要初始化一个对象，不然会报undifine未定义错误
-            });//end 3 外圈 $('#today2').click
-
-            //步骤5，后天按钮单击事件
-            $('#today3').click(function () {
-                var myDate = new Date();
-                myDate.setDate(myDate.getDate() + 2);
-                var aday = myDate.toLocaleDateString();
-                var adayStr = new String(aday);
-                adayStr = adayStr.replace(/\//g,"-"); //把/替换成-，把斜杠替换成减号
-//                alert("转换后"+adayStr);
-                //步骤,展示列表数据
-                var send_cData = {};
-                send_cData.keDateTime = adayStr;
-                $.ajax({
-
-                    url:"/sdpk/aaPaiKe?qqiu=listKeDate",
-                    type: "POST",
-                    //data: JSON.stringify(param),
-                    data: JSON.stringify(send_cData),
-                    contentType: "application/json;charset=UTF-8",
-                    success:function(result){
-                        //步骤1_a1，在步骤1的ajax的回调函数
-                        huiFuncList(result);
-                    }
-
-                });
-                //要初始化一个对象，不然会报undifine未定义错误
-            });//end 3 外圈 $('#today3').click
 
 
         });//end 最外层 $(document).ready

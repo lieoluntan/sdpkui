@@ -219,14 +219,6 @@
                 console.log(curTime);
                 curMon(curYear,curMonth,curTime);
             });
-            /*点击年份----结束*/
-            /*点击日历月份按钮----开始*/
-            /*$('td.calendar-menu-month').on("click",function () {
-                alert("点击事件起作用了");
-                var mm = $(this).attr("abbr");
-
-            })*/
-            /*点击日历月份按钮----结束*/
         }
 //禁止点击事件
         $('.calendar-title span').click(function(){
@@ -393,7 +385,9 @@
         }
         curMon(curYear,curMonth,curTime);
 
-
+        $('#cMonth').click(function () {
+            curMon(curYear,curMonth,curTime);
+        });
 //本月列表加载及点击事件结束
         /*点击所有按钮事件开始*/
         $('#all').click(function(){
@@ -612,9 +606,9 @@
             padding:0 1px;
             color:red;
         }
-        .dataTables_wrapper{
+        /*.dataTables_wrapper{
             top:-40px;
-        }
+        }*/
 	</style>
 </head>
 <body>
@@ -625,37 +619,21 @@
 				<!--<div id="litle_a1" class="xq-logo">-->
 				<!--</div>-->
 				<div class="change_add">
-                    <!--<div id="litle_a2" class="tit_txt">-->
-                        <!--<strong class="fir">班级:</strong><strong id="em_claName">__空__</strong>-->
-                    <!--</div>-->
-                    <!--<div id="litle_a3" class="tit_txt">-->
-                        <!--<strong class="fir">开课时间:</strong><em id="em_start">__空__</em>-->
-                        <!--<i>&nbsp;&nbsp;</i>-->
-                        <!--<strong class="fir">开课课程:</strong><em id="em_course">__空__</em>-->
-                    <!--</div>-->
-                    <!--<div id="litle_a4" class="tit_txt">-->
-                        <!--<strong class="fir">所在校区:</strong><em id="em_org">__空__</em>-->
-                        <!--<i>&nbsp;&nbsp;</i>-->
-                        <!--<strong class="fir">班主任:</strong><em id="em_empName">__空__</em>-->
-                        <!--<i>&nbsp;&nbsp;</i>-->
-                        <!--<strong class="fir">学员人数:</strong><em id="em_claNum">__空__</em>-->
-                    <!--</div>-->
+
                     全校课表查询
                 </div>
 
-
-				<!--<div id="litle_a5" class="tit-btn">-->
-                    <!--<a class="return-link" href="javascript:window.location.href='3a2_ye1.html';">返回上一页</a>-->
-						<!--<button id="btnPaike" class="btn-class">班级排课</button>-->
-				<!--</div>-->
-				
 
 		</div><!-- end div ye_1_content01 -->
 
 		<div id="ye_2_blank"></div>
         <div class="add_block">
-            <div class="calen-b">
+            <div class="calen-b" style="position: relative;">
                 <p>排课日历</p>
+                <div style="position: absolute;right: 0;top:15px;">
+                    <button id="cMonth" class="btn-class" style="margin-right: 0">当月排课记录</button>
+                    <button id="all" class="btn-class" style="margin-right: 0">所有排课记录</button>
+                </div>
                 <div id="ye_3_content02_date"></div>
             </div>
 
@@ -663,10 +641,6 @@
             <div id="ye_4_blank"></div>
 
             <div id="ye_5_content03_list" class="tab-tab">
-                <div style="position: relative;z-index: 999;">
-                    <button id="all" class="btn-class" style="float: left;z-index: 999;">所有</button>
-                </div>
-
                 <table id="paike_biao" class="display tab-mians" cellspacing="0" width="100%" style="padding-top:0;">
                     <!--start 表头 -->
                     <thead class="tab-tit">

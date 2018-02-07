@@ -103,7 +103,6 @@
             curDay = "0"+curDay;
         }
         var curTime =curYear+"-"+curMonth+"-"+curDay;
-
         var courseAll = {};
         courseAll.keDateTime =curTime;
             $.ajax({
@@ -116,7 +115,6 @@
                 $("#ye_3_content02_date").css({
                     "width":"370px",
                     "height":"480px"
-
                 });
                 var shuj = JSON.parse(result);
                 var allTime = shuj.data;
@@ -168,7 +166,6 @@
             }
             /*点击月份+++++开始*/
             $('.calendar-nextmonth').on("click",function(){
-                $('.calendar-body td').removeClass(".calendar-selected");
                 var dataAll = {};
                 curMonth =Number(curMonth)+1;
                 if(curMonth>12){
@@ -180,12 +177,11 @@
                 curTime =curYear+"-"+curMonth+"-"+curDay;
                 console.log(curTime);
                 curMon(curYear,curMonth,curTime);
-
+                $('.calendar-body td').removeClass("calendar-selected");
             });
             /*点击月份+++++结束*/
             /*点击月份----开始*/
             $('.calendar-prevmonth').on("click",function(){
-                $('.calendar-body td').removeClass(".calendar-selected");
                 var dataAll = {};
                 curMonth =Number(curMonth)-1;
                 if(curMonth<1){
@@ -197,34 +193,34 @@
                 curTime =curYear+"-"+curMonth+"-"+curDay;
                 console.log(curTime);
                 curMon(curYear,curMonth,curTime);
-
+                $('.calendar-body td').removeClass("calendar-selected");
             });
             /*点击月份----结束*/
             /*点击年份++++开始*/
             $('.calendar-nextyear').on("click",function(){
-                $('.calendar-body td').removeClass(".calendar-selected");
                 var dataAll = {};
                 curYear =Number(curYear)+1;
                 curTime =curYear+"-"+curMonth+"-"+curDay;
                 console.log(curTime);
                 curMon(curYear,curMonth,curTime);
+                $('.calendar-body td').removeClass("calendar-selected");
             });
             /*点击年份++++结束*/
             /*点击年份----开始*/
             $('.calendar-prevyear').on("click",function(){
-                $('.calendar-body td').removeClass(".calendar-selected");
                 var dataAll = {};
                 curYear =Number(curYear)-1;
                 curTime =curYear+"-"+curMonth+"-"+curDay;
                 console.log(curTime);
                 curMon(curYear,curMonth,curTime);
+                $('.calendar-body td').removeClass("calendar-selected");
             });
         }
 //禁止点击事件
-        $('.calendar-title span').click(function(){
+       /* $('.calendar-title span').click(function(){
             $(".calendar-menu").css("display","none");
 //           alert(111);
-        });
+        });*/
 
 
         function  curMon(curYear,curMonth,curTime) {
@@ -242,6 +238,7 @@
 
                 success:function(result){
                     huiFuncList(result);
+                    $('.calendar-body td').removeClass("calendar-selected");
                     ajaxLoadEnd();
 
                 }
@@ -539,12 +536,7 @@
                                     { "data": "keLongTime" }
                                 ]
                             } );
-
-
                         }
-                        /*onNavigate:function(year,_609){
-                         console.log(609);
-                         }*/
                     });
 
                 }

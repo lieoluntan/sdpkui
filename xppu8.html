@@ -162,19 +162,24 @@ margin:0px; padding:0;text-align:center;}
         //一级菜单权限结束
 
         //二级权限开始
-        $( "#menu_a1" ).hide();
-        console.log("进入了隐藏二级菜单!");
-        $( "#menu_a2" ).hide();
-             $( "#menu_a3" ).hide();
-             $( "#menu_a4" ).hide();
-             $( "#menu_a5" ).hide();
+         $( "#menu_a1" ).hide();
+         console.log("进入了隐藏二级菜单!");
+         $( "#menu_a2" ).hide();
+         $( "#menu_a3" ).hide();
+         $( "#menu_a4" ).hide();
+         $( "#menu_a5" ).hide();
+         $( "#menu_a6" ).hide();//我的今月课,老师
+         $( "#menu_a7" ).hide();//我的今月课,老师
+         $( "#menu_a8" ).hide();//合同消耗
+
         $( "#menu_b1" ).hide();
         $( "#menu_b2" ).hide();
-             $( "#menu_b3" ).hide();
+        $( "#menu_b3" ).hide();
         
         $( "#menu_c1" ).hide();
         $( "#menu_c2" ).hide();
-             $( "#menu_c3" ).hide();
+        $( "#menu_c3" ).hide();
+
         $( "#menu_d1" ).hide();
         $( "#menu_d2" ).hide();
 
@@ -184,13 +189,12 @@ margin:0px; padding:0;text-align:center;}
         $( "#menu_f1" ).hide();//按老师浏览暂不开放
         $( "#menu_f2" ).hide();//按学生浏览暂不开放
         $( "#menu_f3" ).hide();//按教室浏览暂不开放
-        $( "#menu_f4" ).hide();//按日期浏览暂不开放
         $( "#menu_f5" ).hide();
-             $( "#menu_f6" ).hide();
+        $( "#menu_f6" ).hide();
 
         $( "#menu_g1" ).hide();
         $( "#menu_g2" ).hide();
-//             $( "#menu_g3" ).hide();//我的合同 暂不开放
+        $( "#menu_g3" ).hide();//我的合同 暂不开放
 
         $( "#menu_h1" ).hide();
         $( "#menu_h2" ).hide();
@@ -198,13 +202,20 @@ margin:0px; padding:0;text-align:center;}
         $( "#menu_h4" ).hide();
         $( "#menu_h5" ).hide();
         $( "#menu_h6" ).hide();
+        $( "#menu_h7" ).hide();//部门新增 权限
+        $( "#menu_h8" ).hide();//部门管理 权限
         for (var i = 0; i < viewArr.length; i++) {
-        // console.log("第"+i+"个："+viewArr[i]);   
-        if(viewArr[i]=="Ae") {$( "#menu_a1" ).show();}  //我的今日课，班主任
+        // console.log("第"+i+"个："+viewArr[i]);
+        if(viewArr[i]=="Aa") {$( "#menu_a5" ).show();} //我的今日课，老师
         if(viewArr[i]=="Ab") {$( "#menu_a2" ).show();} //全校今日课程
+
+
         if(viewArr[i]=="Ac") {$( "#menu_a3" ).show();} //学生课消统计
         if(viewArr[i]=="Ad") {$( "#menu_a4" ).show();} //老师课消统计
-        if(viewArr[i]=="Aa") {$( "#menu_a5" ).show();} //我的今日课，老师
+        if(viewArr[i]=="Ae") {$( "#menu_a1" ).show();}  //我的今日课，班主任
+        if(viewArr[i]=="Af") {$( "#menu_a8" ).show();}//合同消耗
+        if(viewArr[i]=="Ag") {$( "#menu_a7" ).show();} //我的今月课，班主任
+        if(viewArr[i]=="Ah") {$( "#menu_a6" ).show();}//我的今月课,老师
 
         if(viewArr[i]=="Ba") {$( "#menu_b1" ).show();}
         if(viewArr[i]=="Bb") {$( "#menu_b2" ).show();}
@@ -222,12 +233,11 @@ margin:0px; padding:0;text-align:center;}
         if(viewArr[i]=="Ea") {$( "#menu_e1" ).show();}  
         if(viewArr[i]=="Eb") {$( "#menu_e2" ).show();}
 
-       if(viewArr[i]=="Fa") {$( "#menu_f1" ).show();}//按老师浏览暂不开放
+        if(viewArr[i]=="Fa") {$( "#menu_f1" ).show();}//按老师浏览暂不开放
         if(viewArr[i]=="Fb") {$( "#menu_f2" ).show();}//按教室浏览暂不开放
-       if(viewArr[i]=="Fc") {$( "#menu_f3" ).show();}//按班级浏览暂不开放
-       //if(viewArr[i]=="Fd") {$( "#menu_f4" ).show();}//按学生浏览暂不开放
+        if(viewArr[i]=="Fc") {$( "#menu_f3" ).show();}//按班级浏览暂不开放
         if(viewArr[i]=="Fe") {$( "#menu_f5" ).show();}
-            if(viewArr[i]=="Ff") {$( "#menu_f6" ).show();}
+        if(viewArr[i]=="Ff") {$( "#menu_f6" ).show();}
 
         if(viewArr[i]=="Ga") {$( "#menu_g1" ).show();}
         if(viewArr[i]=="Gb") {$( "#menu_g2" ).show();}
@@ -239,6 +249,8 @@ margin:0px; padding:0;text-align:center;}
         if(viewArr[i]=="Hd") {$( "#menu_h4" ).show();}
         if(viewArr[i]=="He") {$( "#menu_h5" ).show();}
         if(viewArr[i]=="Hf") {$( "#menu_h6" ).show();}
+        if(viewArr[i]=="Hg") {$( "#menu_h7" ).show();}//部门新增 权限
+        if(viewArr[i]=="Hh") {$( "#menu_h8" ).show();}//部门管理 权限
                               
         }//end for
         //二级权限结束

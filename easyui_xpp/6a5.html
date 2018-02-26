@@ -501,7 +501,7 @@
                 //步骤1_a1，完成下拉框L3
                 huiEditFunc2(result);
                 $('#L2ee_dlg').combobox('setValue', rowData.empUuid);
-                $('#L4ee_dlg').combobox('setValue', rowData.pkTypeName);
+                $('#L4ee_dlg').combobox('setValue', rowData.pkType);
             }
 
         });
@@ -655,7 +655,6 @@
                 send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
                 send_edit_data.pkType = document.ffnameDlg.pkType.value;
                 send_edit_data.status = "正常";
-
                 console.log(send_edit_data);
                 $.ajax({
                     url: "/sdpk/aaPaiKe?qqiu=queryConflict",
@@ -703,7 +702,7 @@
                 rowData.weekSome = a2data[0].weekSome;
                 rowData.categoryName = a2data[0].categoryName;
                 rowData.pkType = a2data[0].pkType;
-
+                console.log(rowData);
 
                 //重新画选择行数据
                 table_full.row('.selected').data(rowData).draw();

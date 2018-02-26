@@ -973,7 +973,7 @@
 	/* 复选框样式 */
 	$(function(){
 	    $('.data-main .check-class').click(function(){
-	        if($(this).hasClass("oncheck")){
+	        if(!$(this).children()[0].checked){
 	          $(this).removeClass("oncheck");
 			}else {
 	            $(this).addClass("oncheck");

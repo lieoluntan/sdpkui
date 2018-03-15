@@ -209,12 +209,14 @@
 		   function selectYZ(){
 			 function yz1 (){
 			   var j=0;
-               for(var i=0;i<empUuidData.length;i++){
-                 if(empUuidData[i].empUuid==$("#L2ee").combobox('getValue')){
-                   j++;
-				 }
+               if(empUuidData!=undefined){
+                   for(var i=0;i<empUuidData.length;i++){
+                     if(empUuidData[i].empUuid==$("#L2ee").combobox('getValue')){
+                       j++;
+    				 }
+                   }
                }
-               if(j==0){
+               if(j==0||empUuidData==undefined){
                  alert("所选老师无效，请选择");
                  return false;
                }else{
@@ -223,12 +225,14 @@
 			 }
 			 function yz2(){
 			   var j=0;
-               for(var i=0;i<classroomUuid.length;i++){
-                 if(classroomUuid[i].uuid==$("#L3ee").combobox('getValue')){
-                   j++;
-                 }
+               if(classroomUuid!=undefined){
+                   for(var i=0;i<classroomUuid.length;i++){
+                     if(classroomUuid[i].uuid==$("#L3ee").combobox('getValue')){
+                       j++;
+                     }
+                   }
                }
-               if(j==0){
+               if(j==0||classroomUuid==undefined){
                  alert("所选教室无效，请选择");
                  return false;
                }else{
@@ -237,12 +241,14 @@
 			 }
              function yz3(){
 			   var j = 0;
-               for(var i=0;i<courseUuidData.length;i++){
-                 if(courseUuidData[i].courseUuid==$("#L1ee").combobox('getValue')){
-                   j++;
-                 }
+               if(courseUuidData!=undefined){
+                   for(var i=0;i<courseUuidData.length;i++){
+                     if(courseUuidData[i].courseUuid==$("#L1ee").combobox('getValue')){
+                       j++;
+                     }
+                   }
                }
-               if(j==0){
+               if(j==0||courseUuidData==undefined){
                  alert("选择课程无效，请选择");
                  return false;
 			   }else{
@@ -251,24 +257,76 @@
              }
              function yz4(){
                var j = 0;
-               for(var i=0;i<pktype.length;i++){
-                 if(pktype[i].pkType==$("#L4ee_dlg").combobox('getValue')){
-                   j++;
-                 }
+               if(pktype!=undefined){
+                   for(var i=0;i<pktype.length;i++){
+                     if(pktype[i].pkType==$("#L4ee_dlg").combobox('getValue')){
+                       j++;
+                     }
+                   }
                }
-               if(j==0){
+               if(j==0||pktype==undefined){
                  alert("选择上课类型无效，请选择");
                  return false;
                }else{
                  return true;
 			   }
              }
+             function yz5 (){
+                if($("#keLongTime").numberspinner("getValue")==""){
+                  alert("所选时长数无效，请选择");
+                  return false;
+                }else{
+                  return true;
+                }
+              }
+             function yz6 (){
+                if($("#keDateTime").datebox("getValue")==""){
+                  alert("所选开始日期无效，请选择");
+                  return false;
+                }else{
+                  return true;
+                }
+              }
+              function yz7 (){
+                if($("#keStartTime").timespinner("getValue")==""){
+                  alert("所选上课时间无效，请选择");
+                  return false;
+                }else{
+                  return true;
+                }
+              }
+              function yz8 (){
+                if($("#keCount").numberspinner("getValue")==""){
+                  alert("所选排课次数无效，请选择");
+                  return false;
+                }else{
+                  return true;
+                }
+              }
+              function yz9 (){
+                var j=0;
+                for(var i=0;i<$(".check-class input").length;i++){
+                    if($(".check-class input")[i].checked){
+                        j++;
+                    }
+                }
+                if(j==0){
+                  alert("重复周期无效,请选择");
+                  return false;
+                }else{
+                  return true;
+                }
+              }
              var one = yz1();
              var two = yz2();
              var three = yz3();
              var four = yz4();
-             console.log(one,two,three,four);
-             if(one&&two&&three&&four){
+             var five = yz5();
+             var six = yz6();
+             var senven = yz7();
+             var eight = yz8();
+             var nine = yz9();
+            if(one&&two&&three&&four&&five&&six&&senven&&eight&&nine){
                return true;
 			 }else{
                return false;
@@ -360,6 +418,7 @@
         bSort:true,
         "bLengthChange":false,
         scrollX :670,
+        "bDestroy": true,
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",

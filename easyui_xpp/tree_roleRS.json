@@ -66,6 +66,13 @@
 				"p1":"Custom Attribute1",
 				"p2":"Custom Attribute2"
 			}
+		},{
+			"id":"Bb3",
+			"text":"学员跟进",
+			"attributes":{
+				"p1":"Custom Attribute1",
+				"p2":"Custom Attribute2"
+			}
 		}]
 	},{
 		"id":"Bc",
@@ -80,6 +87,16 @@
 				"p1":"Custom Attribute1",
 				"p2":"Custom Attribute2"
 			}
+		},{
+			"id":"Bc3",
+			"text":"学员跟进",
+			"children":[{
+				"id":"Bc31",
+				"text":"修改"
+			},{
+				"id":"Bc32",
+				"text":"删除"
+			}]
 		}]
 	}]
 	},

@@ -130,6 +130,7 @@
                     columns: [
                         { "data": "courseName" },
                         { "data": "pkTypeName" },
+                        { "data": "claName" },
                         { "data": "keDateTime" },
                         { "data": "keStartTime" },
                         { "data": "weekSome" },
@@ -147,8 +148,8 @@
             send_R4.id = "uuid";
             send_R4.claUuid = "name";
             $.ajax({
-                url:"/sdpk/aaStudent?qqiu=list",
-                type: "POST",
+                url:"/sdpk/aaStuName?qqiu=list",
+                type: "GET",
                 //data: JSON.stringify(param),
                 data: JSON.stringify(send_R4),
                 contentType: "application/json;charset=UTF-8",
@@ -232,7 +233,7 @@
                     uuid = $('#stuUuid').combobox('getValue');
                     year = $('#nDate').combobox('getValue')||thisYear;
                     month = $('#yDate').combobox('getValue')||thisMonth;
-                    var newUrl = '/sdpk/aaQueryStu?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today='+currentTime;
+                    var newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today='+currentTime;
                     $.ajax({
 
                         url: String(newUrl),
@@ -256,7 +257,7 @@
                 onChange: function () {
                     month = $('#yDate').combobox('getValue');
                     year = $('#nDate').combobox('getValue')||thisYear;
-                    newUrl = '/sdpk/aaQueryStu?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
+                    newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
                     $.ajax({
 
                         url: String(newUrl),
@@ -279,7 +280,7 @@
                 onChange: function () {
                     year = $('#nDate').combobox('getValue');
                     month = $('#yDate').combobox('getValue')||thisMonth;
-                    newUrl = '/sdpk/aaQueryStu?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
+                    newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
                     $.ajax({
 
                         url: String(newUrl),
@@ -382,6 +383,7 @@
                 <tr>
                     <th style="min-width:100px;">课程名称</th>
                     <th style="min-width:100px;">类别</th>
+                    <th style="min-width:100px;">班级</th>
                     <th style="min-width:100px;">上课日期</th>
                     <th style="min-width:100px;">上课时间</th>
                     <th style="min-width:100px;">星期</th>
@@ -395,6 +397,7 @@
                 <tr>
                     <th style="min-width:100px;">课程名称</th>
                     <th style="min-width:100px;">类别</th>
+                    <th style="min-width:100px;">班级</th>
                     <th style="min-width:100px;">上课日期</th>
                     <th style="min-width:100px;">上课时间</th>
                     <th style="min-width:100px;">星期</th>

@@ -953,11 +953,10 @@
                 if (conflictFlag) {
                     alert("请修改冲突或删除冲突行,再次点击保存");
                 } else {
-
+                    var Url = "/sdpk/aaPaiKe?qqiu=add_batch"+"&userUuid="+$.cookie("ckUserEmpUuid")+"&userName="+$.cookie("ckUserName");
                     $.ajax({
-                        url: "/sdpk/aaPaiKe?qqiu=add_batch",
+                        url: Url,
                         type: "POST",
-                        //data: JSON.stringify(param),
                         data: JSON.stringify(send_RowDataList),
                         contentType: "application/json;charset=UTF-8",
                         success: function (result) {

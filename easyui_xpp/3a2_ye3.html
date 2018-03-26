@@ -866,9 +866,10 @@
             if(conflictFlag){
                 alert("请修改冲突或删除冲突行,再次点击保存");
             }else{
+                var Url = "/sdpk/aaPaiKe?qqiu=add_batch"+"&userUuid="+$.cookie("ckUserEmpUuid")+"&userName="+$.cookie("ckUserName");
 				console.log(send_RowDataList);
                 $.ajax({
-                url:"/sdpk/aaPaiKe?qqiu=add_batch",
+                url:Url,
                 type: "POST",
                 //data: JSON.stringify(param),
                 data: JSON.stringify(send_RowDataList),
@@ -1024,7 +1025,7 @@
 
 		<div id="content03_1_div" class="tab-tab">
 			<button id="delbutMore" class="btn-class del-btn">批量删除</button>
-			<button id="delbut" class="btn-class del-btn"style="margin-right: 10px;">删除</button>
+			<button id="delbut" class="btn-class del-btn"style="margin-right: 10px;display:none;">删除</button>
 			<button id="opener" class="btn-class">编辑</button>
 
 			<table id="content03_2_tb" class="display tab-mians" cellspacing="0" width="100%">

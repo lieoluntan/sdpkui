@@ -81,7 +81,7 @@
             var viewArr = $.cookie("rsList").split(",");
             for (var i = 0; i < viewArr.length; i++) {
               if(viewArr[i]=="Cb31") {$( "#opener" ).show();}
-              if(viewArr[i]=="Cb32") {$( "#delbut" ).show();}
+//              if(viewArr[i]=="Cb32") {$( "#delbut" ).show();}
               if(viewArr[i]=="Cb33") {$( "#delbutMore" ).show();}
             }//end for
           }
@@ -307,7 +307,6 @@
             }
             today = today.join('');
             var keDateTime,j = 0;
-            console.log(tab);
             for(var i=0;i<$(".checkchild:checkbox:checked").length;i++){
               !tab ? keDateTime = table_ye2.row($(".checkchild:checkbox:checked").parent().parent()[i]).data().keDateTime.split('-').join('') : keDateTime = curD.row($(".checkchild:checkbox:checked").parent().parent()[i]).data().keDateTime.split('-').join('');
               keDateTime < today ? j++ : '';
@@ -321,8 +320,10 @@
                 !tab ? uuidList.push(table_ye2.row($(".checkchild:checkbox:checked").parent().parent()[i]).data().uuid) : uuidList.push(curD.row($(".checkchild:checkbox:checked").parent().parent()[i]).data().uuid);
               }
               send_data.uuidList = uuidList;
+              var Url = "/sdpk/aaKeDelBatch?qqiu=deleteBatch"+"&userUuid="+$.cookie("ckUserEmpUuid")+"&userName="+$.cookie("ckUserName");
+              console.log(Url);
               $.ajax({
-                url:"/sdpk/aaKeDelBatch?qqiu=deleteBatch",
+                url:Url,
                 type: "POST",
                 data: JSON.stringify(send_data),
                 contentType: "application/json;charset=UTF-8",

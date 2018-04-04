@@ -742,8 +742,10 @@
         document.ffnameDlg.keDateTime_Dlg.value= rowData.keDateTime;
         var dateTime = rowData.keDateTime;
         $('#keDateTime_Dlg').datebox('setValue', dateTime);
-        document.ffnameDlg.keStartTime.value= rowData.keStartTime;
-        document.ffnameDlg.keLongTime.value= rowData.keLongTime;
+//        document.ffnameDlg.keStartTimeedit.value= rowData.keStartTime;
+      	$('#keStartTimeedit').timespinner('setValue', rowData.keStartTime);
+      	$('#keLongTimeedit').numberspinner('setValue', rowData.keLongTime);
+//        document.ffnameDlg.keLongTimeedit.value= rowData.keLongTime;
         // document.ffnameDlg.empUuid.value= rowData.empUuid;
 
         var n1 = document.ffnameDlg.keDateTime_Dlg.value; //定义个变量n接收表单中的值
@@ -753,13 +755,123 @@
     
 
     });//end 5 外圈 opener 结束打开对话框
-
+    //编辑提交验证
+    function editYZ(){
+             function yz1 (){
+               var j=0;
+               if(empUuidData!=undefined){
+                 for(var i=0;i<empUuidData.length;i++){
+                   if(empUuidData[i].empUuid==$("#L2ee_dlg").combobox('getValue')){
+                     j++;
+                   }
+                 }
+               }
+               if(j==0||empUuidData==undefined){
+                 alert("所选老师无效，请选择");
+                 return false;
+               }else{
+                 return true;
+               }
+             }
+             function yz2(){
+               var j=0;
+               if(classroomUuid!=undefined){
+                 for(var i=0;i<classroomUuid.length;i++){
+                   if(classroomUuid[i].uuid==$("#L3ee_dlg").combobox('getValue')){
+                     j++;
+                   }
+                 }
+               }
+               if(j==0){
+                 alert("所选教室无效，请选择");
+                 return false;
+               }else{
+                 return true;
+               }
+             }
+             function yz3(){
+               var j = 0;
+               if(courseUuidData!=undefined){
+                 for(var i=0;i<courseUuidData.length;i++){
+                   if(courseUuidData[i].courseUuid==$("#L1ee_dlg").combobox('getValue')){
+                     j++;
+                   }
+                 }
+               }
+               if(j==0||courseUuidData==undefined){
+                 alert("选择课程无效，请选择");
+                 return false;
+               }else{
+                 return true;
+               }
+             }
+             function yz4(){
+               var j = 0;
+               if(pktype!=undefined){
+                 for(var i=0;i<pktype.length;i++){
+                   if(pktype[i].pkType==$("#L4ee").combobox('getValue')){
+                     j++;
+                   }
+                 }
+               }
+               if(j==0||pktype==undefined){
+                 alert("选择上课类型无效，请选择");
+                 return false;
+               }else{
+                 return true;
+               }
+             }
+             function yz5(){
+               console.log($("#keLongTimeedit").numberspinner("getValue"));
+               if($("#keLongTimeedit").numberspinner("getValue")==""){
+                 alert("所选上课时长无效，请选择");
+                 return false;
+               }else{
+                 return true;
+               }
+             }
+             function yz6 (){
+               var date = $("#keDateTime_Dlg").datebox("getValue");
+               var result = date.match(/((^((1[8-9]\d{2})|([2-9]\d{3}))(-)(10|12|0?[13578])(-)(3[01]|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))(-)(11|0?[469])(-)(30|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))(-)(0?2)(-)(2[0-8]|1[0-9]|0?[1-9])$)|(^([2468][048]00)(-)(0?2)(-)(29)$)|(^([3579][26]00)(-)(0?2)(-)(29)$)|(^([1][89][0][48])(-)(0?2)(-)(29)$)|(^([2-9][0-9][0][48])(-)(0?2)(-)(29)$)|(^([1][89][2468][048])(-)(0?2)(-)(29)$)|(^([2-9][0-9][2468][048])(-)(0?2)(-)(29)$)|(^([1][89][13579][26])(-)(0?2)(-)(29)$)|(^([2-9][0-9][13579][26])(-)(0?2)(-)(29)$))/);
+               console.log(result,date.length);
+               if(result==null){
+                 alert("所选上课日期无效，请选择");
+                 return false;
+               }else if(date.length!=10){
+                 alert("所选上课日期无效，请选择");
+                 return false;
+               }else{
+                 return true;
+			   }
+             }
+             function yz7 (){
+               if($("#keStartTimeedit").timespinner("getValue")==""){
+                 alert("所选上课时间无效，请选择");
+                 return false;
+               }else{
+                 return true;
+               }
+             }
+             var one = yz1();
+             var two = yz2();
+             var three = yz3();
+             var four = yz4();
+             var five = yz5();
+             var six = yz6();
+             var senven = yz7();
+             if(one&&two&&three&&four&&five&&six&&senven){
+               return true;
+             }else{
+               return false;
+             }
+           }
     //步骤6，编辑确定事件
     //TODO:提交表单数据到服务器调用查询冲突接口
     $( "#submitForm" ).click(function() { 
         //要初始化一个对象，不然会报undifine未定义错误
             var delRowData = {};
             //获取选择那一行的数据
+      		var YZ = editYZ();
             delRowData = table_full.row('.selected').data();
             
             // var param = $("#ff").serializeObject();
@@ -773,27 +885,31 @@
             //日期框通过获取id来取值，用表单获取不到easyui日期框的值
             var ceshi = $('#keDateTime').datebox('getValue');
             send_edit_data.keDateTime = $('#keDateTime_Dlg').datebox('getValue');
-            send_edit_data.keStartTime = document.ffnameDlg.keStartTime.value;
-            send_edit_data.keLongTime = document.ffnameDlg.keLongTime.value;
+            send_edit_data.keStartTime = document.ffnameDlg.keStartTimeedit.value;
+            send_edit_data.keLongTime = document.ffnameDlg.keLongTimeedit.value;
         	send_edit_data.pkType = $('#L4ee').datebox('getValue');
             send_edit_data.status = "正常";
             console.log(send_edit_data);
-            $.ajax({
-                
-                url:"/sdpk/aaPaiKe?qqiu=queryConflict",
-                type: "POST",
-                //data: JSON.stringify(param),
-                data: JSON.stringify(send_edit_data),
-                contentType: "application/json;charset=UTF-8", 
-                success:function(result){
-                    var obj = JSON.parse(result);
-                alert(obj.message);
-   
-                huiFunc_submit(result);
-                $( "#dialog" ).dialog( "close" );
-                }
-             
-            });
+			  console.log(YZ);
+			  if(YZ){
+				$.ajax({
+
+				  url:"/sdpk/aaPaiKe?qqiu=queryConflict",
+				  type: "POST",
+				  //data: JSON.stringify(param),
+				  data: JSON.stringify(send_edit_data),
+				  contentType: "application/json;charset=UTF-8",
+				  success:function(result){
+					var obj = JSON.parse(result);
+					alert(obj.message);
+
+					huiFunc_submit(result);
+					$( "#dialog" ).dialog( "close" );
+				  }
+
+				});
+			  }
+
 
 
     });//end 6 外圈 submitForm
@@ -1111,12 +1227,12 @@
 
 					<tr style="display: block;margin-top:20px;">
 	    			<td  class="name-c">上课时间</td>
-	    			<td class="new_st"><input id="keStartTime" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true" style="height: 36px;width: 194px;font-size:16px;"></td>
+	    			<td class="new_st"><input id="keStartTimeedit" class="easyui-timespinner" required="required" data-options="min:'07:00',showSeconds:true" style="height: 36px;width: 194px;font-size:16px;"></td>
 	    			</tr>
 						
 					<tr style="display: block;margin-top:20px;">
 	    			<td class="name-c">上课时长</td>
-	    			<td><input id="keLongTime" class="easyui-numberspinner" style="height: 36px;width: 194px;font-size:16px;" required="required" data-options="min:1,max:300,editable:true"></td>
+	    			<td><input id="keLongTimeedit" class="easyui-numberspinner" style="height: 36px;width: 194px;font-size:16px;" required="required" data-options="min:1,max:300,editable:true"></td>
 
 	    			</tr>
 

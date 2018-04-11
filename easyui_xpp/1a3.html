@@ -66,7 +66,7 @@
             $.fn.dataTable.ext.errMode = 'none';
 
             var table = {};//全局变量
-
+            var a2dataR4;
             //步骤1,展示列表数据
             var myDate = new Date();
             var aday = myDate.toLocaleDateString();
@@ -102,7 +102,7 @@
                 table = $('#example').DataTable( {
                     "dom":'frtpi',
                     bSort:true,
-                    "order": [[ 3, "asc" ]],
+                    "order": [[ 2, "asc" ]],
                     "bLengthChange":false,
                     language: {
                         "sProcessing": "处理中...",
@@ -133,11 +133,10 @@
                     columns: [
                         { "data": "claName" },
                         { "data": "courseName" },
-                        { "data": "pkTypeName" },
-
                         { "data": "keDateTime" },
                         { "data": "keStartTime" },
                         { "data": "weekSome" },
+                        { "data": "pkTypeName" },
                         { "data": "empName" },
                         { "data": "headTeaName" },
                         { "data": "croomName" },
@@ -169,7 +168,7 @@
                 // alert("回调中");
                 var objR4 = {};
                 objR4 = JSON.parse(result);
-                var a2dataR4 = objR4.data;
+                a2dataR4 = objR4.data;
                 console.log(a2dataR4);
                 a2dataR4.unshift({'uuid':'allGet','name':'全部学生'});
                 console.log(a2dataR4);
@@ -232,77 +231,107 @@
             $("#yDate").combobox("loadData", data1);//下拉框加载数据
             $("#yDate").combobox("setValue",thisMonth);//设置默认值为本月
             $("#nDate").combobox("setValue",thisYear);//设置默认值为本月
-            $('#stuUuid').combobox({
-                onChange: function () {
+            // $('#stuUuid').combobox({
+            //     onChange: function () {
+            //         uuid = $('#stuUuid').combobox('getValue');
+            //         year = $('#nDate').combobox('getValue')||thisYear;
+            //         month = $('#yDate').combobox('getValue')||thisMonth;
+            //         var newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today='+currentTime;
+            //         $.ajax({
+
+            //             url: String(newUrl),
+            //             type: "POST",
+            //             beforeSend: ajaxLoading,
+            //             //data: JSON.stringify(param),
+            //             data: JSON.stringify(send_edit_data),
+            //             contentType: "application/json;charset=UTF-8",
+            //             success: function (result) {
+            //                 //步骤1_a1，完成下拉框L3
+            //                 huiFuncList(result);
+            //                 ajaxLoadEnd();
+            //             }
+
+            //         });
+            //         console.log(newUrl);
+            //     }
+            // })
+
+            // $("#yDate").combobox({
+            //     onChange: function () {
+            //         month = $('#yDate').combobox('getValue');
+            //         year = $('#nDate').combobox('getValue')||thisYear;
+            //         newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
+            //         $.ajax({
+
+            //             url: String(newUrl),
+            //             type: "POST",
+            //             beforeSend: ajaxLoading,
+            //             //data: JSON.stringify(param),
+            //             data: JSON.stringify(send_edit_data),
+            //             contentType: "application/json;charset=UTF-8",
+            //             success: function (result) {
+            //                 //步骤1_a1，完成下拉框L3
+            //                 huiFuncList(result);
+            //                 ajaxLoadEnd();
+            //             }
+
+            //         });
+            //         console.log(newUrl);
+            //     }
+            // });
+            // $("#nDate").combobox({
+            //     onChange: function () {
+            //         year = $('#nDate').combobox('getValue');
+            //         month = $('#yDate').combobox('getValue')||thisMonth;
+            //         newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
+            //         $.ajax({
+
+            //             url: String(newUrl),
+            //             type: "POST",
+            //             beforeSend: ajaxLoading,
+            //             //data: JSON.stringify(param),
+            //             data: JSON.stringify(send_edit_data),
+            //             contentType: "application/json;charset=UTF-8",
+            //             success: function (result) {
+            //                 //步骤1_a1，完成下拉框L3
+            //                 huiFuncList(result);
+            //                 ajaxLoadEnd();
+            //             }
+
+            //         });
+            //         console.log(newUrl);
+            //     }
+            // });
+            $('#finbtn').click(function () {
                     uuid = $('#stuUuid').combobox('getValue');
-                    year = $('#nDate').combobox('getValue')||thisYear;
-                    month = $('#yDate').combobox('getValue')||thisMonth;
-                    var newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today='+currentTime;
-                    $.ajax({
+                    Year = $("#nDate").combobox("getValue");
+                    Month = $("#yDate").combobox("getValue");
+                    var j = 0;
+                    for(var i = 0;i<a2dataR4.length;i++){
+                        uuid == a2dataR4[i].uuid ? j++ : '';
+                    }
+                    j == 0 ? alert("所选老师无效，请选择") : '';                    
+                    if(j!=0){
+                        var newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today='+currentTime;
+                        $.ajax({
 
-                        url: String(newUrl),
-                        type: "POST",
-                        beforeSend: ajaxLoading,
-                        //data: JSON.stringify(param),
-                        data: JSON.stringify(send_edit_data),
-                        contentType: "application/json;charset=UTF-8",
-                        success: function (result) {
-                            //步骤1_a1，完成下拉框L3
-                            huiFuncList(result);
-                            ajaxLoadEnd();
-                        }
+                            url: String(newUrl),
+                            type: "POST",
+                            beforeSend: ajaxLoading,
+                            //data: JSON.stringify(param),
+                            data: JSON.stringify(send_edit_data),
+                            contentType: "application/json;charset=UTF-8",
+                            success: function (result) {
+                                //步骤1_a1，完成下拉框L3
+                                huiFuncList(result);
+                                ajaxLoadEnd();
+                            }
 
-                    });
-                    console.log(newUrl);
-                }
-            })
-
-            $("#yDate").combobox({
-                onChange: function () {
-                    month = $('#yDate').combobox('getValue');
-                    year = $('#nDate').combobox('getValue')||thisYear;
-                    newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
-                    $.ajax({
-
-                        url: String(newUrl),
-                        type: "POST",
-                        beforeSend: ajaxLoading,
-                        //data: JSON.stringify(param),
-                        data: JSON.stringify(send_edit_data),
-                        contentType: "application/json;charset=UTF-8",
-                        success: function (result) {
-                            //步骤1_a1，完成下拉框L3
-                            huiFuncList(result);
-                            ajaxLoadEnd();
-                        }
-
-                    });
-                    console.log(newUrl);
-                }
-            });
-            $("#nDate").combobox({
-                onChange: function () {
-                    year = $('#nDate').combobox('getValue');
-                    month = $('#yDate').combobox('getValue')||thisMonth;
-                    newUrl = '/sdpk/aaStuKeXiao?qqiu=list&stuUuid='+uuid+'&year='+year+'&&month='+month+'&&today=2018-01-03';
-                    $.ajax({
-
-                        url: String(newUrl),
-                        type: "POST",
-                        beforeSend: ajaxLoading,
-                        //data: JSON.stringify(param),
-                        data: JSON.stringify(send_edit_data),
-                        contentType: "application/json;charset=UTF-8",
-                        success: function (result) {
-                            //步骤1_a1，完成下拉框L3
-                            huiFuncList(result);
-                            ajaxLoadEnd();
-                        }
-
-                    });
-                    console.log(newUrl);
-                }
-            });
+                        });
+                    }
+                    
+                //要初始化一个对象，不然会报undifine未定义错误
+            });//end 3 外圈 $('#today3').click
             //获取关系一班级下拉框数据
             // $.ajax({
             //
@@ -366,17 +395,20 @@
                         <!--</select>-->
                         <input id="stuUuid" name="stuUuid" data-options="editable:true" class="easyui-combobox " style="width: 200px; height: 36px; display: none;" comboname="stuUuid">
                     </td>
-                    <td class="name-s" style="padding-left:88px">选择年份</td>
+                    <td class="name-s" style="padding-left:20px">选择年份</td>
                     <td><input id="nDate" name="cDate" type="text" class="easyui-combobox yzss sel_s" style="line-height: 34px; height:36px;background-color: white;width:200px;" required="required"></td>
-                    <td class="name-s" style="padding-left:88px">选择月份</td>
+                    <td class="name-s" style="padding-left:20px">选择月份</td>
                     <td><input id="yDate" name="cDate" type="text" class="easyui-combobox yzss sel_s" style="line-height: 34px; height:36px;width:200px;background-color: white;" required="required"></td>
+                    <td class="name-s" style="padding-left:20px">
+                        <button id="finbtn" class="btn-class">查询</button>
+                    </td>
                 </tr>
             </table>
             <div class="tab-style">
                 <!-- 第二行 -->
                 <ul class="tj-block">
-                    <li style="padding-left: 2px;line-height: 40px;">月份总课数<em id="sumTeaMon">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月已消课<em id="sumDayBefore">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月未消课<em id="sumDayAfter">0</em></li>
-                    <li style="padding-left: 2px;line-height: 40px;">月份总课时<em id="MonthSumHour">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月已消课时<em id="EndSumHour">0</em>&nbsp;&nbsp;&nbsp;&nbsp;月未消课时<em id="LastSumHour">0</em></li>
+                    <li style="padding-left: 2px;line-height: 40px;">该月共有 <em id="sumTeaMon">0</em> 节课&nbsp;&nbsp;&nbsp;&nbsp;已消 <em id="sumDayBefore">0</em> 课&nbsp;&nbsp;&nbsp;&nbsp;未消 <em id="sumDayAfter">0</em> 课</li>
+                    <li style="padding-left: 2px;line-height: 40px;">该月共有 <em id="MonthSumHour">0</em> 小时课&nbsp;&nbsp;&nbsp;&nbsp;已消 <em id="EndSumHour">0</em> 小时&nbsp;&nbsp;&nbsp;&nbsp;未消 <em id="LastSumHour">0</em> 小时</li>
                 </ul>
             </div>
         </div>
@@ -388,11 +420,10 @@
                 <tr>
                     <th style="min-width:100px;">班级名</th>
                     <th style="min-width:100px;">课程名称</th>
-                    <th style="min-width:100px;">类别</th>
-
                     <th style="min-width:100px;">上课日期</th>
                     <th style="min-width:100px;">上课时间</th>
                     <th style="min-width:100px;">星期</th>
+                    <th style="min-width:100px;">类别</th>
                     <th style="min-width:100px;">授课老师</th>
                     <th style="min-width:100px;">班主任</th>
                     <th style="min-width:100px;">授课教室</th>
@@ -403,11 +434,10 @@
                 <tr>
                     <th style="min-width:100px;">班级名</th>
                     <th style="min-width:100px;">课程名称</th>
-                    <th style="min-width:100px;">类别</th>
-
                     <th style="min-width:100px;">上课日期</th>
                     <th style="min-width:100px;">上课时间</th>
                     <th style="min-width:100px;">星期</th>
+                    <th style="min-width:100px;">类别</th>
                     <th style="min-width:100px;">授课老师</th>
                     <th style="min-width:100px;">班主任</th>
                     <th style="min-width:100px;">授课教室</th>

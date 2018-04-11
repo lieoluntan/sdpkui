@@ -81,7 +81,7 @@
             var viewArr = $.cookie("rsList").split(",");
             for (var i = 0; i < viewArr.length; i++) {
               if(viewArr[i]=="Cb31") {$( "#opener" ).show();}
-//              if(viewArr[i]=="Cb32") {$( "#delbut" ).show();}
+              if(viewArr[i]=="Cb32") {$( "#delbut" ).show();}
               if(viewArr[i]=="Cb33") {$( "#delbutMore" ).show();}
             }//end for
           }
@@ -346,7 +346,9 @@
                 //要初始化一个对象，不然会报undifine未定义错误
                 var delRowData = {};
                 //获取选择那一行的数据
-                delRowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
+                // delRowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
+                !tab ? delRowData = table_ye2.row('.selected').data() : delRowData = curD.row('.selected').data();
+                // delRowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
                 //获取选择行中的uuid字段
                 console.log(delRowData);
                 var Auuid = delRowData.uuid;

@@ -208,6 +208,7 @@
         "dom":'frtpi',
         "bLengthChange":false,
         "bDestroy":true,
+        "order": [[ 2, "asc" ]],
         scrollX :670,
         language: {
             "sProcessing": "处理中...",
@@ -244,12 +245,12 @@
             "title": "多选"
           },
             { "data": "courseName" },
-            { "data": "pkTypeName" },
             { "data": "keDateTime" },
             { "data": "keStartTime" },
             { "data": "weekSome" },
             { "data": "empName" },
             { "data": "croomName" },
+            { "data": "pkTypeName" },
             { "data": "keLongTime" }
         ],
       "columnDefs":[{
@@ -408,14 +409,19 @@
             //获取选择那一行的数据
             rowData = table_ye2.row('.selected').data()||curD.row('.selected').data();
             var time = Number(rowData.keDateTime.split("-").join(""));
-            var currtTime = new Date().toLocaleDateString().split('/');
+            var date = new Date();
+            date = date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+            var currtTime = date.split('/');
+            console.log(currtTime);
             if(currtTime[1]<10){
                 currtTime[1] = "0"+currtTime[1];
             }
             if(currtTime[2]<10){
                 currtTime[2] = "0"+currtTime[2];
             }
+            console.log(currtTime.join(""));
             currtTime = Number(currtTime.join(""));
+            console.log(time,currtTime);
             if(time<currtTime){
                 alert("此课程已过期！");
                 return false;
@@ -609,6 +615,7 @@
                      curD = $('#paike_biao').DataTable( {
                         "dom":'frtpi',
                         "bDestroy":true,
+                        "order": [[ 2, "asc" ]],
                         "bLengthChange":false,
                         language: {
                             "sProcessing": "处理中...",
@@ -645,12 +652,12 @@
                             "title": "多选"
                           },
                             { "data": "courseName" },
-                            { "data": "pkTypeName" },
                             { "data": "keDateTime" },
                             { "data": "keStartTime" },
                             { "data": "weekSome" },
                             { "data": "empName" },
                             { "data": "croomName" },
+                            { "data": "pkTypeName" },
                             { "data": "keLongTime" }
                         ],
                        "columnDefs":[{
@@ -1081,12 +1088,12 @@
                             多选<input type="checkbox" class="checkall"style="display:none;" />
                         </th>
                         <th style="min-width:90px;">课程名称</th>
-                        <th style="min-width:65px;">类别</th>
                         <th style="min-width:110px;">上课日期</th>
                         <th style="min-width:90px;">上课时间</th>
                         <th style="min-width:75px;">星期</th>
                         <th style="min-width:90px;">授课老师</th>
                         <th style="min-width:90px;">授课教室</th>
+                        <th style="min-width:65px;">类别</th>
                         <th style="min-width:80px;">上课时长</th>
                     </tr>
                     </thead>
@@ -1098,12 +1105,12 @@
                             多选<input type="checkbox" class="checkall"style="display:none;" />
                         </th>
                         <th style="min-width:90px;">课程名称</th>
-                        <th style="min-width:65px;">类别</th>
                         <th style="min-width:110px;">上课日期</th>
                         <th style="min-width:90px;">上课时间</th>
                         <th style="min-width:75px;">星期</th>
                         <th style="min-width:90px;">授课老师</th>
                         <th style="min-width:90px;">授课教室</th>
+                        <th style="min-width:65px;">类别</th>
                         <th style="min-width:80px;">上课时长</th>
                     </tr>
                     </tfoot>
